@@ -10,7 +10,7 @@
 :root{
   --G:#004437;--GM:#005a49;--GL:#CFDDBB;--GLD:#a8c490;--GOS:#c8b990;
   --GOLD:#B4A269;--GOM:#908254;
-  --CREAM:#FFFDEF;--LG:#FAFAFA;--GDK:#414042;--GMD:#6D6E71;--GFL:#F1F2F2;--W:#fff;
+  --CREAM:#FFFDEF;--LG:#F4F5F6;--GDK:#414042;--GMD:#6D6E71;--GFL:#F1F2F2;--W:#fff;
   --PG:#e2ecce;--GP:#b8cfa0;--GXP:#eef6e2;
   --RED:#8c2020;--RDL:#faeaea;--AMB:#7a4800;--ABL:#fdf3dc;
   --OK:#0f4028;--OKL:#e0f0e8;
@@ -322,7 +322,10 @@ svg.sp{display:block;width:100%;overflow:visible}
 /* Card header: dark green with light green text */
 #tab-goals .tp-task-hd{background:var(--G);border-bottom-color:var(--GM)}
 /* This week tint preserved */
-#tab-goals .tp-task.week{background:var(--W);border-color:var(--GL)}
+#tab-goals .tp-task.week{background:#FFFEF5;border-color:#E8E0C8}
+#tab-goals .tp-task.week .tp-task-hd{background:#FFFEF5;border-bottom-color:#E8E0C8}
+#tab-goals .tp-task.week .tp-goals{background:#FFF9E6}
+#tab-goals .tp-task.week .tp-note{background:#FFF9E6}
 #tab-goals .tp-task:last-child{margin-bottom:0}
 #tab-goals .tp-task.done{opacity:0.35;box-shadow:none}
 #tab-goals .tp-task.done.hidden{display:none}
@@ -336,7 +339,7 @@ svg.sp{display:block;width:100%;overflow:visible}
 #tab-goals .tp-num.action.urgent{background:var(--RED)}
 #tab-goals .tp-task-hd{display:flex;align-items:center;gap:10px;padding:11px 14px;background:var(--W);border-bottom:1px solid var(--GL)}
 #tab-goals .tp-task-hd.bare{border-bottom:none}
-#tab-goals .tp-num{width:20px;height:20px;min-width:20px;border-radius:3px;background:var(--GOLD);color:var(--G);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:'Geist Mono',monospace;flex-shrink:0}
+#tab-goals .tp-num{width:20px;height:20px;min-width:20px;border-radius:3px;background:var(--W);color:var(--G);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:'Geist Mono',monospace;flex-shrink:0}
 #tab-goals .tp-num.action{background:var(--W);color:var(--G)}
 #tab-goals .tp-num.other{background:var(--GMD);font-size:14px;font-weight:300}
 #tab-goals .tp-task-title{font-size:13px;font-weight:500;color:var(--G);flex:1;line-height:1.4}
@@ -2163,7 +2166,7 @@ svg.sp{display:block;width:100%;overflow:visible}
 <script src="components/platforms.js"></script>
 <script src="components/operations.js"></script>
 <script src="components/customers.js"></script>
-<script src="data/team-pulse-cache.js?v=20260329c"></script>
+<script src="data/team-pulse-cache.js?v=20260329d"></script>
 <script src="components/goals.js"></script>
 <script src="components/scenario.js"></script>
 <!-- App init (must be last) -->

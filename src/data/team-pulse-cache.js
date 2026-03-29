@@ -1,11 +1,11 @@
 // EDEN & CO. CEO Flight Deck — Team Pulse Cache
-// Generated: 2026-03-29T17:52:38Z
+// Generated: 2026-03-29T17:59:20Z
 // Source: EDEN_CO_Weekly_Status.xlsx
 // Do not edit manually. Run: python3 scripts/build-team-pulse.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN.teamPulse = {
-  "generated": "2026-03-29T17:52:38Z",
+  "generated": "2026-03-29T17:59:20Z",
   "current_week": "2026-W13",
   "core_goals": {
     "Jon": {
@@ -545,7 +545,7 @@ window.EDEN.teamPulse = {
       },
       {
         "week": "2026-W13",
-        "category": "This week",
+        "category": "Other",
         "task": "Confirm Building Works",
         "status": "on-track",
         "parent": "",

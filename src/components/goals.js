@@ -16,10 +16,10 @@ window.EDEN.components = window.EDEN.components || {};
 
   // ── Person metadata — role, focus, noise (not in the sheet) ─────
   var TP_META = {
-    Jon:    { role: 'CEO · Business Lead',            focus: 'Close deals. Own the money. Run the ads.',        noise: ['New product line decision', 'EU 90-day review', 'Supplier relationship calls'] },
-    Rosie:  { role: 'Brand + UX + Team Support',      focus: 'Brand QA. Team happy. Customer satisfied.',       noise: ['EU translation review', 'New product copy', 'Website copy refresh'] },
-    Edith:  { role: 'Marketing',                      focus: 'One sentence first. Then depth. Then publish.',   noise: ['B2B lead list support', 'EU listing copy', 'PR pitches', 'Klaviyo flows'] },
-    Phoebe: { role: 'Operations',                     focus: 'Orders out. Stock in. Nothing breaks.',           noise: ['EU fulfilment process docs', 'Supplier SLA review', 'Returns process write-up'] }
+    Jon:    { role: 'CEO · Business Lead',            focus: 'Close deals. Own the money. Run the ads.',        noise: [] },
+    Rosie:  { role: 'Brand + UX + Team Support',      focus: 'Brand QA. Team happy. Customer satisfied.',       noise: [] },
+    Edith:  { role: 'Marketing',                      focus: 'One sentence first. Then depth. Then publish.',   noise: [] },
+    Phoebe: { role: 'Operations',                     focus: 'Orders out. Stock in. Nothing breaks.',           noise: [] }
   };
 
   var PEOPLE = ['Jon', 'Rosie', 'Edith', 'Phoebe'];
@@ -132,14 +132,17 @@ window.EDEN.components = window.EDEN.components || {};
     var rows = weeklyRows[person] || [];
     for (var ri = 0; ri < rows.length; ri++) {
       var row = rows[ri];
-      if (row.week !== currentWeek || !row.task) continue;
+      if (!row.task) continue;
       var cat = row.category || 'This week';
 
-      // Category = 'Other' → noise bucket, not a task
+      // Category = 'Other' → noise bucket (week-agnostic — always show)
       if (cat === 'Other') {
         sheetNoise.push(row.task);
         continue;
       }
+
+      // All other categories filtered to current week only
+      if (row.week !== currentWeek) continue;
 
       // Sanitize parent — unevaluated formula strings start with '='
       var parentVal = (row.parent && row.parent.charAt(0) === '=') ? '' : (row.parent || '');
