@@ -130,6 +130,7 @@ window.EDEN.components = window.EDEN.components || {};
 
     // This week — from the person's weekly tab, current week only
     var rows = weeklyRows[person] || [];
+
     for (var ri = 0; ri < rows.length; ri++) {
       var row = rows[ri];
       if (!row.task) continue;
@@ -141,23 +142,30 @@ window.EDEN.components = window.EDEN.components || {};
         continue;
       }
 
-      // All other categories filtered to current week only
-      if (row.week !== currentWeek) continue;
+      // Skip rows from future weeks
+      if (row.week && row.week > currentWeek) continue;
 
       // Sanitize parent — unevaluated formula strings start with '='
       var parentVal = (row.parent && row.parent.charAt(0) === '=') ? '' : (row.parent || '');
+
+      // Tasks from a prior week that aren't done are overdue
+      var isPriorWeek = row.week && row.week < currentWeek;
+      var status = row.status || '';
+      if (isPriorWeek && status !== 'done') status = 'overdue';
 
       // Urgent rows render in This week section with urgent flag
       var isUrgent = cat === 'Urgent';
       var targetCat = isUrgent ? 'This week' : cat;
       if (!categories[targetCat]) categories[targetCat] = [];
       categories[targetCat].push({
-        title:   row.task,
-        status:  row.status || '',
-        parent:  parentVal,
-        note:    row.note   || '',
-        goals:   [],
-        urgent:  isUrgent
+        title:      row.task,
+        status:     status,
+        parent:     parentVal,
+        note:       row.note || '',
+        goals:      [],
+        urgent:     isUrgent,
+        priorWeek:  isPriorWeek,
+        weekLabel:  isPriorWeek ? row.week : ''
       });
     }
     // Ensure This week section exists even if empty
@@ -200,6 +208,7 @@ window.EDEN.components = window.EDEN.components || {};
                    :           '<div class="tp-num">' + num + '</div>';
 
         var parentTag = t.parent ? '<div class="tp-parent-tag">\u2191 ' + esc(t.parent) + '</div>' : '';
+        var weekTag = (t.priorWeek && t.weekLabel) ? '<div class="tp-parent-tag" style="color:var(--RED,#c0392b)">\u23f0 ' + esc(t.weekLabel) + ' \u2014 not completed</div>' : '';
         var noteId    = 'tp-note-' + name + '-' + num;
         var noteBtn   = isWeek ? '<button class="tp-note-btn" onclick="document.getElementById(\'' + noteId + '\').classList.toggle(\'open\')">note \u25be</button>' : '';
         var noteHtml  = isWeek ? '<div class="tp-note" id="' + noteId + '">' + esc(t.note || 'No note added.') + '</div>' : '';
@@ -220,7 +229,7 @@ window.EDEN.components = window.EDEN.components || {};
 
         tasksHtml += '<div class="tp-task' + (isWeek ? ' week' : '') + taskCls + (done && tpHideDone ? ' hidden' : '') + '">'
           + '<div class="tp-task-hd' + (t.goals && t.goals.length ? '' : ' bare') + '">' + numEl
-          + '<div style="flex:1"><div class="tp-task-title' + (done ? ' struck' : '') + '">' + esc(t.title) + '</div>' + parentTag + '</div>'
+          + '<div style="flex:1"><div class="tp-task-title' + (done ? ' struck' : '') + '">' + esc(t.title) + '</div>' + parentTag + weekTag + '</div>'
           + noteBtn + '<div class="tp-dot ' + dotCls + '"></div></div>'
           + goalsHtml + noteHtml + overdueNote
           + '</div>';

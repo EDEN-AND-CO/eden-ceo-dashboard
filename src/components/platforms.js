@@ -7,9 +7,8 @@ window.EDEN.components = window.EDEN.components || {};
 (function () {
   'use strict';
 
-  var SALES_CHANNELS = ['Shopify', 'Amazon UK', 'Amazon IRE', 'Etsy', 'Yumbles'];
-  var CORP_CHANNELS  = ['NOTHS', 'Virgin', 'Corporate', 'ReachDesk', 'Sendoso', 'GiftSenda', 'Needi'];
-  var PLATFORM_ORDER = SALES_CHANNELS.concat(CORP_CHANNELS).concat(['Unknown']);
+  // Known channel config — any channel found in order data will appear even if not listed here
+  var KNOWN_CHANNELS = ['Shopify', 'Amazon UK', 'Amazon IRE', 'Etsy', 'Yumbles', 'NOTHS', 'Virgin', 'Corporate', 'ReachDesk', 'Sendoso', 'GiftSenda', 'Needi'];
 
   var PLATFORM_META = {
     'Shopify':   { sub: 'D2C primary · Store 87653', comm: 2.5,  cls: 'rowg' },
@@ -28,9 +27,9 @@ window.EDEN.components = window.EDEN.components || {};
   var _currentView  = 'mtd';
 
   var PRODUCT_NAMES = {
-    PETITE: 'Petite (Letterbox Gift)', COCOA: 'Cocoa (Chocolate Hamper)',
+    PETITE: 'Letterbox Gift', COCOA: 'Chocolate Hamper',
     SIGNATURE: 'Signature Hamper', PAMPER: 'Pamper Hamper',
-    GRAND: 'Grand Hamper', PRESTIGE: 'Prestige (Wicker)', UNKNOWN: 'Other / Unknown'
+    GRAND: 'Grand Hamper', PRESTIGE: 'Prestige Hamper', UNKNOWN: 'Other / Unknown'
   };
 
   function fmtGBP(n) {
@@ -102,8 +101,10 @@ window.EDEN.components = window.EDEN.components || {};
       channels.forEach(function (ch) {
         var c = byCur[ch];
         if (!c) return;
-        var p    = byPrior[ch] || { orders: 0, revenue: 0 };
         var meta = PLATFORM_META[ch] || { sub: '', comm: 0, cls: '' };
+        // Only show channels that have a real Store ID in the sub-label
+        if (!meta.sub || !meta.sub.match(/Store\s+\d+/)) return;
+        var p    = byPrior[ch] || { orders: 0, revenue: 0 };
         var aov  = c.orders > 0 ? c.revenue / c.orders : 0;
         var chg  = p.revenue > 0 ? ((c.revenue - p.revenue) / p.revenue) * 100 : null;
         rows += '<tr class="' + meta.cls + '">' +
@@ -118,12 +119,13 @@ window.EDEN.components = window.EDEN.components || {};
       return rows;
     }
 
-    var sectionHdr = '<tr><td colspan="6" style="padding:10px 14px 4px;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--GMD);font-family:\'Josefin Sans\',sans-serif;font-weight:700;background:var(--LG);border-top:2px solid var(--GL)">';
-    var salesRows = buildRows(SALES_CHANNELS);
-    var corpRows  = buildRows(CORP_CHANNELS);
-
-    var rows = (salesRows ? sectionHdr + 'Sales Channels</td></tr>' + salesRows : '')
-             + (corpRows  ? sectionHdr + 'Corporate &amp; High-Commission</td></tr>' + corpRows : '');
+    // Build dynamic channel list: known channels first (if they have data), then any unseen channels from orders
+    var allCurChannels = Object.keys(byCur);
+    var ordered = KNOWN_CHANNELS.filter(function(ch) { return byCur[ch]; });
+    allCurChannels.forEach(function(ch) {
+      if (ordered.indexOf(ch) === -1) ordered.push(ch);
+    });
+    var rows = buildRows(ordered);
 
     var tbody = document.getElementById('plt-table-body');
     if (tbody) tbody.innerHTML = rows || '<tr><td colspan="6" style="text-align:center;color:var(--GMD);padding:16px">No data</td></tr>';

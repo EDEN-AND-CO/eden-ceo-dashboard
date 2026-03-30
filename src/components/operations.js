@@ -7,7 +7,7 @@ window.EDEN.components = window.EDEN.components || {};
 (function () {
   'use strict';
 
-  var _bomView = 'matrix'; // 'matrix' | 'hamper'
+  var _bomView = 'hamper'; // 'matrix' | 'hamper'
   var _activeHamper = 'COCOA';
 
   function esc(s) {
@@ -95,9 +95,38 @@ window.EDEN.components = window.EDEN.components || {};
     return html;
   }
 
+  // ── Sales velocity from orders ─────────────────────────────────────
+  var HAMPER_SKU_MAP = {
+    'LETTERBOX': 'PETITE',
+    'COCOA':     'COCOA',
+    'SIGNATURE': 'SIGNATURE',
+    'PAMPER':    'PAMPER',
+    'GRAND':     'GRAND',
+    'PRESTIGE':  'PRESTIGE'
+  };
+
+  function get30DayVelocity(hamperKey) {
+    var orders = window.EDEN && window.EDEN._allOrders;
+    if (!orders || !orders.length) return null;
+    var skuKey = HAMPER_SKU_MAP[hamperKey];
+    if (!skuKey) return null;
+    var cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - 30);
+    var count = 0;
+    orders.forEach(function(o) {
+      if (o.status === 'cancelled' || o.status === 'on_hold') return;
+      if (o.core_product !== skuKey) return;
+      var d = new Date(o.order_date || o.date || '');
+      if (isNaN(d)) return;
+      if (d >= cutoff) count++;
+    });
+    return count;
+  }
+
   // ── BoM Hamper View ────────────────────────────────────────────────
   function renderBomHamper(bom, hamperKey) {
-    var products = bom.products.filter(function(p){ return p.hampers[hamperKey]; });
+    // Exclude packaging items — BoM product view is food/gift contents only
+    var products = bom.products.filter(function(p){ return p.hampers[hamperKey] && p.section !== 'Packaging'; });
     var label    = bom.hamperLabels[hamperKey] || hamperKey;
     var cogs     = bom.hamperCogs[hamperKey];
     var rrp      = bom.hamperRrp[hamperKey];
@@ -114,6 +143,8 @@ window.EDEN.components = window.EDEN.components || {};
     html += '</div>';
 
     // Summary card
+    var vel = get30DayVelocity(hamperKey);
+    var velPerDay = vel !== null ? (vel / 30).toFixed(1) : null;
     html += '<div class="bom-hsum">'
       + '<div class="bom-hsum-name">' + esc(label) + '</div>'
       + '<div class="bom-hsum-stats">'
@@ -121,11 +152,13 @@ window.EDEN.components = window.EDEN.components || {};
       + '<div class="bom-hstat"><div class="bom-hstat-lbl">RRP</div><div class="bom-hstat-val">' + fmtCost(rrp) + '</div></div>'
       + '<div class="bom-hstat"><div class="bom-hstat-lbl">Gross Margin</div><div class="bom-hstat-val g">' + fmtPct(margin) + '</div></div>'
       + '<div class="bom-hstat"><div class="bom-hstat-lbl">Components</div><div class="bom-hstat-val">' + products.length + '</div></div>'
+      + '<div class="bom-hstat"><div class="bom-hstat-lbl">30d Sales</div><div class="bom-hstat-val">' + (vel !== null ? vel + ' orders' : '—') + '</div></div>'
+      + '<div class="bom-hstat"><div class="bom-hstat-lbl">Velocity</div><div class="bom-hstat-val">' + (velPerDay !== null ? velPerDay + '/day' : '—') + '</div></div>'
       + '</div></div>';
 
     // Component table
     html += '<table class="bom-htable"><thead><tr>'
-      + '<th>Component</th><th>Supplier</th><th class="r">Weight</th><th class="r">Unit Cost</th><th class="r">RRP</th><th>Private Label</th>'
+      + '<th>Component</th><th>Supplier</th><th class="r">Weight</th><th class="r">Case Size</th><th class="r">Unit Cost</th><th class="r">RRP</th><th>PL</th>'
       + '</tr></thead><tbody>';
 
     var running = 0;
@@ -136,16 +169,61 @@ window.EDEN.components = window.EDEN.components || {};
         + '<td>' + esc(p.name) + '</td>'
         + '<td>' + esc(p.supplier) + '</td>'
         + '<td class="r">' + (p.weightG ? p.weightG + 'g' : '—') + '</td>'
+        + '<td class="r">' + (p.caseQty || '—') + '</td>'
         + '<td class="r"><strong>' + fmtCost(p.cost) + '</strong></td>'
         + '<td class="r">' + fmtCost(p.rrp) + '</td>'
         + '<td>' + (p.privateLabel ? '<span class="bom-pl">PL</span>' : '') + '</td>'
         + '</tr>';
     });
 
-    html += '<tr class="bom-sum-row"><td colspan="3">Total COGS</td><td class="r"><strong>' + fmtCost(running) + '</strong></td><td colspan="2"></td></tr>';
+    html += '<tr class="bom-sum-row"><td colspan="4">Total COGS</td><td class="r"><strong>' + fmtCost(running) + '</strong></td><td colspan="2"></td></tr>';
     html += '</tbody></table>';
     html += '</div>';
     return html;
+  }
+
+  // ── Hamper stock tiles ─────────────────────────────────────────────
+  function renderHamperTiles(bom) {
+    var container = document.getElementById('hamper-stock-tiles');
+    if (!container || !bom) return;
+
+    var hampers = bom.hampers.filter(function(h){ return h !== 'ADDON'; });
+    var html = '';
+    hampers.forEach(function(h) {
+      var label = bom.hamperLabels[h] || h;
+      var vel   = get30DayVelocity(h);
+      var velDay = vel !== null ? (vel / 30).toFixed(1) : null;
+
+      // Stock data — loaded from EDEN_CO_WEEKLY_STATUS if available
+      var stockData = window.EDEN._stockData && window.EDEN._stockData[h];
+      var avail     = stockData ? stockData.available : null;
+      var minStock  = stockData ? stockData.minimum   : null;
+      var daysLeft  = (avail !== null && velDay !== null && parseFloat(velDay) > 0)
+        ? Math.floor(avail / parseFloat(velDay)) : null;
+      var restockDate = null;
+      if (daysLeft !== null) {
+        var rd = new Date();
+        rd.setDate(rd.getDate() + daysLeft);
+        var mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        restockDate = rd.getDate() + ' ' + mo[rd.getMonth()];
+      }
+
+      var stockStr  = avail !== null ? avail + ' units' : '—';
+      var daysStr   = daysLeft !== null ? daysLeft + 'd stock left' : '—';
+      var restockStr = restockDate || '—';
+      var isLow = daysLeft !== null && daysLeft < 14;
+      var borderColor = isLow ? '#c94444' : 'rgba(255,255,255,0.12)';
+
+      html += '<div style="background:var(--G);border:2px solid ' + borderColor + ';border-radius:8px;padding:14px 12px;color:#fff">'
+        + '<div style="font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:var(--GL);font-weight:700;margin-bottom:10px">' + esc(label) + '</div>'
+        + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">'
+        + '<div><div style="font-size:9px;color:rgba(255,255,255,0.5);margin-bottom:2px">In stock</div><div style="font-size:16px;font-weight:700;color:var(--GXP)">' + stockStr + '</div></div>'
+        + '<div><div style="font-size:9px;color:rgba(255,255,255,0.5);margin-bottom:2px">Days left</div><div style="font-size:16px;font-weight:700;color:' + (isLow ? '#f07070' : 'var(--GXP)') + '">' + daysStr + '</div></div>'
+        + '<div><div style="font-size:9px;color:rgba(255,255,255,0.5);margin-bottom:2px">30d vel.</div><div style="font-size:14px;font-weight:600;color:var(--GL)">' + (velDay !== null ? velDay + '/day' : '—') + '</div></div>'
+        + '<div><div style="font-size:9px;color:rgba(255,255,255,0.5);margin-bottom:2px">Est. restock</div><div style="font-size:14px;font-weight:600;color:' + (isLow ? '#f07070' : 'var(--GL)') + '">' + restockStr + '</div></div>'
+        + '</div></div>';
+    });
+    container.innerHTML = html;
   }
 
   // ── Main render ────────────────────────────────────────────────────
@@ -181,8 +259,10 @@ window.EDEN.components = window.EDEN.components || {};
   }
 
   function render(data) {
+    var bom = window.EDEN && window.EDEN.bomData;
+    renderHamperTiles(bom);
     renderBom();
-    console.log('[EDEN] Operations tab rendered. BoM products:', window.EDEN.bomData ? window.EDEN.bomData.products.length : 0);
+    console.log('[EDEN] Operations tab rendered. BoM products:', bom ? bom.products.length : 0);
   }
 
   window.EDEN.components.operations = { render: render, switchView: switchView, switchHamper: switchHamper };

@@ -252,6 +252,36 @@ window.EDEN = window.EDEN || {};
   /**
    * Initialise the dashboard: fetch live data, transform, render all tabs.
    */
+  function injectStockOrderByDates() {
+    var today = new Date();
+    // Find stock table rows that have a lead time cell but no order-by date yet
+    var rows = document.querySelectorAll('#tab-operations .dt tbody tr:not(.detrow)');
+    rows.forEach(function(row) {
+      var cells = row.querySelectorAll('td');
+      if (cells.length < 6) return;
+      // Lead time is in the 6th cell (index 5), safety stock in 7th (index 6)
+      var leadCell = cells[5];
+      var leadText = leadCell ? leadCell.textContent.trim() : '';
+      var match = leadText.match(/(\d+)/);
+      if (!match) return;
+      // Check if order-by cell already exists (8th cell added manually)
+      if (cells.length >= 8) return;
+      var leadDays = parseInt(match[1]);
+      var orderBy = new Date(today);
+      orderBy.setDate(orderBy.getDate() + leadDays);
+      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var label = orderBy.getDate() + ' ' + months[orderBy.getMonth()];
+      var urgency = leadDays <= 10 ? 'color:var(--AMB);font-weight:700' : 'color:var(--GMD)';
+      var td = document.createElement('td');
+      td.className = 'r';
+      td.setAttribute('style', urgency);
+      td.textContent = label;
+      // Insert before last cell (the expbtn)
+      var lastCell = cells[cells.length - 1];
+      row.insertBefore(td, lastCell);
+    });
+  }
+
   function init() {
     // Run clock
     updateClock();
@@ -267,6 +297,9 @@ window.EDEN = window.EDEN || {};
     dvRenderLog();
     dvScore();
 
+    // Inject Order By dates into stock table
+    injectStockOrderByDates();
+
     // Load data — prefer pre-built cache, fall back to CSV fetch
     if (window.EDEN._ordersCache && window.EDEN._ordersCache.length > 0) {
       console.log('[EDEN] Using orders cache:', window.EDEN._ordersCache.length, 'rows | Built:', window.EDEN._ordersCacheDate || 'unknown');
@@ -279,6 +312,7 @@ window.EDEN = window.EDEN || {};
       if (window.EDEN.transform) {
         var data = window.EDEN.transform.transformData(raw);
         window.EDEN._data = data;
+        window.EDEN._allOrders = data.orders || [];
         renderAll(data);
       }
     } else if (window.EDEN.sheets && window.EDEN.CONFIG) {
@@ -292,6 +326,7 @@ window.EDEN = window.EDEN || {};
           if (window.EDEN.transform) {
             var data = window.EDEN.transform.transformData(raw);
             window.EDEN._data = data;
+            window.EDEN._allOrders = data.orders || [];
             renderAll(data);
           }
         })
@@ -428,15 +463,30 @@ window.EDEN = window.EDEN || {};
     });
   };
 
+  window.rvSwitch = function (channel, btn) {
+    document.querySelectorAll('.rv-pane').forEach(function (p) { p.classList.remove('active'); });
+    var pane = document.getElementById('rv-' + channel);
+    if (pane) pane.classList.add('active');
+    if (btn) {
+      btn.closest('.ktog').querySelectorAll('.kb').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+    }
+  };
+
   // ── Dream Value Equation ──────────────────────────────────────────
 
   var _dveLog = JSON.parse(localStorage.getItem('eden_dve_log') || '[]');
 
   function dvScore() {
-    var dream  = parseInt(document.getElementById('dve-dream').value)  || 5;
-    var likely = parseInt(document.getElementById('dve-likely').value) || 5;
-    var time   = parseInt(document.getElementById('dve-time').value)   || 5;
-    var effort = parseInt(document.getElementById('dve-effort').value) || 5;
+    var dEl = document.getElementById('dve-dream');
+    var lEl = document.getElementById('dve-likely');
+    var tEl = document.getElementById('dve-time');
+    var eEl = document.getElementById('dve-effort');
+    if (!dEl || !lEl || !tEl || !eEl) return;
+    var dream  = parseInt(dEl.value)  || 5;
+    var likely = parseInt(lEl.value) || 5;
+    var time   = parseInt(tEl.value)   || 5;
+    var effort = parseInt(eEl.value) || 5;
     var score  = Math.round((dream * likely) / (time * effort) * 100) / 100;
     var scoreEl   = document.getElementById('dve-score');
     var verdictEl = document.getElementById('dve-verdict');
@@ -456,10 +506,10 @@ window.EDEN = window.EDEN || {};
     var post    = (document.getElementById('dve-post')     || {}).value || '';
     var plat    = (document.getElementById('dve-platform') || {}).value || '';
     var occ     = (document.getElementById('dve-occasion') || {}).value || '';
-    var dream   = parseInt(document.getElementById('dve-dream').value)  || 5;
-    var likely  = parseInt(document.getElementById('dve-likely').value) || 5;
-    var time    = parseInt(document.getElementById('dve-time').value)   || 5;
-    var effort  = parseInt(document.getElementById('dve-effort').value) || 5;
+    var dream   = parseInt((document.getElementById('dve-dream')  || {value:'5'}).value) || 5;
+    var likely  = parseInt((document.getElementById('dve-likely') || {value:'5'}).value) || 5;
+    var time    = parseInt((document.getElementById('dve-time')   || {value:'5'}).value) || 5;
+    var effort  = parseInt((document.getElementById('dve-effort') || {value:'5'}).value) || 5;
     var score   = Math.round((dream * likely) / (time * effort) * 100) / 100;
     var entry   = { date: new Date().toLocaleDateString('en-GB'), plat: plat, occ: occ, post: post.slice(0, 80), dream: dream, likely: likely, time: time, effort: effort, score: score };
     _dveLog.unshift(entry);
@@ -524,11 +574,12 @@ window.EDEN = window.EDEN || {};
       { name: 'Sales Log',           ts: ordTs,                                   maxH: 24 },
       { name: 'Typeform Data',        ts: mkt && mkt._built,                       maxH: 48 },
       { name: 'Google PPC',           ts: spend && spend.google_updated,            maxH: 25 },
-      { name: 'Google Reviews',       ts: mkt && mkt.gbp && mkt.gbp.last_updated,  maxH: 168 },
+      { name: 'Google Reviews',       ts: mkt && mkt.gbp_reviews && mkt.gbp_reviews.last_updated,  maxH: 168 },
       { name: 'Amazon',               ts: spend && spend.amazon_updated,            maxH: 25 },
       { name: 'Meta',                 ts: spend && spend.meta_updated,              maxH: 25 },
       { name: 'Team Pulse Tasks',     ts: TP && TP.generated,                      maxH: 168 },
       { name: 'Corporate Pipeline',   ts: mkt && mkt._built,                       maxH: 48 },
+      { name: 'Stock Data',            ts: window.EDEN._stockCacheDate,             maxH: 168 },
       { name: 'Social Platforms',     ts: null,                                    maxH: 0 }
     ];
 

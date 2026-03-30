@@ -242,6 +242,28 @@ window.EDEN.components = window.EDEN.components || {};
     setEl('sm-gr-impression',  impr.avg ? impr.avg + '/5' : '—');
     setEl('sm-gr-impression-n', impr.total ? 'from ' + impr.total.toLocaleString('en-GB') + ' post-purchase surveys' : '—');
 
+    // ── What they say — content angles (from top_quotes) ────────────────────
+    var quotes = gbp.top_quotes || [];
+    var ANGLE_THEME_MAP = {
+      'dietary exclusion resolved': { label: 'Inclusion hook',   color: 'var(--GOLD)', bold: true },
+      'recipient joy':              { label: 'Recipient joy',    color: 'var(--GOLD)', bold: true },
+      'gifting emotion':            { label: 'Gifting emotion',  color: 'var(--GOLD)', bold: true },
+      'inclusion':                  { label: 'Inclusion hook',   color: 'var(--GOLD)', bold: true },
+      'personalisation + inclusion':{ label: 'Personalisation',  color: 'var(--GMD)',  bold: false },
+      'quality surprise':           { label: 'Quality surprise', color: 'var(--GMD)',  bold: false },
+      'new diagnosis gifting':      { label: 'New diagnosis',    color: 'var(--GMD)',  bold: false },
+    };
+    if (quotes.length) {
+      var anglesHtml = quotes.map(function(q) {
+        var theme = ANGLE_THEME_MAP[q.theme] || { label: q.theme || 'Brand trust', color: 'var(--GMD)', bold: false };
+        var angleStyle = 'font-size:10px;color:' + theme.color + ';white-space:nowrap' + (theme.bold ? ';font-weight:600' : '');
+        var reviewer   = q.reviewer ? ' <span style="font-size:9px;color:var(--GMD)">' + q.reviewer + '</span>' : '';
+        return '<tr><td style="font-style:italic">"' + q.text + '"' + reviewer + '</td>'
+          + '<td style="' + angleStyle + '">' + theme.label + '</td></tr>';
+      }).join('');
+      setEl('sm-content-angles', anglesHtml);
+    }
+
     // ── Corp pipeline IDs ────────────────────────────────────────────────────
     var corpOcc = corp.occasion || {};
     // Map corp occasion keys to IDs (partial match)
