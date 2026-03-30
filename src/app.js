@@ -263,6 +263,10 @@ window.EDEN = window.EDEN || {};
     // Load stored scores
     loadScores();
 
+    // Init DVE log
+    dvRenderLog();
+    dvScore();
+
     // Load data — prefer pre-built cache, fall back to CSV fetch
     if (window.EDEN._ordersCache && window.EDEN._ordersCache.length > 0) {
       console.log('[EDEN] Using orders cache:', window.EDEN._ordersCache.length, 'rows | Built:', window.EDEN._ordersCacheDate || 'unknown');
@@ -423,6 +427,152 @@ window.EDEN = window.EDEN || {};
       b.classList.toggle('active', b.getAttribute('onclick').includes("'" + view + "'"));
     });
   };
+
+  // ── Dream Value Equation ──────────────────────────────────────────
+
+  var _dveLog = JSON.parse(localStorage.getItem('eden_dve_log') || '[]');
+
+  function dvScore() {
+    var dream  = parseInt(document.getElementById('dve-dream').value)  || 5;
+    var likely = parseInt(document.getElementById('dve-likely').value) || 5;
+    var time   = parseInt(document.getElementById('dve-time').value)   || 5;
+    var effort = parseInt(document.getElementById('dve-effort').value) || 5;
+    var score  = Math.round((dream * likely) / (time * effort) * 100) / 100;
+    var scoreEl   = document.getElementById('dve-score');
+    var verdictEl = document.getElementById('dve-verdict');
+    var adviceEl  = document.getElementById('dve-advice');
+    if (!scoreEl) return;
+    scoreEl.textContent = score.toFixed(2);
+    var verdict, advice;
+    if (score >= 4)      { verdict = 'Exceptional — use as a creative brief'; advice = 'This hook resolves all four tensions. Replicate the format, emotion, and immediacy in future content.'; }
+    else if (score >= 2) { verdict = 'Strong post — worth scaling'; advice = 'Good outcome and believability. Reduce perceived effort (clearer CTA, faster delivery messaging) to push score higher.'; }
+    else if (score >= 1) { verdict = 'Average — room to improve'; advice = dream < 5 ? 'Strengthen the outcome — show the moment of giving, the recipient reaction, the emotional result.' : likely < 5 ? 'Make it more believable — use real UGC, real names, real occasions.' : time > 6 ? 'Reduce time friction — lead with "arrives tomorrow" or "order today".' : 'Simplify the call to action. Fewer steps between scroll and checkout.'; }
+    else                 { verdict = 'Low impact — reconsider'; advice = 'Score below 1. The post either lacks emotional pull or creates too much friction. Rethink the hook before publishing.'; }
+    verdictEl.textContent = verdict;
+    adviceEl.textContent  = advice;
+  }
+
+  function dvSave() {
+    var post    = (document.getElementById('dve-post')     || {}).value || '';
+    var plat    = (document.getElementById('dve-platform') || {}).value || '';
+    var occ     = (document.getElementById('dve-occasion') || {}).value || '';
+    var dream   = parseInt(document.getElementById('dve-dream').value)  || 5;
+    var likely  = parseInt(document.getElementById('dve-likely').value) || 5;
+    var time    = parseInt(document.getElementById('dve-time').value)   || 5;
+    var effort  = parseInt(document.getElementById('dve-effort').value) || 5;
+    var score   = Math.round((dream * likely) / (time * effort) * 100) / 100;
+    var entry   = { date: new Date().toLocaleDateString('en-GB'), plat: plat, occ: occ, post: post.slice(0, 80), dream: dream, likely: likely, time: time, effort: effort, score: score };
+    _dveLog.unshift(entry);
+    localStorage.setItem('eden_dve_log', JSON.stringify(_dveLog.slice(0, 50)));
+    dvRenderLog();
+  }
+
+  function dvRenderLog() {
+    var body = document.getElementById('dve-log-body');
+    if (!body) return;
+    if (!_dveLog.length) {
+      body.innerHTML = '<tr><td colspan="9" style="text-align:center;color:var(--GMD);padding:16px">No posts analysed yet.</td></tr>';
+      return;
+    }
+    body.innerHTML = _dveLog.map(function(e, i) {
+      var cls = e.score >= 4 ? 'rowg' : e.score >= 2 ? '' : e.score >= 1 ? 'rowa' : 'rowr';
+      return '<tr class="' + cls + '">'
+        + '<td>' + e.plat + '</td>'
+        + '<td>' + e.occ + '</td>'
+        + '<td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + e.post + '</td>'
+        + '<td class="r">' + e.dream + '</td>'
+        + '<td class="r">' + e.likely + '</td>'
+        + '<td class="r">' + e.time + '</td>'
+        + '<td class="r">' + e.effort + '</td>'
+        + '<td class="r"><strong>' + e.score.toFixed(2) + '</strong></td>'
+        + '<td><span style="cursor:pointer;color:var(--GMD);font-size:10px" onclick="dvDelete(' + i + ')">remove</span></td>'
+        + '</tr>';
+    }).join('');
+  }
+
+  function dvDelete(i) {
+    _dveLog.splice(i, 1);
+    localStorage.setItem('eden_dve_log', JSON.stringify(_dveLog));
+    dvRenderLog();
+  }
+
+  window.dvScore  = dvScore;
+  window.dvSave   = dvSave;
+  window.dvDelete = dvDelete;
+
+  // ── Status Panel ──────────────────────────────────────────────────
+
+  function fmtAge(isoStr) {
+    if (!isoStr) return null;
+    var d = new Date(isoStr.replace(' ', 'T').replace(' UTC', 'Z'));
+    if (isNaN(d)) return null;
+    var mins = Math.floor((Date.now() - d) / 60000);
+    if (mins < 2)   return 'Just now';
+    if (mins < 60)  return mins + 'm ago';
+    var hrs = Math.floor(mins / 60);
+    if (hrs < 24)   return hrs + 'h ago';
+    return Math.floor(hrs / 24) + 'd ago';
+  }
+
+  function buildStatusPanel() {
+    var TP    = window.EDEN && window.EDEN.teamPulse;
+    var mkt   = window.EDEN && window.EDEN._marketingData;
+    var spend = window.EDEN && window.EDEN._adSpend;
+    var ordTs = window.EDEN && window.EDEN._ordersCacheDate;
+
+    var sources = [
+      { name: 'Sales Log',           ts: ordTs,                                   maxH: 24 },
+      { name: 'Typeform Data',        ts: mkt && mkt._built,                       maxH: 48 },
+      { name: 'Google PPC',           ts: spend && spend.google_updated,            maxH: 25 },
+      { name: 'Google Reviews',       ts: mkt && mkt.gbp && mkt.gbp.last_updated,  maxH: 168 },
+      { name: 'Amazon',               ts: spend && spend.amazon_updated,            maxH: 25 },
+      { name: 'Meta',                 ts: spend && spend.meta_updated,              maxH: 25 },
+      { name: 'Team Pulse Tasks',     ts: TP && TP.generated,                      maxH: 168 },
+      { name: 'Corporate Pipeline',   ts: mkt && mkt._built,                       maxH: 48 },
+      { name: 'Social Platforms',     ts: null,                                    maxH: 0 }
+    ];
+
+    var worstCls = 'g';
+    var rows = sources.map(function(s) {
+      var age = fmtAge(s.ts);
+      var cls = 'r';
+      if (!s.ts) {
+        cls = 'r';
+      } else {
+        var hrs = (Date.now() - new Date(s.ts.replace(' ','T').replace(' UTC','Z'))) / 3600000;
+        cls = hrs <= s.maxH ? 'g' : hrs <= s.maxH * 2 ? 'a' : 'r';
+      }
+      if (cls === 'r' && worstCls !== 'r') worstCls = 'r';
+      else if (cls === 'a' && worstCls === 'g') worstCls = 'a';
+      return '<div class="sp-row">'
+        + '<div class="sp-dot ' + (cls === 'g' ? '' : cls) + '"></div>'
+        + '<div class="sp-name">' + s.name + '</div>'
+        + '<div class="sp-time">' + (age || 'Not loaded') + '</div>'
+        + '</div>';
+    }).join('');
+
+    var rowsEl = document.getElementById('sp-rows');
+    if (rowsEl) rowsEl.innerHTML = rows;
+    var dot = document.getElementById('status-dot');
+    if (dot) { dot.className = 'status-dot' + (worstCls !== 'g' ? ' ' + worstCls : ''); }
+  }
+
+  function toggleStatusPanel(e) {
+    if (e) e.stopPropagation();
+    buildStatusPanel();
+    var panel = document.getElementById('status-panel');
+    if (panel) panel.classList.toggle('open');
+  }
+
+  document.addEventListener('click', function(e) {
+    var panel = document.getElementById('status-panel');
+    if (!panel) return;
+    if (!e.target.closest('.status-btn') && !e.target.closest('.status-panel')) {
+      panel.classList.remove('open');
+    }
+  });
+
+  window.toggleStatusPanel = toggleStatusPanel;
 
   // Init on DOM ready
   if (document.readyState === 'loading') {

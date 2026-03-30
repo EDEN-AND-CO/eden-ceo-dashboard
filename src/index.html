@@ -36,6 +36,23 @@ body{font-family:var(--F);background:var(--PG);color:var(--GDK);font-size:14px;l
 
 /* alert bell button */
 .alert-btn{position:relative;display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:var(--r8);background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);cursor:pointer;flex-shrink:0}
+.status-btn{position:relative;display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:var(--r8);background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);cursor:pointer;flex-shrink:0}
+.status-btn:hover{background:rgba(255,255,255,0.14)}
+.status-btn svg{width:16px;height:16px;fill:none;stroke:rgba(255,255,255,0.8);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.status-dot{position:absolute;top:-3px;right:-3px;width:10px;height:10px;border-radius:50%;border:2px solid var(--G);background:#6dba6d}
+.status-dot.a{background:#d4a94a}
+.status-dot.r{background:#c94444}
+.sp-wrap{position:absolute;top:52px;right:0;z-index:500}
+.status-panel{width:300px;background:var(--W);border:1px solid var(--GL);border-radius:0 0 var(--r8) var(--r8);box-shadow:0 8px 24px rgba(0,0,0,0.14);display:none;flex-direction:column}
+.status-panel.open{display:flex}
+.sp-head{background:var(--G);padding:12px 16px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#fff;font-family:'Josefin Sans',sans-serif;font-weight:700;border-bottom:2px solid var(--GOLD)}
+.sp-row{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--LG);font-size:12px}
+.sp-row:last-child{border-bottom:none}
+.sp-dot{width:8px;height:8px;min-width:8px;border-radius:50%;background:#6dba6d}
+.sp-dot.a{background:#d4a94a}
+.sp-dot.r{background:#aaa}
+.sp-name{flex:1;color:var(--GDK);font-family:'Josefin Sans',sans-serif;letter-spacing:0.04em}
+.sp-time{font-size:11px;color:var(--GMD);font-family:'Geist Mono',monospace;white-space:nowrap}
 .alert-btn:hover{background:rgba(255,255,255,0.14)}
 .alert-btn svg{width:16px;height:16px;fill:none;stroke:rgba(255,255,255,0.8);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .alert-count{position:absolute;top:-4px;right:-4px;width:16px;height:16px;border-radius:50%;background:#f07070;color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid var(--G)}
@@ -157,6 +174,48 @@ svg.sp{display:block;width:100%;overflow:visible}
 .dt td{padding:11px 10px;border-bottom:1px solid var(--GFL);vertical-align:middle}
 .dt tr:last-child td{border-bottom:none}
 .dt tr:hover td{background:var(--GXP)}
+/* BoM Matrix */
+.bom-toolbar{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.bom-matrix-wrap{overflow-x:auto}
+.bom-matrix{border-collapse:collapse;width:100%;font-size:12px;font-family:'Josefin Sans',sans-serif}
+.bom-matrix th{background:var(--G);color:#fff;padding:9px 12px;font-size:9px;letter-spacing:0.13em;text-transform:uppercase;white-space:nowrap;border-right:1px solid rgba(255,255,255,0.1);text-align:left}
+.bom-matrix th.r,.bom-matrix td.r{text-align:right}
+.bom-matrix .bom-prod-col{min-width:160px;position:sticky;left:0;z-index:2;background:var(--G)}
+.bom-matrix .bom-attr-col{min-width:80px}
+.bom-matrix .bom-hcol{min-width:100px;text-align:center;border-left:2px solid rgba(255,255,255,0.15)}
+.bom-sec-row td{background:var(--GXP);color:var(--G);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;font-weight:700;padding:7px 12px;border-top:2px solid var(--GL)}
+.bom-prod-row td{padding:8px 12px;border-bottom:1px solid var(--LG);vertical-align:middle}
+.bom-prod-row:hover td{background:var(--GXP)}
+.bom-prod-name{font-weight:500;color:var(--GDK);position:sticky;left:0;background:var(--W);z-index:1}
+.bom-prod-row:hover .bom-prod-name{background:var(--GXP)}
+.bom-supplier{color:var(--GMD);font-size:11px}
+.bom-cost,.bom-weight{font-family:'Geist Mono',monospace;font-size:11px;color:var(--GDK)}
+.bom-cell{text-align:center;padding:8px 4px;border-left:1px solid var(--LG)}
+.bom-in{background:#F0F7F0}
+.bom-tick{color:var(--OK);font-size:14px;display:block;line-height:1}
+.bom-cell-cost{font-size:10px;color:var(--GMD);font-family:'Geist Mono',monospace;display:block;margin-top:1px}
+.bom-out{background:transparent}
+.bom-pl{font-size:9px;background:var(--ABL);color:var(--AMB);border:1px solid var(--GOLD);padding:1px 5px;border-radius:2px;vertical-align:middle;margin-left:4px}
+.bom-sum-row td{background:var(--G);color:#fff;font-weight:700;padding:9px 12px;font-family:'Geist Mono',monospace;font-size:12px;border-top:2px solid var(--GOLD)}
+.bom-rrp-row td{background:var(--GM);color:var(--GXP);font-weight:600;padding:7px 12px;font-family:'Geist Mono',monospace;font-size:11px}
+.bom-margin-row td{background:var(--GOLD);color:var(--G);font-weight:700;padding:9px 12px;font-family:'Geist Mono',monospace;font-size:13px}
+/* BoM Hamper View */
+.bom-hamper-wrap{font-family:'Josefin Sans',sans-serif}
+.bom-htabs{display:flex;gap:4px;margin-bottom:18px;flex-wrap:wrap}
+.bom-htab{padding:6px 14px;border:1px solid var(--GL);border-radius:var(--r4);background:var(--W);color:var(--GMD);font-size:11px;font-family:'Josefin Sans',sans-serif;cursor:pointer;letter-spacing:0.06em;text-transform:uppercase}
+.bom-htab.active{background:var(--G);color:#fff;border-color:var(--G)}
+.bom-hsum{background:var(--G);border-radius:var(--r8);padding:18px 22px;margin-bottom:18px}
+.bom-hsum-name{color:#fff;font-size:16px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px}
+.bom-hsum-stats{display:flex;gap:24px;flex-wrap:wrap}
+.bom-hstat-lbl{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:4px}
+.bom-hstat-val{font-size:22px;font-weight:700;color:#fff;font-family:'Geist Mono',monospace}
+.bom-hstat-val.g{color:var(--GXP)}
+.bom-htable{border-collapse:collapse;width:100%;font-size:12px}
+.bom-htable th{background:var(--G);color:#fff;padding:8px 12px;font-size:9px;letter-spacing:0.13em;text-transform:uppercase;text-align:left}
+.bom-htable th.r{text-align:right}
+.bom-htable td{padding:10px 12px;border-bottom:1px solid var(--LG);color:var(--GDK);vertical-align:middle}
+.bom-htable td.r{text-align:right;font-family:'Geist Mono',monospace}
+.bom-alt td{background:var(--GXP)}
 .pn{font-weight:700;color:var(--G);font-size:13px}
 .ps{font-size:10px;color:var(--GMD);margin-top:2px}
 .rowg td:first-child{border-left:3px solid var(--OK)}
@@ -279,7 +338,7 @@ svg.sp{display:block;width:100%;overflow:visible}
 #tab-goals .tp-qjob.pu{background:rgba(255,255,255,0.06);color:var(--GLD);border-color:rgba(255,255,255,0.1)}
 
 /* STATS BAR — dark green, reversed from original warm neutral */
-#tab-goals .tp-sum-bar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--GL);border-bottom:2px solid var(--GL)}
+#tab-goals .tp-sum-bar{display:grid;grid-template-columns:repeat(2,1fr);background:var(--GL);border-bottom:2px solid var(--GL)}
 #tab-goals .tp-sc{padding:22px 32px 18px;border-right:1px solid var(--GL);position:relative;background:var(--W)}
 #tab-goals .tp-sc:last-child{border-right:none}
 #tab-goals .tp-sc-lbl{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--GMD);margin-bottom:8px;font-family:'Josefin Sans',sans-serif;font-weight:700;display:block}
@@ -288,7 +347,7 @@ svg.sp{display:block;width:100%;overflow:visible}
 #tab-goals .tp-sc-val.r{color:var(--RED)}
 
 /* LANE GRID — 4 columns, alternating for readability */
-#tab-goals .tp-main{display:grid;grid-template-columns:repeat(4,1fr);background:var(--GL);gap:2px}
+#tab-goals .tp-main{display:grid;grid-template-columns:repeat(2,1fr);background:var(--GL);gap:2px}
 #tab-goals .tp-lane{background:var(--W);display:flex;flex-direction:column}
 #tab-goals .tp-lane:nth-child(even){background:var(--LG)}
 /* Per-person left accent */
@@ -396,7 +455,7 @@ svg.sp{display:block;width:100%;overflow:visible}
 #tab-goals .tp-concerns{background:var(--LG);border-top:2px solid var(--GL);padding:28px 32px 36px}
 #tab-goals .tp-concerns-hd{margin-bottom:20px}
 #tab-goals .tp-concerns-title{font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--G);font-family:'Josefin Sans',sans-serif}
-#tab-goals .tp-concerns-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+#tab-goals .tp-concerns-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 #tab-goals .tp-concern{background:var(--RDL);border-radius:4px;padding:18px 20px;border:1px solid rgba(140,32,32,0.12);box-shadow:0 1px 4px rgba(140,32,32,0.06);border-top:3px solid var(--GL)}
 #tab-goals .tp-concern.high{border-top-color:var(--RED)}
 #tab-goals .tp-concern.med{border-top-color:var(--AMB)}
@@ -467,6 +526,16 @@ svg.sp{display:block;width:100%;overflow:visible}
   <div class="hdr-divider"></div>
   <div class="hdr-section" id="hdr-section">Overview</div>
   <div class="hdr-r">
+    <div style="position:relative">
+      <div class="status-btn" onclick="toggleStatusPanel(event)" title="Data source status">
+        <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        <div class="status-dot" id="status-dot"></div>
+      </div>
+      <div class="sp-wrap"><div class="status-panel" id="status-panel">
+        <div class="sp-head">Data Sources</div>
+        <div id="sp-rows"></div>
+      </div></div>
+    </div>
     <div class="alert-btn" onclick="openDrawer()" title="View alerts">
       <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
       <div class="alert-count" id="alert-count">3</div>
@@ -1427,6 +1496,111 @@ svg.sp{display:block;width:100%;overflow:visible}
     <div class="dnote">Source: Typeform (1,499 gift designer responses, 69 corporate leads). Google Reviews (4.82/5 quality, 766 responses). Social intelligence updated weekly by Social Overview agent. Refresh buyer data: <code>python3 scripts/build-marketing-cache.py</code> &mdash; <span id="mkt-intel-dnote">Loading...</span></div>
   </div>
 
+  <!-- Social Platform Analysis -->
+  <hr class="sec-divider gold">
+  <div class="sec">
+    <div class="sec-head">Social platform performance — Dream Value analysis</div>
+    <div style="font-size:11px;color:var(--GMD);margin-bottom:18px">Rate any post across the four Dream Value axes to understand why it performed. High scorers become creative briefs for Edith.</div>
+
+    <!-- Priority Platforms -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px">
+      <div class="card" style="padding:16px 18px;border-top:3px solid var(--G)">
+        <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--G);font-weight:700;margin-bottom:6px">Instagram</div>
+        <div style="font-size:12px;color:var(--GDK);margin-bottom:8px">Gift discovery · Visual product quality · UGC reposts</div>
+        <div style="font-size:11px;color:var(--GMD)">Audience: 28–45 female, gift occasion intent</div>
+        <div style="margin-top:10px"><span class="bom-pl" style="background:var(--OKL);color:var(--OK);border-color:var(--OK)">HIGH PRIORITY</span></div>
+      </div>
+      <div class="card" style="padding:16px 18px;border-top:3px solid var(--GOLD)">
+        <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--GOM);font-weight:700;margin-bottom:6px">Pinterest</div>
+        <div style="font-size:12px;color:var(--GDK);margin-bottom:8px">Seasonal gifting search · High purchase intent · Save-to-buy</div>
+        <div style="font-size:11px;color:var(--GMD)">Audience: 30–50 female, planning and occasion-driven</div>
+        <div style="margin-top:10px"><span class="bom-pl" style="background:var(--OKL);color:var(--OK);border-color:var(--OK)">HIGH PRIORITY</span></div>
+      </div>
+      <div class="card" style="padding:16px 18px;border-top:3px solid var(--GM)">
+        <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--GM);font-weight:700;margin-bottom:6px">TikTok</div>
+        <div style="font-size:12px;color:var(--GDK);margin-bottom:8px">UGC reach · Unboxing content · Younger gifting audience</div>
+        <div style="font-size:11px;color:var(--GMD)">Audience: 22–35, impulse and recommendation-driven</div>
+        <div style="margin-top:10px"><span class="bom-pl" style="background:var(--ABL);color:var(--AMB);border-color:var(--GOLD)">MEDIUM PRIORITY</span></div>
+      </div>
+    </div>
+
+    <!-- Dream Value Equation Scorer -->
+    <div class="card" style="padding:20px 24px;margin-bottom:20px">
+      <div class="ctitle" style="margin-bottom:4px">Dream Value Equation — post analyser</div>
+      <div style="font-size:11px;color:var(--GMD);margin-bottom:18px">Score = (Dream Outcome × Perceived Likelihood) ÷ (Time Delay × Effort &amp; Sacrifice). Higher = more compelling.</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:18px">
+        <div>
+          <label style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--GMD);font-weight:700;display:block;margin-bottom:6px">Post description / hook</label>
+          <textarea id="dve-post" rows="3" style="width:100%;border:1px solid var(--GL);border-radius:var(--r4);padding:10px;font-family:'Josefin Sans',sans-serif;font-size:12px;color:var(--GDK);resize:vertical;background:var(--W)" placeholder="e.g. Unboxing video showing chocolates and card inside letterbox gift…"></textarea>
+        </div>
+        <div>
+          <label style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--GMD);font-weight:700;display:block;margin-bottom:6px">Platform &amp; post type</label>
+          <select id="dve-platform" style="width:100%;border:1px solid var(--GL);border-radius:var(--r4);padding:10px;font-family:'Josefin Sans',sans-serif;font-size:12px;color:var(--GDK);background:var(--W);margin-bottom:10px">
+            <option>Instagram Reel</option><option>Instagram Post</option><option>Instagram Story</option>
+            <option>TikTok Video</option><option>Pinterest Pin</option><option>Pinterest Story</option>
+          </select>
+          <label style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--GMD);font-weight:700;display:block;margin-bottom:6px">Occasion / intent</label>
+          <select id="dve-occasion" style="width:100%;border:1px solid var(--GL);border-radius:var(--r4);padding:10px;font-family:'Josefin Sans',sans-serif;font-size:12px;color:var(--GDK);background:var(--W)">
+            <option>Just because</option><option>Birthday</option><option>Thank you</option><option>Celebration</option><option>Christmas / seasonal</option><option>Corporate</option><option>New baby</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:18px">
+        <div>
+          <label style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--G);font-weight:700;display:block;margin-bottom:4px">Dream Outcome <span style="color:var(--GMD);font-weight:400">(1–10)</span></label>
+          <div style="font-size:10px;color:var(--GMD);margin-bottom:6px">Does it show a deeply desirable result — the gift landing perfectly?</div>
+          <input type="range" id="dve-dream" min="1" max="10" value="5" oninput="document.getElementById('dve-dream-v').textContent=this.value;dvScore()" style="width:100%;accent-color:var(--G)">
+          <div id="dve-dream-v" style="font-size:18px;font-weight:700;color:var(--G);font-family:'Geist Mono',monospace;text-align:center">5</div>
+        </div>
+        <div>
+          <label style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--G);font-weight:700;display:block;margin-bottom:4px">Perceived Likelihood <span style="color:var(--GMD);font-weight:400">(1–10)</span></label>
+          <div style="font-size:10px;color:var(--GMD);margin-bottom:6px">Does it feel achievable? Is the gift believably good, not too perfect?</div>
+          <input type="range" id="dve-likely" min="1" max="10" value="5" oninput="document.getElementById('dve-likely-v').textContent=this.value;dvScore()" style="width:100%;accent-color:var(--G)">
+          <div id="dve-likely-v" style="font-size:18px;font-weight:700;color:var(--G);font-family:'Geist Mono',monospace;text-align:center">5</div>
+        </div>
+        <div>
+          <label style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--AMB);font-weight:700;display:block;margin-bottom:4px">Time Delay <span style="color:var(--GMD);font-weight:400">(1–10)</span></label>
+          <div style="font-size:10px;color:var(--GMD);margin-bottom:6px">Lower = better. Does it feel instantly achievable? (1=instant, 10=long wait)</div>
+          <input type="range" id="dve-time" min="1" max="10" value="5" oninput="document.getElementById('dve-time-v').textContent=this.value;dvScore()" style="width:100%;accent-color:var(--AMB)">
+          <div id="dve-time-v" style="font-size:18px;font-weight:700;color:var(--AMB);font-family:'Geist Mono',monospace;text-align:center">5</div>
+        </div>
+        <div>
+          <label style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--AMB);font-weight:700;display:block;margin-bottom:4px">Effort &amp; Sacrifice <span style="color:var(--GMD);font-weight:400">(1–10)</span></label>
+          <div style="font-size:10px;color:var(--GMD);margin-bottom:6px">Lower = better. How hard is it to act on this? (1=one click, 10=complex)</div>
+          <input type="range" id="dve-effort" min="1" max="10" value="5" oninput="document.getElementById('dve-effort-v').textContent=this.value;dvScore()" style="width:100%;accent-color:var(--AMB)">
+          <div id="dve-effort-v" style="font-size:18px;font-weight:700;color:var(--AMB);font-family:'Geist Mono',monospace;text-align:center">5</div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:20px;background:var(--G);border-radius:var(--r8);padding:16px 20px;margin-bottom:14px">
+        <div>
+          <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:4px">Dream Value Score</div>
+          <div id="dve-score" style="font-size:36px;font-weight:700;color:#fff;font-family:'Geist Mono',monospace">5.0</div>
+        </div>
+        <div style="flex:1">
+          <div id="dve-verdict" style="font-size:13px;color:var(--GXP);font-weight:600;margin-bottom:4px">Average post — room to improve</div>
+          <div id="dve-advice" style="font-size:11px;color:rgba(255,255,255,0.6);line-height:1.6"></div>
+        </div>
+        <button onclick="dvSave()" style="background:var(--GOLD);color:var(--G);border:none;border-radius:var(--r4);padding:10px 18px;font-family:'Josefin Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer">Save to log</button>
+      </div>
+    </div>
+
+    <!-- Post log -->
+    <div class="card" style="padding:16px 20px">
+      <div class="ctitle" style="margin-bottom:12px">Post analysis log</div>
+      <table class="dt" id="dve-log-table">
+        <thead><tr><th>Platform</th><th>Occasion</th><th>Post description</th><th class="r">Dream</th><th class="r">Likely</th><th class="r">Time</th><th class="r">Effort</th><th class="r">Score</th><th></th></tr></thead>
+        <tbody id="dve-log-body"><tr><td colspan="9" style="text-align:center;color:var(--GMD);padding:16px">No posts analysed yet. Score a post above and save it.</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="dnote">Source: Typeform (1,499 gift designer responses, 69 corporate leads). Google Reviews (4.82/5 quality, 766 responses). Social intelligence updated weekly by Social Overview agent. Refresh buyer data: <code>python3 scripts/build-marketing-cache.py</code> &mdash; <span id="mkt-intel-dnote">Loading...</span></div>
+  </div>
+
 </div></div>
 
 <!-- ═══════════════════════════════════
@@ -1950,6 +2124,19 @@ svg.sp{display:block;width:100%;overflow:visible}
     </div>
   </div>
 
+  <!-- BoM Matrix -->
+  <div class="sec">
+    <div class="seclbl">Bill of Materials — product matrix</div>
+    <div class="card" style="padding:20px 24px">
+      <div class="bom-toolbar">
+        <button id="bom-btn-matrix" class="kb active" onclick="window.EDEN.components.operations.switchView('matrix',this)">Matrix View</button>
+        <button id="bom-btn-hamper" class="kb" onclick="window.EDEN.components.operations.switchView('hamper',this)">Hamper View</button>
+        <span style="margin-left:auto;font-size:11px;color:var(--GMD);font-family:'Josefin Sans',sans-serif">&#10003; = included &nbsp;&middot;&nbsp; Cost shown per unit</span>
+      </div>
+      <div id="bom-container">Loading BoM data…</div>
+    </div>
+  </div>
+
 </div></div>
 
 <!-- ═══════════════════════════════════
@@ -2167,6 +2354,7 @@ svg.sp{display:block;width:100%;overflow:visible}
 <script src="components/operations.js"></script>
 <script src="components/customers.js"></script>
 <script src="data/team-pulse-cache.js?v=20260329d"></script>
+<script src="data/bom-cache.js?v=20260330a"></script>
 <script src="components/goals.js"></script>
 <script src="components/scenario.js"></script>
 <!-- App init (must be last) -->

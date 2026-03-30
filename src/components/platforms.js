@@ -7,11 +7,9 @@ window.EDEN.components = window.EDEN.components || {};
 (function () {
   'use strict';
 
-  var PLATFORM_ORDER = [
-    'Shopify', 'Amazon UK', 'Amazon IRE',
-    'Yumbles', 'NOTHS', 'Virgin', 'Etsy',
-    'Corporate', 'Unknown'
-  ];
+  var SALES_CHANNELS = ['Shopify', 'Amazon UK', 'Amazon IRE', 'Etsy', 'Yumbles'];
+  var CORP_CHANNELS  = ['NOTHS', 'Virgin', 'Corporate', 'ReachDesk', 'Sendoso', 'GiftSenda', 'Needi'];
+  var PLATFORM_ORDER = SALES_CHANNELS.concat(CORP_CHANNELS).concat(['Unknown']);
 
   var PLATFORM_META = {
     'Shopify':   { sub: 'D2C primary · Store 87653', comm: 2.5,  cls: 'rowg' },
@@ -99,24 +97,33 @@ window.EDEN.components = window.EDEN.components || {};
     var byCur   = groupByChannel(cur);
     var byPrior = groupByChannel(prior);
 
-    var rows = '';
-    PLATFORM_ORDER.forEach(function (ch) {
-      var c = byCur[ch];
-      if (!c) return;
-      var p    = byPrior[ch] || { orders: 0, revenue: 0 };
-      var meta = PLATFORM_META[ch] || { sub: '', comm: 0, cls: '' };
-      var aov  = c.orders > 0 ? c.revenue / c.orders : 0;
-      var chg  = p.revenue > 0 ? ((c.revenue - p.revenue) / p.revenue) * 100 : null;
+    function buildRows(channels) {
+      var rows = '';
+      channels.forEach(function (ch) {
+        var c = byCur[ch];
+        if (!c) return;
+        var p    = byPrior[ch] || { orders: 0, revenue: 0 };
+        var meta = PLATFORM_META[ch] || { sub: '', comm: 0, cls: '' };
+        var aov  = c.orders > 0 ? c.revenue / c.orders : 0;
+        var chg  = p.revenue > 0 ? ((c.revenue - p.revenue) / p.revenue) * 100 : null;
+        rows += '<tr class="' + meta.cls + '">' +
+          '<td><span class="pn">' + ch + '</span><div class="ps">' + meta.sub + '</div></td>' +
+          '<td class="r">' + meta.comm + '%</td>' +
+          '<td class="r">' + c.orders + '</td>' +
+          '<td class="r">' + fmtGBP(c.revenue) + '</td>' +
+          '<td class="r">' + fmtGBP(aov) + '</td>' +
+          '<td class="r">' + chgSpan(chg, p.revenue === 0) + '</td>' +
+          '</tr>';
+      });
+      return rows;
+    }
 
-      rows += '<tr class="' + meta.cls + '">' +
-        '<td><span class="pn">' + ch + '</span><div class="ps">' + meta.sub + '</div></td>' +
-        '<td class="r">' + meta.comm + '%</td>' +
-        '<td class="r">' + c.orders + '</td>' +
-        '<td class="r">' + fmtGBP(c.revenue) + '</td>' +
-        '<td class="r">' + fmtGBP(aov) + '</td>' +
-        '<td class="r">' + chgSpan(chg, p.revenue === 0) + '</td>' +
-        '</tr>';
-    });
+    var sectionHdr = '<tr><td colspan="6" style="padding:10px 14px 4px;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--GMD);font-family:\'Josefin Sans\',sans-serif;font-weight:700;background:var(--LG);border-top:2px solid var(--GL)">';
+    var salesRows = buildRows(SALES_CHANNELS);
+    var corpRows  = buildRows(CORP_CHANNELS);
+
+    var rows = (salesRows ? sectionHdr + 'Sales Channels</td></tr>' + salesRows : '')
+             + (corpRows  ? sectionHdr + 'Corporate &amp; High-Commission</td></tr>' + corpRows : '');
 
     var tbody = document.getElementById('plt-table-body');
     if (tbody) tbody.innerHTML = rows || '<tr><td colspan="6" style="text-align:center;color:var(--GMD);padding:16px">No data</td></tr>';
