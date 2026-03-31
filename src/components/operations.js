@@ -226,6 +226,93 @@ window.EDEN.components = window.EDEN.components || {};
     container.innerHTML = html;
   }
 
+  // ── Stock velocity table ───────────────────────────────────────────
+  var VELOCITY_META = {
+    LETTERBOX: { cogs: 13.16, longestLead: 'Booja Booja (specialist free-from)', leadDays: 10 },
+    COCOA:     { cogs: 22.51, longestLead: 'Willies Cacao / Booja Booja',        leadDays: 10 },
+    SIGNATURE: { cogs: 23.56, longestLead: 'Blendsmiths Chai Box (specialty)',   leadDays: 10 },
+    PAMPER:    { cogs: 39.79, longestLead: 'AERY home goods supplier',           leadDays: 21 },
+    GRAND:     { cogs: 35.16, longestLead: 'Booja Booja Cherry Bakewell / Nozeco', leadDays: 14 },
+    PRESTIGE:  { cogs: 48.00, longestLead: 'Bottega Prosecco Gold / Bodha',      leadDays: 14 }
+  };
+
+  function get60DayVelocity(hamperKey) {
+    var orders = window.EDEN && window.EDEN._allOrders;
+    if (!orders || !orders.length) return null;
+    var skuKey = HAMPER_SKU_MAP[hamperKey];
+    if (!skuKey) return null;
+    var cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - 60);
+    var count = 0;
+    orders.forEach(function(o) {
+      if (o.status === 'cancelled' || o.status === 'on_hold') return;
+      if (o.core_product !== skuKey) return;
+      var d = new Date(o.order_date || o.date || '');
+      if (isNaN(d)) return;
+      if (d >= cutoff) count++;
+    });
+    return count;
+  }
+
+  function renderStockVelocity() {
+    var tbody = document.getElementById('stock-vel-body');
+    if (!tbody) return;
+    var bom = window.EDEN && window.EDEN.bomData;
+    var hampers = bom ? bom.hampers.filter(function(h){ return h !== 'ADDON'; })
+                      : ['LETTERBOX','COCOA','SIGNATURE','PAMPER','GRAND','PRESTIGE'];
+    var labels  = bom ? bom.hamperLabels : {
+      LETTERBOX:'Petite (Letterbox)', COCOA:'Cocoa (Chocolate Hamper)', SIGNATURE:'Signature Hamper',
+      PAMPER:'Pamper Hamper', GRAND:'Grand Hamper', PRESTIGE:'Prestige (Wicker)'
+    };
+
+    var mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+    var html = '';
+    hampers.forEach(function(h, idx) {
+      var meta     = VELOCITY_META[h] || {};
+      var vel30    = get30DayVelocity(h);
+      var vel60    = get60DayVelocity(h);
+      var vel30d   = vel30 !== null ? (vel30 / 30) : null;
+      var vel60d   = vel60 !== null ? (vel60 / 60) : null;
+
+      var stockData = window.EDEN._stockData && window.EDEN._stockData[h];
+      var avail     = stockData ? stockData.available : null;
+      var safetyStock = (vel30d !== null && meta.leadDays)
+        ? Math.ceil(vel30d * meta.leadDays) + ' units' : '—';
+
+      var orderBy = '—';
+      if (avail !== null && vel30d !== null && vel30d > 0 && meta.leadDays) {
+        var daysLeft    = Math.floor(avail / vel30d);
+        var orderByDays = daysLeft - meta.leadDays;
+        if (orderByDays <= 0) {
+          orderBy = '<span style="color:var(--RED);font-weight:700">NOW</span>';
+        } else {
+          var ob = new Date();
+          ob.setDate(ob.getDate() + orderByDays);
+          var obStr = ob.getDate() + ' ' + mo[ob.getMonth()];
+          var urgency = orderByDays <= 7 ? 'color:var(--RED);font-weight:700'
+                      : orderByDays <= 14 ? 'color:var(--AMB);font-weight:700' : 'color:var(--GMD)';
+          orderBy = '<span style="' + urgency + '">' + obStr + '</span>';
+        }
+      }
+
+      var vel30Str = vel30d !== null ? '<strong>' + vel30d.toFixed(1) + '/day</strong>' : '—';
+      var vel60Str = vel60d !== null ? vel60d.toFixed(1) + '/day' : '—';
+      var cls = idx % 2 === 1 ? ' class="rowa"' : '';
+      html += '<tr' + cls + '>'
+        + '<td><span class="pn">' + esc(labels[h] || h) + '</span></td>'
+        + '<td class="r">' + fmtCost(meta.cogs) + '</td>'
+        + '<td class="r">' + vel30Str + '</td>'
+        + '<td class="r">' + vel60Str + '</td>'
+        + '<td class="r">' + esc(meta.longestLead || '—') + '</td>'
+        + '<td class="r">' + safetyStock + '</td>'
+        + '<td class="r">' + orderBy + '</td>'
+        + '</tr>';
+    });
+
+    tbody.innerHTML = html || '<tr><td colspan="7" style="text-align:center;color:var(--GMD);padding:12px">No order data loaded</td></tr>';
+  }
+
   // ── Main render ────────────────────────────────────────────────────
   function renderBom() {
     var bom = window.EDEN && window.EDEN.bomData;
@@ -262,6 +349,7 @@ window.EDEN.components = window.EDEN.components || {};
     var bom = window.EDEN && window.EDEN.bomData;
     renderHamperTiles(bom);
     renderBom();
+    renderStockVelocity();
     console.log('[EDEN] Operations tab rendered. BoM products:', bom ? bom.products.length : 0);
   }
 
