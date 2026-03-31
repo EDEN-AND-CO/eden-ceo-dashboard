@@ -1,31 +1,32 @@
 // EDEN & CO. CEO Flight Deck — Ad Spend Cache
-// Generated: 2026-03-31T14:06:20Z
-// Sources: Coupler CSV exports (Google Ads, Amazon)
-// Do not edit manually. Run: python3 scripts/build-adspend-cache.py
-
+// Generated: 2026-03-31T14:42:08Z
+// Source: Stock Tracker Google Sheet — Coupler (Google Ads, Amazon Ads, Meta Ads tabs)
 window.EDEN = window.EDEN || {};
 window.EDEN._adSpend = {
   "google": {
-    "spend_30d": 2936.93,
-    "conv_30d": 195.07,
-    "cpa_30d": 15.05,
-    "roas_30d": 3.37,
-    "revenue_30d": 9896.61,
-    "spend_7d": 776.3,
-    "roas_7d": 1.54,
-    "notes": "Post-Mothers Day dip. Duplicate AW tag removed. Basket data ZZ ID mismatch identified. Actions 3-7 pending.",
-    "data_date": "2026-03-22"
+    "spend": 2994.42,
+    "clicks": 0,
+    "conversions": 1829.9,
+    "impressions": 48638,
+    "rows": 933,
+    "spend_col": "Cost: Amount spend"
   },
-  "google_updated": "2026-03-22T16:10:11Z",
+  "google_updated": "2026-03-31 15:26:42",
   "amazon": {
-    "spend": 2641.13,
-    "sales": 8810.02,
-    "clicks": 3994,
-    "orders": 330,
-    "acos": 30.0,
-    "roas": 3.34,
-    "rows": 58
+    "spend": 2429.0,
+    "clicks": 3881,
+    "orders": 350,
+    "impressions": 223079,
+    "rows": 2541
   },
-  "amazon_updated": "2026-03-22T17:44:09Z",
-  "_built": "2026-03-31T14:06:20Z"
+  "amazon_updated": "2026-03-31 15:20:49",
+  "meta": {
+    "spend": 2234.71,
+    "clicks": 4494,
+    "impressions": 207478,
+    "rows": 560,
+    "spend_col": "Cost: Amount spend"
+  },
+  "meta_updated": "2026-03-31 15:22:16",
+  "_built": "2026-03-31T14:42:08Z"
 };
