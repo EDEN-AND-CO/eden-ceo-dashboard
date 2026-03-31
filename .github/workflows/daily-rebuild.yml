@@ -1,0 +1,59 @@
+name: Daily Data Rebuild
+
+on:
+  schedule:
+    - cron: '30 9 * * *'   # 9:30am UTC daily (Coupler syncs at 9am UTC)
+  workflow_dispatch:         # Allow manual trigger from GitHub Actions UI
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install openpyxl
+
+      - name: Build orders cache (Sales Log from Google Sheet)
+        run: python3 scripts/build-cache.py
+        working-directory: ./
+
+      - name: Build ad spend cache (Google Ads, Amazon, Meta from Google Sheet)
+        run: python3 scripts/build-adspend-cache.py
+        working-directory: ./
+
+      - name: Build stock cache (from EDEN_CO_Weekly_Status.xlsx)
+        run: python3 scripts/build-stock-cache.py
+        working-directory: ./
+
+      - name: Build team pulse cache (from EDEN_CO_Weekly_Status.xlsx)
+        run: python3 scripts/build-team-pulse.py
+        working-directory: ./
+
+      - name: Build BoM cache (from BoM.xlsx)
+        run: python3 scripts/build-bom-cache.py
+        working-directory: ./
+
+      - name: Build marketing cache (Typeform + Google Reviews)
+        run: python3 scripts/build-marketing-cache.py
+        working-directory: ./
+        env:
+          TYPEFORM_TOKEN: ${{ secrets.TYPEFORM_TOKEN }}
+
+      - name: Commit and push updated cache files
+        run: |
+          git config user.name "EDEN Dashboard Bot"
+          git config user.email "dashboard@edenandco.com"
+          git add src/data/*.js
+          git diff --staged --quiet && echo "No changes to commit" || \
+            git commit -m "Data refresh: $(date -u '+%Y-%m-%d %H:%M UTC') [auto]" && \
+            git push
