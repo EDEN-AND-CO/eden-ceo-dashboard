@@ -22,6 +22,10 @@ except ImportError:
 
 TOKEN     = os.environ.get("TYPEFORM_TOKEN", "")
 BASE      = "https://api.typeform.com"
+
+if not TOKEN:
+    print("[ERROR] TYPEFORM_TOKEN not set — skipping marketing cache build")
+    sys.exit(0)  # exit 0 so GitHub Actions doesn't fail the whole workflow
 OUT_FILE  = os.path.join(os.path.dirname(__file__), "../src/data/marketing-cache.js")
 
 FORMS = {

@@ -3,11 +3,31 @@
 EDEN & CO. CEO Flight Deck — BoM Cache Builder
 Reads PRODUCT COSTS sheet from BoM.xlsx, outputs bom-cache.js
 """
-import openpyxl, json, os, sys
+import openpyxl, json, os, sys, tempfile
+import urllib.request
 from datetime import datetime, timezone
 
-SRC  = os.path.join(os.path.dirname(__file__), '../Final Data Files/SKUs & BOM/BoM.xlsx')
-DEST = os.path.join(os.path.dirname(__file__), '../src/data/bom-cache.js')
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BUILD_DIR  = os.path.dirname(SCRIPT_DIR)
+LOCAL_SRC  = os.path.join(BUILD_DIR, 'Final Data Files', 'SKUs & BOM', 'BoM.xlsx')
+DEST       = os.path.join(BUILD_DIR, 'src', 'data', 'bom-cache.js')
+
+ONEDRIVE_URL = os.environ.get('ONEDRIVE_BOM_URL', '')
+if ONEDRIVE_URL:
+    download_url = ONEDRIVE_URL.replace('redir?', 'download?').replace('embed?', 'download?')
+    if 'download' not in download_url:
+        import base64
+        encoded = base64.b64encode(ONEDRIVE_URL.encode()).decode().rstrip('=').replace('+','-').replace('/','_')
+        download_url = f'https://api.onedrive.com/v1.0/shares/u!{encoded}/root/content'
+    print(f'[INFO] Downloading BoM.xlsx from OneDrive...')
+    tmp = tempfile.NamedTemporaryFile(suffix='.xlsx', delete=False)
+    urllib.request.urlretrieve(download_url, tmp.name)
+    SRC = tmp.name
+else:
+    SRC = LOCAL_SRC
+    if not os.path.exists(SRC):
+        print(f'[ERROR] BoM.xlsx not found at {SRC}. Set ONEDRIVE_BOM_URL to fetch from OneDrive.')
+        sys.exit(0)
 
 HAMPER_KEYS   = ['LETTERBOX','COCOA','SIGNATURE','PAMPER','GRAND','PRESTIGE','ADDON']
 HAMPER_LABELS = {

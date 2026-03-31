@@ -1,11 +1,11 @@
 // EDEN & CO. CEO Flight Deck — Team Pulse Cache
-// Generated: 2026-03-30T09:17:17Z
+// Generated: 2026-03-31T16:52:41Z
 // Source: EDEN_CO_Weekly_Status.xlsx
 // Do not edit manually. Run: python3 scripts/build-team-pulse.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN.teamPulse = {
-  "generated": "2026-03-30T09:17:17Z",
+  "generated": "2026-03-31T16:52:41Z",
   "current_week": "2026-W14",
   "core_goals": {
     "Jon": {
@@ -370,7 +370,7 @@ window.EDEN.teamPulse = {
   "weekly": {
     "Jon": [
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Amazon Account Validation (VAT + Phone)",
         "status": "on-track",
@@ -379,7 +379,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Support Phoebe - Orders Despatch",
         "status": "on-track",
@@ -388,7 +388,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Teach Phoebe Invoicing",
         "status": "on-track",
@@ -397,7 +397,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Payroll",
         "status": "on-track",
@@ -406,7 +406,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Launch New Dashboard",
         "status": "on-track",
@@ -415,7 +415,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Finalise 2026 Product Range",
         "status": "on-track",
@@ -424,7 +424,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Monitor International Orders",
         "status": "on-track",
@@ -442,7 +442,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Bread&Jam Tickets",
         "status": "on-track",
@@ -451,7 +451,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Checking WIth Corp Campaigns: Virgin, PIPL, SmartCurrencyExchange",
         "status": "on-track",
@@ -460,7 +460,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "PPC Check-in & Ypdate",
         "status": "on-track",
@@ -480,7 +480,7 @@ window.EDEN.teamPulse = {
     ],
     "Rosie": [
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Chase RH Fibreboard - packaging quotes",
         "status": "on-track",
@@ -489,7 +489,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Checkin Founder Content with Edith",
         "status": "on-track",
@@ -498,7 +498,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Checkin UGC Content with Edith",
         "status": "on-track",
@@ -507,7 +507,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Pack Gift Tubes",
         "status": "on-track",
@@ -516,7 +516,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "W/House Assemble Plan with Phoebe",
         "status": "on-track",
@@ -525,7 +525,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Continue Despatch Training Phoebe",
         "status": "on-track",
@@ -534,7 +534,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Decide on new Product lines",
         "status": "on-track",
@@ -543,7 +543,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "Other",
         "task": "Confirm Building Works",
         "status": "on-track",
@@ -554,7 +554,7 @@ window.EDEN.teamPulse = {
     ],
     "Edith": [
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Finish @MillzCooksContent by Wednesday",
         "status": "on-track",
@@ -563,7 +563,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Ready to Present 7x FInish Content Pieces by Wednesday",
         "status": "on-track",
@@ -572,7 +572,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Ready to Present 3x Finished Emails by Wednesday",
         "status": "on-track",
@@ -581,7 +581,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Pack Gift Tubes on Tuesday",
         "status": "on-track",
@@ -590,7 +590,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Create a 3 Step Sign-off Plan for Content & Emails",
         "status": "on-track",
@@ -601,7 +601,7 @@ window.EDEN.teamPulse = {
     ],
     "Phoebe": [
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Support Whouse Despatch",
         "status": "on-track",
@@ -610,7 +610,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Learn Admin Despatch",
         "status": "on-track",
@@ -619,7 +619,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Learn Invoicing & Purchase Order",
         "status": "on-track",
@@ -628,7 +628,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W13",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Pack GiftTubes",
         "status": "on-track",
@@ -663,13 +663,6 @@ window.EDEN.teamPulse = {
       "owner": "Rosie",
       "level": "high",
       "action": "Start Building Pallets and claearing shelves for move",
-      "due": "2026-04-04"
-    },
-    {
-      "title": "Food & Drink Exhbo",
-      "owner": "Rosie",
-      "level": "med",
-      "action": "Confirm team attending and ticket links",
       "due": "2026-04-04"
     },
     {

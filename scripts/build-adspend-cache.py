@@ -32,9 +32,13 @@ try:
     #       Campaign status, Ad group Id, Ad group name, Ad group status, ...
     # Find spend/clicks/conv cols
     updated = rows[0].get('Row Updated At','') if rows else ''
-    spend_col = next((k for k in rows[0] if 'spend' in k.lower() or 'cost' in k.lower()), None) if rows else None
-    clicks_col = next((k for k in rows[0] if k.lower() == 'clicks'), None) if rows else None
-    conv_col = next((k for k in rows[0] if 'conv' in k.lower()), None) if rows else None
+    # Coupler Google Ads columns: 'Cost: Amount spend', 'Performance: Clicks',
+    # 'Performance: Impressions', 'Conversions: Conversions'
+    spend_col = next((k for k in rows[0] if 'amount spend' in k.lower() or ('spend' in k.lower() and 'cost' in k.lower())), None) if rows else None
+    if not spend_col:
+        spend_col = next((k for k in rows[0] if 'spend' in k.lower()), None) if rows else None
+    clicks_col = next((k for k in rows[0] if k.lower() in ('performance: clicks', 'clicks')), None) if rows else None
+    conv_col = next((k for k in rows[0] if 'conversions: conversions' in k.lower() or k.lower() == 'conversions'), None) if rows else None
     impr_col = next((k for k in rows[0] if 'impress' in k.lower()), None) if rows else None
 
     total_spend = sum(clean(r.get(spend_col,0)) for r in rows) if spend_col else 0

@@ -23,42 +23,55 @@ jobs:
       - name: Install dependencies
         run: pip install openpyxl
 
+      # ── Core data (Google Sheet / Coupler) ─────────────────────────────────
       - name: Build orders cache (Sales Log from Google Sheet)
+        continue-on-error: true
         run: python3 scripts/build-cache.py
         working-directory: ./
 
       - name: Build ad spend cache (Google Ads, Amazon, Meta from Google Sheet)
+        continue-on-error: true
         run: python3 scripts/build-adspend-cache.py
         working-directory: ./
 
+      # ── XLSX-based (OneDrive) ──────────────────────────────────────────────
       - name: Build stock cache (from EDEN_CO_Weekly_Status.xlsx)
+        continue-on-error: true
         run: python3 scripts/build-stock-cache.py
         working-directory: ./
         env:
           ONEDRIVE_XLSX_URL: ${{ secrets.ONEDRIVE_XLSX_URL }}
 
       - name: Build team pulse cache (from EDEN_CO_Weekly_Status.xlsx)
+        continue-on-error: true
         run: python3 scripts/build-team-pulse.py
         working-directory: ./
         env:
           ONEDRIVE_XLSX_URL: ${{ secrets.ONEDRIVE_XLSX_URL }}
 
-      - name: Build BoM cache (from BoM.xlsx)
+      - name: Build BoM cache (from BoM.xlsx via OneDrive)
+        continue-on-error: true
         run: python3 scripts/build-bom-cache.py
         working-directory: ./
+        env:
+          ONEDRIVE_BOM_URL: ${{ secrets.ONEDRIVE_BOM_URL }}
 
+      # ── External APIs ──────────────────────────────────────────────────────
       - name: Build marketing cache (Typeform + Google Reviews)
+        continue-on-error: true
         run: python3 scripts/build-marketing-cache.py
         working-directory: ./
         env:
           TYPEFORM_TOKEN: ${{ secrets.TYPEFORM_TOKEN }}
 
       - name: Build Klaviyo cache (flows, campaigns, 30d metrics)
+        continue-on-error: true
         run: python3 scripts/build-klaviyo-cache.py
         working-directory: ./
         env:
           KLAVIYO_API_KEY: ${{ secrets.KLAVIYO_API_KEY }}
 
+      # ── Always commit whatever rebuilt successfully ─────────────────────────
       - name: Commit and push updated cache files
         run: |
           git config user.name "EDEN Dashboard Bot"
