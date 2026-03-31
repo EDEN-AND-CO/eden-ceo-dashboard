@@ -146,7 +146,7 @@ window.EDEN.components = window.EDEN.components || {};
     // ── Contribute to TACOS ──
     window.EDEN._adSpend = window.EDEN._adSpend || {};
     window.EDEN._adSpend.google = totalSpend;
-    window.EDEN._adSpend.google_updated = '2026-03-27T00:00:00Z'; // last data pull date
+    // google_updated is set by adspend-cache.js (from Coupler CSV file timestamp)
     if (window.EDEN.refreshAdTiles) window.EDEN.refreshAdTiles();
 
     console.log('[EDEN] Google Ads rendered. Spend: ' + fmtGBP(totalSpend) + ' | Conv: ' + Math.round(totalConv) + ' | ROAS: ' + fmt2(blendedROAS) + 'x | CPA: ' + fmtGBPd(blendedCPA));

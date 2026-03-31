@@ -27,6 +27,7 @@ run_script build-cache.py
 run_script build-stock-cache.py
 run_script build-team-pulse.py
 run_script build-bom-cache.py
+run_script build-adspend-cache.py
 run_script build-marketing-cache.py
 
 echo "[$TIMESTAMP] All scripts complete. Deploying..." >> "$LOG"
