@@ -11,7 +11,7 @@ Forms:
   jbw36b3O  Google Reviews (Oct 2025)
 """
 
-import json, time, os, sys
+import json, time, os, sys, csv, io
 from datetime import datetime, timezone
 from collections import Counter
 
@@ -124,7 +124,7 @@ print("=" * 40)
 result = {}
 
 # 1. Gift Designer
-print("\n[1/4] Gift Designer (AxBUWMZz)...")
+print("\n[1/5] Gift Designer (AxBUWMZz)...")
 gd_items, gd_total = fetch_responses(FORMS["gift_designer"])
 n = len(gd_items)
 print(f"  {gd_total} total | {n} fetched")
@@ -145,7 +145,7 @@ result["gift_designer"] = {
 time.sleep(1)
 
 # 2. Virgin
-print("\n[2/4] Virgin Experience Vouchers (P8H6VegM)...")
+print("\n[2/5] Virgin Experience Vouchers (P8H6VegM)...")
 vir_items, vir_total = fetch_responses(FORMS["virgin"])
 n = len(vir_items)
 print(f"  {vir_total} total | {n} fetched")
@@ -167,7 +167,7 @@ result["virgin"] = {
 time.sleep(1)
 
 # 3. Corporate
-print("\n[3/4] Corporate Lead Gen (D0PGh6hl)...")
+print("\n[3/5] Corporate Lead Gen (D0PGh6hl)...")
 corp_items, corp_total = fetch_responses(FORMS["corporate"])
 n = len(corp_items)
 print(f"  {corp_total} total | {n} fetched")
@@ -194,7 +194,7 @@ result["corporate"] = {
 time.sleep(1)
 
 # 4. Google Reviews form
-print("\n[4/4] Google Reviews form (jbw36b3O)...")
+print("\n[4/5] Google Reviews form (jbw36b3O)...")
 gr_items, gr_total = fetch_responses(FORMS["google_reviews"])
 n = len(gr_items)
 print(f"  {gr_total} total | {n} fetched")
@@ -234,102 +234,106 @@ result["google_reviews"] = {
     "months":     month_counts(gr_items),
 }
 
-# ── Google Business Profile reviews (from live Google Sheet via Make)
-# Sheet: https://docs.google.com/spreadsheets/d/1DXKumasfRDY4tGiPAi07pV15eiyAb5R0HezoxpUkhc8
-# Tab: All Google Reviews (gid=879421801) — full all-time dataset
-# Updated: 2026-03-29 | 673 reviews | 4.67 avg | 79% five-star
-result["gbp_reviews"] = {
-    "source":       "Google Business Profile via Make → Google Sheet (All Google Reviews tab)",
-    "sheet_url":    "https://docs.google.com/spreadsheets/d/1DXKumasfRDY4tGiPAi07pV15eiyAb5R0HezoxpUkhc8/edit?gid=879421801",
-    "last_updated": "2026-03-29",
-    "total":        673,
-    "avg_rating":   4.67,
-    "five_star":    532,
-    "four_star":    78,
-    "three_star":   41,
-    "two_star":     0,
-    "one_star":     22,
-    "pct_five":     79,
-    "pct_positive": 91,
-    "dietary_mentions": {
-        "Vegan":       122,
-        "Gluten Free": 47,
-        "Dairy Free":  8,
-        "Coeliac":     6,
-    },
-    "top_phrases": [
-        "Lovely gift",
-        "Beautiful/beautifully packaged",
-        "Delicious",
-        "Wonderful",
-        "Thank you",
-        "Vegan",
-        "Treats",
-        "Quality",
-        "Special",
-        "Delivery/quick delivery",
-        "Gluten free",
-        "Variety",
-        "Pleased/delighted",
-        "Great selection",
-        "Impressed",
-    ],
-    "top_quotes": [
-        {
-            "text": "I usually have to watch other people eating treats because they've not thought about my allergies — this time the whole hamper was curated for me!",
-            "reviewer": "Adrienne Ayres",
-            "stars": 5,
-            "theme": "dietary exclusion resolved"
-        },
-        {
-            "text": "She was able to eat everything and raved about how much she enjoyed the beautiful hamper.",
-            "reviewer": "Kathy Richards",
-            "stars": 5,
-            "theme": "recipient joy"
-        },
-        {
-            "text": "Their faces light up every time they open the box.",
-            "reviewer": "Michelle Tilson",
-            "stars": 5,
-            "theme": "gifting emotion"
-        },
-        {
-            "text": "I'm obsessed! The whole hamper was curated for my coeliac disease.",
-            "reviewer": "Molie Honeyman",
-            "stars": 5,
-            "theme": "personalisation + inclusion"
-        },
-        {
-            "text": "Recently learnt he is now dairy and gluten intolerant — this was a great indulgent gift.",
-            "reviewer": "Tim Weston",
-            "stars": 5,
-            "theme": "new diagnosis gifting"
-        },
-        {
-            "text": "Now this is the kind of gift I like to receive! Some of the best vegan chocolate I have ever tasted.",
-            "reviewer": "AJ Sefton",
-            "stars": 5,
-            "theme": "quality surprise"
-        },
-        {
-            "text": "Having those who need to eat gluten free feel normal and included for a change.",
-            "stars": 5,
-            "theme": "inclusion"
-        },
-        {
-            "text": "These hampers are the most gorgeous gift for a dairy free gal. They really make it feel like I'm not missing out.",
-            "stars": 5,
-            "theme": "inclusion"
-        },
-    ],
-    "watch_areas": [
-        "Fulfilment failures: 22 one-star reviews, mostly citing non-delivery or missing items at Christmas",
-        "Taste expectations vs price: value perception raised in 3-star reviews",
-        "May-contain labelling: 'may contain gluten' warning on GF orders flagged by customers",
-        "Sender identification: some recipients did not know who sent the gift",
-    ],
-    "peak_month": "December 2025 (majority of reviews)",
+# ── Google Business Profile reviews (live from Google Sheet via Make)
+GBP_SHEET_CSV = "https://docs.google.com/spreadsheets/d/1DXKumasfRDY4tGiPAi07pV15eiyAb5R0HezoxpUkhc8/export?format=csv&gid=879421801"
+DIETARY_TERMS = {
+    "Vegan":       ["vegan", "plant-based", "plant based"],
+    "Gluten Free": ["gluten", "coeliac", "celiac", "gf "],
+    "Dairy Free":  ["dairy free", "dairy-free", "lactose"],
+    "Coeliac":     ["coeliac", "celiac"],
 }
+
+print("\n[5/5] Google Reviews (Sheet CSV)...")
+try:
+    req = urllib.request.Request(GBP_SHEET_CSV, headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(req, timeout=15) as r:
+        raw = r.read().decode("utf-8")
+
+    reader = csv.DictReader(io.StringIO(raw))
+    rows = list(reader)
+    headers = reader.fieldnames or []
+    print(f"  Columns: {headers}")
+
+    # Detect column names flexibly
+    def col(names):
+        for n in names:
+            for h in headers:
+                if n.lower() in h.lower():
+                    return h
+        return None
+
+    rating_col   = col(["rating", "star", "score"])
+    text_col     = col(["review", "comment", "text", "body"])
+    reviewer_col = col(["reviewer", "name", "author"])
+    date_col     = col(["date", "time", "submitted"])
+
+    ratings, quotes, diet_counts = [], [], Counter()
+    months = Counter()
+
+    for row in rows:
+        raw_rating = row.get(rating_col, "").strip() if rating_col else ""
+        try:
+            r_val = int(float(raw_rating))
+        except (ValueError, TypeError):
+            continue
+
+        ratings.append(r_val)
+        text    = (row.get(text_col, "") if text_col else "").strip()
+        reviewer = (row.get(reviewer_col, "") if reviewer_col else "").strip()
+        date_str = (row.get(date_col, "") if date_col else "").strip()
+
+        if date_str and len(date_str) >= 7:
+            months[date_str[:7]] += 1
+
+        tl = text.lower()
+        for label, terms in DIETARY_TERMS.items():
+            if any(t in tl for t in terms):
+                diet_counts[label] += 1
+
+        if r_val >= 4 and len(text) > 40:
+            quotes.append({"text": text, "reviewer": reviewer, "stars": r_val, "date": date_str})
+
+    total = len(ratings)
+    dist  = Counter(ratings)
+    avg   = round(sum(ratings) / total, 2) if total else 0
+    pct5  = round(dist[5] / total * 100) if total else 0
+    pct_pos = round((dist[5] + dist[4]) / total * 100) if total else 0
+
+    # Pick top quotes: prefer dietary-mention ones, then newest
+    diet_quotes = [q for q in quotes if any(t in q["text"].lower() for terms in DIETARY_TERMS.values() for t in terms)]
+    other_quotes = [q for q in quotes if q not in diet_quotes]
+    top_quotes = (diet_quotes[:6] + other_quotes)[:10]
+
+    result["gbp_reviews"] = {
+        "source":       "Google Business Profile via Make → Google Sheet (All Google Reviews tab)",
+        "sheet_url":    "https://docs.google.com/spreadsheets/d/1DXKumasfRDY4tGiPAi07pV15eiyAb5R0HezoxpUkhc8/edit?gid=879421801",
+        "last_updated": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+        "total":        total,
+        "avg_rating":   avg,
+        "five_star":    dist[5],
+        "four_star":    dist[4],
+        "three_star":   dist[3],
+        "two_star":     dist[2],
+        "one_star":     dist[1],
+        "pct_five":     pct5,
+        "pct_positive": pct_pos,
+        "dietary_mentions": dict(diet_counts.most_common()),
+        "top_quotes":   top_quotes,
+        "months":       dict(sorted(months.items())),
+    }
+    print(f"  {total} reviews | avg {avg} | {pct5}% five-star")
+
+except Exception as e:
+    print(f"  WARNING: Could not fetch GBP sheet: {e}")
+    print("  Using last known values.")
+    result["gbp_reviews"] = {
+        "source": "fallback — sheet fetch failed",
+        "last_updated": "unknown",
+        "total": 0, "avg_rating": 0,
+        "five_star": 0, "four_star": 0, "three_star": 0, "two_star": 0, "one_star": 0,
+        "pct_five": 0, "pct_positive": 0,
+        "dietary_mentions": {}, "top_quotes": [], "months": {},
+    }
 
 # ── Metadata ──────────────────────────────────────────────────────────────────
 result["_built"]   = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
@@ -350,4 +354,5 @@ print(f"  Gift Designer:   {result['gift_designer']['total']} responses")
 print(f"  Virgin:          {result['virgin']['total']} responses")
 print(f"  Corporate:       {result['corporate']['total']} responses")
 print(f"  Google Reviews:  {result['google_reviews']['total']} responses")
+print(f"  GBP Reviews:     {result['gbp_reviews']['total']} reviews | avg {result['gbp_reviews']['avg_rating']}")
 print(f"\nReload the dashboard to see updated data.")

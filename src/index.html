@@ -63,6 +63,9 @@ body{font-family:var(--F);background:var(--PG);color:var(--GDK);font-size:14px;l
 .sp-dot.r{background:#aaa}
 .sp-name{flex:1;color:var(--GDK);font-family:'Josefin Sans',sans-serif;letter-spacing:0.04em}
 .sp-time{font-size:11px;color:var(--GMD);font-family:var(--FM);white-space:nowrap}
+.data-ts{font-size:10px;color:var(--GMD);font-family:var(--FM);margin-left:8px;font-weight:400;letter-spacing:0}
+.data-ts.stale{color:var(--RED)}
+.data-ts.ok{color:var(--OK)}
 .alert-btn:hover{background:rgba(255,255,255,0.14)}
 .alert-btn svg{width:16px;height:16px;fill:none;stroke:rgba(255,255,255,0.8);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .alert-count{position:absolute;top:-4px;right:-4px;width:16px;height:16px;border-radius:50%;background:#f07070;color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid var(--G)}
@@ -567,6 +570,11 @@ svg.sp{display:block;width:100%;overflow:visible}
   </div>
 </div>
 
+<!-- Stale data alert banner -->
+<div id="stale-banner" style="display:none;background:var(--ABL);border-bottom:2px solid var(--GOLD);padding:8px 20px;font-size:11px;color:var(--AMB);display:flex;align-items:center;gap:8px;cursor:pointer" onclick="this.style.display='none'">
+  <strong>Data alert:</strong> <span id="stale-banner-msg"></span> &nbsp;·&nbsp; Click to dismiss
+</div>
+
 <!-- TAB BAR -->
 <div class="tab-bar">
   <div class="tab active" onclick="showTab('overview',this,'Overview')"><div class="tdot a"></div>Overview</div>
@@ -787,7 +795,7 @@ svg.sp{display:block;width:100%;overflow:visible}
     <div class="g21">
       <div>
         <div id="gads-adblk" class="adblk ok">
-          <div class="adhead"><div class="adname">Google Ads</div><span class="rag a">Loading...</span></div>
+          <div class="adhead"><div class="adname">Google Ads<span class="data-ts" id="ts-google-ppc"></span></div><span class="rag a">Loading...</span></div>
           <div class="adgrid">
             <div><div class="amlbl">ROAS MTD</div><div class="amval">—</div><div class="amtgt">Target 3x+</div></div>
             <div><div class="amlbl">Spend MTD</div><div class="amval">—</div><div class="amtgt">—</div></div>
@@ -801,7 +809,7 @@ svg.sp{display:block;width:100%;overflow:visible}
           <div class="dnote" style="margin-top:6px">Live from Google Ads MCP · 27 Mar 2026</div>
         </div>
         <div id="amz-adblk" class="adblk ok" style="border-left-color:var(--OK)">
-          <div class="adhead"><div class="adname">Amazon Ads</div><span class="rag g">Loading...</span></div>
+          <div class="adhead"><div class="adname">Amazon Ads<span class="data-ts" id="ts-amazon-ppc"></span></div><span class="rag g">Loading...</span></div>
           <div class="adgrid">
             <div><div class="amlbl">ACOS MTD</div><div class="amval">—</div><div class="amtgt">Target &lt;25%</div></div>
             <div><div class="amlbl">Spend MTD</div><div class="amval">—</div><div class="amtgt">—</div></div>
@@ -815,7 +823,7 @@ svg.sp{display:block;width:100%;overflow:visible}
           <div class="dnote" style="margin-top:6px">Coupler · Mar 1–9 2026 only · re-run dataflow to update</div>
         </div>
         <div id="meta-adblk" class="adblk no">
-          <div class="adhead"><div class="adname">Meta Ads</div><span class="rag a">REACTIVATING</span></div>
+          <div class="adhead"><div class="adname">Meta Ads<span class="data-ts" id="ts-meta-ppc"></span></div><span class="rag a">REACTIVATING</span></div>
           <div class="adgrid">
             <div><div class="amlbl">ROAS MTD</div><div class="amval na">—</div><div class="amtgt">Target 5x+</div></div>
             <div><div class="amlbl">Spend MTD</div><div class="amval" id="meta-spend-val">—</div><div class="amtgt">Coupler live</div></div>
@@ -983,7 +991,7 @@ svg.sp{display:block;width:100%;overflow:visible}
   </div>
 
   <div class="sec">
-    <div class="seclbl">Klaviyo email performance</div>
+    <div class="seclbl">Klaviyo email performance<span class="data-ts" id="ts-klaviyo"></span></div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
       <div class="card">
         <div style="display:flex;align-items:center;margin-bottom:12px"><div class="ctitle" style="margin:0;flex:1">Flows by revenue</div><div class="ktog"><button class="kb active" id="klv-f-mtd" onclick="window.EDEN.components.klaviyo.setView('mtd')">MTD</button><button class="kb" id="klv-f-ytd" onclick="window.EDEN.components.klaviyo.setView('ytd')">YTD</button></div></div>
@@ -2602,6 +2610,24 @@ function calcYear() {
 document.addEventListener('DOMContentLoaded', function() {
   calcProduct();
   calcYear();
+});
+</script>
+
+<!-- Hidden sync log — press Shift+L to view -->
+<div id="sync-log-panel" style="display:none;position:fixed;bottom:0;left:0;right:0;height:40vh;background:var(--GDK);color:#3ecf7a;font-family:var(--FM);font-size:11px;padding:16px;overflow:auto;z-index:9999;border-top:2px solid var(--GOLD)">
+  <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+    <strong style="color:var(--GOLD);letter-spacing:0.1em">SYNC LOG</strong>
+    <span style="cursor:pointer;color:var(--GMD)" onclick="document.getElementById('sync-log-panel').style.display='none'">close ×</span>
+  </div>
+  <pre id="sync-log-content" style="margin:0;white-space:pre-wrap;line-height:1.6">Loading...</pre>
+</div>
+<script>
+document.addEventListener('keydown', function(e) {
+  if (e.shiftKey && e.key === 'L') {
+    var p = document.getElementById('sync-log-panel');
+    p.style.display = p.style.display === 'none' ? 'block' : 'none';
+    if (p.style.display === 'block') window.EDEN && window.EDEN.loadSyncLog && window.EDEN.loadSyncLog();
+  }
 });
 </script>
 

@@ -300,6 +300,10 @@ window.EDEN = window.EDEN || {};
     // Inject Order By dates into stock table
     injectStockOrderByDates();
 
+    // Data timestamps and freshness banner
+    updateDataTimestamps();
+    checkDataFreshness();
+
     // Load data — prefer pre-built cache, fall back to CSV fetch
     if (window.EDEN._ordersCache && window.EDEN._ordersCache.length > 0) {
       console.log('[EDEN] Using orders cache:', window.EDEN._ordersCache.length, 'rows | Built:', window.EDEN._ordersCacheDate || 'unknown');
@@ -624,6 +628,93 @@ window.EDEN = window.EDEN || {};
   });
 
   window.toggleStatusPanel = toggleStatusPanel;
+
+  // ── Data timestamps ───────────────────────────────────────────────
+
+  function updateDataTimestamps() {
+    var now = Date.now();
+    var H24 = 24 * 60 * 60 * 1000;
+    var H48 = 48 * 60 * 60 * 1000;
+
+    function setTs(id, isoStr, maxMs) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      if (!isoStr) { el.textContent = 'Not loaded'; el.className = 'data-ts stale'; return; }
+      var d = new Date(isoStr);
+      var age = now - d.getTime();
+      var label = fmtTsAge(age);
+      el.textContent = 'Updated ' + label;
+      el.className = 'data-ts ' + (age > maxMs ? 'stale' : 'ok');
+    }
+
+    function fmtTsAge(ms) {
+      var h = Math.floor(ms / 3600000);
+      if (h < 1) return 'just now';
+      if (h < 24) return h + 'h ago';
+      return Math.floor(h / 24) + 'd ago';
+    }
+
+    var ad = window.EDEN._adSpend || {};
+    var mkt = window.EDEN._marketingData || {};
+    setTs('ts-google-ppc', ad.google_updated, H24);
+    setTs('ts-amazon-ppc', ad.amazon_updated, H24);
+    setTs('ts-meta-ppc', ad.meta_updated, H24);
+    var klvDate = (mkt.klaviyo && mkt.klaviyo.updated) || mkt._built || null;
+    setTs('ts-klaviyo', klvDate, H48);
+  }
+
+  // ── Staleness alert banner ────────────────────────────────────────
+
+  var FRESHNESS_SOURCES = [
+    { name: 'Sales Log',      ts: function(){ return (window.EDEN._ordersCacheDate || null); },      maxH: 24 },
+    { name: 'Stock Data',     ts: function(){ return (window.EDEN._stockCacheDate || null); },       maxH: 168 },
+    { name: 'Team Pulse',     ts: function(){ var tp=window.EDEN.teamPulse; return tp && tp.generated; }, maxH: 168 },
+    { name: 'Google PPC',     ts: function(){ return (window.EDEN._adSpend||{}).google_updated; },   maxH: 24 },
+    { name: 'Amazon PPC',     ts: function(){ return (window.EDEN._adSpend||{}).amazon_updated; },   maxH: 24 },
+    { name: 'Meta PPC',       ts: function(){ return (window.EDEN._adSpend||{}).meta_updated; },     maxH: 24 },
+    { name: 'Google Reviews', ts: function(){ var m=window.EDEN._marketingData; return m && m.gbp_reviews && m.gbp_reviews.last_updated; }, maxH: 168 }
+  ];
+
+  function checkDataFreshness() {
+    var now = Date.now();
+    var stale = [];
+    FRESHNESS_SOURCES.forEach(function(s) {
+      var ts = s.ts();
+      if (!ts) { stale.push(s.name + ' (not loaded)'); return; }
+      var age = now - new Date(ts).getTime();
+      if (age > s.maxH * 3600000) {
+        var h = Math.floor(age / 3600000);
+        stale.push(s.name + ' (' + (h < 24 ? h + 'h' : Math.floor(h/24) + 'd') + ' old)');
+      }
+    });
+    var banner = document.getElementById('stale-banner');
+    if (!banner) return;
+    if (stale.length) {
+      document.getElementById('stale-banner-msg').textContent = stale.join(' · ');
+      banner.style.display = 'flex';
+    } else {
+      banner.style.display = 'none';
+    }
+  }
+
+  // ── Sync log loader ───────────────────────────────────────────────
+
+  window.EDEN.loadSyncLog = function() {
+    var el = document.getElementById('sync-log-content');
+    if (!el) return;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'data/sync.log?_=' + Date.now(), true);
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        var lines = xhr.responseText.trim().split('\n');
+        el.textContent = lines.slice(-50).join('\n');
+      } else {
+        el.textContent = 'Log not found. Run scripts/daily-rebuild.sh to generate.';
+      }
+    };
+    xhr.onerror = function() { el.textContent = 'Could not load sync log.'; };
+    xhr.send();
+  };
 
   // Init on DOM ready
   if (document.readyState === 'loading') {

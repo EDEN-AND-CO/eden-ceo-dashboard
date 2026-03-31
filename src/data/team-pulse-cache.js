@@ -1,12 +1,12 @@
 // EDEN & CO. CEO Flight Deck — Team Pulse Cache
-// Generated: 2026-03-29T17:59:20Z
+// Generated: 2026-03-30T09:17:17Z
 // Source: EDEN_CO_Weekly_Status.xlsx
 // Do not edit manually. Run: python3 scripts/build-team-pulse.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN.teamPulse = {
-  "generated": "2026-03-29T17:59:20Z",
-  "current_week": "2026-W13",
+  "generated": "2026-03-30T09:17:17Z",
+  "current_week": "2026-W14",
   "core_goals": {
     "Jon": {
       "PPC - Blended ROAS 5x": {
@@ -167,12 +167,7 @@ window.EDEN.teamPulse = {
           {
             "t": "2 Recipient Focused Posts",
             "m": "Captures Recipients Thinking"
-          }
-        ]
-      },
-      "7 posts per week": {
-        "status": "on",
-        "goals": [
+          },
           {
             "t": "3 Buyer Focused Posts",
             "m": "Captures Buyers Thinking"
@@ -182,12 +177,16 @@ window.EDEN.teamPulse = {
             "m": "Captures Brand Experience"
           },
           {
+            "t": "Respond to Messages Comments",
+            "m": "Within 4 Working Hours"
+          },
+          {
             "t": "Reported in Monday Meeting",
             "m": "Increased Reach + Followers"
           }
         ]
       },
-      "3 emails per week (1 promo)": {
+      "Email Campaigns": {
         "status": "on",
         "goals": [
           {

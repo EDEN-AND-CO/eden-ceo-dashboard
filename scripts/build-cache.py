@@ -21,6 +21,9 @@ def main():
         print(f'ERROR: CSV not found at {csv_path}')
         sys.exit(1)
 
+    # Strategy: REPLACE on every run. Sales Log CSV is the source of truth — always export
+    # the full history from ShipStation. The cache is rebuilt from scratch each run.
+    # For append-style sources (Google Reviews), see build-marketing-cache.py.
     orders = []
     skipped = 0
     with open(csv_path, newline='', encoding='utf-8-sig') as f:
