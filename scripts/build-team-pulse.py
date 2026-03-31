@@ -10,7 +10,8 @@ Run this each Monday morning before opening the dashboard, or whenever
 the team has updated the spreadsheet.
 """
 
-import json, os, sys
+import json, os, sys, tempfile
+import urllib.request
 from datetime import datetime
 
 try:
@@ -21,8 +22,24 @@ except ImportError:
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 BUILD_DIR  = os.path.dirname(SCRIPT_DIR)
-XLSX_PATH  = os.path.join(BUILD_DIR, 'Final Data Files', 'Team Pulse', 'EDEN_CO_Weekly_Status.xlsx')
+LOCAL_PATH = os.path.join(BUILD_DIR, 'Final Data Files', 'Team Pulse', 'EDEN_CO_Weekly_Status.xlsx')
 OUT_PATH   = os.path.join(BUILD_DIR, 'src', 'data', 'team-pulse-cache.js')
+
+# Allow OneDrive share link override (for GitHub Actions)
+ONEDRIVE_URL = os.environ.get('ONEDRIVE_XLSX_URL', '')
+if ONEDRIVE_URL:
+    download_url = ONEDRIVE_URL.replace('redir?', 'download?').replace('embed?', 'download?')
+    if 'download' not in download_url:
+        import base64
+        encoded = base64.b64encode(ONEDRIVE_URL.encode()).decode().rstrip('=').replace('+','-').replace('/','_')
+        download_url = f'https://api.onedrive.com/v1.0/shares/u!{encoded}/root/content'
+    print(f'[INFO] Downloading XLSX from OneDrive...')
+    tmp = tempfile.NamedTemporaryFile(suffix='.xlsx', delete=False)
+    urllib.request.urlretrieve(download_url, tmp.name)
+    XLSX_PATH = tmp.name
+    print(f'[INFO] Downloaded to {tmp.name}')
+else:
+    XLSX_PATH = LOCAL_PATH
 
 PEOPLE = ['Jon', 'Rosie', 'Edith', 'Phoebe']
 

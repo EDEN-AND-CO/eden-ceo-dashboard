@@ -5,11 +5,35 @@ Reads Stock tab from EDEN_CO_Weekly_Status.xlsx
 Outputs src/data/stock-cache.js -> window.EDEN._stockData
 Run: python3 scripts/build-stock-cache.py
 """
-import openpyxl, json, os, sys
+import openpyxl, json, os, sys, tempfile
+import urllib.request
 from datetime import datetime, timezone
 
-SRC  = os.path.join(os.path.dirname(__file__), '../Final Data Files/Team Pulse/EDEN_CO_Weekly_Status.xlsx')
-DEST = os.path.join(os.path.dirname(__file__), '../src/data/stock-cache.js')
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BUILD_DIR  = os.path.dirname(SCRIPT_DIR)
+LOCAL_SRC  = os.path.join(BUILD_DIR, 'Final Data Files', 'Team Pulse', 'EDEN_CO_Weekly_Status.xlsx')
+DEST       = os.path.join(BUILD_DIR, 'src', 'data', 'stock-cache.js')
+
+# Allow OneDrive share link override (for GitHub Actions)
+ONEDRIVE_URL = os.environ.get('ONEDRIVE_XLSX_URL', '')
+if ONEDRIVE_URL:
+    # Convert OneDrive share link to direct download URL
+    download_url = ONEDRIVE_URL.replace('redir?', 'download?').replace('embed?', 'download?')
+    if 'download' not in download_url:
+        import base64
+        encoded = base64.b64encode(ONEDRIVE_URL.encode()).decode().rstrip('=').replace('+','-').replace('/','_')
+        download_url = f'https://api.onedrive.com/v1.0/shares/u!{encoded}/root/content'
+    print(f'[INFO] Downloading XLSX from OneDrive...')
+    tmp = tempfile.NamedTemporaryFile(suffix='.xlsx', delete=False)
+    urllib.request.urlretrieve(download_url, tmp.name)
+    SRC = tmp.name
+    print(f'[INFO] Downloaded to {tmp.name}')
+else:
+    SRC = LOCAL_SRC
+    if not os.path.exists(SRC):
+        print(f'[ERROR] File not found: {SRC}')
+        print('        Set ONEDRIVE_XLSX_URL env var to fetch from OneDrive')
+        sys.exit(1)
 
 # Map sheet item names to dashboard hamper keys
 ITEM_MAP = {

@@ -584,6 +584,7 @@ window.EDEN = window.EDEN || {};
       { name: 'Team Pulse Tasks',     ts: TP && TP.generated,                      maxH: 168 },
       { name: 'Corporate Pipeline',   ts: mkt && mkt._built,                       maxH: 48 },
       { name: 'Stock Data',            ts: window.EDEN._stockCacheDate,             maxH: 168 },
+      { name: 'Klaviyo',              ts: window.EDEN._klaviyoData && window.EDEN._klaviyoData._built, maxH: 48 },
       { name: 'Social Platforms',     ts: null,                                    maxH: 0 }
     ];
 
@@ -659,7 +660,7 @@ window.EDEN = window.EDEN || {};
     setTs('ts-google-ppc', ad.google_updated, H24);
     setTs('ts-amazon-ppc', ad.amazon_updated, H24);
     setTs('ts-meta-ppc', ad.meta_updated, H24);
-    var klvDate = (mkt.klaviyo && mkt.klaviyo.updated) || mkt._built || null;
+    var klvDate = (window.EDEN._klaviyoData && window.EDEN._klaviyoData._built) || (mkt.klaviyo && mkt.klaviyo.updated) || mkt._built || null;
     setTs('ts-klaviyo', klvDate, H48);
   }
 
@@ -672,7 +673,8 @@ window.EDEN = window.EDEN || {};
     { name: 'Google PPC',     ts: function(){ return (window.EDEN._adSpend||{}).google_updated; },   maxH: 24 },
     { name: 'Amazon PPC',     ts: function(){ return (window.EDEN._adSpend||{}).amazon_updated; },   maxH: 24 },
     { name: 'Meta PPC',       ts: function(){ return (window.EDEN._adSpend||{}).meta_updated; },     maxH: 24 },
-    { name: 'Google Reviews', ts: function(){ var m=window.EDEN._marketingData; return m && m.gbp_reviews && m.gbp_reviews.last_updated; }, maxH: 168 }
+    { name: 'Google Reviews', ts: function(){ var m=window.EDEN._marketingData; return m && m.gbp_reviews && m.gbp_reviews.last_updated; }, maxH: 168 },
+    { name: 'Klaviyo',        ts: function(){ return (window.EDEN._klaviyoData||{})._built || null; }, maxH: 48 }
   ];
 
   function checkDataFreshness() {

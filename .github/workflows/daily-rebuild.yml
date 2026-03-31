@@ -34,10 +34,14 @@ jobs:
       - name: Build stock cache (from EDEN_CO_Weekly_Status.xlsx)
         run: python3 scripts/build-stock-cache.py
         working-directory: ./
+        env:
+          ONEDRIVE_XLSX_URL: ${{ secrets.ONEDRIVE_XLSX_URL }}
 
       - name: Build team pulse cache (from EDEN_CO_Weekly_Status.xlsx)
         run: python3 scripts/build-team-pulse.py
         working-directory: ./
+        env:
+          ONEDRIVE_XLSX_URL: ${{ secrets.ONEDRIVE_XLSX_URL }}
 
       - name: Build BoM cache (from BoM.xlsx)
         run: python3 scripts/build-bom-cache.py
@@ -48,6 +52,12 @@ jobs:
         working-directory: ./
         env:
           TYPEFORM_TOKEN: ${{ secrets.TYPEFORM_TOKEN }}
+
+      - name: Build Klaviyo cache (flows, campaigns, 30d metrics)
+        run: python3 scripts/build-klaviyo-cache.py
+        working-directory: ./
+        env:
+          KLAVIYO_API_KEY: ${{ secrets.KLAVIYO_API_KEY }}
 
       - name: Commit and push updated cache files
         run: |
