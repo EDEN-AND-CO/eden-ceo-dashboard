@@ -9,13 +9,18 @@ window.EDEN.components = window.EDEN.components || {};
 (function () {
   'use strict';
 
-  // ── Live data (Coupler, 27 Mar 2026, full Mar MTD) ───────────────────────
+  // ── Totals — read from adspend-cache.js (Coupler, daily auto-update) ───────
+  // Per-campaign breakdown below is from last manual Coupler pull (27 Mar 2026).
+  // To update campaigns: re-export from Amazon Ads console and update PRODUCTS + SEARCH_TERMS.
 
+  var _cache = (window.EDEN._adSpend && window.EDEN._adSpend.amazon) || {};
   var TOTALS = {
-    spend:  2212.52,
-    orders: 321,   // 14-day attribution window
-    days:   27
+    spend:  (typeof _cache === 'object' ? _cache.spend  : _cache) || 2429.00,
+    orders: (typeof _cache === 'object' ? _cache.orders : 0)      || 350,
+    days:   31
   };
+  // Timestamp for Flight Check
+  window.EDEN._amzFetched = (window.EDEN._adSpend && window.EDEN._adSpend.amazon_updated) || '2026-03-27T00:00:00Z';
 
   var PRODUCTS = [
     { name: 'Petite (Letterbox)', spend: 1225.42, orders: 209 },
@@ -109,9 +114,11 @@ window.EDEN.components = window.EDEN.components || {};
       }).join('');
     }
 
-    // ── Contribute to TACOS ──
+    // ── Contribute to TACOS — only write if adspend-cache hasn't loaded ──
     window.EDEN._adSpend = window.EDEN._adSpend || {};
-    window.EDEN._adSpend.amazon = TOTALS.spend;
+    if (!window.EDEN._adSpend.amazon_updated) {
+      window.EDEN._adSpend.amazon = TOTALS.spend;
+    }
     if (window.EDEN.refreshAdTiles) window.EDEN.refreshAdTiles();
 
     console.log('[EDEN] Amazon Ads rendered. Spend: ' + fmtGBP(TOTALS.spend) + ' | Orders: ' + TOTALS.orders + ' | CPA: ' + fmtGBPd(cpa) + ' (Coupler 27 Mar)');

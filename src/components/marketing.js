@@ -106,12 +106,12 @@ window.EDEN.components = window.EDEN.components || {};
         attachChip('Prosecco add-on', proseccoCount, total);
     }
 
-    // ── TACOS + Blended ACOS ──
-    var cfg      = window.EDEN.CONFIG;
-    // Meta spend from Coupler (Mar 1–27 2026, updated 27 Mar)
+    // ── TACOS + Blended ROAS ──
+    var cfg = window.EDEN.CONFIG;
     window.EDEN._adSpend = window.EDEN._adSpend || {};
-    window.EDEN._adSpend.meta = 302.27;
-    var adSpend = (window.EDEN._adSpend.google || 0) + (window.EDEN._adSpend.amazon || 0) + (window.EDEN._adSpend.meta || 0);
+    // Read spend from adspend-cache.js (objects with .spend) or component-set numbers
+    function getSpend(v) { return (v && typeof v === 'object') ? (v.spend || 0) : (v || 0); }
+    var adSpend = getSpend(window.EDEN._adSpend.google) + getSpend(window.EDEN._adSpend.amazon) + getSpend(window.EDEN._adSpend.meta);
     var revMTD  = mtd.reduce(function (s, o) { return s + o.amount_paid; }, 0);
 
     function setEl(id, html)  { var el = document.getElementById(id); if (el) el.innerHTML = html; }
@@ -145,11 +145,14 @@ window.EDEN.components = window.EDEN.components || {};
       if (roasBarEl) roasBarEl.style.width = Math.min(roasVal / 6 * 100, 100) + '%';
     }
 
-    // ── Meta adblk live values ──
+    // ── Meta adblk live values (from adspend-cache.js) ──
+    var metaCache = (window.EDEN._adSpend && window.EDEN._adSpend.meta) || {};
+    var metaSpendVal = typeof metaCache === 'object' ? (metaCache.spend || 0) : metaCache;
+    var metaImprVal  = typeof metaCache === 'object' ? (metaCache.impressions || 0) : 0;
     var metaSpendEl = document.getElementById('meta-spend-val');
-    if (metaSpendEl) metaSpendEl.textContent = '£302';
+    if (metaSpendEl) metaSpendEl.textContent = '£' + Math.round(metaSpendVal).toLocaleString('en-GB');
     var metaImprEl = document.getElementById('meta-impr-val');
-    if (metaImprEl) metaImprEl.textContent = '41,865';
+    if (metaImprEl) metaImprEl.textContent = metaImprVal > 0 ? Math.round(metaImprVal).toLocaleString('en-GB') : '—';
 
     // Trigger TACOS tile refresh now that meta spend is set
     if (window.EDEN.refreshAdTiles) window.EDEN.refreshAdTiles();

@@ -630,6 +630,84 @@ window.EDEN = window.EDEN || {};
 
   window.toggleStatusPanel = toggleStatusPanel;
 
+  // ── Flight Check ──────────────────────────────────────────────────
+
+  function fmtAgeStr(isoStr) {
+    if (!isoStr) return null;
+    var ms = Date.now() - new Date(isoStr.replace(' ', 'T').replace(' UTC', 'Z')).getTime();
+    if (ms < 0) return 'just now';
+    var h = Math.floor(ms / 3600000);
+    if (h < 1) return Math.floor(ms / 60000) + 'm ago';
+    if (h < 24) return h + 'h ago';
+    return Math.floor(h / 24) + 'd ago';
+  }
+
+  function fcDot(ts, maxH, manual) {
+    if (manual) return '<span style="width:9px;height:9px;border-radius:50%;background:#d4a94a;display:inline-block;flex-shrink:0"></span>';
+    if (!ts) return '<span style="width:9px;height:9px;border-radius:50%;background:#c94444;display:inline-block;flex-shrink:0"></span>';
+    var h = (Date.now() - new Date(ts.replace(' ', 'T').replace(' UTC', 'Z')).getTime()) / 3600000;
+    var bg = h <= maxH ? '#3ecf7a' : h <= maxH * 2 ? '#d4a94a' : '#c94444';
+    return '<span style="width:9px;height:9px;border-radius:50%;background:' + bg + ';display:inline-block;flex-shrink:0"></span>';
+  }
+
+  function fcRow(label, ts, maxH, note, manual) {
+    var age = ts ? fmtAgeStr(ts) : (manual ? 'Manual' : 'Not loaded');
+    var noteHtml = note ? '<span style="color:var(--GMD);margin-left:6px">' + note + '</span>' : '';
+    return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--LG)">'
+      + fcDot(ts, maxH, manual)
+      + '<div style="flex:1;font-size:12px">' + label + noteHtml + '</div>'
+      + '<div style="font-size:11px;color:var(--GMD);white-space:nowrap">' + (age || '—') + '</div>'
+      + '</div>';
+  }
+
+  function buildFlightCheck() {
+    var ad  = window.EDEN._adSpend || {};
+    var tp  = window.EDEN.teamPulse || {};
+    var mkt = window.EDEN._marketingData || {};
+    var klv = window.EDEN._klaviyoData || {};
+
+    var auto = [
+      fcRow('Sales & Orders (ShipStation via Coupler)', window.EDEN._ordersCacheDate, 25, ''),
+      fcRow('Google Ads — spend totals (Coupler)', ad.google_updated, 25, 'TACOS tile'),
+      fcRow('Amazon — spend + orders (Coupler)', ad.amazon_updated, 25, 'TACOS tile'),
+      fcRow('Meta — spend (Coupler)', ad.meta_updated, 25, 'TACOS tile'),
+      fcRow('Marketing Intelligence (Typeform)', mkt._built, 72, ''),
+      fcRow('Klaviyo — aggregate metrics', klv._built, 48, 'Opens/clicks/revenue'),
+      fcRow('Team Pulse (OneDrive XLSX)', tp.generated, 168, ''),
+      fcRow('Stock Levels (OneDrive XLSX)', window.EDEN._stockCacheDate, 168, ''),
+    ];
+
+    var manual = [
+      fcRow('Google Ads — campaigns &amp; search terms', window.EDEN._gadsFetched, 0, '', true),
+      fcRow('Amazon — campaign breakdown', window.EDEN._amzFetched, 0, '', true),
+      fcRow('Klaviyo — per-flow revenue', '2026-03-27T00:00:00Z', 0, '', true),
+    ];
+
+    var autoSection = '<div style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--G);margin:0 0 8px">Auto-updated daily at 9:30am UTC</div>'
+      + auto.join('');
+    var manualSection = '<div style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--AMB);margin:16px 0 8px">Manual refresh required (Claude session)</div>'
+      + '<div style="font-size:11px;color:var(--GMD);margin-bottom:8px">These sources need a Claude session with MCP tools to update. Ask Claude to refresh Google Ads campaigns, Amazon search terms, or Klaviyo flow data.</div>'
+      + manual.join('');
+
+    var el = document.getElementById('fc-content');
+    if (el) el.innerHTML = autoSection + manualSection;
+
+    // Last rebuild timestamp from orders cache (proxy for last Actions run)
+    var rebuildTs = window.EDEN._ordersCacheDate || mkt._built || null;
+    var rebuildEl = document.getElementById('fc-last-rebuild');
+    if (rebuildEl) rebuildEl.textContent = rebuildTs ? ('Last cloud rebuild: ' + fmtAgeStr(rebuildTs)) : 'Last cloud rebuild: unknown';
+  }
+
+  window.openFlightCheck = function () {
+    buildFlightCheck();
+    document.getElementById('fc-overlay').style.display = 'block';
+    document.getElementById('fc-modal').style.display = 'block';
+  };
+  window.closeFlightCheck = function () {
+    document.getElementById('fc-overlay').style.display = 'none';
+    document.getElementById('fc-modal').style.display = 'none';
+  };
+
   // ── Data timestamps ───────────────────────────────────────────────
 
   function updateDataTimestamps() {
