@@ -689,14 +689,9 @@ window.EDEN = window.EDEN || {};
         stale.push(s.name + ' (' + (h < 24 ? h + 'h' : Math.floor(h/24) + 'd') + ' old)');
       }
     });
+    // Banner hidden — status drawer (Shift+L / status icon) is the freshness indicator
     var banner = document.getElementById('stale-banner');
-    if (!banner) return;
-    if (stale.length) {
-      document.getElementById('stale-banner-msg').textContent = stale.join(' · ');
-      banner.style.display = 'flex';
-    } else {
-      banner.style.display = 'none';
-    }
+    if (banner) banner.style.display = 'none';
   }
 
   // ── Sync log loader ───────────────────────────────────────────────
