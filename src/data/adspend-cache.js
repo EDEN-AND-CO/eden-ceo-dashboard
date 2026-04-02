@@ -1,32 +1,32 @@
 // EDEN & CO. CEO Flight Deck — Ad Spend Cache
-// Generated: 2026-04-01T12:03:27Z
+// Generated: 2026-04-02T11:58:26Z
 // Source: Stock Tracker Google Sheet — Coupler (Google Ads, Amazon Ads, Meta Ads tabs)
 window.EDEN = window.EDEN || {};
 window.EDEN._adSpend = {
   "google": {
-    "spend": 2999.27,
-    "clicks": 3633,
-    "conversions": 203.3,
-    "impressions": 49336,
-    "rows": 931,
+    "spend": 3059.47,
+    "clicks": 3694,
+    "conversions": 211.3,
+    "impressions": 50735,
+    "rows": 934,
     "spend_col": "Cost: Amount spend"
   },
-  "google_updated": "2026-04-01 09:05:22",
+  "google_updated": "2026-04-02 09:12:02",
   "amazon": {
-    "spend": 2432.44,
-    "clicks": 3914,
-    "orders": 363,
-    "impressions": 237720,
-    "rows": 2554
+    "spend": 2407.3,
+    "clicks": 3923,
+    "orders": 364,
+    "impressions": 251806,
+    "rows": 2538
   },
-  "amazon_updated": "2026-04-01 09:04:44",
+  "amazon_updated": "2026-04-02 09:45:23",
   "meta": {
-    "spend": 2274.24,
-    "clicks": 4565,
-    "impressions": 211158,
-    "rows": 569,
+    "spend": 2329.2,
+    "clicks": 4629,
+    "impressions": 215876,
+    "rows": 579,
     "spend_col": "Cost: Amount spend"
   },
-  "meta_updated": "2026-04-01 09:14:58",
-  "_built": "2026-04-01T12:03:27Z"
+  "meta_updated": "2026-04-02 09:13:13",
+  "_built": "2026-04-02T11:58:26Z"
 };

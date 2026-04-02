@@ -1,48 +1,48 @@
 // EDEN & CO. Marketing Intelligence Cache
-// Built: 2026-04-01 12:03 UTC
+// Built: 2026-04-02 11:58 UTC
 // Run: python3 scripts/build-marketing-cache.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN._marketingData = {
   "gift_designer": {
-    "total": 1519,
+    "total": 1526,
     "fetched": 1000,
     "who": {
-      "A family member or friend": 831,
-      "A client or colleague": 128,
+      "A family member or friend": 834,
+      "A client or colleague": 125,
       "Myself (we love this!)": 23,
       "A team or group": 18
     },
     "feel": {
-      "Loved and appreciated": 581,
-      "Surprised and delighted": 344,
+      "Loved and appreciated": 586,
+      "Surprised and delighted": 339,
       "Calm and relaxed": 49,
       "Inspired or empowered": 20
     },
     "concern": {
       "Worrying about allergies or dietary needs": 695,
       "Not wanting it to feel generic": 327,
-      "It won't look as good as it does in the picture": 235,
-      "It will taste rubbish": 225,
-      "I care deeply, but worry the gift won\u2019t show it.": 182,
-      "Feeling overwhelmed with options": 65
+      "It won't look as good as it does in the picture": 237,
+      "It will taste rubbish": 227,
+      "I care deeply, but worry the gift won\u2019t show it.": 183,
+      "Feeling overwhelmed with options": 68
     },
     "matters": {
-      "All of the above": 572,
-      "Quality, ethical ingredients": 323,
-      "Beautiful packaging & presentation": 294,
-      "Something they\u2019ve never seen before": 167
+      "All of the above": 573,
+      "Quality, ethical ingredients": 325,
+      "Beautiful packaging & presentation": 292,
+      "Something they\u2019ve never seen before": 168
     },
     "product": {
       "The Signature Collection (Top Seller)": 397,
-      "The Petite Collection (The perfect gesture)": 305,
-      "The Chocolate Collection (Pure Indulgence)": 146,
-      "The Grand (For Special occasions)": 92,
-      "The Prestige (For Milestone Moments)": 60
+      "The Petite Collection (The perfect gesture)": 309,
+      "The Chocolate Collection (Pure Indulgence)": 145,
+      "The Grand (For Special occasions)": 91,
+      "The Prestige (For Milestone Moments)": 58
     },
     "occasion": {
-      "Merry Christmas": 244,
-      "Happy Birthday": 95,
+      "Merry Christmas": 242,
+      "Happy Birthday": 96,
       "With Love": 60,
       "For Mum": 43,
       "Thank You": 39,
@@ -52,21 +52,21 @@ window.EDEN._marketingData = {
       "For Dad": 2
     },
     "dietary": {
-      "Gluten Free": 500,
-      "Dairy Free": 333,
-      "Vegan": 295,
+      "Gluten Free": 501,
+      "Dairy Free": 336,
+      "Vegan": 294,
       "Vegetarian": 94,
-      "None": 70,
-      "Plant Based": 45,
-      "Halal": 36
+      "None": 69,
+      "Plant Based": 46,
+      "Halal": 35
     },
     "months": {
-      "2025-11": 150,
+      "2025-11": 143,
       "2025-12": 447,
       "2026-01": 97,
       "2026-02": 127,
       "2026-03": 176,
-      "2026-04": 3
+      "2026-04": 10
     }
   },
   "virgin": {
@@ -187,12 +187,12 @@ window.EDEN._marketingData = {
     }
   },
   "google_reviews": {
-    "total": 1009,
+    "total": 1010,
     "fetched": 1000,
     "quality": {
       "avg": 4.82,
-      "total": 776,
-      "five": 661,
+      "total": 777,
+      "five": 662,
       "four": 98,
       "three": 12,
       "two": 3,
@@ -201,8 +201,8 @@ window.EDEN._marketingData = {
     },
     "impression": {
       "avg": 4.72,
-      "total": 754,
-      "five": 583,
+      "total": 755,
+      "five": 584,
       "four": 139,
       "three": 25,
       "two": 4,
@@ -212,7 +212,7 @@ window.EDEN._marketingData = {
     "dietary": {},
     "missed_foods": [],
     "months": {
-      "2024-03": 26,
+      "2024-03": 25,
       "2024-04": 25,
       "2024-05": 25,
       "2024-06": 20,
@@ -234,13 +234,13 @@ window.EDEN._marketingData = {
       "2026-01": 85,
       "2026-02": 126,
       "2026-03": 138,
-      "2026-04": 1
+      "2026-04": 2
     }
   },
   "gbp_reviews": {
     "source": "Google Business Profile via Make \u2192 Google Sheet (All Google Reviews tab)",
     "sheet_url": "https://docs.google.com/spreadsheets/d/1DXKumasfRDY4tGiPAi07pV15eiyAb5R0HezoxpUkhc8/edit?gid=879421801",
-    "last_updated": "2026-04-01",
+    "last_updated": "2026-04-02",
     "total": 0,
     "avg_rating": 0,
     "five_star": 0,
@@ -254,6 +254,6 @@ window.EDEN._marketingData = {
     "top_quotes": [],
     "months": {}
   },
-  "_built": "2026-04-01 12:03 UTC",
+  "_built": "2026-04-02 11:58 UTC",
   "_version": "1.0"
 };
