@@ -1,5 +1,5 @@
 // EDEN & CO. Marketing Intelligence Cache
-// Built: 2026-04-05 11:03 UTC
+// Built: 2026-04-06 11:59 UTC
 // Run: python3 scripts/build-marketing-cache.py
 
 window.EDEN = window.EDEN || {};
@@ -187,12 +187,12 @@ window.EDEN._marketingData = {
     }
   },
   "google_reviews": {
-    "total": 1027,
+    "total": 1031,
     "fetched": 1000,
     "quality": {
       "avg": 4.82,
-      "total": 794,
-      "five": 678,
+      "total": 798,
+      "five": 682,
       "four": 99,
       "three": 12,
       "two": 3,
@@ -201,8 +201,8 @@ window.EDEN._marketingData = {
     },
     "impression": {
       "avg": 4.72,
-      "total": 772,
-      "five": 600,
+      "total": 776,
+      "five": 604,
       "four": 140,
       "three": 25,
       "two": 4,
@@ -212,7 +212,7 @@ window.EDEN._marketingData = {
     "dietary": {},
     "missed_foods": [],
     "months": {
-      "2024-03": 8,
+      "2024-03": 4,
       "2024-04": 25,
       "2024-05": 25,
       "2024-06": 20,
@@ -234,13 +234,13 @@ window.EDEN._marketingData = {
       "2026-01": 85,
       "2026-02": 126,
       "2026-03": 138,
-      "2026-04": 19
+      "2026-04": 23
     }
   },
   "gbp_reviews": {
     "source": "Google Business Profile via Make \u2192 Google Sheet (All Google Reviews tab)",
     "sheet_url": "https://docs.google.com/spreadsheets/d/1DXKumasfRDY4tGiPAi07pV15eiyAb5R0HezoxpUkhc8/edit?gid=879421801",
-    "last_updated": "2026-04-05",
+    "last_updated": "2026-04-06",
     "total": 0,
     "avg_rating": 0,
     "five_star": 0,
@@ -254,6 +254,6 @@ window.EDEN._marketingData = {
     "top_quotes": [],
     "months": {}
   },
-  "_built": "2026-04-05 11:03 UTC",
+  "_built": "2026-04-06 11:59 UTC",
   "_version": "1.0"
 };
