@@ -16,8 +16,9 @@ window.EDEN = window.EDEN || {};
 (function () {
   'use strict';
 
-  var m  = null; // metrics namespace, resolved at render time
+  var m   = null; // metrics namespace, resolved at render time
   var cfg = null; // config namespace
+  var _ovMode = 'mtd'; // 'mtd' | 'lastmonth'
 
   // ── Formatting helpers ─────────────────────────────────────────
 
@@ -255,31 +256,60 @@ window.EDEN = window.EDEN || {};
       return o.status !== 'cancelled' && o.status !== 'on_hold';
     });
 
-    var mtd       = m.getMTDOrders(orders);
-    var priorMTD  = m.getPriorMTDOrders(orders);
+    // ── Mode: MTD (current) or full last calendar month ──
+    var isLastMonth = _ovMode === 'lastmonth';
+    var mtd, priorMTD, daysElapsed, daysInMonthN, periodLabel, priorLabel;
 
-    // Diagnostic -- remove once confirmed working
-    console.log('[EDEN Overview] Total orders loaded:', orders.length,
-      '| MTD:', mtd.length,
-      '| Prior MTD:', priorMTD.length,
-      '| Sample order_date:', orders[0] && orders[0].order_date,
-      '| Sample amount_paid:', orders[0] && orders[0].amount_paid,
-      '| Today:', new Date().toISOString()
-    );
+    if (isLastMonth) {
+      mtd      = m.getFullLastMonthOrders(orders);
+      priorMTD = m.getFullPreviousMonthOrders(orders);
+      var lmDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+      var pmDate = new Date(now.getFullYear(), now.getMonth() - 2, 1);
+      var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      periodLabel = MONTHS[lmDate.getMonth()] + ' ' + lmDate.getFullYear();
+      priorLabel  = MONTHS[pmDate.getMonth()] + ' ' + pmDate.getFullYear();
+      daysInMonthN = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+      daysElapsed  = daysInMonthN; // full month
+    } else {
+      mtd      = m.getMTDOrders(orders);
+      priorMTD = m.getPriorMTDOrders(orders);
+      periodLabel = null;
+      priorLabel  = 'last period';
+      daysElapsed  = now.getDate();
+      daysInMonthN = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+    }
 
-    // ── Revenue MTD ──
+    // Update mode banner
+    var banner = document.getElementById('ov-mode-banner');
+    if (banner) {
+      if (isLastMonth) {
+        banner.style.display = 'flex';
+        banner.innerHTML = '<span style="font-weight:700;color:var(--G)">' + periodLabel + ' — Full Month</span>'
+          + '<span style="color:var(--GMD);margin-left:8px">vs ' + priorLabel + '</span>'
+          + '<span style="margin-left:auto;font-size:10px;color:var(--GMD)">Toggle to return to current month</span>';
+      } else {
+        banner.style.display = 'none';
+      }
+    }
+
+    // Update section label
+    var secLbl = document.getElementById('ov-period-label');
+    if (secLbl) secLbl.textContent = isLastMonth ? (periodLabel + ' — full month comparison') : 'Month to date — primary performance';
+
+    console.log('[EDEN Overview] Mode:', _ovMode, '| Orders:', mtd.length, '| Prior:', priorMTD.length);
+
+    // ── Revenue ──
     var revMTD       = m.totalRevenue(mtd);
     var revPriorMTD  = m.totalRevenue(priorMTD);
     var revChange    = m.pctChange(revMTD, revPriorMTD);
-    var daysElapsed   = now.getDate();
-    var daysInMonthN  = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-    var proratedTarget = cfg.targets.monthly_revenue * (daysElapsed / daysInMonthN);
+    var proratedTarget = cfg.targets.monthly_revenue * (isLastMonth ? 1 : (daysElapsed / daysInMonthN));
     var revRag       = m.ragStatus(revMTD, { green: proratedTarget, amber: proratedTarget * 0.85, red: proratedTarget * 0.65 });
     var revPct       = Math.min(100, Math.round((revMTD / proratedTarget) * 100));
     var revChg       = fmtChange(revChange);
 
+    var vsLbl = isLastMonth ? ('vs ' + priorLabel) : 'vs last period';
     setHTML('ov-rev-val', fmtGBP(revMTD));
-    setHTML('ov-rev-change', '<span class="d ' + revChg.cls + '">' + (revChg.cls === 'up' ? '&#8593;' : revChg.cls === 'dn' ? '&#8595;' : '&#8213;') + ' ' + Math.abs(Math.round(revChange * 10) / 10) + '% vs last period</span><span class="rag ' + ragClass(revRag) + '">' + ragLabel(revRag) + '</span>');
+    setHTML('ov-rev-change', '<span class="d ' + revChg.cls + '">' + (revChg.cls === 'up' ? '&#8593;' : revChg.cls === 'dn' ? '&#8595;' : '&#8213;') + ' ' + Math.abs(Math.round(revChange * 10) / 10) + '% ' + vsLbl + '</span><span class="rag ' + ragClass(revRag) + '">' + ragLabel(revRag) + '</span>');
     setStyle('ov-rev-bar', 'width', revPct + '%');
     setClass('ov-rev-bar', 'pf a pf r', revRag === 'g' ? 'pf' : revRag === 'a' ? 'pf a' : 'pf r');
     setClass('ov-rev-tile', 'tg ta tr', 't' + ragClass(revRag));
@@ -412,7 +442,9 @@ window.EDEN = window.EDEN || {};
     var opdRag   = m.ragStatus(opd, { green: impliedDailyGoal, amber: impliedDailyGoal * 0.8, red: impliedDailyGoal * 0.6 });
 
     setHTML('ov-orders-val', totalMTD.toLocaleString('en-GB'));
-    setHTML('ov-orders-meta', '<span class="d">' + goalPct + '% of ' + proratedOrderGoal.toLocaleString('en-GB') + ' pace goal · ' + impliedMonthGoal + '/mo implied</span>');
+    setHTML('ov-orders-meta', isLastMonth
+      ? '<span class="d">' + totalMTD.toLocaleString('en-GB') + ' orders · ' + (Math.round(opd * 10) / 10) + '/day avg · full month</span>'
+      : '<span class="d">' + goalPct + '% of ' + proratedOrderGoal.toLocaleString('en-GB') + ' pace goal · ' + impliedMonthGoal + '/mo implied</span>');
     setStyle('ov-orders-bar', 'width', Math.min(100, goalPct) + '%');
     setClass('ov-orders-chip', 'tg ta tr', 't' + ragClass(m.ragStatus(goalPct, { green: 100, amber: 80, red: 60 })));
 
@@ -564,6 +596,16 @@ window.EDEN = window.EDEN || {};
     return result;
   }
 
-  window.EDEN.overview = { render: render };
+  function toggleLastMonth() {
+    _ovMode = _ovMode === 'lastmonth' ? 'mtd' : 'lastmonth';
+    var btn = document.getElementById('ov-toggle-btn');
+    if (btn) {
+      btn.classList.toggle('active', _ovMode === 'lastmonth');
+      btn.textContent = _ovMode === 'lastmonth' ? 'Viewing: Last Month' : 'Last Month';
+    }
+    render(window.EDEN._edenData);
+  }
+
+  window.EDEN.overview = { render: render, toggleLastMonth: toggleLastMonth };
 
 })();

@@ -72,6 +72,22 @@ window.EDEN = window.EDEN || {};
     return filterByDateRange(orders, priorStart, priorEnd);
   }
 
+  /** Get full calendar last month (1st to last day). */
+  function getFullLastMonthOrders(orders) {
+    var t = today();
+    var start = new Date(t.getFullYear(), t.getMonth() - 1, 1);
+    var end   = new Date(t.getFullYear(), t.getMonth(), 0); // day 0 = last day of prev month
+    return filterByDateRange(orders, start, end);
+  }
+
+  /** Get full calendar month two months ago (comparison for last month view). */
+  function getFullPreviousMonthOrders(orders) {
+    var t = today();
+    var start = new Date(t.getFullYear(), t.getMonth() - 2, 1);
+    var end   = new Date(t.getFullYear(), t.getMonth() - 1, 0);
+    return filterByDateRange(orders, start, end);
+  }
+
   /**
    * Get YTD orders (1st Jan to today).
    * @param {Object[]} orders
@@ -300,6 +316,8 @@ window.EDEN = window.EDEN || {};
     filterByDateRange: filterByDateRange,
     getMTDOrders: getMTDOrders,
     getPriorMTDOrders: getPriorMTDOrders,
+    getFullLastMonthOrders: getFullLastMonthOrders,
+    getFullPreviousMonthOrders: getFullPreviousMonthOrders,
     getYTDOrders: getYTDOrders,
     getLast30Days: getLast30Days,
     totalRevenue: totalRevenue,

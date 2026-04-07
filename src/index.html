@@ -138,6 +138,7 @@ body{font-family:var(--F);background:var(--PG);color:var(--GDK);font-size:14px;l
 .tile{background:var(--W);border:1px solid var(--GP);border-left:4px solid var(--GP);border-radius:var(--r8);padding:18px 20px}
 .tile.tg{border-left-color:var(--OK)}.tile.ta{border-left-color:var(--AMB)}.tile.tr{border-left-color:var(--RED)}.tile.tgold{border-left-color:var(--GOLD)}
 .tlbl{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--GMD);margin-bottom:9px;font-weight:700}
+#ov-toggle-btn.active{background:var(--G)!important;color:#fff!important;border-color:var(--G)!important}
 .tval{font-size:32px;font-weight:700;color:var(--G);line-height:1;letter-spacing:-0.02em;margin-bottom:9px}
 .tval.lg{font-size:38px}.tval.sm{font-size:22px}
 .tmeta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:9px}
@@ -595,7 +596,17 @@ svg.sp{display:block;width:100%;overflow:visible}
 <div class="panel active" id="tab-overview"><div class="page">
 
   <div class="sec">
-    <div class="seclbl">Month to date — primary performance</div>
+    <div class="seclbl" style="display:flex;align-items:center;justify-content:space-between">
+      <span id="ov-period-label">Month to date — primary performance</span>
+      <button id="ov-toggle-btn" onclick="window.EDEN.overview && window.EDEN.overview.toggleLastMonth()"
+        style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-family:var(--FS);
+               padding:5px 12px;border-radius:20px;border:1.5px solid var(--GP);background:var(--W);
+               color:var(--G);cursor:pointer;transition:all .2s"
+        onmouseover="this.style.background='var(--GXP)'"
+        onmouseout="if(!this.classList.contains('active'))this.style.background='var(--W)'"
+        title="Toggle last full month for comparison">Last Month</button>
+    </div>
+    <div id="ov-mode-banner" style="display:none;align-items:center;padding:8px 14px;background:var(--GXP);border:1px solid var(--GP);border-radius:var(--r8);font-size:11px;margin-bottom:12px;color:var(--G)"></div>
     <div class="g4">
       <div class="tile ta" id="ov-rev-tile">
         <div class="tlbl">Total Revenue MTD</div>

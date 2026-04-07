@@ -346,6 +346,7 @@ window.EDEN = window.EDEN || {};
    * @param {Object} data - Transformed data from transform.js
    */
   function renderAll(data) {
+    window.EDEN._edenData = data; // store for toggle re-renders
     // Components may be registered under EDEN.components.X or EDEN.X
     var components = ['overview', 'marketing', 'klaviyo', 'google-ads', 'amazon', 'platforms', 'operations', 'customers', 'goals', 'scenario'];
     for (var i = 0; i < components.length; i++) {
