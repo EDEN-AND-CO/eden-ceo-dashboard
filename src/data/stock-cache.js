@@ -1,5 +1,5 @@
 // EDEN & CO. CEO Flight Deck — Stock Cache
-// Generated: 2026-03-31T16:52:37Z
+// Generated: 2026-04-08T09:48:33Z
 // Source: EDEN_CO_Weekly_Status.xlsx · Stock tab
 // Do not edit manually. Run: python3 scripts/build-stock-cache.py
 
@@ -21,7 +21,7 @@ window.EDEN._stockData = {
   },
   "LETTERBOX": {
     "item": "Petite",
-    "available": 0,
+    "available": 555,
     "minimum": 462,
     "date": "2026-03-31 00:00:00",
     "notes": ""
@@ -44,7 +44,7 @@ window.EDEN._stockData = {
 window.EDEN._packagingStock = [
   {
     "item": "Gift Tubes",
-    "available": 555,
+    "available": 0,
     "minimum": 2000,
     "date": "2026-03-30 00:00:00",
     "notes": ""
@@ -64,4 +64,4 @@ window.EDEN._packagingStock = [
     "notes": ""
   }
 ];
-window.EDEN._stockCacheDate = '2026-03-31T16:52:37Z';
+window.EDEN._stockCacheDate = '2026-04-08T09:48:33Z';

@@ -523,7 +523,7 @@ svg.sp{display:block;width:100%;overflow:visible}
       <div class="da-icon">&#9675;</div>
       <div class="da-body">
         <div class="da-title">Google Ads — Policy Appeal Pending</div>
-        <div class="da-text">3 ad groups suppressed. Appeal submitted 6 Mar. Check clearance status in Google Ads.</div>
+        <div class="da-text">3 ad groups suppressed — Gluten Free, Dairy Free, Vegetarian. Appeal submitted March 2026. Check clearance status in Google Ads UI.</div>
       </div>
       <span class="da-dismiss" onclick="dimDrawerAlert('da2')">&#10005;</span>
     </div>
@@ -818,7 +818,7 @@ svg.sp{display:block;width:100%;overflow:visible}
         <div class="adblk" style="border-left-color:var(--GP);padding:10px 14px">
           <div class="ctitle" style="margin-bottom:8px">Campaign breakdown — MTD</div>
           <table class="dt"><thead><tr><th>Campaign</th><th class="r">Spend</th><th class="r">Conv</th><th class="r">CPA</th><th class="r">ROAS</th></tr></thead><tbody id="gads-camp-body"><tr><td colspan="5" style="text-align:center;color:var(--GMD);padding:8px">Loading...</td></tr></tbody></table>
-          <div class="dnote" style="margin-top:6px">Live from Google Ads MCP · 27 Mar 2026</div>
+          <div class="dnote" style="margin-top:6px">Data from Coupler · refreshed daily 9am</div>
         </div>
         <div id="amz-adblk" class="adblk ok" style="border-left-color:var(--OK)">
           <div class="adhead"><div class="adname">Amazon Ads<span class="data-ts" id="ts-amazon-ppc"></span></div><span class="rag g">Loading...</span></div>
@@ -905,32 +905,32 @@ svg.sp{display:block;width:100%;overflow:visible}
       <div class="rv-pane active" id="rv-google">
         <ul class="rv-list">
           <li class="rv-warn">
-            <div><strong>7-day search term review overdue</strong> — pull converting terms since 6 Mar changes, harvest winners to exact match, add new negatives.
-            <div class="rv-sub">Priority: identify gift-intent terms converting below £15.90 CPA ceiling.</div></div>
+            <div><strong>Generic Search CPA above ceiling — £19.29 vs £15.90 target</strong> — Apr MTD: £231.52 spend, 12 conv. Biggest budget campaign is over ceiling. Pull search terms, check for wasted spend on non-converting queries.
+            <div class="rv-sub">tROAS reduced from 300% to 200% in March — may need tightening if CPA doesn't come down.</div></div>
           </li>
           <li class="rv-warn">
-            <div><strong>Policy appeals — check status</strong> — Gluten Free, Dairy Free, Vegetarian ad groups submitted 6 Mar. If cleared, reactivate and set tROAS 200%.
+            <div><strong>Policy appeals — check clearance status</strong> — Gluten Free, Dairy Free, Vegetarian ad groups submitted March 2026. If cleared, reactivate and set tROAS 200%.
             <div class="rv-sub">These ad groups target the 69.7% of buyers who arrive with dietary anxiety.</div></div>
           </li>
           <li>
-            <div><strong>PMAX audit with GAQL</strong> — verify curated feed (letterbox + select choc/signature) is driving spend. Confirm wicker/grand/food exclusions held.
-            <div class="rv-sub">Letterbox is top converter at ~22.5 conv, £12.19 CPA. Protect its share.</div></div>
+            <div><strong>PMAX not reporting MTD — verify it is spending</strong> — no PMAX rows in Apr data. Either paused, renamed, or Coupler not capturing it. Confirm in Google Ads UI.
+            <div class="rv-sub">Curated feed: letterbox + select choc/signature. Wicker/grand/food should be excluded.</div></div>
           </li>
           <li>
-            <div><strong>Gift-occasion ad groups — first data pull</strong> — live since 22 Mar. Check impression share, CTR, and early conversions on occasion-framed headlines.
-            <div class="rv-sub">Shift from diet-first to gift-intent framing — validate it's working in the data.</div></div>
+            <div><strong>Gift-occasion ad groups — check performance</strong> — live since March 22. Pull impression share, CTR, and conversions. Validate gift-intent framing is outperforming diet-first.
+            <div class="rv-sub">New headlines shift from dietary to occasion — needs at least 4 weeks of data before judging.</div></div>
           </li>
           <li>
-            <div><strong>Generic Search budget check</strong> — raised £35 to £60/day on 6 Mar. Confirm spend is absorbing budget and CPA is holding below £15.90.
-            <div class="rv-sub">If headroom remains and CPA is healthy, candidate for further increase.</div></div>
+            <div><strong>Search term harvest — run now</strong> — pull all converting search terms Apr MTD, add winners as exact match, add non-converting broad as negatives.
+            <div class="rv-sub">Gift-intent keywords identified in March audit. Check if they are converting as expected.</div></div>
           </li>
           <li class="rv-ok">
-            <div><strong>Brand Search holding at £5/day</strong> — defensive only. No action needed unless branded CPCs spike.
-            <div class="rv-sub">Target: protect brand impression share at minimal spend.</div></div>
+            <div><strong>Shopping Brand and Brand Search both efficient</strong> — Shopping Brand £6.72 CPA (5 conv), Brand Search £14.89 (1 conv). No action needed.
+            <div class="rv-sub">Combined £48.48 spend, 6 conversions. Strong defensive coverage.</div></div>
           </li>
         </ul>
         <div class="rv-kv">
-          <span>Baseline ROAS 3.08</span><span>Target ROAS 4.0+</span><span>CPA ceiling £15.90</span><span>Budget ~£115/day</span><span>TACOS target &lt;15%</span>
+          <span>Apr MTD CPA £15.56</span><span>Target CPA &lt;£15.90</span><span>Generic Search CPA £19.29 (over ceiling)</span><span>Budget ~£115/day</span><span>TACOS target &lt;15%</span>
         </div>
       </div>
 
@@ -938,32 +938,32 @@ svg.sp{display:block;width:100%;overflow:visible}
       <div class="rv-pane" id="rv-amazon">
         <ul class="rv-list">
           <li class="rv-warn">
-            <div><strong>Signature ACOS at 106.8% — reduce bids immediately</strong> — current base bid £0.80 producing extreme ACOS on Mar 1–9 data. Reduce to £0.45 and monitor.
+            <div><strong>Signature CPA £61.06 — critical</strong> — Apr MTD: £61.06 spend, 1 order. One conversion across all Signature campaigns. Reduce bids across all Signature ad groups immediately.
             <div class="rv-sub">Never pause — Mina Elias rule. Reduce bids to profitability, not zero.</div></div>
           </li>
           <li class="rv-warn">
-            <div><strong>Petite ACOS at 43.4% — above 25% target</strong> — base bid £0.45, TOS multiplier 30%. Reduce TOS multiplier to 10% first, hold base bid.
-            <div class="rv-sub">Petite is the volume driver. Protect traffic while tightening ACOS.</div></div>
+            <div><strong>Cocoa CPA £15.70 — above ceiling</strong> — Apr MTD: £94.19 spend, 6 orders. Shopify ceiling is £6.25. Amazon margin compressed further by 15% commission. Reduce TOS multiplier from 40% before touching base bid.
+            <div class="rv-sub">Still driving orders — reduce cost, don't pause.</div></div>
           </li>
           <li>
-            <div><strong>Exact match harvest — 11 candidates ready</strong> — converting phrase/broad terms with no exact match coverage. Validated w/c 31 Mar. Add as exact match with conservative bids.
-            <div class="rv-sub">These are already converting — exact match gives control over bid and spend.</div></div>
+            <div><strong>Exact match harvest — 11 candidates pending</strong> — converting phrase/broad terms with no exact match coverage. Identified in March audit, not yet actioned. Add as exact match with conservative bids.
+            <div class="rv-sub">These are already converting — exact match gives full bid control.</div></div>
           </li>
           <li>
             <div><strong>Dairy Free — next scaling move</strong> — Gluten Free and Vegan are primary pillars. Dairy Free (32.9% of buyers) is under-targeted. Identify top dairy free gift search terms and launch SP campaign.
             <div class="rv-sub">Third dietary pillar. Conservative £0.50 base bid to start.</div></div>
           </li>
           <li>
-            <div><strong>7-day review was due 13 Mar</strong> — check ACOS shifts across 39 active campaigns (reduced from 143). Confirm no winners accidentally losing traffic.
-            <div class="rv-sub">Down-only bidding is live — verify it's not suppressing winning ad groups.</div></div>
+            <div><strong>Signature campaigns generating zero sales traffic</strong> — two Signature phrase/broad campaigns (Vegan, Hug) spending with 0 orders. Check search terms — likely not gift-intent. Add negatives.
+            <div class="rv-sub">Signature at £65 needs qualified traffic, not broad volume.</div></div>
           </li>
           <li class="rv-ok">
-            <div><strong>Cocoa ACOS at 20.5% — within target</strong> — base bid £0.75, TOS 40%. No action needed. Candidate for small bid increase if inventory is healthy.
-            <div class="rv-sub">Only SKU currently within 25% ACOS ceiling.</div></div>
+            <div><strong>Petite CPA £6.00 — efficient volume driver</strong> — Apr MTD: £257.81 spend, 43 orders. Accounts for 78% of Amazon orders. Bid structure working. Birthday Exact and Hug Exact both converting at CPA £5.35 and £3.07 respectively.
+            <div class="rv-sub">Maintain current bids. No action needed unless ACOS deteriorates.</div></div>
           </li>
         </ul>
         <div class="rv-kv">
-          <span>Active campaigns: 39</span><span>ACOS target &lt;25%</span><span>Petite bid 45p</span><span>Cocoa bid 75p</span><span>Sig bid 80p (problem)</span>
+          <span>Apr MTD: 55 orders, CPA £8.07</span><span>Petite CPA £6.00 (OK)</span><span>Cocoa CPA £15.70 (high)</span><span>Signature CPA £61.06 (critical)</span><span>ACOS target &lt;25%</span>
         </div>
       </div>
 
@@ -971,32 +971,32 @@ svg.sp{display:block;width:100%;overflow:visible}
       <div class="rv-pane" id="rv-meta">
         <ul class="rv-list">
           <li class="rv-warn">
-            <div><strong>Confirm account is live and spending</strong> — status shows REACTIVATING. Verify no policy holds or payment issues before building campaigns.
-            <div class="rv-sub">No point building structure until confirmed active.</div></div>
+            <div><strong>No purchase conversion tracking in Coupler</strong> — £429 MTD spend with 0 tracked purchases in the data feed. ROAS is visible per row but not aggregated. Set up purchase event tracking or pull from Meta Ads Manager directly before next audit.
+            <div class="rv-sub">Without purchase data, ROAS and CPA cannot be calculated from the dashboard.</div></div>
+          </li>
+          <li class="rv-warn">
+            <div><strong>BYOB leading at £127.96 MTD — watch frequency</strong> — BYOB (Signature Broad) is the top-spending ad at freq 1.7. This was the only survivor from the April 2 audit. If frequency continues rising, creative fatigue risk. Next action: add a fresh creative to the same ad set.
+            <div class="rv-sub">Never move to a new ad set — scale in-place or add creative within the existing set.</div></div>
           </li>
           <li>
-            <div><strong>Build ABO structure from the ground up</strong> — CBO has failed twice on this account. Launch with ABO (Ad Set Budget Optimisation), one audience per ad set, £5–10/day per set.
-            <div class="rv-sub">ABO playbook: kill &lt;3 ROAS at day 3, hold 3–5 ROAS to day 7, scale in-place above 5x.</div></div>
+            <div><strong>Test batch performance unclear without ROAS data</strong> — 7 test ads running (Chloe Hansard, PlantBased VO, Undairy, Chocolate creatives). Without purchase tracking, cannot apply kill/hold/scale rules. Apply the day 7 decision on click volume and frequency alone until purchase data is confirmed.
+            <div class="rv-sub">Kill rule: if freq &gt;3.0 with no visible ROAS signal by day 7. Hold if freq &lt;2.0 and CTR holding.</div></div>
           </li>
           <li>
-            <div><strong>Source UGC content before launch</strong> — first ad creative priority. Gift unboxing, recipient reaction, giver testimonial. Authentic over produced.
-            <div class="rv-sub">EDEN & CO. brand fit: warm, real, dietary relief moment. Not promotional.</div></div>
+            <div><strong>Apply for Meta Ads Library API access</strong> — competitor creative intelligence requires Ad Library API approval (separate from Graph API). Submit at facebook.com/ads/library/api. Needed for structured competitor analysis.
+            <div class="rv-sub">Until approved, pull competitor creatives manually from Meta Ads Library UI.</div></div>
           </li>
           <li>
-            <div><strong>Target: gift occasion audiences first</strong> — birthday gifting, anniversary, new baby, thank you. Avoid generic "vegan" or "health food" interests.
-            <div class="rv-sub">85% female buyers, age 28–50. Gifting intent beats dietary interest targeting.</div></div>
-          </li>
-          <li>
-            <div><strong>Never move winners between ad sets</strong> — if an ad set hits ROAS target, scale spend within it. Duplicating to a new set resets the learning phase and destroys conversion history.
-            <div class="rv-sub">Previous account suffered from this pattern — hardcode the rule now.</div></div>
+            <div><strong>Next creative priority: gift unboxing UGC</strong> — current test batch is mostly produced video. Best-performing Meta format for gifting brands is authentic unboxing and recipient reaction. Source from existing customer base.
+            <div class="rv-sub">Brief: real person, real product, genuine dietary relief moment. Not a brand video.</div></div>
           </li>
           <li class="rv-ok">
-            <div><strong>ROAS target 5x+</strong> — highest target of all three channels. Meta purchases are impulse/discovery. AOV likely lower than Google — account for this in creative angle.
-            <div class="rv-sub">Push Letterbox Gift (£30) and Chocolate Hamper (£50) as entry creatives.</div></div>
+            <div><strong>ABO structure holding — no CBO drift</strong> — all campaigns running on ABO as intended. Budget is controlled per ad set. CBO has been banned following two failed tests.
+            <div class="rv-sub">Never move winners between ad sets. Scale in-place only.</div></div>
           </li>
         </ul>
         <div class="rv-kv">
-          <span>Target ROAS 5x+</span><span>ABO only — no CBO</span><span>UGC first</span><span>Kill &lt;3x at day 3</span><span>Scale in-place above 5x</span>
+          <span>Apr MTD spend £429.61</span><span>ABO only — no CBO</span><span>BYOB freq 1.7 (watch)</span><span>Purchase tracking gap — fix first</span><span>Target ROAS 5x+</span>
         </div>
       </div>
     </div>
@@ -1018,7 +1018,7 @@ svg.sp{display:block;width:100%;overflow:visible}
         <div style="margin-top:10px;font-size:11px;color:var(--GMD)">Total campaign revenue: <strong style="color:var(--G)" id="klv-c-tot"></strong> &nbsp;·&nbsp; Emails sent: <strong id="klv-c-recip"></strong></div>
       </div>
     </div>
-    <div class="dnote">Data fetched live from Klaviyo MCP. Last updated 27 Mar 2026. Refresh by re-running Klaviyo query in Claude.</div>
+    <div class="dnote">Data fetched live from Klaviyo MCP. Refresh by re-running Klaviyo query in Claude.</div>
   </div>
 
   <div class="sec">
@@ -1179,6 +1179,23 @@ svg.sp{display:block;width:100%;overflow:visible}
             <tr><td colspan="2" style="color:var(--GMD)">Loading...</td></tr>
           </tbody>
         </table>
+
+        <!-- Latest 5 + Top 5 reviews -->
+        <div style="display:flex;align-items:center;gap:8px;margin:18px 0 8px">
+          <div style="font-size:10px;font-weight:700;color:var(--GOM);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap">Latest 5 reviews</div>
+          <div style="flex:1;height:1px;background:var(--GP)"></div>
+        </div>
+        <div id="sm-latest-reviews" style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px">
+          <div style="color:var(--GMD);font-size:11px">Loading...</div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <div style="font-size:10px;font-weight:700;color:var(--GOM);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap">Top 5 reviews — highest signal</div>
+          <div style="flex:1;height:1px;background:var(--GP)"></div>
+        </div>
+        <div id="sm-top-reviews" style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px">
+          <div style="color:var(--GMD);font-size:11px">Loading...</div>
+        </div>
 
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
           <div style="font-size:10px;font-weight:700;color:var(--GOM);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap">Occasions they're buying for</div>
@@ -1637,6 +1654,70 @@ svg.sp{display:block;width:100%;overflow:visible}
     <div class="dnote" style="margin-top:8px;color:var(--GOLD)">EDEN &amp; CO. gap: Not one of these brands talks to the anxious buyer — the person checking the label, navigating dietary needs, afraid of getting it wrong. That content territory is completely uncontested. Bloom &amp; Wild has the closest emotional positioning but has no food product and no dietary angle. EDEN owns "gifts that make people feel seen" and nobody is competing on it.</div>
   </div>
 
+  <!-- Competitor SWOT — Socials -->
+  <div class="sec">
+    <div class="seclbl">Competitor SWOT — social brands</div>
+    <div class="dnote" style="margin-bottom:14px">Where competitors are strong, where they are weak, and where EDEN has uncontested ground. Use this to brief Edith and prioritise content angles.</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+
+      <div class="card" style="border-top:3px solid var(--GOLD)">
+        <div class="ctitle" style="margin-bottom:10px">Treatbox <span style="font-size:10px;color:var(--GMD);font-weight:400">260K IG</span></div>
+        <div style="font-size:10px;font-weight:700;color:var(--OK);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Strengths</div>
+        <ul style="margin:0 0 10px;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
+          <li>High volume, consistent UGC machine</li>
+          <li>Strong "just because" and pick-me-up angle</li>
+          <li>Broad audience recognition — known brand</li>
+        </ul>
+        <div style="font-size:10px;font-weight:700;color:var(--RED);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Weaknesses</div>
+        <ul style="margin:0 0 10px;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
+          <li>Zero dietary positioning — no vegan/GF angle</li>
+          <li>Aesthetically inconsistent feed</li>
+          <li>Feels volume-led, not premium</li>
+          <li>"Thoughtful" overused and generic</li>
+        </ul>
+        <div style="font-size:10px;font-weight:700;color:var(--GOLD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">EDEN opportunity</div>
+        <div style="font-size:11px;color:var(--GDK);line-height:1.6">Own the same "just because" emotional territory with dietary safety layered in. Treatbox cannot follow without rebuilding their product range.</div>
+      </div>
+
+      <div class="card" style="border-top:3px solid var(--GOLD)">
+        <div class="ctitle" style="margin-bottom:10px">Bloom &amp; Wild <span style="font-size:10px;color:var(--GMD);font-weight:400">284K IG</span></div>
+        <div style="font-size:10px;font-weight:700;color:var(--OK);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Strengths</div>
+        <ul style="margin:0 0 10px;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
+          <li>Best emotional positioning in the category</li>
+          <li>"Care Wildly" — giver as hero, unscripted moments</li>
+          <li>High production quality, strong brand consistency</li>
+        </ul>
+        <div style="font-size:10px;font-weight:700;color:var(--RED);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Weaknesses</div>
+        <ul style="margin:0 0 10px;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
+          <li>Flowers only — no food, no dietary angle possible</li>
+          <li>Production-heavy content is hard to compete with organically</li>
+          <li>Cannot address dietary anxiety at all</li>
+        </ul>
+        <div style="font-size:10px;font-weight:700;color:var(--GOLD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">EDEN opportunity</div>
+        <div style="font-size:11px;color:var(--GDK);line-height:1.6">Match their emotional depth but add the dietary resolution layer. "Care wildly — and make sure everyone can eat it." Territory they structurally cannot occupy.</div>
+      </div>
+
+      <div class="card" style="border-top:3px solid var(--GOLD)">
+        <div class="ctitle" style="margin-bottom:10px">British Hamper Co. <span style="font-size:10px;color:var(--GMD);font-weight:400">7K IG</span></div>
+        <div style="font-size:10px;font-weight:700;color:var(--OK);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Strengths</div>
+        <ul style="margin:0 0 10px;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
+          <li>Clear provenance positioning</li>
+          <li>Traditional hamper buyer appeal</li>
+        </ul>
+        <div style="font-size:10px;font-weight:700;color:var(--RED);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Weaknesses</div>
+        <ul style="margin:0 0 10px;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
+          <li>Product-out content — no buyer emotion</li>
+          <li>Zero dietary presence</li>
+          <li>Feed reads like a catalogue</li>
+          <li>Small audience, low engagement</li>
+        </ul>
+        <div style="font-size:10px;font-weight:700;color:var(--GOLD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">EDEN opportunity</div>
+        <div style="font-size:11px;color:var(--GDK);line-height:1.6">No real competition here. Different buyer. EDEN's buyer is not looking for provenance — they're looking for safety and emotional resonance. Ignore.</div>
+      </div>
+
+    </div>
+  </div>
+
   <div class="sec">
     <div class="dnote">Source: Typeform (1,499 gift designer responses, 69 corporate leads). Google Reviews (4.82/5 quality, 766 responses). Social intelligence updated weekly by Social Overview agent. Refresh buyer data: <code>python3 scripts/build-marketing-cache.py</code> &mdash; <span id="mkt-intel-dnote">Loading...</span></div>
   </div>
@@ -1714,6 +1795,140 @@ svg.sp{display:block;width:100%;overflow:visible}
         </div>
         <div style="font-size:10px;color:var(--GMD);margin-top:8px">Dream: shows the ideal outcome (8am text) · Likelihood: specific, named, real · Time: overnight, next morning · Effort: "just as a thought" — no research, one impulse</div>
       </div>
+    </div>
+  </div>
+
+  <!-- Competitor-inspired content angles -->
+  <div class="sec">
+    <hr class="sec-divider gold">
+    <div class="seclbl">Competitor-inspired content angles — reworked for EDEN &amp; CO.</div>
+    <div class="dnote" style="margin-bottom:16px">Based on top-performing posts from Treatbox UK, British Blanket Company, The Newt, and similar brands. Language is human and collective — "we/us" not "I/Rosie". Each post includes the source inspiration and why it works.</div>
+
+    <div style="display:flex;flex-direction:column;gap:14px">
+
+      <div class="ccard">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div class="ctitle-lg" style="margin:0">Post 1 — The everyday send</div>
+          <div style="display:flex;gap:6px">
+            <span style="font-size:9px;background:var(--GXP);color:var(--GOLD);border-radius:3px;padding:2px 7px;font-weight:700">IG / TikTok caption</span>
+            <span style="font-size:9px;background:var(--GXP);color:var(--GMD);border-radius:3px;padding:2px 7px;font-weight:700">Inspired by: Treatbox</span>
+          </div>
+        </div>
+        <div style="font-size:12px;line-height:1.9;color:var(--G);border-left:3px solid var(--GOLD);padding-left:14px;margin-bottom:10px">
+          Some of the best ones we send have no occasion at all.<br><br>
+          No birthday. No anniversary. Just someone thinking of someone else on a Tuesday.<br><br>
+          Those are our favourites.
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px">
+            <div style="font-size:9px;font-weight:700;color:var(--GMD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Why it works</div>
+            <div style="font-size:11px;color:var(--GDK);line-height:1.6">Treatbox's strongest performing posts are "just because" framing — occasion-free gifting. It lowers the barrier to purchase and creates relatability. The short paragraph rhythm stops the scroll.</div>
+          </div>
+          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px">
+            <div style="font-size:9px;font-weight:700;color:var(--GMD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Original inspiration</div>
+            <div style="font-size:11px;color:var(--GDK);line-height:1.6">Treatbox: "Sometimes you just want to send someone a little bit of happy. No reason needed." — consistently high engagement, used repeatedly across formats.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ccard">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div class="ctitle-lg" style="margin:0">Post 2 — The unboxing moment</div>
+          <div style="display:flex;gap:6px">
+            <span style="font-size:9px;background:var(--GXP);color:var(--GOLD);border-radius:3px;padding:2px 7px;font-weight:700">IG Reel / UGC prompt</span>
+            <span style="font-size:9px;background:var(--GXP);color:var(--GMD);border-radius:3px;padding:2px 7px;font-weight:700">Inspired by: The Newt</span>
+          </div>
+        </div>
+        <div style="font-size:12px;line-height:1.9;color:var(--G);border-left:3px solid var(--GOLD);padding-left:14px;margin-bottom:10px">
+          We pack every box knowing it'll be opened by someone who needed this.<br><br>
+          Sometimes we get to see it. Sometimes someone sends us a video at 8am.<br><br>
+          Those are the ones we save.
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px">
+            <div style="font-size:9px;font-weight:700;color:var(--GMD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Why it works</div>
+            <div style="font-size:11px;color:var(--GDK);line-height:1.6">The Newt leads with the human behind the product — maker intention, recipient experience. The "8am" detail is specific and real (from EDEN's own reviews). Specificity kills generic.</div>
+          </div>
+          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px">
+            <div style="font-size:9px;font-weight:700;color:var(--GMD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Original inspiration</div>
+            <div style="font-size:11px;color:var(--GDK);line-height:1.6">The Newt: "Every jar is made here. We watch it leave, then sometimes we hear what happens next." — founder-voice storytelling, product as vehicle not hero.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ccard">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div class="ctitle-lg" style="margin:0">Post 3 — The label reader</div>
+          <div style="display:flex;gap:6px">
+            <span style="font-size:9px;background:var(--GXP);color:var(--GOLD);border-radius:3px;padding:2px 7px;font-weight:700">IG / TikTok caption</span>
+            <span style="font-size:9px;background:var(--GXP);color:var(--GMD);border-radius:3px;padding:2px 7px;font-weight:700">Inspired by: Treatbox UGC</span>
+          </div>
+        </div>
+        <div style="font-size:12px;line-height:1.9;color:var(--G);border-left:3px solid var(--GOLD);padding-left:14px;margin-bottom:10px">
+          For anyone who's ever bought a gift and quietly checked the label three times before sending it.<br><br>
+          We made the whole box so you don't have to.
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px">
+            <div style="font-size:9px;font-weight:700;color:var(--GMD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Why it works</div>
+            <div style="font-size:11px;color:var(--GDK);line-height:1.6">Addresses the primary buyer anxiety (69.7% arrive with dietary worry) without leading on allergens. Validates the giver's effort without making it about restrictions. Short, punchy, two-line payoff.</div>
+          </div>
+          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px">
+            <div style="font-size:9px;font-weight:700;color:var(--GMD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Original inspiration</div>
+            <div style="font-size:11px;color:var(--GDK);line-height:1.6">Treatbox UGC: buyers in comments describing checking the label before gifting. High save rate on posts that validate anxiety then resolve it. Pattern observed repeatedly in their comment sections.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ccard">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div class="ctitle-lg" style="margin:0">Post 4 — The cosy season frame</div>
+          <div style="display:flex;gap:6px">
+            <span style="font-size:9px;background:var(--GXP);color:var(--GOLD);border-radius:3px;padding:2px 7px;font-weight:700">IG static / carousel</span>
+            <span style="font-size:9px;background:var(--GXP);color:var(--GMD);border-radius:3px;padding:2px 7px;font-weight:700">Inspired by: British Blanket Co.</span>
+          </div>
+        </div>
+        <div style="font-size:12px;line-height:1.9;color:var(--G);border-left:3px solid var(--GOLD);padding-left:14px;margin-bottom:10px">
+          Not every gift needs an occasion.<br><br>
+          Some of the most appreciated ones arrive on a grey Wednesday when someone needed to feel remembered.<br><br>
+          That's what we're here for.
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px">
+            <div style="font-size:9px;font-weight:700;color:var(--GMD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Why it works</div>
+            <div style="font-size:11px;color:var(--GDK);line-height:1.6">British Blanket Co. excels at ambient lifestyle framing — the gift as comfort object, not purchase. "Grey Wednesday" is a specific image that creates feeling without sentimentality. Works in product flat lay context.</div>
+          </div>
+          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px">
+            <div style="font-size:9px;font-weight:700;color:var(--GMD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Original inspiration</div>
+            <div style="font-size:11px;color:var(--GDK);line-height:1.6">British Blanket Co.: "The right blanket for a dark evening when you need something soft." — sensory, atmospheric, sells a feeling not a product. Consistently top engagement on non-promotional posts.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ccard">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div class="ctitle-lg" style="margin:0">Post 5 — The review, let breathe</div>
+          <div style="display:flex;gap:6px">
+            <span style="font-size:9px;background:var(--GXP);color:var(--GOLD);border-radius:3px;padding:2px 7px;font-weight:700">IG static — quote card</span>
+            <span style="font-size:9px;background:var(--GXP);color:var(--GMD);border-radius:3px;padding:2px 7px;font-weight:700">Inspired by: Treatbox + The Newt</span>
+          </div>
+        </div>
+        <div style="font-size:12px;line-height:1.9;color:var(--G);border-left:3px solid var(--GOLD);padding-left:14px;margin-bottom:10px">
+          "For a change, I got to eat everything."<br><br>
+          — One of our reviews. We think about this one a lot.
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px">
+            <div style="font-size:9px;font-weight:700;color:var(--GMD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Why it works</div>
+            <div style="font-size:11px;color:var(--GDK);line-height:1.6">The review does the work. The second line ("we think about this one a lot") adds brand voice without narrating over the customer. Both Treatbox and The Newt use this format — high save rate, strong comment trigger.</div>
+          </div>
+          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px">
+            <div style="font-size:9px;font-weight:700;color:var(--GMD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Original inspiration</div>
+            <div style="font-size:11px;color:var(--GDK);line-height:1.6">Treatbox + The Newt both run single-quote posts with one sentence of brand response. No context, no selling. The review speaks. The brand simply says "this." High-performing, low-production format.</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -1926,6 +2141,129 @@ svg.sp{display:block;width:100%;overflow:visible}
         <div class="dnote">Use for: HR / People & Culture teams, onboarding sequences, standing order pitch. Opens on Rosie's bad first day. Para 2 has a real referral story. Para 3 pitches standing orders directly.</div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- B2B Competitor SWOT -->
+  <div class="sec">
+    <div class="seclbl">Competitor SWOT — B2B corporate gifting</div>
+    <div class="dnote" style="margin-bottom:14px">Direct competitors targeting HR, EA, and marketing buyers. Evaluated on outreach approach, site copy, blog content, and social presence. Use to sharpen EDEN's B2B positioning and identify gaps.</div>
+
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:14px">
+
+      <div class="card" style="border-top:3px solid var(--RED)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px">
+          <div class="ctitle">Wellbox UK</div>
+          <div style="font-size:10px;color:var(--GMD)">Direct B2B competitor</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--OK);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Strengths</div>
+            <ul style="margin:0;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
+              <li>Built explicitly for B2B gifting — corporate-first positioning</li>
+              <li>Strong HR/wellbeing angle ("employee wellbeing" messaging)</li>
+              <li>Platform integrations — ReachDesk, Sendoso presence</li>
+              <li>Subscription model for repeat corporate orders</li>
+            </ul>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--RED);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Weaknesses</div>
+            <ul style="margin:0;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
+              <li>Site copy is functional, not emotional — reads like a procurement catalogue</li>
+              <li>No dietary inclusion angle — standard products, mixed allergen risk</li>
+              <li>Social presence thin and infrequent</li>
+              <li>Blog content generic — "top corporate gift ideas" listicles</li>
+            </ul>
+          </div>
+        </div>
+        <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 14px">
+          <div style="font-size:10px;font-weight:700;color:var(--GOLD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">EDEN counter-positioning</div>
+          <div style="font-size:11px;color:var(--GDK);line-height:1.6">Wellbox owns "wellbeing" but not "inclusion." EDEN copy should lead with: "A gift that works for everyone on the team — no dietary guesswork, no exclusions." Wellbox cannot make that claim without reformulating their range.</div>
+        </div>
+      </div>
+
+      <div class="card" style="border-top:3px solid var(--RED)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px">
+          <div class="ctitle">Social Stories Club</div>
+          <div style="font-size:10px;color:var(--GMD)">B2B + impact gifting</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--OK);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Strengths</div>
+            <ul style="margin:0;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
+              <li>Strong ESG/impact angle — social enterprise credentials</li>
+              <li>B2B gifting with purpose-led narrative</li>
+              <li>Good blog content — thought leadership on ethical gifting</li>
+              <li>Active LinkedIn presence targeting HR and CSR buyers</li>
+            </ul>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--RED);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Weaknesses</div>
+            <ul style="margin:0;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
+              <li>Impact story overshadows product experience — recipient not the centre</li>
+              <li>Dietary inclusion not a core claim</li>
+              <li>Premium positioning inconsistent — price points vary widely</li>
+              <li>Site copy heavy on mission, light on "why this gift for this person"</li>
+            </ul>
+          </div>
+        </div>
+        <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 14px">
+          <div style="font-size:10px;font-weight:700;color:var(--GOLD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">EDEN counter-positioning</div>
+          <div style="font-size:11px;color:var(--GDK);line-height:1.6">Social Stories Club wins the ESG buyer. EDEN does not need to compete on impact credentials. Counter with emotional clarity: the recipient experience, dietary safety, and the gift that makes people feel seen — not why the brand deserves the sale.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px">
+
+      <div class="card" style="border-top:3px solid var(--AMB)">
+        <div class="ctitle" style="margin-bottom:10px">Reachdesk <span style="font-size:10px;color:var(--GMD);font-weight:400">Platform (not supplier)</span></div>
+        <div style="font-size:10px;font-weight:700;color:var(--OK);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Their positioning</div>
+        <div style="font-size:11px;color:var(--GDK);line-height:1.6;margin-bottom:8px">Enterprise gifting platform. Buyer — not a competitor. Blog content targets marketing and sales teams with gifting ROI framing. Heavy on ABM and pipeline acceleration.</div>
+        <div style="font-size:10px;font-weight:700;color:var(--GOLD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">EDEN angle</div>
+        <div style="font-size:11px;color:var(--GDK);line-height:1.6">Be the dietary-safe default in the Reachdesk catalogue. Their buyers ask "will this work for everyone?" — EDEN is the answer. Pitch copy should emphasise catalogue-level inclusion guarantee.</div>
+      </div>
+
+      <div class="card" style="border-top:3px solid var(--AMB)">
+        <div class="ctitle" style="margin-bottom:10px">Virgin Experience Days <span style="font-size:10px;color:var(--GMD);font-weight:400">30% commission</span></div>
+        <div style="font-size:10px;font-weight:700;color:var(--OK);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Their positioning</div>
+        <div style="font-size:11px;color:var(--GDK);line-height:1.6;margin-bottom:8px">Experiential gifting. Targets corporate buyers who want memorable over consumable. No food/dietary angle possible. Strong brand recognition.</div>
+        <div style="font-size:10px;font-weight:700;color:var(--GOLD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">EDEN angle</div>
+        <div style="font-size:11px;color:var(--GDK);line-height:1.6">Different buyer category. EDEN competes on consumable premium gifting. Counter: "An experience in a box — one that everyone on the team can actually enjoy."</div>
+      </div>
+
+      <div class="card" style="border-top:3px solid var(--AMB)">
+        <div class="ctitle" style="margin-bottom:10px">Hotel Chocolat / M&amp;S Corporate</div>
+        <div style="font-size:10px;font-weight:700;color:var(--OK);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Their positioning</div>
+        <div style="font-size:11px;color:var(--GDK);line-height:1.6;margin-bottom:8px">Default corporate food gift. Brand recognition does the selling — no outreach strategy, no dietary differentiation. Buyers use them because everyone knows the name.</div>
+        <div style="font-size:10px;font-weight:700;color:var(--GOLD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">EDEN angle</div>
+        <div style="font-size:11px;color:var(--GDK);line-height:1.6">Attack the "safe default" position: "Hotel Chocolat is the safe choice — until someone on the team is dairy free." EDEN is the gift that removes the risk entirely.</div>
+      </div>
+
+    </div>
+
+    <!-- SWOT summary bar -->
+    <div style="background:var(--G);border-radius:var(--r4);padding:16px 20px">
+      <div style="font-size:10px;font-weight:700;color:var(--GOLD);text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px">EDEN B2B competitive summary</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+        <div>
+          <div style="font-size:10px;color:var(--OK);font-weight:700;margin-bottom:4px">Strengths vs field</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.8);line-height:1.6">Only brand with guaranteed dietary inclusion across full range. Emotional copy territory uncontested. Premium positioning without corporate-catalogue tone.</div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--RED);font-weight:700;margin-bottom:4px">Weaknesses vs field</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.8);line-height:1.6">Lower brand recognition than Hotel Chocolat and M&amp;S. No ESG credentials vs Social Stories Club. Smaller catalogue than platform suppliers.</div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--AMB);font-weight:700;margin-bottom:4px">Opportunities</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.8);line-height:1.6">New-hire gifting gap uncontested. International shipping for remote-first teams. Dietary blindness is a growing HR risk — EDEN solves it. Corporate standing orders not being pitched by any competitor.</div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--GMD);font-weight:700;margin-bottom:4px">Threats</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.8);line-height:1.6">Large food brands entering dietary-safe range. Platform consolidation reducing discovery. Budget-first procurement buyers defaulting to known names.</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -2462,7 +2800,7 @@ svg.sp{display:block;width:100%;overflow:visible}
       <div class="term"><div class="term-n">ACOS</div><div class="term-d">Advertising Cost of Sale. Amazon-specific metric. Ad spend ÷ ad-attributed revenue on Amazon only. Target below 25%.</div></div>
       <div class="term"><div class="term-n">CPA</div><div class="term-d">Cost Per Acquisition. Ad spend ÷ number of orders. Google ceiling: £15.90 blended. By SKU: Petite £3.25, Cocoa £6.25, Signature £10.91, Pamper £11.62, Grand £19.00, Prestige £27.88.</div></div>
       <div class="term"><div class="term-n">PMAX</div><div class="term-d">Performance Max. Google Ads campaign type that serves across all Google surfaces (Search, Shopping, Display, YouTube, Gmail, Maps) from a single campaign. Asset-based. EDEN &amp; CO. PMAX runs at £45/day focused on letterbox gifts and select chocolate/signature hampers.</div></div>
-      <div class="term"><div class="term-n">tROAS</div><div class="term-d">Target ROAS. Google Smart Bidding strategy that sets bids to achieve a specified return on ad spend. EDEN &amp; CO. Search campaigns reduced from 300% to 200% tROAS on 6 March 2026 to expand reach while maintaining margin.</div></div>
+      <div class="term"><div class="term-n">tROAS</div><div class="term-d">Target ROAS. Google Smart Bidding strategy that sets bids to achieve a specified return on ad spend. EDEN &amp; CO. Search campaigns reduced from 300% to 200% tROAS in March 2026 to expand reach while maintaining margin.</div></div>
     </div>
 
     <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--G);padding:18px 0 6px;border-bottom:2px solid var(--G);margin-bottom:12px">Commercial &amp; Financial</div>
@@ -2514,34 +2852,34 @@ svg.sp{display:block;width:100%;overflow:visible}
 
 </div></div>
 
-<div class="footer">EDEN &amp; CO. CEO FLIGHT DECK &nbsp;·&nbsp; v5.0 &nbsp;·&nbsp; 24 MARCH 2026 &nbsp;·&nbsp; SHEET: 1Zx4fyaKGOuOcfpWmTyn2LZHBzWSUC-8sbOVqCFoh9fE</div>
+<div class="footer">EDEN &amp; CO. CEO FLIGHT DECK &nbsp;·&nbsp; v5.1 &nbsp;·&nbsp; 8 APRIL 2026 &nbsp;·&nbsp; SHEET: 1Zx4fyaKGOuOcfpWmTyn2LZHBzWSUC-8sbOVqCFoh9fE</div>
 
 
 <!-- Data layer (load order matters) -->
-<script src="data/config.js"></script>
-<script src="data/orders-cache.js"></script>
-<script src="data/marketing-cache.js"></script>
-<script src="data/sheets.js"></script>
-<script src="data/transform.js"></script>
-<script src="data/metrics.js"></script>
+<script src="data/config.js?v=20260408"></script>
+<script src="data/orders-cache.js?v=20260408"></script>
+<script src="data/marketing-cache.js?v=20260408"></script>
+<script src="data/sheets.js?v=20260408"></script>
+<script src="data/transform.js?v=20260408"></script>
+<script src="data/metrics.js?v=20260408"></script>
 <!-- Component renderers -->
-<script src="components/overview.js"></script>
-<script src="components/marketing.js"></script>
-<script src="components/klaviyo.js"></script>
-<script src="components/google-ads.js"></script>
-<script src="components/amazon.js"></script>
-<script src="components/platforms.js"></script>
-<script src="components/operations.js"></script>
-<script src="components/customers.js"></script>
-<script src="data/stock-cache.js?v=20260330b"></script>
-<script src="data/adspend-cache.js"></script>
-<script src="data/klaviyo-cache.js"></script>
-<script src="data/team-pulse-cache.js?v=20260329d"></script>
-<script src="data/bom-cache.js?v=20260330a"></script>
-<script src="components/goals.js"></script>
-<script src="components/scenario.js"></script>
+<script src="components/overview.js?v=20260408"></script>
+<script src="components/marketing.js?v=20260408"></script>
+<script src="components/klaviyo.js?v=20260408"></script>
+<script src="components/google-ads.js?v=20260408"></script>
+<script src="components/amazon.js?v=20260408"></script>
+<script src="components/platforms.js?v=20260408"></script>
+<script src="components/operations.js?v=20260408"></script>
+<script src="components/customers.js?v=20260408"></script>
+<script src="data/stock-cache.js?v=20260408"></script>
+<script src="data/adspend-cache.js?v=20260408"></script>
+<script src="data/klaviyo-cache.js?v=20260408"></script>
+<script src="data/team-pulse-cache.js?v=20260408"></script>
+<script src="data/bom-cache.js?v=20260408"></script>
+<script src="components/goals.js?v=20260408"></script>
+<script src="components/scenario.js?v=20260408"></script>
 <!-- App init (must be last) -->
-<script src="app.js"></script>
+<script src="app.js?v=20260408"></script>
 
 <script>
 function fmt(n) { return '£' + Math.round(n).toLocaleString('en-GB'); }

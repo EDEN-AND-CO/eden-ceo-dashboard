@@ -1,11 +1,11 @@
 // EDEN & CO. CEO Flight Deck — Team Pulse Cache
-// Generated: 2026-04-07T08:35:33Z
+// Generated: 2026-04-08T09:48:33Z
 // Source: EDEN_CO_Weekly_Status.xlsx
 // Do not edit manually. Run: python3 scripts/build-team-pulse.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN.teamPulse = {
-  "generated": "2026-04-07T08:35:33Z",
+  "generated": "2026-04-08T09:48:33Z",
   "current_week": "2026-W15",
   "core_goals": {
     "Jon": {
@@ -510,15 +510,15 @@ window.EDEN.teamPulse = {
         "week": "2026-W14",
         "category": "This week",
         "task": "Pack Gift Tubes",
-        "status": "on-track",
+        "status": "done",
         "parent": "Stock + product QA",
         "note": "",
         "other": ""
       },
       {
-        "week": "2026-W14",
+        "week": "2026-W15",
         "category": "This week",
-        "task": "W/House Assemble Plan with Phoebe",
+        "task": "W/House Assemble Plan with Phoebe + Jon",
         "status": "on-track",
         "parent": "Stock + product QA",
         "note": "",
@@ -584,7 +584,7 @@ window.EDEN.teamPulse = {
         "week": "2026-W14",
         "category": "This week",
         "task": "Pack Gift Tubes on Tuesday",
-        "status": "on-track",
+        "status": "done",
         "parent": "Team Support",
         "note": "",
         "other": ""
@@ -631,7 +631,7 @@ window.EDEN.teamPulse = {
         "week": "2026-W14",
         "category": "This week",
         "task": "Pack GiftTubes",
-        "status": "on-track",
+        "status": "done",
         "parent": "Stock planning",
         "note": "",
         "other": ""
@@ -640,15 +640,15 @@ window.EDEN.teamPulse = {
   },
   "ytd": {
     "Jon": 0,
-    "Rosie": 0,
-    "Edith": 0,
-    "Phoebe": 0
+    "Rosie": 1,
+    "Edith": 1,
+    "Phoebe": 1
   },
   "streak": {
     "Jon": 0,
-    "Rosie": 0,
-    "Edith": 0,
-    "Phoebe": 0
+    "Rosie": 1,
+    "Edith": 1,
+    "Phoebe": 1
   },
   "concerns": [
     {
