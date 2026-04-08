@@ -1,6 +1,6 @@
 /**
  * EDEN & CO. CEO Flight Deck - Klaviyo Email Component
- * Live data fetched from Klaviyo MCP on 27 Mar 2026.
+ * Live data fetched from Klaviyo MCP on 8 Apr 2026.
  * Refresh by re-running Klaviyo MCP queries in Claude and updating the DATA block below.
  */
 window.EDEN = window.EDEN || {};
@@ -9,39 +9,39 @@ window.EDEN.components = window.EDEN.components || {};
 (function () {
   'use strict';
 
-  // ── Live data (last fetched: 27 Mar 2026) ────────────────────────────────
+  // ── Live data (last fetched: 8 Apr 2026) ─────────────────────────────────
 
   var DATA = {
     flows: {
       mtd: [
-        { name: 'Winback Flow',          revenue: 575.89,  conversions: 8,  recipients: 2307,  open_rate: 0.3808, click_rate: 0.0157 },
-        { name: 'Shipping: Order Shipped',revenue: 218.50, conversions: 4,  recipients: 6716,  open_rate: 0.0655, click_rate: 0.0019 },
-        { name: 'Email Welcome Series',  revenue: 198.00,  conversions: 5,  recipients: 1096,  open_rate: 0.3512, click_rate: 0.0065 },
-        { name: 'Browse Abandonment',    revenue: 177.08,  conversions: 4,  recipients: 341,   open_rate: 0.7722, click_rate: 0.0266 },
-        { name: 'Abandoned Cart',        revenue: 98.00,   conversions: 3,  recipients: 75,    open_rate: 0.3151, click_rate: 0.0137 },
-        { name: 'Gift Finder (Large)',   revenue: 25.00,   conversions: 1,  recipients: 1,     open_rate: 1.0000, click_rate: 0.0000 }
+        { name: 'Winback Flow',           revenue: 157.98, conversions: 2, recipients: 402,  open_rate: 0.3233, click_rate: 0.0100 },
+        { name: 'Abandoned Cart',         revenue:  45.00, conversions: 1, recipients:  20,  open_rate: 0.1765, click_rate: 0.0000 },
+        { name: 'Email Welcome Series',   revenue:  25.00, conversions: 1, recipients: 276,  open_rate: 0.3162, click_rate: 0.0110 },
+        { name: 'Browse Abandonment',     revenue:   0.00, conversions: 0, recipients:  42,  open_rate: 0.6098, click_rate: 0.0000 },
+        { name: 'Shipping: Order Shipped',revenue:   0.00, conversions: 0, recipients: 1018, open_rate: 0.0884, click_rate: 0.0010 },
+        { name: 'Shipping: Order Received',revenue:  0.00, conversions: 0, recipients: 521,  open_rate: 0.0576, click_rate: 0.0019 }
       ],
       ytd: [
-        { name: 'Winback Flow',          revenue: 1180.87, conversions: 18, recipients: 14439, open_rate: 0.3811, click_rate: 0.0111 },
-        { name: 'Shipping: Order Shipped',revenue: 529.00, conversions: 16, recipients: 15911, open_rate: 0.0961, click_rate: 0.0035 },
-        { name: 'Email Welcome Series',  revenue: 764.09,  conversions: 13, recipients: 3352,  open_rate: 0.3465, click_rate: 0.0087 },
-        { name: 'Abandoned Cart',        revenue: 459.99,  conversions: 8,  recipients: 202,   open_rate: 0.4141, click_rate: 0.0455 },
-        { name: 'Browse Abandonment',    revenue: 371.08,  conversions: 6,  recipients: 562,   open_rate: 0.6631, click_rate: 0.0323 },
-        { name: 'Gift Finder (Large)',   revenue: 25.00,   conversions: 1,  recipients: 3,     open_rate: 0.6667, click_rate: 0.0000 }
+        { name: 'Winback Flow',           revenue: 1338.85, conversions: 20, recipients: 15132, open_rate: 0.3798, click_rate: 0.0111 },
+        { name: 'Email Welcome Series',   revenue:  789.09, conversions: 14, recipients:  3850, open_rate: 0.3409, click_rate: 0.0089 },
+        { name: 'Shipping: Order Shipped',revenue:  529.00, conversions: 16, recipients: 17634, open_rate: 0.0957, click_rate: 0.0033 },
+        { name: 'Abandoned Cart',         revenue:  504.99, conversions:  9, recipients:   240, open_rate: 0.3820, click_rate: 0.0386 },
+        { name: 'Browse Abandonment',     revenue:  371.08, conversions:  6, recipients:   640, open_rate: 0.6441, click_rate: 0.0299 },
+        { name: 'Gift Finder (Large)',    revenue:   25.00, conversions:  1, recipients:     4, open_rate: 0.7500, click_rate: 0.0000 }
       ]
     },
     campaigns: {
       mtd: [
-        { name: 'Mothers Day 1',   revenue: 227.37, conversions: 4, recipients: 7025, open_rate: 0.3487, click_rate: 0.00742, sent: '10 Mar' },
-        { name: 'Easter 2026 1',   revenue: 45.00,  conversions: 2, recipients: 1957, open_rate: 0.5714, click_rate: 0.01535, sent: '24 Mar' },
-        { name: 'Mothers Day 2',   revenue: 47.50,  conversions: 2, recipients: 6886, open_rate: 0.3004, click_rate: 0.00349, sent: '12 Mar' },
-        { name: 'Mar 12 Campaign', revenue: 22.50,  conversions: 1, recipients: 7006, open_rate: 0.2762, click_rate: 0.00143, sent: '13 Mar' }
+        { name: 'Easter 3',       revenue: 25.00, conversions: 1, recipients: 2107, open_rate: 0.5031, click_rate: 0.00380, sent: '2 Apr' },
+        { name: 'Easter 2026 4',  revenue:  0.00, conversions: 0, recipients: 2125, open_rate: 0.5588, click_rate: 0.00236, sent: '5 Apr' }
       ],
       ytd: [
-        { name: 'Mothers Day 1',   revenue: 227.37, conversions: 4, recipients: 7025, open_rate: 0.3487, click_rate: 0.00742, sent: '10 Mar' },
-        { name: 'Mothers Day 2',   revenue: 47.50,  conversions: 2, recipients: 6886, open_rate: 0.3004, click_rate: 0.00349, sent: '12 Mar' },
-        { name: 'Easter 2026 1',   revenue: 45.00,  conversions: 2, recipients: 1957, open_rate: 0.5714, click_rate: 0.01535, sent: '24 Mar' },
-        { name: 'Mar 12 Campaign', revenue: 22.50,  conversions: 1, recipients: 7006, open_rate: 0.2762, click_rate: 0.00143, sent: '13 Mar' }
+        { name: 'Mothers Day 1',        revenue: 227.37, conversions: 4, recipients: 7025, open_rate: 0.3501, click_rate: 0.00742, sent: '10 Mar' },
+        { name: 'Mothers Day 2',        revenue:  47.50, conversions: 2, recipients: 6886, open_rate: 0.3020, click_rate: 0.00364, sent: '12 Mar' },
+        { name: 'Easter 2026 1',        revenue:  45.00, conversions: 2, recipients: 1957, open_rate: 0.5852, click_rate: 0.01586, sent: '24 Mar' },
+        { name: 'Easter 3',             revenue:  25.00, conversions: 1, recipients: 2107, open_rate: 0.5031, click_rate: 0.00380, sent: '2 Apr' },
+        { name: 'Campaign Mar 12',      revenue:  22.50, conversions: 1, recipients: 7006, open_rate: 0.2786, click_rate: 0.00143, sent: '13 Mar' },
+        { name: 'Campaign Mar 30',      revenue:  22.00, conversions: 1, recipients: 2053, open_rate: 0.5439, click_rate: 0.00634, sent: '30 Mar' }
       ]
     }
   };

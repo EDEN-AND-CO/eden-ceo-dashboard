@@ -349,33 +349,50 @@ window.EDEN = window.EDEN || {};
     setClass('ov-profit-tile', 'tg ta tr', opexCovered ? 'tg' : 'tr');
 
     // ── TACOS + Blended ROAS card ──
-    var adSpend = (data.adSpend && data.adSpend.total_mtd) || 0;
+    // adSpend-cache is MTD-filtered at build time by build-adspend-cache.py
+    // In Last Month mode, ad spend cache is MTD (current month) — cannot compare to last month
+    // revenue accurately, so TACOS/ROAS are suppressed in that mode.
+    var sp = window.EDEN._adSpend || {};
+    function gs(v) { return (v && typeof v === 'object') ? (v.spend || 0) : (Number(v) || 0); }
+    var adSpendMTD = gs(sp.google) + gs(sp.amazon) + gs(sp.meta);
+    // Sanity check: if adSpend exceeds monthly revenue by more than 5x, something is wrong
+    var adSpend = (adSpendMTD > 0 && revMTD > 0 && adSpendMTD > revMTD * 5) ? 0 : adSpendMTD;
+    if (adSpend !== adSpendMTD && adSpendMTD > 0) {
+      console.warn('[EDEN Overview] adSpend sanity fail: £' + adSpendMTD + ' vs rev £' + revMTD + ' — suppressing TACOS');
+    }
+    var adSpendValid = adSpend > 0 && !isLastMonth;
+    var ovSpendLabel = adSpendValid ? ('£' + Math.round(adSpend).toLocaleString('en-GB') + ' total ad spend MTD') : '—';
 
-    // Revenue vs ad spend card (always populate revenue; ROAS when adSpend known)
+    // Revenue vs ad spend card (always populate revenue; ROAS when adSpend known and in MTD mode)
     setHTML('ov-roas-rev', fmtGBP(revMTD));
-    if (adSpend > 0) {
+    if (adSpendValid) {
       var blendedRoas = revMTD / adSpend;
       setHTML('ov-roas-spend', fmtGBP(adSpend));
       setHTML('ov-roas-val', (Math.round(blendedRoas * 10) / 10) + 'x');
       setHTML('ov-roas-insight', blendedRoas >= 4 ? 'On target (4x+)' : blendedRoas >= 3 ? 'Below target — 4x needed' : 'Below baseline — action required');
       setStyle('ov-roas-bar', 'width', Math.min(blendedRoas / 6 * 100, 100) + '%');
-      document.getElementById('ov-roas-bar').style.background = blendedRoas >= 4 ? 'var(--OK)' : blendedRoas >= 3 ? 'var(--AMB)' : 'var(--RED)';
+      var roasBarEl = document.getElementById('ov-roas-bar');
+      if (roasBarEl) roasBarEl.style.background = blendedRoas >= 4 ? 'var(--OK)' : blendedRoas >= 3 ? 'var(--AMB)' : 'var(--RED)';
     } else {
-      setHTML('ov-roas-spend', '—');
+      setHTML('ov-roas-spend', isLastMonth ? 'MTD only' : '—');
       setHTML('ov-roas-val', '—');
-      setHTML('ov-roas-insight', 'Ad spend from Google Ads MCP · Amazon/Meta via Coupler when available');
+      setHTML('ov-roas-insight', isLastMonth ? 'Ad spend cache is MTD — switch to MTD view for ROAS' : 'Ad spend from Google Ads MCP · Amazon/Meta via Coupler when available');
     }
 
-    if (adSpend > 0 && revMTD > 0) {
+    if (adSpendValid && revMTD > 0) {
       var tacosPct  = (adSpend / revMTD) * 100;
       var tacosRag  = m.ragStatus(tacosPct, cfg.rag.tacos_pct);
       var tacosDisp = Math.round(tacosPct * 10) / 10 + '%';
       setHTML('ov-tacos-val', tacosDisp);
-      setHTML('ov-tacos-meta', '£' + Math.round(adSpend).toLocaleString('en-GB') + ' total ad spend MTD');
+      setHTML('ov-tacos-meta', ovSpendLabel);
       setHTML('ov-tacos-status', 'Target &lt;15%');
       setStyle('ov-tacos-bar', 'width', Math.min(tacosPct / 25 * 100, 100) + '%');
       setHTML('ov-tacos-insight', '');
       setClass('ov-tacos-tile', 'tg ta tr', tacosRag === 'g' ? 'tg' : tacosRag === 'a' ? 'ta' : 'tr');
+    } else if (isLastMonth) {
+      setHTML('ov-tacos-val', 'N/A');
+      setHTML('ov-tacos-meta', 'Switch to MTD view for TACOS');
+      setHTML('ov-tacos-insight', '');
     }
 
     // ── Platform split (Shopify / Amazon / Other) ──

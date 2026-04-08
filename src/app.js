@@ -366,11 +366,15 @@ window.EDEN = window.EDEN || {};
 
   // ── Ad spend accumulator + TACOS tile refresh ──────────────────
 
-  window.EDEN._adSpend = { google: 0, amazon: 0, meta: 0 };
+  // Preserve adspend-cache.js values (that script runs before app.js)
+  // Only initialise if not already populated by the cache script
+  window.EDEN._adSpend = window.EDEN._adSpend || { google: 0, amazon: 0, meta: 0 };
 
   window.EDEN.refreshAdTiles = function () {
     var sp    = window.EDEN._adSpend || {};
-    var total = (sp.google || 0) + (sp.amazon || 0) + (sp.meta || 0);
+    // sp.google/amazon/meta are objects {spend, clicks, ...} from adspend-cache.js
+    function gs(v) { return (v && typeof v === 'object') ? (v.spend || 0) : (Number(v) || 0); }
+    var total = gs(sp.google) + gs(sp.amazon) + gs(sp.meta);
     if (total === 0) return;
 
     var data = window.EDEN._data;
@@ -383,14 +387,25 @@ window.EDEN = window.EDEN || {};
     var mtd    = m.getMTDOrders(data.orders.filter(function (o) {
       return o.status !== 'cancelled' && o.status !== 'on_hold';
     }));
-    var revMTD = mtd.reduce(function (s, o) { return s + o.amount_paid; }, 0);
-    if (revMTD === 0) return;
+    var revMTD = mtd.reduce(function (s, o) { return s + (o.amount_paid || 0); }, 0);
+    if (revMTD === 0) {
+      console.warn('[EDEN refreshAdTiles] revMTD=0 — orders count:', mtd.length, '| first order sample:', mtd[0]);
+      return;
+    }
 
-    var tacosPct  = (total / revMTD) * 100;
+    // Sanity check: ad spend > 5x revenue is impossible for a functioning account
+    if (total > revMTD * 5) {
+      console.error('[EDEN refreshAdTiles] SANITY FAIL — ad spend £' + total + ' vs revenue £' + revMTD + '. Suppressing TACOS to prevent display of impossible value.');
+      return;
+    }
+
+    // adSpend-cache is MTD-filtered at build time — use directly
+    var totalMTD  = total;
+    var tacosPct  = (totalMTD / revMTD) * 100;
     var tacosDisp = Math.round(tacosPct * 10) / 10 + '%';
     var tacosRag  = cfg ? m.ragStatus(tacosPct, cfg.rag.tacos_pct) : 'a';
     var tacosCol  = tacosRag === 'g' ? 'var(--OK)' : tacosRag === 'a' ? 'var(--AMB)' : 'var(--RED)';
-    var spendFmt  = '£' + Math.round(total).toLocaleString('en-GB');
+    var spendFmt  = '£' + Math.round(totalMTD).toLocaleString('en-GB');
 
     function setEl(id, val) { var e = document.getElementById(id); if (e) e.textContent = val; }
     function setWidth(id, w) { var e = document.getElementById(id); if (e) e.style.width = w; }
@@ -414,8 +429,8 @@ window.EDEN = window.EDEN || {};
     var mktTacosTile = document.getElementById('mkt-tacos-tile');
     if (mktTacosTile) mktTacosTile.className = 'tile ' + tileCls;
 
-    // Blended ROAS = total revenue / total ad spend
-    var roas     = total > 0 ? revMTD / total : 0;
+    // Blended ROAS = total revenue / total ad spend (prorated MTD)
+    var roas     = totalMTD > 0 ? revMTD / totalMTD : 0;
     var roasDisp = roas.toFixed(1) + 'x';
     var roasRag  = roas >= 4 ? 'g' : roas >= 2 ? 'a' : 'r';
     var roasCls  = roasRag === 'g' ? 'tg' : roasRag === 'a' ? 'ta' : 'tr';

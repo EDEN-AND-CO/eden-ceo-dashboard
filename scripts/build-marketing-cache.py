@@ -248,54 +248,78 @@ DIETARY_TERMS = {
 }
 
 print("\n[5/5] Google Reviews (Sheet CSV)...")
+
+# Tag rules — order matters, first match wins per review
+REVIEW_TAGS = [
+    ("dietary_resolved",  ["could eat everything", "whole hamper", "all dietary", "safe for", "everyone could eat", "no exclusions", "for a change", "finally", "for once i could"]),
+    ("dietary_anxiety",   ["gluten", "coeliac", "celiac", "dairy free", "dairy-free", "vegan", "plant-based", "lactose", "allergy", "allergen", "intolerant", "intolerance", "gf "]),
+    ("recipient_joy",     ["face", "cried", "burst into tears", "so happy", "loved it", "texted me", "phoned me", "reaction", "opened it", "delighted", "speechless"]),
+    ("gifting_emotion",   ["thoughtful", "feels seen", "made them feel", "meant so much", "perfect gift", "couldn't have chosen better", "exactly right", "knew what", "really personal"]),
+    ("quality_surprise",  ["better than expected", "exceeded", "blown away", "so good", "amazing quality", "gorgeous", "luxurious", "beautiful", "stunning", "premium", "worth every"]),
+    ("new_hire",          ["new job", "new starter", "onboarding", "started", "first day", "new role", "joining"]),
+    ("corporate",         ["team", "office", "colleagues", "staff", "company", "employees", "corporate", "workplace", "hr "]),
+    ("repeat_buyer",      ["again", "second time", "third time", "always order", "every year", "come back", "reorder", "bought before"]),
+    ("delivery",          ["delivery", "arrived", "packaging", "packed", "box", "letterbox", "courier", "postman", "next day"]),
+]
+
+def tag_review(text):
+    tl = text.lower()
+    tags = []
+    for tag, terms in REVIEW_TAGS:
+        if any(t in tl for t in terms):
+            tags.append(tag)
+    return tags if tags else ["brand_trust"]
+
 try:
     req = urllib.request.Request(GBP_SHEET_CSV, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(req, timeout=15) as r:
         raw = r.read().decode("utf-8")
 
-    reader = csv.DictReader(io.StringIO(raw))
-    rows = list(reader)
-    headers = reader.fieldnames or []
-    print(f"  Columns: {headers}")
+    # Sheet has no header row. Columns: 0=date, 1=reviewer, 2=star_word, 3=review_text, 4=reply
+    raw_rows = list(csv.reader(io.StringIO(raw)))
+    print(f"  Raw rows: {len(raw_rows)}")
 
-    # Detect column names flexibly
-    def col(names):
-        for n in names:
-            for h in headers:
-                if n.lower() in h.lower():
-                    return h
-        return None
-
-    rating_col   = col(["rating", "star", "score"])
-    text_col     = col(["review", "comment", "text", "body"])
-    reviewer_col = col(["reviewer", "name", "author"])
-    date_col     = col(["date", "time", "submitted"])
-
-    ratings, quotes, diet_counts = [], [], Counter()
+    STAR_MAP = {"ONE": 1, "TWO": 2, "THREE": 3, "FOUR": 4, "FIVE": 5}
+    ratings, all_reviews, diet_counts = [], [], Counter()
     months = Counter()
 
-    for row in rows:
-        raw_rating = row.get(rating_col, "").strip() if rating_col else ""
-        try:
-            r_val = int(float(raw_rating))
-        except (ValueError, TypeError):
+    for row in raw_rows:
+        if len(row) < 4:
+            continue
+        date_str  = row[0].strip()
+        reviewer  = row[1].strip()
+        star_word = row[2].strip().upper()
+        text      = row[3].strip()
+
+        r_val = STAR_MAP.get(star_word)
+        if not r_val:
             continue
 
         ratings.append(r_val)
-        text    = (row.get(text_col, "") if text_col else "").strip()
-        reviewer = (row.get(reviewer_col, "") if reviewer_col else "").strip()
-        date_str = (row.get(date_col, "") if date_col else "").strip()
 
-        if date_str and len(date_str) >= 7:
-            months[date_str[:7]] += 1
+        # Month tracking — convert DD/MM/YYYY to YYYY-MM
+        try:
+            parts = date_str.split("/")
+            if len(parts) == 3:
+                month_key = parts[2][:4] + "-" + parts[1].zfill(2)
+                months[month_key] += 1
+        except Exception:
+            pass
 
         tl = text.lower()
         for label, terms in DIETARY_TERMS.items():
             if any(t in tl for t in terms):
                 diet_counts[label] += 1
 
-        if r_val >= 4 and len(text) > 40:
-            quotes.append({"text": text, "reviewer": reviewer, "stars": r_val, "date": date_str})
+        if r_val >= 4 and len(text) > 30:
+            tags = tag_review(text)
+            all_reviews.append({
+                "text":     text,
+                "reviewer": reviewer,
+                "stars":    r_val,
+                "date":     date_str,
+                "tags":     tags,
+            })
 
     total = len(ratings)
     dist  = Counter(ratings)
@@ -303,10 +327,23 @@ try:
     pct5  = round(dist[5] / total * 100) if total else 0
     pct_pos = round((dist[5] + dist[4]) / total * 100) if total else 0
 
-    # Pick top quotes: prefer dietary-mention ones, then newest
-    diet_quotes = [q for q in quotes if any(t in q["text"].lower() for terms in DIETARY_TERMS.values() for t in terms)]
-    other_quotes = [q for q in quotes if q not in diet_quotes]
-    top_quotes = (diet_quotes[:6] + other_quotes)[:10]
+    # Top 5: highest-signal dietary/emotional reviews
+    priority_tags = {"dietary_resolved", "recipient_joy", "gifting_emotion"}
+    priority   = [r for r in all_reviews if any(t in priority_tags for t in r["tags"]) and r["stars"] == 5]
+    other_5    = [r for r in all_reviews if r not in priority and r["stars"] == 5]
+    top_reviews = (priority + other_5)[:5]
+
+    # Latest 5: most recent by date (DD/MM/YYYY sort)
+    def parse_date(d):
+        try:
+            parts = d.split("/")
+            return (int(parts[2]), int(parts[1]), int(parts[0]))
+        except Exception:
+            return (0, 0, 0)
+    recent_reviews = sorted(all_reviews, key=lambda r: parse_date(r["date"]), reverse=True)[:5]
+
+    # Top 10 content angles (same pool, for existing sm-content-angles)
+    top_quotes = (priority + other_5)[:10]
 
     result["gbp_reviews"] = {
         "source":       "Google Business Profile via Make → Google Sheet (All Google Reviews tab)",
@@ -323,20 +360,23 @@ try:
         "pct_positive": pct_pos,
         "dietary_mentions": dict(diet_counts.most_common()),
         "top_quotes":   top_quotes,
+        "top_reviews":  top_reviews,
+        "latest_reviews": recent_reviews,
         "months":       dict(sorted(months.items())),
     }
-    print(f"  {total} reviews | avg {avg} | {pct5}% five-star")
+    print(f"  {total} reviews | avg {avg} | {pct5}% five-star | {len(top_reviews)} top | {len(recent_reviews)} latest")
 
 except Exception as e:
+    import traceback
     print(f"  WARNING: Could not fetch GBP sheet: {e}")
-    print("  Using last known values.")
+    traceback.print_exc()
     result["gbp_reviews"] = {
         "source": "fallback — sheet fetch failed",
         "last_updated": "unknown",
         "total": 0, "avg_rating": 0,
         "five_star": 0, "four_star": 0, "three_star": 0, "two_star": 0, "one_star": 0,
         "pct_five": 0, "pct_positive": 0,
-        "dietary_mentions": {}, "top_quotes": [], "months": {},
+        "dietary_mentions": {}, "top_quotes": [], "top_reviews": [], "latest_reviews": [], "months": {},
     }
 
 # ── Metadata ──────────────────────────────────────────────────────────────────

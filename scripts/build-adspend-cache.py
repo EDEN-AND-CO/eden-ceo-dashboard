@@ -13,6 +13,29 @@ BUILD_DIR  = os.path.dirname(SCRIPT_DIR)
 OUT_PATH   = os.path.join(BUILD_DIR, 'src', 'data', 'adspend-cache.js')
 SHEET_ID   = '1Zx4fyaKGOuOcfpWmTyn2LZHBzWSUC-8sbOVqCFoh9fE'
 
+# Current month prefix for MTD filtering (e.g. "2026-04")
+NOW         = datetime.now(timezone.utc)
+MTD_PREFIX  = NOW.strftime('%Y-%m')
+
+def is_mtd(date_str):
+    """Return True if date string starts with current YYYY-MM."""
+    if not date_str:
+        return False
+    # Handle formats: 2026-04-07, 2026-04-07T00:00:00Z, 07/04/2026, April 7 2026
+    s = str(date_str).strip()
+    # ISO format
+    if s[:7] == MTD_PREFIX:
+        return True
+    # DD/MM/YYYY
+    try:
+        parts = s.split('/')
+        if len(parts) == 3:
+            d = datetime(int(parts[2][:4]), int(parts[1]), int(parts[0]))
+            return d.strftime('%Y-%m') == MTD_PREFIX
+    except Exception:
+        pass
+    return False
+
 def fetch_tab(tab):
     url = f'https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet={urllib.parse.quote(tab)}'
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -41,10 +64,13 @@ try:
     conv_col = next((k for k in rows[0] if 'conversions: conversions' in k.lower() or k.lower() == 'conversions'), None) if rows else None
     impr_col = next((k for k in rows[0] if 'impress' in k.lower()), None) if rows else None
 
-    total_spend = sum(clean(r.get(spend_col,0)) for r in rows) if spend_col else 0
-    total_clicks = sum(clean(r.get(clicks_col,0)) for r in rows) if clicks_col else 0
-    total_conv = sum(clean(r.get(conv_col,0)) for r in rows) if conv_col else 0
-    total_impr = sum(clean(r.get(impr_col,0)) for r in rows) if impr_col else 0
+    date_col_g = next((k for k in rows[0] if k.lower() in ('report: date', 'report:date', 'date')), None) if rows else None
+    mtd_rows_g = [r for r in rows if is_mtd(r.get(date_col_g,''))] if date_col_g else rows
+    print(f'[Google] {len(rows)} total rows → {len(mtd_rows_g)} MTD rows (col: {date_col_g})')
+    total_spend = sum(clean(r.get(spend_col,0)) for r in mtd_rows_g) if spend_col else 0
+    total_clicks = sum(clean(r.get(clicks_col,0)) for r in mtd_rows_g) if clicks_col else 0
+    total_conv = sum(clean(r.get(conv_col,0)) for r in mtd_rows_g) if conv_col else 0
+    total_impr = sum(clean(r.get(impr_col,0)) for r in mtd_rows_g) if impr_col else 0
 
     result['google'] = {
         'spend': round(total_spend, 2),
@@ -66,10 +92,12 @@ try:
     #       clickThroughRate, clicks, cost, costPerClick, date, impressions, keyword,
     #       purchases14d, searchTerm, targeting
     updated = rows[0].get('Row Updated At','') if rows else ''
-    total_spend   = sum(clean(r.get('cost',0)) for r in rows)
-    total_clicks  = sum(clean(r.get('clicks',0)) for r in rows)
-    total_orders  = sum(clean(r.get('purchases14d',0)) for r in rows)
-    total_impr    = sum(clean(r.get('impressions',0)) for r in rows)
+    mtd_rows_a = [r for r in rows if is_mtd(r.get('date',''))]
+    print(f'[Amazon] {len(rows)} total rows → {len(mtd_rows_a)} MTD rows')
+    total_spend   = sum(clean(r.get('cost',0)) for r in mtd_rows_a)
+    total_clicks  = sum(clean(r.get('clicks',0)) for r in mtd_rows_a)
+    total_orders  = sum(clean(r.get('purchases14d',0)) for r in mtd_rows_a)
+    total_impr    = sum(clean(r.get('impressions',0)) for r in mtd_rows_a)
     # Amazon doesn't give revenue directly in this feed — calc ACOS from spend/orders
     result['amazon'] = {
         'spend': round(total_spend, 2),
@@ -94,9 +122,12 @@ try:
     clicks_col = next((k for k in rows[0] if k.lower() in ('performance: clicks','clicks')), None) if rows else None
     impr_col = next((k for k in rows[0] if 'impressions' in k.lower()), None) if rows else None
 
-    total_spend  = sum(clean(r.get(spend_col,0)) for r in rows) if spend_col else 0
-    total_clicks = sum(clean(r.get(clicks_col,0)) for r in rows) if clicks_col else 0
-    total_impr   = sum(clean(r.get(impr_col,0)) for r in rows) if impr_col else 0
+    date_col_m = next((k for k in rows[0] if k.lower() in ('report: date', 'report:date', 'date')), None) if rows else None
+    mtd_rows_m = [r for r in rows if is_mtd(r.get(date_col_m,''))] if date_col_m else rows
+    print(f'[Meta] {len(rows)} total rows → {len(mtd_rows_m)} MTD rows (col: {date_col_m})')
+    total_spend  = sum(clean(r.get(spend_col,0)) for r in mtd_rows_m) if spend_col else 0
+    total_clicks = sum(clean(r.get(clicks_col,0)) for r in mtd_rows_m) if clicks_col else 0
+    total_impr   = sum(clean(r.get(impr_col,0)) for r in mtd_rows_m) if impr_col else 0
 
     result['meta'] = {
         'spend': round(total_spend, 2),

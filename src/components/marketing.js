@@ -111,18 +111,25 @@ window.EDEN.components = window.EDEN.components || {};
     window.EDEN._adSpend = window.EDEN._adSpend || {};
     // Read spend from adspend-cache.js (objects with .spend) or component-set numbers
     function getSpend(v) { return (v && typeof v === 'object') ? (v.spend || 0) : (v || 0); }
-    var adSpend = getSpend(window.EDEN._adSpend.google) + getSpend(window.EDEN._adSpend.amazon) + getSpend(window.EDEN._adSpend.meta);
-    var revMTD  = mtd.reduce(function (s, o) { return s + o.amount_paid; }, 0);
+    var adSpendRaw = getSpend(window.EDEN._adSpend.google) + getSpend(window.EDEN._adSpend.amazon) + getSpend(window.EDEN._adSpend.meta);
+    var revMTD  = mtd.reduce(function (s, o) { return s + (o.amount_paid || 0); }, 0);
+    // Sanity: ad spend > 5x revenue is impossible for a functioning account
+    var adSpend = (adSpendRaw > 0 && revMTD > 0 && adSpendRaw > revMTD * 5) ? 0 : adSpendRaw;
+    if (adSpend !== adSpendRaw && adSpendRaw > 0) {
+      console.error('[EDEN Marketing] SANITY FAIL — ad spend £' + adSpendRaw + ' vs revenue £' + revMTD + '. Suppressing TACOS.');
+    }
 
     function setEl(id, html)  { var el = document.getElementById(id); if (el) el.innerHTML = html; }
     function setAttr(id, attr, val) { var el = document.getElementById(id); if (el) el.setAttribute('style', attr + ':' + val); }
+
+    var spendLabel = '£' + Math.round(adSpend).toLocaleString('en-GB') + ' total ad spend MTD';
 
     if (adSpend > 0 && revMTD > 0) {
       var tacosPct  = (adSpend / revMTD) * 100;
       var tacosRag  = cfg ? window.EDEN.metrics.ragStatus(tacosPct, cfg.rag.tacos_pct) : 'a';
       var tacosDisp = Math.round(tacosPct * 10) / 10 + '%';
       setEl('mkt-tacos-val',     tacosDisp);
-      setEl('mkt-tacos-meta',    '£' + Math.round(adSpend).toLocaleString('en-GB') + ' total ad spend MTD');
+      setEl('mkt-tacos-meta',    spendLabel);
       setEl('mkt-tacos-status',  'Target &lt;15%');
       setEl('mkt-tacos-insight', '');
       var tacosTile = document.getElementById('mkt-tacos-tile');
@@ -136,7 +143,7 @@ window.EDEN.components = window.EDEN.components || {};
       var roasDisp = Math.round(roasVal * 10) / 10 + 'x';
       var roasRag  = roasVal >= 4 ? 'g' : roasVal >= 3 ? 'a' : 'r';
       setEl('mkt-roas-val',     roasDisp);
-      setEl('mkt-roas-meta',    '£' + Math.round(adSpend).toLocaleString('en-GB') + ' total ad spend MTD');
+      setEl('mkt-roas-meta',    spendLabel);
       setEl('mkt-roas-status',  'Target: 4x+');
       setEl('mkt-roas-insight', 'Total ad revenue ÷ total ad spend (Google + Amazon + Meta)');
       var roasTile = document.getElementById('mkt-roas-tile');
@@ -156,6 +163,9 @@ window.EDEN.components = window.EDEN.components || {};
 
     // Trigger TACOS tile refresh now that meta spend is set
     if (window.EDEN.refreshAdTiles) window.EDEN.refreshAdTiles();
+
+    // Re-run intel renderer to ensure reviews/ratings are always populated
+    renderIntel();
 
     console.log('[EDEN] Marketing tab rendered. Occasions:', occList.length, '| Add-ons: gin=' + ginCount + ' mock=' + mocktailCount + ' pro=' + proseccoCount);
   }
@@ -247,24 +257,58 @@ window.EDEN.components = window.EDEN.components || {};
 
     // ── What they say — content angles (from top_quotes) ────────────────────
     var quotes = gbp.top_quotes || [];
-    var ANGLE_THEME_MAP = {
-      'dietary exclusion resolved': { label: 'Inclusion hook',   color: 'var(--GOLD)', bold: true },
-      'recipient joy':              { label: 'Recipient joy',    color: 'var(--GOLD)', bold: true },
-      'gifting emotion':            { label: 'Gifting emotion',  color: 'var(--GOLD)', bold: true },
-      'inclusion':                  { label: 'Inclusion hook',   color: 'var(--GOLD)', bold: true },
-      'personalisation + inclusion':{ label: 'Personalisation',  color: 'var(--GMD)',  bold: false },
-      'quality surprise':           { label: 'Quality surprise', color: 'var(--GMD)',  bold: false },
-      'new diagnosis gifting':      { label: 'New diagnosis',    color: 'var(--GMD)',  bold: false },
+    var TAG_LABEL = {
+      'dietary_resolved': { label: 'Inclusion hook',    color: 'var(--GOLD)', bold: true  },
+      'recipient_joy':    { label: 'Recipient joy',     color: 'var(--GOLD)', bold: true  },
+      'gifting_emotion':  { label: 'Gifting emotion',   color: 'var(--GOLD)', bold: true  },
+      'dietary_anxiety':  { label: 'Dietary anxiety',   color: 'var(--AMB)',  bold: false },
+      'quality_surprise': { label: 'Quality surprise',  color: 'var(--GMD)',  bold: false },
+      'new_hire':         { label: 'New hire gifting',  color: 'var(--GMD)',  bold: false },
+      'corporate':        { label: 'Corporate',         color: 'var(--GMD)',  bold: false },
+      'repeat_buyer':     { label: 'Repeat buyer',      color: 'var(--OK)',   bold: false },
+      'delivery':         { label: 'Delivery',          color: 'var(--GMD)',  bold: false },
+      'brand_trust':      { label: 'Brand trust',       color: 'var(--GMD)',  bold: false },
     };
+
+    function reviewCardHtml(q, showDate) {
+      var tags = q.tags || [];
+      var primaryTag = TAG_LABEL[tags[0]] || TAG_LABEL['brand_trust'];
+      var tagBadges = tags.map(function(t) {
+        var tl = TAG_LABEL[t] || { label: t, color: 'var(--GMD)' };
+        return '<span style="display:inline-block;font-size:9px;font-weight:600;padding:2px 7px;border-radius:10px;background:var(--GXP);color:' + tl.color + ';margin:2px 2px 0 0">' + tl.label + '</span>';
+      }).join('');
+      var stars = Array(q.stars || 5).fill('★').join('');
+      var dateStr = showDate && q.date ? '<span style="font-size:9px;color:var(--GMD);margin-left:6px">' + q.date + '</span>' : '';
+      return '<div style="background:var(--GXP);border-radius:var(--r4);padding:12px 14px;border-left:3px solid ' + primaryTag.color + '">' +
+        '<div style="font-size:10px;color:var(--GOLD);margin-bottom:4px">' + stars + dateStr +
+        (q.reviewer ? ' <span style="font-size:10px;color:var(--GMD);font-weight:600">' + q.reviewer + '</span>' : '') + '</div>' +
+        '<div style="font-size:12px;font-style:italic;color:var(--G);line-height:1.6;margin-bottom:8px">"' + q.text + '"</div>' +
+        '<div>' + tagBadges + '</div>' +
+        '</div>';
+    }
+
     if (quotes.length) {
       var anglesHtml = quotes.map(function(q) {
-        var theme = ANGLE_THEME_MAP[q.theme] || { label: q.theme || 'Brand trust', color: 'var(--GMD)', bold: false };
-        var angleStyle = 'font-size:10px;color:' + theme.color + ';white-space:nowrap' + (theme.bold ? ';font-weight:600' : '');
+        var tags = q.tags || [q.theme || 'brand_trust'];
+        var primaryTag = TAG_LABEL[tags[0]] || { label: tags[0] || 'Brand trust', color: 'var(--GMD)', bold: false };
+        var angleStyle = 'font-size:10px;color:' + primaryTag.color + ';white-space:nowrap' + (primaryTag.bold ? ';font-weight:600' : '');
         var reviewer   = q.reviewer ? ' <span style="font-size:9px;color:var(--GMD)">' + q.reviewer + '</span>' : '';
         return '<tr><td style="font-style:italic">"' + q.text + '"' + reviewer + '</td>'
-          + '<td style="' + angleStyle + '">' + theme.label + '</td></tr>';
+          + '<td style="' + angleStyle + '">' + primaryTag.label + '</td></tr>';
       }).join('');
       setEl('sm-content-angles', anglesHtml);
+    }
+
+    // ── Latest 5 reviews ─────────────────────────────────────────────────────
+    var latestRevs = gbp.latest_reviews || [];
+    if (latestRevs.length) {
+      setEl('sm-latest-reviews', latestRevs.map(function(q) { return reviewCardHtml(q, true); }).join(''));
+    }
+
+    // ── Top 5 reviews ─────────────────────────────────────────────────────────
+    var topRevs = gbp.top_reviews || [];
+    if (topRevs.length) {
+      setEl('sm-top-reviews', topRevs.map(function(q) { return reviewCardHtml(q, false); }).join(''));
     }
 
     // ── Corp pipeline IDs ────────────────────────────────────────────────────
