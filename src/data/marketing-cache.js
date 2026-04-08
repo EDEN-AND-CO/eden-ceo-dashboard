@@ -1,5 +1,5 @@
 // EDEN & CO. Marketing Intelligence Cache
-// Built: 2026-04-08 13:00 UTC
+// Built: 2026-04-08 13:03 UTC
 // Run: python3 scripts/build-marketing-cache.py
 
 window.EDEN = window.EDEN || {};
@@ -484,6 +484,6 @@ window.EDEN._marketingData = {
       "2026-03": 79
     }
   },
-  "_built": "2026-04-08 13:00 UTC",
+  "_built": "2026-04-08 13:03 UTC",
   "_version": "1.0"
 };
