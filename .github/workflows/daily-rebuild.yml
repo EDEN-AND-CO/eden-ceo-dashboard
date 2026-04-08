@@ -79,6 +79,9 @@ jobs:
           git config user.name "EDEN Dashboard Bot"
           git config user.email "dashboard@edenandco.com"
           git add src/data/*.js
-          git diff --staged --quiet && echo "No changes to commit" || \
-            git commit -m "Data refresh: $(date -u '+%Y-%m-%d %H:%M UTC') [auto]" && \
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Data refresh: $(date -u '+%Y-%m-%d %H:%M UTC') [auto]"
             git push
+          fi
