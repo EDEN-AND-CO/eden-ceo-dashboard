@@ -1,11 +1,11 @@
 // EDEN & CO. Marketing Intelligence Cache
-// Built: 2026-04-09 12:07 UTC
+// Built: 2026-04-10 10:32 UTC
 // Run: python3 scripts/build-marketing-cache.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN._marketingData = {
   "gift_designer": {
-    "total": 1549,
+    "total": 1552,
     "fetched": 1000,
     "who": {
       "A family member or friend": 831,
@@ -14,35 +14,35 @@ window.EDEN._marketingData = {
       "A team or group": 18
     },
     "feel": {
-      "Loved and appreciated": 590,
-      "Surprised and delighted": 336,
+      "Loved and appreciated": 588,
+      "Surprised and delighted": 338,
       "Calm and relaxed": 48,
       "Inspired or empowered": 20
     },
     "concern": {
       "Worrying about allergies or dietary needs": 695,
       "Not wanting it to feel generic": 325,
-      "It won't look as good as it does in the picture": 237,
-      "It will taste rubbish": 231,
-      "I care deeply, but worry the gift won\u2019t show it.": 182,
+      "It won't look as good as it does in the picture": 238,
+      "It will taste rubbish": 232,
+      "I care deeply, but worry the gift won\u2019t show it.": 181,
       "Feeling overwhelmed with options": 71
     },
     "matters": {
-      "All of the above": 573,
+      "All of the above": 572,
       "Quality, ethical ingredients": 325,
-      "Beautiful packaging & presentation": 291,
+      "Beautiful packaging & presentation": 292,
       "Something they\u2019ve never seen before": 172
     },
     "product": {
       "The Signature Collection (Top Seller)": 394,
-      "The Petite Collection (The perfect gesture)": 308,
+      "The Petite Collection (The perfect gesture)": 306,
       "The Chocolate Collection (Pure Indulgence)": 144,
-      "The Grand (For Special occasions)": 94,
-      "The Prestige (For Milestone Moments)": 60
+      "The Grand (For Special occasions)": 95,
+      "The Prestige (For Milestone Moments)": 61
     },
     "occasion": {
-      "Merry Christmas": 234,
-      "Happy Birthday": 96,
+      "Merry Christmas": 233,
+      "Happy Birthday": 97,
       "With Love": 63,
       "For Mum": 42,
       "Thank You": 38,
@@ -55,18 +55,18 @@ window.EDEN._marketingData = {
       "Gluten Free": 497,
       "Dairy Free": 335,
       "Vegan": 295,
-      "Vegetarian": 95,
+      "Vegetarian": 94,
       "None": 70,
       "Plant Based": 47,
       "Halal": 34
     },
     "months": {
-      "2025-11": 120,
+      "2025-11": 117,
       "2025-12": 447,
       "2026-01": 97,
       "2026-02": 127,
       "2026-03": 176,
-      "2026-04": 33
+      "2026-04": 36
     }
   },
   "virgin": {
@@ -187,32 +187,32 @@ window.EDEN._marketingData = {
     }
   },
   "google_reviews": {
-    "total": 1042,
+    "total": 1045,
     "fetched": 1000,
     "quality": {
       "avg": 4.83,
-      "total": 809,
-      "five": 692,
-      "four": 100,
+      "total": 812,
+      "five": 694,
+      "four": 101,
       "three": 12,
       "two": 3,
       "one": 2,
       "pct_positive": 97.9
     },
     "impression": {
-      "avg": 4.73,
-      "total": 787,
-      "five": 613,
+      "avg": 4.72,
+      "total": 790,
+      "five": 615,
       "four": 142,
       "three": 25,
-      "two": 4,
+      "two": 5,
       "one": 3,
-      "pct_positive": 95.9
+      "pct_positive": 95.8
     },
     "dietary": {},
     "missed_foods": [],
     "months": {
-      "2024-04": 18,
+      "2024-04": 15,
       "2024-05": 25,
       "2024-06": 20,
       "2024-07": 27,
@@ -233,13 +233,13 @@ window.EDEN._marketingData = {
       "2026-01": 85,
       "2026-02": 126,
       "2026-03": 138,
-      "2026-04": 34
+      "2026-04": 37
     }
   },
   "gbp_reviews": {
     "source": "Google Business Profile via Make \u2192 Google Sheet (All Google Reviews tab)",
     "sheet_url": "https://docs.google.com/spreadsheets/d/1DXKumasfRDY4tGiPAi07pV15eiyAb5R0HezoxpUkhc8/edit?gid=879421801",
-    "last_updated": "2026-04-09",
+    "last_updated": "2026-04-10",
     "total": 673,
     "avg_rating": 4.82,
     "five_star": 585,
@@ -484,6 +484,6 @@ window.EDEN._marketingData = {
       "2026-03": 79
     }
   },
-  "_built": "2026-04-09 12:07 UTC",
+  "_built": "2026-04-10 10:32 UTC",
   "_version": "1.0"
 };
