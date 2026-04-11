@@ -1,11 +1,11 @@
 // EDEN & CO. Marketing Intelligence Cache
-// Built: 2026-04-10 10:32 UTC
+// Built: 2026-04-11 10:02 UTC
 // Run: python3 scripts/build-marketing-cache.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN._marketingData = {
   "gift_designer": {
-    "total": 1552,
+    "total": 1554,
     "fetched": 1000,
     "who": {
       "A family member or friend": 831,
@@ -23,22 +23,22 @@ window.EDEN._marketingData = {
       "Worrying about allergies or dietary needs": 695,
       "Not wanting it to feel generic": 325,
       "It won't look as good as it does in the picture": 238,
-      "It will taste rubbish": 232,
-      "I care deeply, but worry the gift won\u2019t show it.": 181,
-      "Feeling overwhelmed with options": 71
+      "It will taste rubbish": 234,
+      "I care deeply, but worry the gift won\u2019t show it.": 183,
+      "Feeling overwhelmed with options": 72
     },
     "matters": {
       "All of the above": 572,
-      "Quality, ethical ingredients": 325,
-      "Beautiful packaging & presentation": 292,
-      "Something they\u2019ve never seen before": 172
+      "Quality, ethical ingredients": 324,
+      "Beautiful packaging & presentation": 291,
+      "Something they\u2019ve never seen before": 171
     },
     "product": {
-      "The Signature Collection (Top Seller)": 394,
+      "The Signature Collection (Top Seller)": 395,
       "The Petite Collection (The perfect gesture)": 306,
       "The Chocolate Collection (Pure Indulgence)": 144,
       "The Grand (For Special occasions)": 95,
-      "The Prestige (For Milestone Moments)": 61
+      "The Prestige (For Milestone Moments)": 60
     },
     "occasion": {
       "Merry Christmas": 233,
@@ -46,55 +46,55 @@ window.EDEN._marketingData = {
       "With Love": 63,
       "For Mum": 42,
       "Thank You": 38,
-      "Signature": 34,
+      "Signature": 35,
       "Just For You": 18,
       "Celebration": 11,
       "For Dad": 2
     },
     "dietary": {
-      "Gluten Free": 497,
+      "Gluten Free": 498,
       "Dairy Free": 335,
       "Vegan": 295,
       "Vegetarian": 94,
       "None": 70,
-      "Plant Based": 47,
+      "Plant Based": 46,
       "Halal": 34
     },
     "months": {
-      "2025-11": 117,
+      "2025-11": 115,
       "2025-12": 447,
       "2026-01": 97,
       "2026-02": 127,
       "2026-03": 176,
-      "2026-04": 36
+      "2026-04": 38
     }
   },
   "virgin": {
-    "total": 2047,
+    "total": 2050,
     "fetched": 1000,
     "product": {
       "P07274": 166,
-      "P06059": 114,
+      "P06059": 115,
       "P04313": 102,
       "P04314": 93,
       "P04315": 74,
-      "P04316": 70,
+      "P04316": 71,
       "P04649": 61,
       "P10519": 53,
-      "P10527": 45,
+      "P10527": 44,
       "P10530": 43,
       "P04652": 38,
-      "P04317": 29,
+      "P04317": 30,
       "P07273": 26,
       "P10525": 19,
-      "P04653": 18,
+      "P04653": 17,
       "P10521": 17,
-      "P10528": 14,
       "P06058": 13,
+      "P10528": 13,
       "P10523": 5
     },
     "card": {
-      "No Personalisation": 125,
+      "No Personalisation": 124,
       "Merry Christmas": 101,
       "Just For You": 60,
       "Let's Celebrate": 42,
@@ -109,15 +109,14 @@ window.EDEN._marketingData = {
       "Yes": 2
     },
     "dietary": {
-      "None": 748,
+      "None": 749,
       "Vegetarian": 50,
       "Vegan": 45,
-      "Gluten Free": 22,
+      "Gluten Free": 21,
       "Dairy Free": 16
     },
     "months": {
-      "2024-10": 1,
-      "2024-11": 163,
+      "2024-11": 161,
       "2024-12": 115,
       "2025-01": 69,
       "2025-02": 32,
@@ -134,7 +133,7 @@ window.EDEN._marketingData = {
       "2026-01": 34,
       "2026-02": 30,
       "2026-03": 64,
-      "2026-04": 14
+      "2026-04": 17
     }
   },
   "corporate": {
@@ -187,32 +186,32 @@ window.EDEN._marketingData = {
     }
   },
   "google_reviews": {
-    "total": 1045,
+    "total": 1050,
     "fetched": 1000,
     "quality": {
-      "avg": 4.83,
-      "total": 812,
-      "five": 694,
+      "avg": 4.82,
+      "total": 817,
+      "five": 698,
       "four": 101,
-      "three": 12,
+      "three": 13,
       "two": 3,
       "one": 2,
-      "pct_positive": 97.9
+      "pct_positive": 97.8
     },
     "impression": {
       "avg": 4.72,
-      "total": 790,
-      "five": 615,
-      "four": 142,
-      "three": 25,
+      "total": 795,
+      "five": 618,
+      "four": 143,
+      "three": 26,
       "two": 5,
       "one": 3,
-      "pct_positive": 95.8
+      "pct_positive": 95.7
     },
     "dietary": {},
     "missed_foods": [],
     "months": {
-      "2024-04": 15,
+      "2024-04": 10,
       "2024-05": 25,
       "2024-06": 20,
       "2024-07": 27,
@@ -233,13 +232,13 @@ window.EDEN._marketingData = {
       "2026-01": 85,
       "2026-02": 126,
       "2026-03": 138,
-      "2026-04": 37
+      "2026-04": 42
     }
   },
   "gbp_reviews": {
     "source": "Google Business Profile via Make \u2192 Google Sheet (All Google Reviews tab)",
     "sheet_url": "https://docs.google.com/spreadsheets/d/1DXKumasfRDY4tGiPAi07pV15eiyAb5R0HezoxpUkhc8/edit?gid=879421801",
-    "last_updated": "2026-04-10",
+    "last_updated": "2026-04-11",
     "total": 673,
     "avg_rating": 4.82,
     "five_star": 585,
@@ -484,6 +483,6 @@ window.EDEN._marketingData = {
       "2026-03": 79
     }
   },
-  "_built": "2026-04-10 10:32 UTC",
+  "_built": "2026-04-11 10:02 UTC",
   "_version": "1.0"
 };
