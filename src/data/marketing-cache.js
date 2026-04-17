@@ -1,11 +1,11 @@
 // EDEN & CO. Marketing Intelligence Cache
-// Built: 2026-04-16 10:42 UTC
+// Built: 2026-04-17 10:37 UTC
 // Run: python3 scripts/build-marketing-cache.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN._marketingData = {
   "gift_designer": {
-    "total": 1582,
+    "total": 1588,
     "fetched": 1000,
     "who": {
       "A family member or friend": 826,
@@ -15,58 +15,58 @@ window.EDEN._marketingData = {
     },
     "feel": {
       "Loved and appreciated": 589,
-      "Surprised and delighted": 336,
-      "Calm and relaxed": 49,
+      "Surprised and delighted": 335,
+      "Calm and relaxed": 50,
       "Inspired or empowered": 21
     },
     "concern": {
-      "Worrying about allergies or dietary needs": 694,
+      "Worrying about allergies or dietary needs": 695,
       "Not wanting it to feel generic": 331,
       "It won't look as good as it does in the picture": 236,
       "It will taste rubbish": 233,
-      "I care deeply, but worry the gift won\u2019t show it.": 183,
+      "I care deeply, but worry the gift won\u2019t show it.": 185,
       "Feeling overwhelmed with options": 73
     },
     "matters": {
-      "All of the above": 579,
-      "Quality, ethical ingredients": 319,
-      "Beautiful packaging & presentation": 290,
-      "Something they\u2019ve never seen before": 166
+      "All of the above": 576,
+      "Quality, ethical ingredients": 321,
+      "Beautiful packaging & presentation": 292,
+      "Something they\u2019ve never seen before": 169
     },
     "product": {
-      "The Signature Collection (Top Seller)": 395,
-      "The Petite Collection (The perfect gesture)": 311,
-      "The Chocolate Collection (Pure Indulgence)": 138,
+      "The Signature Collection (Top Seller)": 397,
+      "The Petite Collection (The perfect gesture)": 309,
+      "The Chocolate Collection (Pure Indulgence)": 137,
       "The Grand (For Special occasions)": 93,
-      "The Prestige (For Milestone Moments)": 63
+      "The Prestige (For Milestone Moments)": 64
     },
     "occasion": {
-      "Merry Christmas": 219,
-      "Happy Birthday": 108,
-      "With Love": 63,
-      "For Mum": 42,
+      "Merry Christmas": 218,
+      "Happy Birthday": 110,
+      "With Love": 62,
+      "For Mum": 41,
       "Thank You": 37,
       "Signature": 34,
       "Just For You": 18,
-      "Celebration": 10,
+      "Celebration": 12,
       "For Dad": 2
     },
     "dietary": {
-      "Gluten Free": 501,
+      "Gluten Free": 502,
       "Dairy Free": 333,
-      "Vegan": 288,
+      "Vegan": 289,
       "Vegetarian": 95,
       "None": 72,
-      "Plant Based": 45,
-      "Halal": 34
+      "Plant Based": 46,
+      "Halal": 33
     },
     "months": {
-      "2025-11": 87,
+      "2025-11": 81,
       "2025-12": 447,
       "2026-01": 97,
       "2026-02": 127,
       "2026-03": 176,
-      "2026-04": 66
+      "2026-04": 72
     }
   },
   "virgin": {
@@ -187,12 +187,12 @@ window.EDEN._marketingData = {
     }
   },
   "google_reviews": {
-    "total": 1076,
+    "total": 1080,
     "fetched": 1000,
     "quality": {
       "avg": 4.82,
-      "total": 843,
-      "five": 719,
+      "total": 847,
+      "five": 723,
       "four": 106,
       "three": 13,
       "two": 3,
@@ -201,18 +201,18 @@ window.EDEN._marketingData = {
     },
     "impression": {
       "avg": 4.72,
-      "total": 821,
-      "five": 637,
+      "total": 825,
+      "five": 641,
       "four": 149,
       "three": 26,
       "two": 6,
       "one": 3,
-      "pct_positive": 95.7
+      "pct_positive": 95.8
     },
     "dietary": {},
     "missed_foods": [],
     "months": {
-      "2024-05": 9,
+      "2024-05": 5,
       "2024-06": 20,
       "2024-07": 27,
       "2024-08": 4,
@@ -232,13 +232,13 @@ window.EDEN._marketingData = {
       "2026-01": 85,
       "2026-02": 126,
       "2026-03": 138,
-      "2026-04": 68
+      "2026-04": 72
     }
   },
   "gbp_reviews": {
     "source": "Google Business Profile via Make \u2192 Google Sheet (All Google Reviews tab)",
     "sheet_url": "https://docs.google.com/spreadsheets/d/1DXKumasfRDY4tGiPAi07pV15eiyAb5R0HezoxpUkhc8/edit?gid=879421801",
-    "last_updated": "2026-04-16",
+    "last_updated": "2026-04-17",
     "total": 673,
     "avg_rating": 4.82,
     "five_star": 585,
@@ -483,6 +483,6 @@ window.EDEN._marketingData = {
       "2026-03": 79
     }
   },
-  "_built": "2026-04-16 10:42 UTC",
+  "_built": "2026-04-17 10:37 UTC",
   "_version": "1.0"
 };
