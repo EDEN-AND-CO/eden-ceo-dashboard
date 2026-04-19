@@ -1,0 +1,34 @@
+headersOrigin = "config"
+plugins = []
+redirects = []
+
+[functions]
+
+[functions."*"]
+
+[build]
+publish = "/Users/jonwinter/Library/CloudStorage/OneDrive-Personal/eden-co-brain/data/ceo dashboard/build/src/src"
+publishOrigin = "config"
+base = "/Users/jonwinter/Library/CloudStorage/OneDrive-Personal/eden-co-brain/data/ceo dashboard/build/src"
+
+[build.environment]
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
+
+[[headers]]
+for = "/*"
+
+[headers.values]
+X-Frame-Options = "DENY"
+X-Content-Type-Options = "nosniff"
+Cache-Control = "no-cache, no-store, must-revalidate"
