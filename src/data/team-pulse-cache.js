@@ -1,12 +1,12 @@
 // EDEN & CO. CEO Flight Deck — Team Pulse Cache
-// Generated: 2026-04-08T09:48:33Z
+// Generated: 2026-04-13T09:20:30Z
 // Source: EDEN_CO_Weekly_Status.xlsx
 // Do not edit manually. Run: python3 scripts/build-team-pulse.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN.teamPulse = {
-  "generated": "2026-04-08T09:48:33Z",
-  "current_week": "2026-W15",
+  "generated": "2026-04-13T09:20:30Z",
+  "current_week": "2026-W16",
   "core_goals": {
     "Jon": {
       "PPC - Blended ROAS 5x": {
@@ -370,7 +370,7 @@ window.EDEN.teamPulse = {
   "weekly": {
     "Jon": [
       {
-        "week": "2026-W14",
+        "week": "2026-W16",
         "category": "This week",
         "task": "Amazon Account Validation (VAT + Phone)",
         "status": "on-track",
@@ -379,7 +379,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W14",
+        "week": "2026-W16",
         "category": "This week",
         "task": "Support Phoebe - Orders Despatch",
         "status": "on-track",
@@ -388,7 +388,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W14",
+        "week": "2026-W16",
         "category": "This week",
         "task": "Teach Phoebe Invoicing",
         "status": "on-track",
@@ -400,7 +400,7 @@ window.EDEN.teamPulse = {
         "week": "2026-W14",
         "category": "This week",
         "task": "Payroll",
-        "status": "on-track",
+        "status": "done",
         "parent": "Business Strategy & Performance",
         "note": "Monday Update",
         "other": ""
@@ -409,13 +409,13 @@ window.EDEN.teamPulse = {
         "week": "2026-W14",
         "category": "This week",
         "task": "Launch New Dashboard",
-        "status": "on-track",
+        "status": "done",
         "parent": "Business Strategy & Performance",
         "note": "Monday Meeting Unveil",
         "other": ""
       },
       {
-        "week": "2026-W14",
+        "week": "2026-W16",
         "category": "This week",
         "task": "Finalise 2026 Product Range",
         "status": "on-track",
@@ -427,13 +427,13 @@ window.EDEN.teamPulse = {
         "week": "2026-W14",
         "category": "This week",
         "task": "Monitor International Orders",
-        "status": "on-track",
+        "status": "done",
         "parent": "International - shipping + Amz",
         "note": "UPS checkin",
         "other": ""
       },
       {
-        "week": "2026-W14",
+        "week": "2026-W16",
         "category": "This week",
         "task": "GlobalCheckout Setup",
         "status": "on-track",
@@ -442,7 +442,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W14",
+        "week": "2026-W16",
         "category": "This week",
         "task": "Bread&Jam Tickets",
         "status": "on-track",
@@ -454,7 +454,7 @@ window.EDEN.teamPulse = {
         "week": "2026-W14",
         "category": "This week",
         "task": "Checking WIth Corp Campaigns: Virgin, PIPL, SmartCurrencyExchange",
-        "status": "on-track",
+        "status": "done",
         "parent": "B2B - 2 key accounts/month",
         "note": "Email each Monday",
         "other": ""
@@ -462,8 +462,8 @@ window.EDEN.teamPulse = {
       {
         "week": "2026-W14",
         "category": "This week",
-        "task": "PPC Check-in & Ypdate",
-        "status": "on-track",
+        "task": "PPC Check-in & Update",
+        "status": "done",
         "parent": "PPC - Blended ROAS 5x",
         "note": "",
         "other": ""
@@ -476,11 +476,56 @@ window.EDEN.teamPulse = {
         "parent": "",
         "note": "",
         "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "PPC Weekly Audit — Google + Amazon + Meta",
+        "status": "on-track",
+        "parent": "PPC - Blended ROAS 5x",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "Corp outreach — Virgin, PIPL, SmartCurrencyExchange",
+        "status": "on-track",
+        "parent": "B2B - 2 key accounts/month",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "Weekly Finance + Dashboard Review",
+        "status": "on-track",
+        "parent": "Business Strategy & Performance",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "Team 1:1 Reviews",
+        "status": "on-track",
+        "parent": "Business Strategy & Performance",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "International Orders — UPS check-in",
+        "status": "on-track",
+        "parent": "International - shipping + Amz",
+        "note": "",
+        "other": ""
       }
     ],
     "Rosie": [
       {
-        "week": "2026-W14",
+        "week": "2026-W16",
         "category": "This week",
         "task": "Chase RH Fibreboard - packaging quotes",
         "status": "on-track",
@@ -492,7 +537,7 @@ window.EDEN.teamPulse = {
         "week": "2026-W14",
         "category": "This week",
         "task": "Checkin Founder Content with Edith",
-        "status": "on-track",
+        "status": "done",
         "parent": "Content brand QA every piece",
         "note": "",
         "other": ""
@@ -501,7 +546,7 @@ window.EDEN.teamPulse = {
         "week": "2026-W14",
         "category": "This week",
         "task": "Checkin UGC Content with Edith",
-        "status": "on-track",
+        "status": "overdue",
         "parent": "Stock + product QA",
         "note": "",
         "other": ""
@@ -516,7 +561,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W15",
+        "week": "2026-W16",
         "category": "This week",
         "task": "W/House Assemble Plan with Phoebe + Jon",
         "status": "on-track",
@@ -525,7 +570,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W14",
+        "week": "2026-W16",
         "category": "This week",
         "task": "Continue Despatch Training Phoebe",
         "status": "on-track",
@@ -534,7 +579,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W14",
+        "week": "2026-W16",
         "category": "This week",
         "task": "Decide on new Product lines",
         "status": "on-track",
@@ -546,17 +591,80 @@ window.EDEN.teamPulse = {
         "week": "2026-W14",
         "category": "Other",
         "task": "Confirm Building Works",
-        "status": "on-track",
+        "status": "done",
         "parent": "",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This Month",
+        "task": "Process new Alcohol Licence",
+        "status": "on-track",
+        "parent": "Stock + product QA",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This Month",
+        "task": "Reg. Food Biz",
+        "status": "on-track",
+        "parent": "Stock + product QA",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "Other",
+        "task": "Close down operations/ suppliers to Estune",
+        "status": "on-track",
+        "parent": "Stock + product QA",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "Content QA — all Edith pieces checked before publish",
+        "status": "on-track",
+        "parent": "Content brand QA every piece",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "2x Founder-led content pieces",
+        "status": "on-track",
+        "parent": "Content brand QA every piece",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "Google reviews — all replied within 24hrs",
+        "status": "on-track",
+        "parent": "Customer satisfaction",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "W/House move planning — stock on pallets",
+        "status": "on-track",
+        "parent": "Stock + product QA",
         "note": "",
         "other": ""
       }
     ],
     "Edith": [
       {
-        "week": "2026-W14",
+        "week": "2026-W16",
         "category": "This week",
-        "task": "Finish @MillzCooksContent by Wednesday",
+        "task": "UGC content production — current batch",
         "status": "on-track",
         "parent": "16 UGC + 4 Meta groups",
         "note": "",
@@ -566,7 +674,7 @@ window.EDEN.teamPulse = {
         "week": "2026-W14",
         "category": "This week",
         "task": "Ready to Present 7x FInish Content Pieces by Wednesday",
-        "status": "on-track",
+        "status": "done",
         "parent": "Social Media Content",
         "note": "",
         "other": ""
@@ -575,7 +683,7 @@ window.EDEN.teamPulse = {
         "week": "2026-W14",
         "category": "This week",
         "task": "Ready to Present 3x Finished Emails by Wednesday",
-        "status": "on-track",
+        "status": "done",
         "parent": "Social Media Content",
         "note": "",
         "other": ""
@@ -590,12 +698,48 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W14",
+        "week": "2026-W16",
         "category": "This week",
         "task": "Create a 3 Step Sign-off Plan for Content & Emails",
         "status": "on-track",
         "parent": "Team Support",
         "note": "Monday: \nOne Sentence Concept - What's The Message?\nWhat's the Hook, Retain, Reward\nDescribe Visual (words)\n2 Brand, 2 Recipient, 3 Buyer. \n\nWednesday:\nFully Completed Sign-off / Review \n\nFriday: \nAmends Made / Sign-off",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "2x Recipient-focused posts",
+        "status": "on-track",
+        "parent": "Social Media Content",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "3x Buyer-focused posts",
+        "status": "on-track",
+        "parent": "Social Media Content",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "3 emails ready — subject lines approved first",
+        "status": "on-track",
+        "parent": "Email Campaigns",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "UGC batch check-in with Rosie",
+        "status": "on-track",
+        "parent": "Meta UGC & Creatives",
+        "note": "",
         "other": ""
       }
     ],
@@ -604,7 +748,7 @@ window.EDEN.teamPulse = {
         "week": "2026-W14",
         "category": "This week",
         "task": "Support Whouse Despatch",
-        "status": "on-track",
+        "status": "done",
         "parent": "Order satisfaction + despatch",
         "note": "Goal: Teach Edith Despatch process in full by end of April",
         "other": ""
@@ -613,13 +757,13 @@ window.EDEN.teamPulse = {
         "week": "2026-W14",
         "category": "This week",
         "task": "Learn Admin Despatch",
-        "status": "on-track",
+        "status": "done",
         "parent": "Order satisfaction + despatch",
         "note": "Goal: Teach Rosie Despatch process in full by end of April",
         "other": ""
       },
       {
-        "week": "2026-W14",
+        "week": "2026-W16",
         "category": "This week",
         "task": "Learn Invoicing & Purchase Order",
         "status": "on-track",
@@ -635,17 +779,53 @@ window.EDEN.teamPulse = {
         "parent": "Stock planning",
         "note": "",
         "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "Orders despatched same day before 4pm",
+        "status": "on-track",
+        "parent": "Order satisfaction + despatch",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "Stock levels checked + low stock flagged",
+        "status": "on-track",
+        "parent": "Stock planning",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "Customer queries — 4hr SLA",
+        "status": "on-track",
+        "parent": "Customer service - 4hr SLA",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "ShipStation labels confirmed daily",
+        "status": "on-track",
+        "parent": "Order satisfaction + despatch",
+        "note": "",
+        "other": ""
       }
     ]
   },
   "ytd": {
-    "Jon": 0,
-    "Rosie": 1,
-    "Edith": 1,
-    "Phoebe": 1
+    "Jon": 5,
+    "Rosie": 3,
+    "Edith": 3,
+    "Phoebe": 3
   },
   "streak": {
-    "Jon": 0,
+    "Jon": 1,
     "Rosie": 1,
     "Edith": 1,
     "Phoebe": 1
@@ -662,7 +842,7 @@ window.EDEN.teamPulse = {
       "title": "Hampers on Pallets",
       "owner": "Rosie",
       "level": "high",
-      "action": "Start Building Pallets and claearing shelves for move",
+      "action": "Start Building Pallets and clearing shelves for move",
       "due": "2026-04-04"
     },
     {
@@ -671,6 +851,34 @@ window.EDEN.teamPulse = {
       "level": "med",
       "action": "Find and Give Edith Access",
       "due": "2026-04-04"
+    },
+    {
+      "title": "Change Return Process",
+      "owner": "Jon + Phoebe",
+      "level": "high",
+      "action": "Offer Labelless as standard (find our cost first), all not damaged / or mistake based refunds instead incur a £7.50 restocking fee.",
+      "due": "2026-04-17"
+    },
+    {
+      "title": "Laptop Battery Maintenance",
+      "owner": "Team",
+      "level": "med",
+      "action": "Drain your batteries down, don't leave cables plugged in all the time.",
+      "due": "2026-04-17"
+    },
+    {
+      "title": "Large Hamper Outers",
+      "owner": "Jon + Phoebe",
+      "level": "high",
+      "action": "Order Hamper Postal Outers",
+      "due": "2026-04-15"
+    },
+    {
+      "title": "Turn Off Prime / Back On",
+      "owner": "Jon + Phoebe",
+      "level": "high",
+      "action": "Turn off Prime Monday / On Wed",
+      "due": "2026-04-15"
     }
   ]
 };

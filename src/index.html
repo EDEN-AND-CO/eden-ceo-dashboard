@@ -28,7 +28,7 @@
   --WBRD:var(--WBRD);--WBG1:var(--WBG1);--WBG2:var(--WBG2);--WBG3:var(--WBG3);--WBG4:var(--WBG4);
 }
 body{font-family:var(--F);background:var(--PG);color:var(--GDK);font-size:14px;line-height:1.55;min-height:100vh}
-#tab-marketing,#tab-mkt-copy,#tab-corporate,#tab-platforms,#tab-operations,#tab-scenario,#tab-goals,#tab-knowledge{zoom:1.13}
+
 
 /* ── HEADER ── clean signpost only */
 .topbar{background:var(--G);padding:0 24px;height:52px;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:300;border-bottom:1px solid rgba(255,255,255,0.06)}
@@ -104,7 +104,7 @@ body{font-family:var(--F);background:var(--PG);color:var(--GDK);font-size:14px;l
 .tdot.g{background:var(--OK)}.tdot.a{background:var(--AMB)}.tdot.r{background:var(--RED)}
 
 /* ── PAGE ── */
-.page{padding:22px 26px;max-width:1500px;margin:0 auto}
+.page{padding:28px 32px;max-width:1500px;margin:0 auto}
 .panel{display:none}.panel.active{display:block}
 
 /* ── SECTION LABELS ── */
@@ -264,7 +264,7 @@ svg.sp{display:block;width:100%;overflow:visible}
 .amtgt{font-size:10px;color:var(--GMD);margin-top:3px}
 
 /* ── OCCASIONS ── */
-.occ-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
 .occ{background:var(--CREAM);border:1px solid var(--GP);border-left:3px solid var(--GOLD);border-radius:var(--r8);padding:13px 14px}
 .occ-n{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--GMD);margin-bottom:6px;font-weight:700}
 .occ-v{font-size:20px;font-weight:700;color:var(--G);letter-spacing:-0.01em}
@@ -336,7 +336,7 @@ svg.sp{display:block;width:100%;overflow:visible}
 #tab-goals .page{padding:0;max-width:none}
 
 /* INFO BAR — light green, reversed from original dark */
-#tab-goals .tp-info-bar{background:var(--GXP);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;border-bottom:2px solid var(--GOLD)}
+#tab-goals .tp-info-bar{background:var(--G);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;border-bottom:2px solid var(--GOLD)}
 #tab-goals .tp-info-bar::after{content:'';position:absolute;bottom:-2px;left:0;height:2px;background:rgba(0,68,55,0.25);width:var(--tp-year-pct,0%);transition:width 0.7s ease;pointer-events:none}
 #tab-goals .tp-info-left{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 #tab-goals .tp-pill{font-family:var(--FM);font-size:12px;font-weight:600;color:var(--G);padding:3px 12px;background:var(--W);border:1px solid var(--GL);border-radius:2px;letter-spacing:0.03em}
@@ -344,7 +344,7 @@ svg.sp{display:block;width:100%;overflow:visible}
 #tab-goals .tp-pill.stat{color:var(--G);background:var(--W);border:1px solid var(--GL);padding:3px 12px;font-weight:700;border-radius:2px}
 #tab-goals .tp-sep{width:1px;height:16px;background:var(--GL);flex-shrink:0}
 #tab-goals .tp-info-right{display:flex;align-items:center;gap:16px;flex-shrink:0}
-#tab-goals .tp-show-toggle{display:flex;align-items:center;gap:7px;color:var(--GMD);font-size:11px;cursor:pointer;user-select:none;font-family:'Josefin Sans',sans-serif;letter-spacing:0.08em;text-transform:uppercase}
+#tab-goals .tp-show-toggle{display:flex;align-items:center;gap:7px;color:rgba(255,255,255,0.75);font-size:11px;cursor:pointer;user-select:none;font-family:'Josefin Sans',sans-serif;letter-spacing:0.08em;text-transform:uppercase}
 #tab-goals .tp-show-toggle input{cursor:pointer;accent-color:var(--G);width:14px;height:14px}
 #tab-goals .tp-demo-bar{background:var(--ABL);border-bottom:1px solid var(--GOLD);padding:9px 32px;font-size:12px;color:var(--AMB);display:none;font-family:'Josefin Sans',sans-serif;letter-spacing:0.06em}
 
@@ -523,7 +523,7 @@ svg.sp{display:block;width:100%;overflow:visible}
       <div class="da-icon">&#9675;</div>
       <div class="da-body">
         <div class="da-title">Google Ads — Policy Appeal Pending</div>
-        <div class="da-text">3 ad groups suppressed — Gluten Free, Dairy Free, Vegetarian. Appeal submitted March 2026. Check clearance status in Google Ads UI.</div>
+        <div class="da-text">3 ad groups suppressed. Appeal submitted 6 Mar. Check clearance status in Google Ads.</div>
       </div>
       <span class="da-dismiss" onclick="dimDrawerAlert('da2')">&#10005;</span>
     </div>
@@ -582,11 +582,8 @@ svg.sp{display:block;width:100%;overflow:visible}
   <div class="tab active" onclick="showTab('overview',this,'Overview')"><div class="tdot a"></div>Overview</div>
   <div class="tab" onclick="showTab('goals',this,'Weekly Pulse');tpActivate()"><div class="tdot g"></div>Weekly Pulse</div>
   <div class="tab" onclick="showTab('marketing',this,'PPC &amp; EMAIL')"><div class="tdot a"></div>PPC &amp; EMAIL</div>
-  <div class="tab" onclick="showTab('mkt-copy',this,'Socials')"><div class="tdot a"></div>Socials</div>
-  <div class="tab" onclick="showTab('corporate',this,'Corporate')"><div class="tdot a"></div>Corporate</div>
   <div class="tab" onclick="showTab('platforms',this,'Platforms')"><div class="tdot g"></div>Platforms</div>
   <div class="tab" onclick="showTab('operations',this,'Operations')"><div class="tdot r"></div>Operations</div>
-  <div class="tab" onclick="showTab('scenario',this,'Scenario')">Scenario</div>
   <div class="tab" onclick="showTab('knowledge',this,'Knowledge Base')">Knowledge Base</div>
 </div>
 
@@ -637,7 +634,7 @@ svg.sp{display:block;width:100%;overflow:visible}
         <div class="tmeta" id="ov-tacos-meta" style="color:var(--GMD);font-size:10px">Ad spend data pending</div>
         <div class="prog-lbls"><span>Target: &lt;15%</span><span id="ov-tacos-status"></span></div>
         <div class="pbar"><div class="pf" id="ov-tacos-bar" style="width:0%"></div></div>
-        <div class="insight" id="ov-tacos-insight" style="font-size:10px;color:var(--GMD);margin-top:8px">Connect Google &amp; Amazon ad spend via Coupler to activate</div>
+        <div class="insight" id="ov-tacos-insight" style="font-size:10px;color:var(--GMD);margin-top:8px">Total ad spend &divide; revenue (ex-VAT). Target &lt;15%.</div>
       </div>
     </div>
   </div>
@@ -741,11 +738,7 @@ svg.sp{display:block;width:100%;overflow:visible}
         <div class="tmeta" id="ov-opd-meta"></div>
         <div class="pbar" style="background:rgba(15,64,40,0.12);margin-top:6px"><div class="pf" id="ov-opd-bar" style="width:0%"></div></div>
       </div>
-      <div class="chip tgold">
-        <div class="tlbl">Express Orders MTD</div>
-        <div class="tval sm" id="ov-express-val" style="font-size:28px">—</div>
-        <div style="font-size:11px;color:var(--GMD);margin-top:4px" id="ov-express-meta">Shipping £0.01–£9.99 · UK only</div>
-      </div>
+      
     </div>
   </div>
 
@@ -804,7 +797,7 @@ svg.sp{display:block;width:100%;overflow:visible}
         <div class="insight" id="mkt-roas-insight">Total ad revenue ÷ total ad spend (Google + Amazon + Meta). Target 4x+.</div>
       </div>
     </div>
-    <div class="g21">
+    <div>
       <div>
         <div id="gads-adblk" class="adblk ok">
           <div class="adhead"><div class="adname">Google Ads<span class="data-ts" id="ts-google-ppc"></span></div><span class="rag a">Loading...</span></div>
@@ -818,7 +811,7 @@ svg.sp{display:block;width:100%;overflow:visible}
         <div class="adblk" style="border-left-color:var(--GP);padding:10px 14px">
           <div class="ctitle" style="margin-bottom:8px">Campaign breakdown — MTD</div>
           <table class="dt"><thead><tr><th>Campaign</th><th class="r">Spend</th><th class="r">Conv</th><th class="r">CPA</th><th class="r">ROAS</th></tr></thead><tbody id="gads-camp-body"><tr><td colspan="5" style="text-align:center;color:var(--GMD);padding:8px">Loading...</td></tr></tbody></table>
-          <div class="dnote" style="margin-top:6px">Data from Coupler · refreshed daily 9am</div>
+          <div class="dnote" style="margin-top:6px">Google Ads MCP · last refreshed manually</div>
         </div>
         <div id="amz-adblk" class="adblk ok" style="border-left-color:var(--OK)">
           <div class="adhead"><div class="adname">Amazon Ads<span class="data-ts" id="ts-amazon-ppc"></span></div><span class="rag g">Loading...</span></div>
@@ -832,31 +825,21 @@ svg.sp{display:block;width:100%;overflow:visible}
         <div class="adblk" style="border-left-color:var(--GP);padding:10px 14px">
           <div class="ctitle" style="margin-bottom:8px">Amazon — product breakdown</div>
           <table class="dt"><thead><tr><th>Product</th><th class="r">Spend</th><th class="r">Orders</th><th class="r">CPA</th></tr></thead><tbody id="amz-camp-body"><tr><td colspan="4" style="text-align:center;color:var(--GMD);padding:8px">Loading...</td></tr></tbody></table>
-          <div class="dnote" style="margin-top:6px">Coupler · Mar 1–9 2026 only · re-run dataflow to update</div>
+          <div class="dnote" style="margin-top:6px">Coupler · Apr 1–12 2026 (MTD) · re-run dataflow to update</div>
         </div>
         <div id="meta-adblk" class="adblk no">
-          <div class="adhead"><div class="adname">Meta Ads<span class="data-ts" id="ts-meta-ppc"></span></div><span class="rag a">REACTIVATING</span></div>
+          <div class="adhead"><div class="adname">Meta Ads<span class="data-ts" id="ts-meta-ppc"></span></div><span class="rag a">ACTIVE</span></div>
           <div class="adgrid">
             <div><div class="amlbl">ROAS MTD</div><div class="amval na">—</div><div class="amtgt">Target 5x+</div></div>
-            <div><div class="amlbl">Spend MTD</div><div class="amval" id="meta-spend-val">—</div><div class="amtgt">Coupler live</div></div>
+            <div><div class="amlbl">Spend MTD</div><div class="amval" id="meta-spend-val">—</div><div class="amtgt">Last synced Apr 12</div></div>
             <div><div class="amlbl">CPM</div><div class="amval na">—</div><div class="amtgt">Awareness</div></div>
-            <div><div class="amlbl">Impressions</div><div class="amval" id="meta-impr-val">—</div><div class="amtgt">Mar MTD</div></div>
+            <div><div class="amlbl">Impressions</div><div class="amval" id="meta-impr-val">—</div><div class="amtgt">Apr MTD</div></div>
           </div>
         </div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:12px">
-        <div class="card">
-          <div class="ctitle">Top search terms — MTD</div>
-          <div style="font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--GMD);margin-bottom:7px">Google — live</div>
-          <table class="dt"><thead><tr><th>Term</th><th class="r">Conv</th><th class="r">Clicks</th><th class="r">CPA</th></tr></thead><tbody id="mkt-gads-terms-body"><tr><td colspan="4" style="text-align:center;color:var(--GMD);padding:8px">Loading...</td></tr></tbody></table>
-          <div style="font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--GMD);margin:12px 0 7px">Amazon — campaign level only (search terms not in Coupler export)</div>
-          <table class="dt"><thead><tr><th>Term</th><th class="r">Conv</th><th class="r">Clicks</th><th class="r">ACOS</th></tr></thead><tbody id="mkt-amz-terms-body"><tr><td colspan="4" style="text-align:center;color:var(--GMD);padding:8px">Re-authorise Coupler to activate</td></tr></tbody></table>
-        </div>
+      <div class="sec">
         <div class="ccard">
-          <div style="display:flex;align-items:center;margin-bottom:10px">
-            <div class="ctitle" style="margin:0;flex:1">CPA targets by SKU <span style="font-size:9px;color:var(--GMD);font-style:italic;font-weight:400;letter-spacing:0.04em">@ 45% margin</span></div>
-            <div class="ktog"><button class="kb active" onclick="setCPAView('google')">Google</button><button class="kb" onclick="setCPAView('amazon')">Amazon</button></div>
-          </div>
+          <div class="ctitle">CPA targets by SKU <span style="font-size:9px;color:var(--GMD);font-style:italic;font-weight:400;letter-spacing:0.04em">@ 45% margin</span></div>
           <div id="cpa-google-view">
             <table class="dt">
               <thead><tr><th>SKU</th><th class="r">Avg CPC</th><th class="r">Clicks/Sale</th><th class="r">Avg CPA</th><th class="r">Max CPA</th></tr></thead>
@@ -871,1452 +854,31 @@ svg.sp{display:block;width:100%;overflow:visible}
             </table>
             <div class="dnote" style="margin-top:6px">Avg CPC and CPA from Google Ads MCP (blended). Max CPA = Shopify margin floor at 45%.</div>
           </div>
-          <div id="cpa-amazon-view" style="display:none">
-            <table class="dt">
-              <thead><tr><th>SKU</th><th class="r">Base Bid</th><th class="r">ACOS (Mar 1–9)</th><th class="r">Target ACOS</th><th class="r">Max Bid</th></tr></thead>
-              <tbody>
-                <tr><td>Petite</td><td class="r">£0.45</td><td class="r" id="amz-cpa-acos-petite">43.4%</td><td class="r">&lt;25%</td><td class="r">£0.65</td></tr>
-                <tr><td>Cocoa</td><td class="r">£0.75</td><td class="r" id="amz-cpa-acos-cocoa">20.5%</td><td class="r">&lt;25%</td><td class="r">£1.20</td></tr>
-                <tr><td>Signature</td><td class="r">£0.80</td><td class="r" id="amz-cpa-acos-sig" style="color:var(--RED);font-weight:700">106.8%</td><td class="r">&lt;25%</td><td class="r">£1.60</td></tr>
-                <tr><td>Pamper</td><td class="r">—</td><td class="r">—</td><td class="r">&lt;25%</td><td class="r">£2.10</td></tr>
-                <tr><td>Grand</td><td class="r">—</td><td class="r">—</td><td class="r">&lt;25%</td><td class="r">£3.10</td></tr>
-                <tr><td>Prestige</td><td class="r">—</td><td class="r">—</td><td class="r">&lt;25%</td><td class="r">£4.30</td></tr>
-              </tbody>
-            </table>
-            <div class="dnote" style="margin-top:6px">ACOS from Coupler (Mar 1–9 only). Max bid = ceiling to stay within 25% ACOS at blended order value.</div>
-          </div>
         </div>
       </div>
     </div>
   </div>
 
   <div class="sec">
-    <div class="rv-panel">
-      <div class="rv-head">
-        <div class="rv-title">Channel review — quick wins</div>
-        <div class="ktog">
-          <button class="kb active" onclick="rvSwitch('google',this)">Google PPC</button>
-          <button class="kb" onclick="rvSwitch('amazon',this)">Amazon</button>
-          <button class="kb" onclick="rvSwitch('meta',this)">Meta</button>
-        </div>
-      </div>
-
-      <!-- GOOGLE PPC -->
-      <div class="rv-pane active" id="rv-google">
-        <ul class="rv-list">
-          <li class="rv-warn">
-            <div><strong>Generic Search CPA above ceiling — £19.29 vs £15.90 target</strong> — Apr MTD: £231.52 spend, 12 conv. Biggest budget campaign is over ceiling. Pull search terms, check for wasted spend on non-converting queries.
-            <div class="rv-sub">tROAS reduced from 300% to 200% in March — may need tightening if CPA doesn't come down.</div></div>
-          </li>
-          <li class="rv-warn">
-            <div><strong>Policy appeals — check clearance status</strong> — Gluten Free, Dairy Free, Vegetarian ad groups submitted March 2026. If cleared, reactivate and set tROAS 200%.
-            <div class="rv-sub">These ad groups target the 69.7% of buyers who arrive with dietary anxiety.</div></div>
-          </li>
-          <li>
-            <div><strong>PMAX not reporting MTD — verify it is spending</strong> — no PMAX rows in Apr data. Either paused, renamed, or Coupler not capturing it. Confirm in Google Ads UI.
-            <div class="rv-sub">Curated feed: letterbox + select choc/signature. Wicker/grand/food should be excluded.</div></div>
-          </li>
-          <li>
-            <div><strong>Gift-occasion ad groups — check performance</strong> — live since March 22. Pull impression share, CTR, and conversions. Validate gift-intent framing is outperforming diet-first.
-            <div class="rv-sub">New headlines shift from dietary to occasion — needs at least 4 weeks of data before judging.</div></div>
-          </li>
-          <li>
-            <div><strong>Search term harvest — run now</strong> — pull all converting search terms Apr MTD, add winners as exact match, add non-converting broad as negatives.
-            <div class="rv-sub">Gift-intent keywords identified in March audit. Check if they are converting as expected.</div></div>
-          </li>
-          <li class="rv-ok">
-            <div><strong>Shopping Brand and Brand Search both efficient</strong> — Shopping Brand £6.72 CPA (5 conv), Brand Search £14.89 (1 conv). No action needed.
-            <div class="rv-sub">Combined £48.48 spend, 6 conversions. Strong defensive coverage.</div></div>
-          </li>
-        </ul>
-        <div class="rv-kv">
-          <span>Apr MTD CPA £15.56</span><span>Target CPA &lt;£15.90</span><span>Generic Search CPA £19.29 (over ceiling)</span><span>Budget ~£115/day</span><span>TACOS target &lt;15%</span>
-        </div>
-      </div>
-
-      <!-- AMAZON -->
-      <div class="rv-pane" id="rv-amazon">
-        <ul class="rv-list">
-          <li class="rv-warn">
-            <div><strong>Signature CPA £61.06 — critical</strong> — Apr MTD: £61.06 spend, 1 order. One conversion across all Signature campaigns. Reduce bids across all Signature ad groups immediately.
-            <div class="rv-sub">Never pause — Mina Elias rule. Reduce bids to profitability, not zero.</div></div>
-          </li>
-          <li class="rv-warn">
-            <div><strong>Cocoa CPA £15.70 — above ceiling</strong> — Apr MTD: £94.19 spend, 6 orders. Shopify ceiling is £6.25. Amazon margin compressed further by 15% commission. Reduce TOS multiplier from 40% before touching base bid.
-            <div class="rv-sub">Still driving orders — reduce cost, don't pause.</div></div>
-          </li>
-          <li>
-            <div><strong>Exact match harvest — 11 candidates pending</strong> — converting phrase/broad terms with no exact match coverage. Identified in March audit, not yet actioned. Add as exact match with conservative bids.
-            <div class="rv-sub">These are already converting — exact match gives full bid control.</div></div>
-          </li>
-          <li>
-            <div><strong>Dairy Free — next scaling move</strong> — Gluten Free and Vegan are primary pillars. Dairy Free (32.9% of buyers) is under-targeted. Identify top dairy free gift search terms and launch SP campaign.
-            <div class="rv-sub">Third dietary pillar. Conservative £0.50 base bid to start.</div></div>
-          </li>
-          <li>
-            <div><strong>Signature campaigns generating zero sales traffic</strong> — two Signature phrase/broad campaigns (Vegan, Hug) spending with 0 orders. Check search terms — likely not gift-intent. Add negatives.
-            <div class="rv-sub">Signature at £65 needs qualified traffic, not broad volume.</div></div>
-          </li>
-          <li class="rv-ok">
-            <div><strong>Petite CPA £6.00 — efficient volume driver</strong> — Apr MTD: £257.81 spend, 43 orders. Accounts for 78% of Amazon orders. Bid structure working. Birthday Exact and Hug Exact both converting at CPA £5.35 and £3.07 respectively.
-            <div class="rv-sub">Maintain current bids. No action needed unless ACOS deteriorates.</div></div>
-          </li>
-        </ul>
-        <div class="rv-kv">
-          <span>Apr MTD: 55 orders, CPA £8.07</span><span>Petite CPA £6.00 (OK)</span><span>Cocoa CPA £15.70 (high)</span><span>Signature CPA £61.06 (critical)</span><span>ACOS target &lt;25%</span>
-        </div>
-      </div>
-
-      <!-- META -->
-      <div class="rv-pane" id="rv-meta">
-        <ul class="rv-list">
-          <li class="rv-warn">
-            <div><strong>No purchase conversion tracking in Coupler</strong> — £429 MTD spend with 0 tracked purchases in the data feed. ROAS is visible per row but not aggregated. Set up purchase event tracking or pull from Meta Ads Manager directly before next audit.
-            <div class="rv-sub">Without purchase data, ROAS and CPA cannot be calculated from the dashboard.</div></div>
-          </li>
-          <li class="rv-warn">
-            <div><strong>BYOB leading at £127.96 MTD — watch frequency</strong> — BYOB (Signature Broad) is the top-spending ad at freq 1.7. This was the only survivor from the April 2 audit. If frequency continues rising, creative fatigue risk. Next action: add a fresh creative to the same ad set.
-            <div class="rv-sub">Never move to a new ad set — scale in-place or add creative within the existing set.</div></div>
-          </li>
-          <li>
-            <div><strong>Test batch performance unclear without ROAS data</strong> — 7 test ads running (Chloe Hansard, PlantBased VO, Undairy, Chocolate creatives). Without purchase tracking, cannot apply kill/hold/scale rules. Apply the day 7 decision on click volume and frequency alone until purchase data is confirmed.
-            <div class="rv-sub">Kill rule: if freq &gt;3.0 with no visible ROAS signal by day 7. Hold if freq &lt;2.0 and CTR holding.</div></div>
-          </li>
-          <li>
-            <div><strong>Apply for Meta Ads Library API access</strong> — competitor creative intelligence requires Ad Library API approval (separate from Graph API). Submit at facebook.com/ads/library/api. Needed for structured competitor analysis.
-            <div class="rv-sub">Until approved, pull competitor creatives manually from Meta Ads Library UI.</div></div>
-          </li>
-          <li>
-            <div><strong>Next creative priority: gift unboxing UGC</strong> — current test batch is mostly produced video. Best-performing Meta format for gifting brands is authentic unboxing and recipient reaction. Source from existing customer base.
-            <div class="rv-sub">Brief: real person, real product, genuine dietary relief moment. Not a brand video.</div></div>
-          </li>
-          <li class="rv-ok">
-            <div><strong>ABO structure holding — no CBO drift</strong> — all campaigns running on ABO as intended. Budget is controlled per ad set. CBO has been banned following two failed tests.
-            <div class="rv-sub">Never move winners between ad sets. Scale in-place only.</div></div>
-          </li>
-        </ul>
-        <div class="rv-kv">
-          <span>Apr MTD spend £429.61</span><span>ABO only — no CBO</span><span>BYOB freq 1.7 (watch)</span><span>Purchase tracking gap — fix first</span><span>Target ROAS 5x+</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="sec">
-    <div class="seclbl">Klaviyo email performance<span class="data-ts" id="ts-klaviyo"></span></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-      <div class="card">
-        <div style="display:flex;align-items:center;margin-bottom:12px"><div class="ctitle" style="margin:0;flex:1">Flows by revenue</div><div class="ktog"><button class="kb active" id="klv-f-mtd" onclick="window.EDEN.components.klaviyo.setView('mtd')">MTD</button><button class="kb" id="klv-f-ytd" onclick="window.EDEN.components.klaviyo.setView('ytd')">YTD</button></div></div>
-        <div style="font-size:10px;color:var(--GMD);margin-bottom:10px" id="klv-f-lbl">Month to date</div>
-        <table class="dt"><thead><tr><th>#</th><th>Flow</th><th class="r">Revenue</th><th class="r">Open %</th><th class="r">Click %</th><th class="r">Conv</th></tr></thead><tbody id="klv-f-body"><tr><td colspan="6" style="text-align:center;color:var(--GMD);padding:12px">Loading...</td></tr></tbody></table>
-        <div style="margin-top:10px;font-size:11px;color:var(--GMD)">Total flow revenue: <strong style="color:var(--G)" id="klv-f-tot"></strong> &nbsp;·&nbsp; Emails sent: <strong id="klv-f-recip"></strong></div>
-      </div>
-      <div class="card">
-        <div style="display:flex;align-items:center;margin-bottom:12px"><div class="ctitle" style="margin:0;flex:1">Campaigns by revenue</div><div class="ktog"><button class="kb active" id="klv-c-mtd" onclick="window.EDEN.components.klaviyo.setView('mtd')">MTD</button><button class="kb" id="klv-c-ytd" onclick="window.EDEN.components.klaviyo.setView('ytd')">YTD</button></div></div>
-        <div style="font-size:10px;color:var(--GMD);margin-bottom:10px" id="klv-c-lbl">Month to date</div>
-        <table class="dt"><thead><tr><th>#</th><th>Campaign</th><th class="r">Revenue</th><th class="r">Open %</th><th class="r">Click %</th><th class="r">Conv</th></tr></thead><tbody id="klv-c-body"><tr><td colspan="6" style="text-align:center;color:var(--GMD);padding:12px">Loading...</td></tr></tbody></table>
-        <div style="margin-top:10px;font-size:11px;color:var(--GMD)">Total campaign revenue: <strong style="color:var(--G)" id="klv-c-tot"></strong> &nbsp;·&nbsp; Emails sent: <strong id="klv-c-recip"></strong></div>
-      </div>
-    </div>
-    <div class="dnote">Data fetched live from Klaviyo MCP. Refresh by re-running Klaviyo query in Claude.</div>
-  </div>
-
-  <div class="sec">
-    <div class="seclbl">Occasion performance — MTD vs prior MTD <span style="font-size:9px;color:var(--GMD);font-style:italic;font-weight:400;text-transform:none">accuracy unverified — treat as directional only</span></div>
-    <div class="occ-grid" id="mkt-occ-grid"><div style="color:var(--GMD);padding:16px;font-size:11px">Loading...</div></div>
-  </div>
-
-  <div class="sec" style="display:none">
-    <div class="seclbl">Add-on attach rates — MTD</div>
-    <div class="g3" id="mkt-addon-grid"><div style="color:var(--GMD);padding:16px;font-size:11px">Loading...</div></div>
-    <div class="dnote">Add-on data partial — derived from SKU suffix in ShipStation. Not all add-on data captured.</div>
-  </div>
-
-</div></div>
-
-<!-- ═══════════════════════════════════
-     SOCIALS TAB
-═══════════════════════════════════ -->
-<div class="panel" id="tab-mkt-copy"><div class="page">
-
-  <hr class="sec-divider gold" style="margin-top:0">
-  <div class="sec">
-    <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px">
-      <div class="sec-head" style="margin:0">Social media — buyer &amp; recipient intelligence</div>
-      <div style="font-size:10px;color:var(--GMD)">Reviews last updated: <span id="sm-last-updated">—</span></div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:18px">
-      <div style="background:var(--G);border-radius:var(--r4);padding:14px 16px">
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.6);margin-bottom:6px">Their #1 fear</div>
-        <div style="font-size:18px;font-weight:700;color:#fff;margin-bottom:4px">Dietary anxiety</div>
-        <div style="font-size:10px;color:rgba(255,255,255,0.65)">69.7% arrive worried. Not about price or quality — about whether the recipient can actually eat it.</div>
-      </div>
-      <div style="background:var(--G);border-radius:var(--r4);padding:14px 16px">
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.6);margin-bottom:6px">What they need most</div>
-        <div style="font-size:18px;font-weight:700;color:#fff;margin-bottom:4px">Loved &amp; appreciated</div>
-        <div style="font-size:10px;color:rgba(255,255,255,0.65)">57.2% primary emotional job. Not impressed. Not surprised. Loved. That word matters.</div>
-      </div>
-      <div style="background:var(--OK);border-radius:var(--r4);padding:14px 16px">
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.6);margin-bottom:6px">Google rating</div>
-        <div style="font-size:28px;font-weight:700;color:#fff;line-height:1;margin-bottom:4px" id="sm-gr-quality">—</div>
-        <div style="font-size:10px;color:rgba(255,255,255,0.65)" id="sm-gr-quality-n">— reviews</div>
-      </div>
-      <div style="background:var(--OK);border-radius:var(--r4);padding:14px 16px">
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.6);margin-bottom:6px">5-star rate</div>
-        <div style="font-size:28px;font-weight:700;color:#fff;line-height:1;margin-bottom:4px" id="sm-gr-pct">—</div>
-        <div style="font-size:10px;color:rgba(255,255,255,0.65)">of all-time recipients</div>
-      </div>
-    </div>
-    <div style="font-size:11px;color:var(--GMD);margin-bottom:4px">Buyer data: 1,499 Typeform responses. Recipient data: 673 Google reviews (all-time). Use both to write content that speaks to what buyers feel before they click and what recipients feel when they open it.</div>
-  </div>
-
-  <!-- Buyer vs Recipient -->
-  <div class="sec">
-    <div class="g2">
-
-      <!-- BUYER SIDE -->
-      <div class="card acc-gold" style="background:var(--CREAM)">
-        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:18px">
-          <div style="font-size:14px;font-weight:700;color:var(--G)">The Buyer</div>
-          <div style="font-size:10px;color:var(--GMD)">motivations &amp; fears · 1,499 real responses</div>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;margin-top:4px">
-          <div style="font-size:10px;font-weight:700;color:var(--GOM);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap">Who they're buying for</div>
-          <div style="flex:1;height:1px;background:var(--GP)"></div>
-        </div>
-        <table class="dt" style="margin-bottom:18px">
-          <thead><tr><th>Their words</th><th class="r">Responses</th></tr></thead>
-          <tbody>
-            <tr><td>"A family member or friend"</td><td class="r" id="sm-who-family">—</td></tr>
-            <tr><td>"A client or colleague"</td><td class="r" id="sm-who-corp">—</td></tr>
-            <tr><td>"Just for myself"</td><td class="r" id="sm-who-self">—</td></tr>
-          </tbody>
-        </table>
-
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          <div style="font-size:10px;font-weight:700;color:var(--GOM);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap">How they want the recipient to feel</div>
-          <div style="flex:1;height:1px;background:var(--GP)"></div>
-        </div>
-        <table class="dt" style="margin-bottom:18px">
-          <thead><tr><th>Desired feeling</th><th class="r">Responses</th></tr></thead>
-          <tbody>
-            <tr><td>"Loved and appreciated"</td><td class="r" id="sm-feel-loved">—</td></tr>
-            <tr><td>"Surprised and delighted"</td><td class="r" id="sm-feel-surp">—</td></tr>
-            <tr><td>"Calm and relaxed"</td><td class="r" id="sm-feel-calm">—</td></tr>
-          </tbody>
-        </table>
-
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          <div style="font-size:10px;font-weight:700;color:var(--RED);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap">What stops them buying</div>
-          <div style="flex:1;height:1px;background:var(--GP)"></div>
-        </div>
-        <table class="dt" style="margin-bottom:18px">
-          <thead><tr><th>Their exact words</th><th class="r">Responses</th></tr></thead>
-          <tbody>
-            <tr><td>"Worrying about allergies or dietary needs"</td><td class="r" id="sm-concern-diet">—</td></tr>
-            <tr><td>"Not wanting it to feel generic"</td><td class="r" id="sm-concern-generic">—</td></tr>
-            <tr><td>"It won't look as good in photos"</td><td class="r" id="sm-concern-look">—</td></tr>
-            <tr><td>"It will taste rubbish"</td><td class="r" id="sm-concern-taste">—</td></tr>
-            <tr><td>"The gift won't show how much I care"</td><td class="r" id="sm-concern-care">—</td></tr>
-          </tbody>
-        </table>
-
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          <div style="font-size:10px;font-weight:700;color:var(--GOM);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap">Dietary needs they're buying for</div>
-          <div style="flex:1;height:1px;background:var(--GP)"></div>
-        </div>
-        <table class="dt">
-          <thead><tr><th>Requirement</th><th class="r">Responses</th><th class="r">%</th></tr></thead>
-          <tbody id="sm-dietary-body">
-            <tr><td colspan="3" style="color:var(--GMD)">Loading...</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- RECIPIENT SIDE -->
-      <div class="card" style="background:var(--W)">
-        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:18px">
-          <div style="font-size:14px;font-weight:700;color:var(--G)">The Recipient</div>
-          <div style="font-size:10px;color:var(--GMD)">experience &amp; language · 673 Google reviews (all-time)</div>
-        </div>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px">
-          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px;border-left:3px solid var(--OK)">
-            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--OK);margin-bottom:3px">All-time rating</div>
-            <div style="font-size:22px;font-weight:700;color:var(--G)" id="sm-gr-quality-card">—</div>
-            <div style="font-size:10px;color:var(--GMD)" id="sm-gr-quality-n-card">— reviews</div>
-          </div>
-          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px;border-left:3px solid var(--OK)">
-            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--OK);margin-bottom:3px">First impression</div>
-            <div style="font-size:22px;font-weight:700;color:var(--G)" id="sm-gr-impression">—</div>
-            <div style="font-size:10px;color:var(--GMD)" id="sm-gr-impression-n">post-purchase surveys</div>
-          </div>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          <div style="font-size:10px;font-weight:700;color:var(--RED);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap">Copy-ready quotes — flagged for ads</div>
-          <div style="flex:1;height:1px;background:var(--GP)"></div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:18px">
-          <div style="background:var(--RDL);border-left:3px solid var(--RED);border-radius:var(--r4);padding:10px 12px">
-            <div style="font-size:11px;font-style:italic;color:var(--G);font-weight:600;margin-bottom:4px">"I usually have to watch other people eating treats because they've not thought about my allergies — this time the whole hamper was curated for me!"</div>
-            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--RED)">Adrienne Ayres · 5 stars · Use in ads</div>
-          </div>
-          <div style="background:var(--RDL);border-left:3px solid var(--RED);border-radius:var(--r4);padding:10px 12px">
-            <div style="font-size:11px;font-style:italic;color:var(--G);font-weight:600;margin-bottom:4px">"Having those who need to eat gluten free feel normal and included for a change."</div>
-            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--RED)">Verified review · 5 stars · Use in ads</div>
-          </div>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          <div style="font-size:10px;font-weight:700;color:var(--GOM);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap">What they say — content angles</div>
-          <div style="flex:1;height:1px;background:var(--GP)"></div>
-        </div>
-        <table class="dt" style="margin-bottom:18px">
-          <thead><tr><th>Their words</th><th style="font-size:9px;color:var(--GDK);white-space:nowrap">Angle</th></tr></thead>
-          <tbody id="sm-content-angles">
-            <tr><td colspan="2" style="color:var(--GMD)">Loading...</td></tr>
-          </tbody>
-        </table>
-
-        <!-- Latest 5 + Top 5 reviews -->
-        <div style="display:flex;align-items:center;gap:8px;margin:18px 0 8px">
-          <div style="font-size:10px;font-weight:700;color:var(--GOM);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap">Latest 5 reviews</div>
-          <div style="flex:1;height:1px;background:var(--GP)"></div>
-        </div>
-        <div id="sm-latest-reviews" style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px">
-          <div style="color:var(--GMD);font-size:11px">Loading...</div>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          <div style="font-size:10px;font-weight:700;color:var(--GOM);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap">Top 5 reviews — highest signal</div>
-          <div style="flex:1;height:1px;background:var(--GP)"></div>
-        </div>
-        <div id="sm-top-reviews" style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px">
-          <div style="color:var(--GMD);font-size:11px">Loading...</div>
-        </div>
-
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          <div style="font-size:10px;font-weight:700;color:var(--GOM);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap">Occasions they're buying for</div>
-          <div style="flex:1;height:1px;background:var(--GP)"></div>
-        </div>
-        <table class="dt">
-          <thead><tr><th>Occasion</th><th class="r">Responses</th></tr></thead>
-          <tbody id="sm-occasion-body">
-            <tr><td colspan="2" style="color:var(--GMD)">Loading...</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- Post ideas — 10 posts -->
-  <div class="sec">
-    <div class="seclbl" style="font-size:14px">Post ideas — 10 posts per week</div>
-    <div style="font-size:12px;color:var(--GMD);margin-bottom:20px">Moment first, always. 3 types: Buyer, Recipient Joy, Brand. 2 posts feature Rosie. Describe the situation, occasion, or feeling to a friend. Never sell. Each post ends with a single aim sentence.</div>
-
-    <!-- TYPE 1: FOR THE BUYER -->
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-      <div style="font-size:11px;font-weight:700;color:var(--GOLD);text-transform:uppercase;letter-spacing:.1em">For the Buyer</div>
-      <div style="flex:1;height:1px;background:var(--GOLD);opacity:.35"></div>
-      <div style="font-size:10px;color:var(--GMD)">3 posts · the person searching, worrying, choosing</div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px">
-
-      <div class="term">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-          <div class="ctitle-lg" style="margin:0">Post 1 — Late on a Wednesday</div>
-          <span style="font-size:9px;background:var(--GOLD);color:#fff;border-radius:3px;padding:2px 6px;white-space:nowrap;font-weight:700">BUYER</span>
-        </div>
-        <div style="font-size:12px;line-height:1.7;color:var(--G);margin-bottom:10px">
-          It's gone 11. You've got seventeen browser tabs open, a birthday this Friday, and you've already had to close four websites because none of them are actually suitable for someone who is gluten free.<br><br>
-          Not "mostly fine." Not "check the labels." You need something where the whole thing is right, without you having to investigate it at midnight.<br><br>
-          Every product in every hamper here is plant-based, gluten free, and dairy free. Not a filter option. That is just what everything is.
-        </div>
-        <div class="dnote">Visual: laptop screen at night, soft glow, search bar visible · Tone: knowing, understated · Aim: show the buyer that their specific late-night anxiety is already solved.</div>
-      </div>
-
-      <div class="term">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-          <div class="ctitle-lg" style="margin:0">Post 2 — The group WhatsApp</div>
-          <span style="font-size:9px;background:var(--GOLD);color:#fff;border-radius:3px;padding:2px 6px;white-space:nowrap;font-weight:700">BUYER</span>
-        </div>
-        <div style="font-size:12px;line-height:1.7;color:var(--G);margin-bottom:10px">
-          Someone in the group chat mentioned a birthday next week and then added "she's dairy free and her husband is coeliac, so just so you know." Everyone went a bit quiet.<br><br>
-          You know that feeling. Not impossible, just suddenly more complicated than it needs to be. Everyone second-guessing whether their idea is still appropriate.<br><br>
-          A hamper that works for both of them, the way a thoughtful gift should, without it becoming a project.
-        </div>
-        <div class="dnote">Visual: phone with group chat notification, blurred · Tone: familiar, warm, not loud · Aim: reach the person managing a group gift where dietary needs made it awkward.</div>
-      </div>
-
-      <div class="term">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-          <div class="ctitle-lg" style="margin:0">Post 3 — The first time</div>
-          <span style="font-size:9px;background:var(--GOLD);color:#fff;border-radius:3px;padding:2px 6px;white-space:nowrap;font-weight:700">BUYER</span>
-        </div>
-        <div style="font-size:12px;line-height:1.7;color:var(--G);margin-bottom:10px">
-          She was diagnosed last autumn. Coeliac. Suddenly every food gift feels like a gamble, and you are the one holding the responsibility for whether she spends the next three days feeling unwell.<br><br>
-          You have done the research. You have read the ingredients on things you would never normally read. You are being incredibly careful, and also slightly exhausted by how much effort it takes just to be kind.<br><br>
-          This is exactly the situation these hampers are made for.
-        </div>
-        <div class="dnote">Visual: wrapped hamper, clean and considered · Tone: serious but warm, no drama · Aim: speak to someone buying for a newly diagnosed person for the first time.</div>
-      </div>
-
-    </div>
-
-    <!-- TYPE 2: RECIPIENT JOY -->
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-      <div style="font-size:11px;font-weight:700;color:var(--OK);text-transform:uppercase;letter-spacing:.1em">Recipient Joy</div>
-      <div style="flex:1;height:1px;background:var(--OK);opacity:.4"></div>
-      <div style="font-size:10px;color:var(--GMD)">3 posts · the moment of receiving · 1 feat. Rosie</div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px">
-
-      <div class="term">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-          <div class="ctitle-lg" style="margin:0">Post 4 — The voice note at 8am</div>
-          <span style="font-size:9px;background:var(--OK);color:#fff;border-radius:3px;padding:2px 6px;white-space:nowrap;font-weight:700">RECIPIENT</span>
-        </div>
-        <div style="font-size:12px;line-height:1.7;color:var(--G);margin-bottom:10px">
-          Some gifts get a polite thank you message later that week. Some gifts get a voice note at 8am the day they arrive, still half-unwrapped, just because she could not wait.<br><br>
-          The difference is not the price. The difference is whether the whole thing felt like it was chosen for her specifically, not just ordered and crossed off a list.<br><br>
-          The 8am message. That is what people are actually after when they start searching.
-        </div>
-        <div class="dnote">Visual: phone with voice message bubble, morning light · Tone: quiet, observational · Aim: help the buyer picture the exact reaction they want to create.</div>
-      </div>
-
-      <div class="term">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-          <div class="ctitle-lg" style="margin:0">Post 5 — For a change</div>
-          <span style="font-size:9px;background:var(--OK);color:#fff;border-radius:3px;padding:2px 6px;white-space:nowrap;font-weight:700">RECIPIENT</span>
-        </div>
-        <div style="font-size:12px;line-height:1.7;color:var(--G);margin-bottom:10px">
-          A customer left a review last week. I have been thinking about four words in it ever since.<br><br>
-          "For a change, I got to eat everything."<br><br>
-          For a change. She has spent years opening gifts and quietly setting aside the things she cannot have. Watching other people get through the good bits. This time was different. That is the whole point of this.
-        </div>
-        <div class="dnote">Visual: hamper contents fully laid out, abundant, nothing missing · Tone: still, deliberate, let the quote land · Aim: show the emotional significance of a gift where nothing needs to be set aside.</div>
-      </div>
-
-      <div class="term" style="border-top-color:var(--G)">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-          <div class="ctitle-lg" style="margin:0">Post 6 — Rosie opens one</div>
-          <div style="display:flex;gap:4px">
-            <span style="font-size:9px;background:var(--OK);color:#fff;border-radius:3px;padding:2px 6px;white-space:nowrap;font-weight:700">RECIPIENT</span>
-            <span style="font-size:9px;background:var(--G);color:#fff;border-radius:3px;padding:2px 6px;white-space:nowrap;font-weight:700">ROSIE</span>
-          </div>
-        </div>
-        <div style="font-size:12px;line-height:1.7;color:var(--G);margin-bottom:10px">
-          I pack these. I know what goes in every single layer. And I still catch myself properly smiling when I open one.<br><br>
-          The caramel truffle in the Signature right now took six months to find. Not because the alternatives were difficult to source. Because most of them tasted fine, and fine is not what this is for.<br><br>
-          I go through the whole hamper on camera. Everything in it, why it is there, and whether I would put it in front of my mum without a second thought. [video]
-        </div>
-        <div class="dnote">Visual: Rosie, casual, natural light, not styled · Tone: genuine, specific, first person · Aim: let Rosie's standards speak for the brand without the brand speaking about itself.</div>
-      </div>
-
-    </div>
-
-    <!-- TYPE 3: BRAND BUILDING -->
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-      <div style="font-size:11px;font-weight:700;color:var(--G);text-transform:uppercase;letter-spacing:.1em">Brand Building</div>
-      <div style="flex:1;height:1px;background:var(--G);opacity:.25"></div>
-      <div style="font-size:10px;color:var(--GMD)">4 posts · who we are and how we think · 2 feat. Rosie</div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px">
-
-      <div class="term" style="border-top-color:var(--G)">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-          <div class="ctitle-lg" style="margin:0">Post 7 — The text I used to have to send</div>
-          <div style="display:flex;gap:4px">
-            <span style="font-size:9px;background:var(--G);color:#fff;border-radius:3px;padding:2px 6px;white-space:nowrap;font-weight:700">BRAND</span>
-            <span style="font-size:9px;background:var(--G);color:#fff;border-radius:3px;padding:2px 6px;white-space:nowrap;font-weight:700">ROSIE</span>
-          </div>
-        </div>
-        <div style="font-size:12px;line-height:1.7;color:var(--G);margin-bottom:10px">
-          My friend Sarah is coeliac. For years, sending her any kind of food gift meant also sending a message that said something like "just a heads up, the two in the middle are probably fine but double check."<br><br>
-          I stopped sending that message when I started making these. Not because I stopped caring. Because I no longer needed to.<br><br>
-          Everything in every hamper is something I could send her, no caveats, no follow-up text, nothing to check. That is still the test every product has to pass.
-        </div>
-        <div class="dnote">Visual: Rosie, candid, not posed · Tone: personal, origin, specific name, no brand speech · Aim: connect the founder's personal reason to the product standard, without making a claim.</div>
-      </div>
-
-      <div class="term" style="border-top-color:var(--G)">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-          <div class="ctitle-lg" style="margin:0">Post 8 — The one we said no to</div>
-          <div style="display:flex;gap:4px">
-            <span style="font-size:9px;background:var(--G);color:#fff;border-radius:3px;padding:2px 6px;white-space:nowrap;font-weight:700">BRAND</span>
-            <span style="font-size:9px;background:var(--G);color:#fff;border-radius:3px;padding:2px 6px;white-space:nowrap;font-weight:700">ROSIE</span>
-          </div>
-        </div>
-        <div style="font-size:12px;line-height:1.7;color:var(--G);margin-bottom:10px">
-          We had a supplier last month that was genuinely lovely. Good story, beautiful packaging, tasted exactly right in sampling.<br><br>
-          Then I read the full ingredients. One line. Not "may contain." Actually in it. That was the end of that conversation.<br><br>
-          The supplier seemed surprised. Apparently most people do not read that far. We do, every time, for every product, and the answer has to be the same every time.
-        </div>
-        <div class="dnote">Visual: sample products on a table, ingredient label in focus · Tone: matter-of-fact, no drama, understated standards · Aim: show the rigour of product selection through a real decision, not a claim.</div>
-      </div>
-
-      <div class="term" style="border-top-color:var(--GOLD)">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-          <div class="ctitle-lg" style="margin:0">Post 9 — Sunday, half a podcast in</div>
-          <span style="font-size:9px;background:var(--GOLD);color:#fff;border-radius:3px;padding:2px 6px;white-space:nowrap;font-weight:700">BRAND BUILD</span>
-        </div>
-        <div style="font-size:12px;line-height:1.7;color:var(--G);margin-bottom:10px">
-          Tissue paper everywhere. The podcast is on episode two. Someone ordered this one at 11pm last night for a birthday tomorrow afternoon.<br><br>
-          There is a particular way these go together. The tissue first, then the heavier products, then the things that need to sit on top in a specific order so that the first thing she sees when the lid comes off is the right thing.<br><br>
-          Nobody is watching when we pack these. They all go out the same way regardless.
-        </div>
-        <div class="dnote">Visual: packing bench, tissue paper, natural light, no styling · Tone: quiet, behind the scenes, no performance · Aim: show care through process without naming care as a value.</div>
-      </div>
-
-      <div class="term" style="border-top-color:var(--GOLD)">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-          <div class="ctitle-lg" style="margin:0">Post 10 — What "may contain" actually means</div>
-          <span style="font-size:9px;background:var(--GOLD);color:#fff;border-radius:3px;padding:2px 6px;white-space:nowrap;font-weight:700">BRAND BUILD</span>
-        </div>
-        <div style="font-size:12px;line-height:1.7;color:var(--G);margin-bottom:10px">
-          "May contain gluten" means it was made in the same facility as something that contains gluten. Which is completely legal and fairly standard in food production. It also means that for someone who is coeliac, the product is not suitable.<br><br>
-          A lot of gifts labelled as gluten free contain products with exactly this wording. The label is technically correct. The gift is still not safe for the person it was bought for.<br><br>
-          Every product in these hampers has been checked for this specifically. That is one of the things that takes the time it takes.
-        </div>
-        <div class="dnote">Visual: ingredient label close-up, clean · Tone: informative, calm, no alarm · Aim: educate buyers on the difference between gluten free and truly safe, building quiet authority.</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ── COMPETITOR PROFILES ── -->
-  <div class="sec">
-    <div class="seclbl">Accounts to watch — competitor &amp; content benchmarks</div>
-    <div class="dnote" style="margin-bottom:14px">Passive intelligence. Study these for content format, hook style, and audience positioning — not for outreach. Source: EDEN_CO_Weekly_Status · IG Accounts tab. <span style="background:var(--GOLD);border-radius:3px;padding:1px 5px;font-size:9px;font-weight:700;color:#fff">SHEET</span> = from spreadsheet &nbsp;·&nbsp; <span style="background:var(--GMD);border-radius:3px;padding:1px 5px;font-size:9px;font-weight:700;color:#fff">SUGGESTED</span> = recommended addition, not yet in sheet.</div>
-    <div class="card" style="overflow-x:auto">
-      <table class="dt" style="min-width:640px">
-        <thead>
-          <tr>
-            <th>Handle</th>
-            <th>Niche</th>
-            <th>Why relevant</th>
-            <th style="min-width:240px">Suggested post title — matches their high performers</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(180,162,105,0.08)">
-            <td style="font-weight:700;color:var(--G)">@treatboxuk <span style="font-size:9px;background:var(--GOLD);color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;font-weight:700">SHEET</span></td>
-            <td><span style="font-size:10px;background:var(--GXP);border-radius:3px;padding:2px 7px;font-weight:700;color:var(--G)">Hampers &amp; Gifts</span></td>
-            <td style="font-size:11px;color:var(--GT)">Direct competitor. Lifestyle content style. Day-in-the-life packing posts perform strongly. BTS format builds brand trust at scale.</td>
-            <td style="font-size:11px;color:var(--G)">"What actually goes into every box (and why we say no to more than we say yes to)"</td>
-          </tr>
-          <tr class="rowa">
-            <td style="font-weight:700;color:var(--G)">@bloomandwild <span style="font-size:9px;background:var(--GMD);color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;font-weight:700">SUGGESTED</span></td>
-            <td><span style="font-size:10px;background:var(--GXP);border-radius:3px;padding:2px 7px;font-weight:700;color:var(--G)">Gifting / Flowers</span></td>
-            <td style="font-size:11px;color:var(--GT)">Premium gifting benchmark. Emotion-led occasion content. "The morning after" reaction format drives high saves and shares.</td>
-            <td style="font-size:11px;color:var(--G)">"She texted at 8am. This is what she said."</td>
-          </tr>
-          <tr>
-            <td style="font-weight:700;color:var(--G)">@hotel_chocolat <span style="font-size:9px;background:var(--GMD);color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;font-weight:700">SUGGESTED</span></td>
-            <td><span style="font-size:10px;background:var(--GXP);border-radius:3px;padding:2px 7px;font-weight:700;color:var(--G)">Premium Chocolate</span></td>
-            <td style="font-size:11px;color:var(--GT)">Positioning benchmark. Sourcing stories and product close-ups. "This is what quality looks like" format — high saves, premium audience.</td>
-            <td style="font-size:11px;color:var(--G)">"The ingredient we wouldn't compromise on (even when it would've been easier)"</td>
-          </tr>
-          <tr class="rowa">
-            <td style="font-weight:700;color:var(--G)">@notonthehighstreet <span style="font-size:9px;background:var(--GMD);color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;font-weight:700">SUGGESTED</span></td>
-            <td><span style="font-size:10px;background:var(--GXP);border-radius:3px;padding:2px 7px;font-weight:700;color:var(--G)">Gifting / Marketplace</span></td>
-            <td style="font-size:11px;color:var(--GT)">Occasion-led gifting. "Gift for someone who has everything" drives highest engagement. Strong personalisation angle.</td>
-            <td style="font-size:11px;color:var(--G)">"The gift you send when you really want them to feel it — not just receive it"</td>
-          </tr>
-          <tr>
-            <td style="font-weight:700;color:var(--G)">@deliciouslyella <span style="font-size:9px;background:var(--GMD);color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;font-weight:700">SUGGESTED</span></td>
-            <td><span style="font-size:10px;background:var(--CREAM);border-radius:3px;padding:2px 7px;font-weight:700;color:var(--GOM)">Plant-Based / Lifestyle</span></td>
-            <td style="font-size:11px;color:var(--GT)">Large plant-based UK audience. High overlap with EDEN buyer. "I didn't think I'd like this but" format — authentic, high engagement.</td>
-            <td style="font-size:11px;color:var(--G)">"I've eaten a lot of vegan chocolate. Most of it is fine. These are the ones I actually go back for."</td>
-          </tr>
-          <tr class="rowa">
-            <td style="font-weight:700;color:var(--G)">@freefromfairy <span style="font-size:9px;background:var(--GMD);color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;font-weight:700">SUGGESTED</span></td>
-            <td><span style="font-size:10px;background:var(--CREAM);border-radius:3px;padding:2px 7px;font-weight:700;color:var(--GOM)">Allergy / Free-From</span></td>
-            <td style="font-size:11px;color:var(--GT)">UK allergy food blogger. GF + dairy free. Trusted coeliac voice. Product review format drives purchase intent in EDEN's core segment.</td>
-            <td style="font-size:11px;color:var(--G)">"A hamper a coeliac can actually eat. All of it. No caveats."</td>
-          </tr>
-          <tr>
-            <td style="font-weight:700;color:var(--G)">@thevegankind <span style="font-size:9px;background:var(--GMD);color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;font-weight:700">SUGGESTED</span></td>
-            <td><span style="font-size:10px;background:var(--CREAM);border-radius:3px;padding:2px 7px;font-weight:700;color:var(--GOM)">Vegan / Subscription</span></td>
-            <td style="font-size:11px;color:var(--GT)">Vegan subscription box brand. Unboxing and "what's inside" format performs consistently. Shared audience with EDEN vegan segment.</td>
-            <td style="font-size:11px;color:var(--G)">"Unboxing the hamper we sent to someone who's been vegan for 10 years. Her reaction."</td>
-          </tr>
-        </tbody>
+    <div class="seclbl">Top converting search terms — Google Ads (MCP 31 Mar)</div>
+    <div class="card" style="padding:0">
+      <table class="dt">
+        <thead><tr><th>Search term</th><th class="r">Conv</th><th class="r">Clicks</th><th class="r">CPA</th></tr></thead>
+        <tbody id="mkt-gads-terms-body"><tr><td colspan="4" style="text-align:center;color:var(--GMD);padding:12px">Loading...</td></tr></tbody>
       </table>
     </div>
-    <div class="dnote" style="margin-top:8px">Add new rows to the IG Accounts tab in EDEN_CO_Weekly_Status to expand. Updated Monday by Social Intelligence Agent.</div>
+    <div class="dnote" style="margin-top:6px">Top 10 converting terms by conversion volume. Refresh via Google Ads MCP.</div>
   </div>
 
-  <!-- ── UGC INFLUENCERS ── -->
   <div class="sec">
-    <div class="seclbl">Outreach pipeline — UGC &amp; influencer contacts</div>
-    <div class="dnote" style="margin-bottom:14px">Active targets. These are people to contact and work with — not just observe. Source: EDEN_CO_Weekly_Status · UGC Influencers tab · 343 contacts. <span style="background:var(--GOLD);border-radius:3px;padding:1px 5px;font-size:9px;font-weight:700;color:#fff">SHEET</span> = in outreach database &nbsp;·&nbsp; <span style="background:var(--GMD);border-radius:3px;padding:1px 5px;font-size:9px;font-weight:700;color:#fff">SUGGESTED</span> = not yet in sheet, recommended addition.</div>
-    <div class="card" style="overflow-x:auto">
-      <table class="dt" style="min-width:680px">
-        <thead>
-          <tr>
-            <th>Handle</th>
-            <th>Size / Followers</th>
-            <th>Content Type</th>
-            <th style="min-width:220px">Suggested post title — their format</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(15,64,40,0.07)">
-            <td style="font-weight:700;color:var(--G)">@embothevego <span style="font-size:9px;background:var(--GOLD);color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;font-weight:700">SHEET</span></td>
-            <td style="font-size:11px;color:var(--GMD)">Micro · 4.9k</td>
-            <td style="font-size:11px;color:var(--GT)">Recipes, Rest. Reviews, Prod. Reviews</td>
-            <td style="font-size:11px;color:var(--G)">"Vegan hamper taste test — everything in the box, honest thoughts."</td>
-          </tr>
-          <tr class="rowa" style="background:rgba(15,64,40,0.04)">
-            <td style="font-weight:700;color:var(--G)">@glam_vegan <span style="font-size:9px;background:var(--GOLD);color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;font-weight:700">SHEET</span></td>
-            <td style="font-size:11px;color:var(--GMD)">Micro · 14k</td>
-            <td style="font-size:11px;color:var(--GT)">Recipes, Prod. Reviews</td>
-            <td style="font-size:11px;color:var(--G)">"The vegan gift I'd actually ask for. Every product rated."</td>
-          </tr>
-          <tr style="background:rgba(15,64,40,0.07)">
-            <td style="font-weight:700;color:var(--G)">@brookesnowsill <span style="font-size:9px;background:var(--GOLD);color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;font-weight:700">SHEET</span></td>
-            <td style="font-size:11px;color:var(--GMD)">Micro · 50.7k</td>
-            <td style="font-size:11px;color:var(--GT)">Health &amp; Fitness, Lifestyle</td>
-            <td style="font-size:11px;color:var(--G)">"Plant-based gifting that doesn't feel like a consolation prize."</td>
-          </tr>
-          <tr class="rowa">
-            <td style="font-weight:700;color:var(--G)">@rubybhogal <span style="font-size:9px;background:var(--GOLD);color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;font-weight:700">SHEET</span></td>
-            <td style="font-size:11px;color:var(--GMD)">Macro · 886k</td>
-            <td style="font-size:11px;color:var(--GT)">Recipes, Prod. Reviews</td>
-            <td style="font-size:11px;color:var(--G)">"The hamper I sent to my vegan friend and she texted me immediately."</td>
-          </tr>
-          <tr>
-            <td style="font-weight:700;color:var(--G)">@vegansofldn <span style="font-size:9px;background:var(--GOLD);color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;font-weight:700">SHEET</span></td>
-            <td style="font-size:11px;color:var(--GMD)">Mid · 100k</td>
-            <td style="font-size:11px;color:var(--GT)">Prod. Reviews, Rest. Reviews</td>
-            <td style="font-size:11px;color:var(--G)">"This is what a fully vegan gift box actually looks like in 2024."</td>
-          </tr>
-          <tr class="rowa">
-            <td style="font-weight:700;color:var(--G)">@bos.kitchen <span style="font-size:9px;background:var(--GOLD);color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;font-weight:700">SHEET</span></td>
-            <td style="font-size:11px;color:var(--GMD)">Micro · 53.7k</td>
-            <td style="font-size:11px;color:var(--GT)">Recipes, Prod. Reviews</td>
-            <td style="font-size:11px;color:var(--G)">"Every product in this hamper — taste tested, honest verdict."</td>
-          </tr>
-          <tr>
-            <td style="font-weight:700;color:var(--G)">@vegan.manchester <span style="font-size:9px;background:var(--GOLD);color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;font-weight:700">SHEET</span></td>
-            <td style="font-size:11px;color:var(--GMD)">Micro · 31.8k</td>
-            <td style="font-size:11px;color:var(--GT)">Prod. Reviews, Rest. Reviews</td>
-            <td style="font-size:11px;color:var(--G)">"The only gift box I'd send to someone who actually reads labels."</td>
-          </tr>
-          <tr class="rowa">
-            <td style="font-weight:700;color:var(--G)">@plantbasednatasha <span style="font-size:9px;background:var(--GOLD);color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;font-weight:700">SHEET</span></td>
-            <td style="font-size:11px;color:var(--GMD)">Micro · 22.8k</td>
-            <td style="font-size:11px;color:var(--GT)">Recipes, Rest. Reviews, Prod. Reviews</td>
-            <td style="font-size:11px;color:var(--G)">"Gifting when someone is plant-based — this is what I'd actually send."</td>
-          </tr>
-          <tr>
-            <td style="font-weight:700;color:var(--G)">@plantbasedrd <span style="font-size:9px;background:var(--GMD);color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;font-weight:700">SUGGESTED</span></td>
-            <td><span style="font-size:10px;background:var(--CREAM);border-radius:3px;padding:2px 7px;font-weight:700;color:var(--GOM)">Plant-Based / Nutrition</span></td>
-            <td style="font-size:11px;color:var(--GT)">UK registered dietitian. Science-backed plant-based content. High credibility with EDEN's professional female buyer segment. "Dietitian-tested" format drives saves.</td>
-            <td style="font-size:11px;color:var(--G)">"The gift box I recommend when someone asks what to send a plant-based friend who doesn't want to feel like an afterthought."</td>
-          </tr>
-          <tr class="rowa">
-            <td style="font-weight:700;color:var(--G)">@mindfulfooduk <span style="font-size:9px;background:var(--GMD);color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;font-weight:700">SUGGESTED</span></td>
-            <td><span style="font-size:10px;background:var(--GXP);border-radius:3px;padding:2px 7px;font-weight:700;color:var(--G)">Wellness / Gifting</span></td>
-            <td style="font-size:11px;color:var(--GT)">UK wellness and thoughtful gifting content. "Gifts that actually mean something" format. High share potential. Audience alignment with EDEN's "thoughtful gifts that make people feel seen" positioning.</td>
-            <td style="font-size:11px;color:var(--G)">"The difference between a gift and a thought. This one felt like both."</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="seclbl">Customer reviews — Google Business Profile</div>
+    <div style="display:flex;gap:10px;margin-bottom:14px">
+      <div class="chip ta"><div class="tlbl">Avg rating</div><div class="tval lg" id="sm-gr-quality">—</div><div class="tmeta" id="sm-gr-quality-n" style="font-size:9px;color:var(--GMD)">—</div></div>
+      <div class="chip ta"><div class="tlbl">5-star %</div><div class="tval lg" id="sm-gr-pct">—</div><div class="tmeta" style="font-size:9px;color:var(--GMD)">of all reviews</div></div>
+      <div class="chip ta"><div class="tlbl">Last updated</div><div class="tval" style="font-size:13px" id="sm-last-updated">—</div></div>
     </div>
-    <div class="dnote" style="margin-top:8px">Niche colour key: <span style="background:var(--GXP);border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;color:var(--G)">Gifting / Lifestyle</span> gifting-adjacent, unboxing format &nbsp;·&nbsp; <span style="background:var(--CREAM);border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;color:var(--GOM)">Dietary / Nutrition</span> dietary community trust, inclusion angle. To connect live: add a Coupler dataflow for the UGC Influencers tab in EDEN_CO_Weekly_Status.</div>
-  </div>
-
-  <!-- Email section -->
-  <div class="sec">
-    <div class="seclbl">Email ideas — personal from Rosie</div>
-    <div class="dnote" style="margin-bottom:20px">Kennedy structure: curiosity subject line, Para 1 opens mid-action about them (doesn't close the loop), Para 2 is Rosie's shared experience and why to trust, Para 3 closes the loop with a directional solve. Every para has a contextual link descriptive of its destination. Witty PS with final link. Tone: a friend who's been there, giving advice. Never selling. Every link reads clearly on its own — and always points to a product, even when the link text is about a story, review, or feeling.</div>
-
-    <div style="display:flex;flex-direction:column;gap:14px">
-
-      <!-- EMAIL 1 -->
-      <div class="ccard">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div class="ctitle-lg" style="margin:0">Email 1 — The 10pm panic</div>
-          <div style="display:flex;gap:6px">
-            <span style="font-size:9px;border:1px solid var(--GOLD);color:var(--GOLD);border-radius:3px;padding:2px 7px;font-weight:700">I've been there too — here's what I do now</span>
-            <span style="font-size:9px;background:var(--G);color:#fff;border-radius:3px;padding:2px 7px;font-weight:700">FROM ROSIE</span>
-          </div>
-        </div>
-        <div style="font-size:12px;line-height:1.8;color:var(--G);border-left:3px solid var(--GOLD);padding-left:14px;margin-bottom:10px">
-          <p style="margin:0 0 10px">Subject: <strong>She nearly cried. (Not in the good way.)</strong></p>
-          <p style="margin:0 0 8px;color:var(--GMD);font-style:italic">Hi [first name],</p>
-          <p style="margin:0 0 12px">
-            It's 10pm. Sarah's birthday is tomorrow. I've just realised the hamper I ordered is full of food she can't eat. My stomach dropped. Yes, that was me. Last minute merchant. I know that feeling.
-          </p>
-          <p style="margin:0 0 12px">
-            What that looks like now: <a href="https://www.edenandco.com/collections/signature-hamper" style="color:var(--GOLD)">the Signature is still my go-to for a birthday</a>. I'm a sweet and savoury person and every product in there is something I'd genuinely want to open myself. If she's more of a chocolate moment, <a href="https://www.edenandco.com/collections/chocolate-hamper" style="color:var(--GOLD)">the Chocolate Hamper is what I'd pick for that</a>.
-          </p>
-          <p style="margin:0 0 12px">
-            The text she'll send you tomorrow morning will make the 10pm panic worth it. That bit I can promise.
-          </p>
-          <p style="margin:0;color:var(--GMD)">Rosie x</p>
-          <p style="margin:10px 0 0;font-style:italic;color:var(--GT);font-size:11px">PS: Adrienne left us a review last week: "I usually have to watch other people eating treats because they've not thought about my allergies — this time the whole hamper was curated for me." <a href="https://www.edenandco.com/collections/signature-hamper" style="color:var(--GOLD)">Still unsure? Here's what 673 customers said. 4.67 stars.</a></p>
-        </div>
-        <div class="dnote">Use for: late-buyer trigger, birthday abandoned cart, re-engagement. Para 1 = Rosie's own story in the panic moment, first-person. Para 2 = "what that looks like now" — personal product opinions, specific names, no speech. Para 3 = warm close, no sell. PS = real customer name + real quote.</div>
-      </div>
-
-      <!-- EMAIL 2 -->
-      <div class="ccard">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div class="ctitle-lg" style="margin:0">Email 2 — The review I keep thinking about</div>
-          <div style="display:flex;gap:6px">
-            <span style="font-size:9px;border:1px solid var(--GOLD);color:var(--GOLD);border-radius:3px;padding:2px 7px;font-weight:700">I know this feeling from the other side</span>
-            <span style="font-size:9px;background:var(--G);color:#fff;border-radius:3px;padding:2px 7px;font-weight:700">FROM ROSIE</span>
-          </div>
-        </div>
-        <div style="font-size:12px;line-height:1.8;color:var(--G);border-left:3px solid var(--GOLD);padding-left:14px;margin-bottom:10px">
-          <p style="margin:0 0 10px">Subject: <strong>"For a change." (A review I can't stop thinking about.)</strong></p>
-          <p style="margin:0 0 8px;color:var(--GMD);font-style:italic">Hi [first name],</p>
-          <p style="margin:0 0 12px">
-            A review came in last week and I've genuinely not stopped thinking about it. Six words. "For a change, I got to eat everything." Adrienne wrote it at 11pm on a Thursday after opening her birthday hamper. <a href="https://www.edenandco.com/collections/signature-hamper" style="color:var(--GOLD)">For a change. Read what people say when a gift is actually made for them.</a>
-          </p>
-          <p style="margin:0 0 12px">
-            I know this feeling from the other side too. I've been the person at the birthday table eating the one product I could identify as safe and smiling through it. It's why I built this. <a href="https://www.edenandco.com/collections/signature-hamper" style="color:var(--GOLD)">Read the moment that started EDEN &amp; CO.</a>
-          </p>
-          <p style="margin:0 0 12px">
-            If you've got a birthday coming up for a friend who checks every label, <a href="https://www.edenandco.com/collections/signature-hamper" style="color:var(--GOLD)">the Signature is my personal pick</a>. Sweet, savoury, genuinely impressive. Ships next day.
-          </p>
-          <p style="margin:0;color:var(--GMD)">Rosie x</p>
-          <p style="margin:10px 0 0;font-style:italic;color:var(--GT);font-size:11px">PS: Michelle left one this week too: "Their faces light up every time they open the box." <a href="https://www.edenandco.com/collections/signature-hamper" style="color:var(--GOLD)">Here's what's inside the Signature that does that.</a></p>
-        </div>
-        <div class="dnote">Use for: welcome sequence, post-purchase upsell, weekly newsletter. Para 1 = specific reviewer name, curiosity open, link reads as invitation. Para 2 = Rosie's own experience from the other side, link to origin story page. Para 3 = personal recommendation not a pitch. PS = second named reviewer.</div>
-      </div>
-
-      <!-- EMAIL 3 -->
-      <div class="ccard">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div class="ctitle-lg" style="margin:0">Email 3 — The text after the good gift</div>
-          <div style="display:flex;gap:6px">
-            <span style="font-size:9px;border:1px solid var(--GOLD);color:var(--GOLD);border-radius:3px;padding:2px 7px;font-weight:700">The 8am message only comes from one kind of gift</span>
-            <span style="font-size:9px;background:var(--G);color:#fff;border-radius:3px;padding:2px 7px;font-weight:700">FROM ROSIE</span>
-          </div>
-        </div>
-        <div style="font-size:12px;line-height:1.8;color:var(--G);border-left:3px solid var(--GOLD);padding-left:14px;margin-bottom:10px">
-          <p style="margin:0 0 10px">Subject: <strong>Two gifts. Same price. One text came back. One didn't.</strong></p>
-          <p style="margin:0 0 8px;color:var(--GMD);font-style:italic">Hi [first name],</p>
-          <p style="margin:0 0 12px">
-            Two hampers. Same birthday. Same price tag. One person got a message at 8am the next morning. The other gift sat quietly on the kitchen counter for a few days. I've read 673 of our reviews at this point and the pattern is always the same. <a href="https://www.edenandco.com/collections/signature-hamper" style="color:var(--GOLD)">Read the messages people send after opening ours.</a>
-          </p>
-          <p style="margin:0 0 12px">
-            The gifts that get the 8am message are the ones where every product was made for the person opening it. Not mostly. Not three she can eat out of twelve. All of it. I know because I was the person on the other end for years, picking around the edges and pretending I was fine. <a href="https://www.edenandco.com/collections/signature-hamper" style="color:var(--GOLD)">That's the story of how this started.</a>
-          </p>
-          <p style="margin:0 0 12px">
-            If you've got a birthday, a new baby, or a thank you coming up, <a href="https://www.edenandco.com/collections/signature-hamper" style="color:var(--GOLD)">the Signature is the one that gets the 8am message</a>. Ships next day, arrives beautifully.
-          </p>
-          <p style="margin:0;color:var(--GMD)">Rosie x</p>
-          <p style="margin:10px 0 0;font-style:italic;color:var(--GT);font-size:11px">PS: Kathy left us a review: "She was able to eat everything and raved about how much she enjoyed the beautiful hamper." <a href="https://www.edenandco.com/collections/signature-hamper" style="color:var(--GOLD)">The Signature Hamper — the one Kathy sent.</a></p>
-        </div>
-        <div class="dnote">Use for: prospect nurture, gifting occasion triggers, re-engagement. Para 1 = contrast story with specific data point (673 reviews), link reads as invitation. Para 2 = Rosie's own lived experience on the receiving end, link to origin story. Para 3 = named product recommendation, no pitch. PS = named reviewer + specific product link.</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Competitor landscape -->
-  <div class="sec">
-    <div class="seclbl">Competitor social landscape</div>
-    <div class="dnote" style="margin-bottom:12px">What they post, how they position, and where the gaps are. Differentiate — don't copy. Profiles reviewed every Monday.</div>
-    <table class="dt">
-      <thead><tr><th>Brand</th><th>Followers</th><th>What they lead with</th><th>Their hook language</th><th>Gap / weakness</th></tr></thead>
-      <tbody>
-        <tr>
-          <td style="font-weight:700;font-size:13px">Treatbox</td>
-          <td style="font-size:11px">260K IG</td>
-          <td style="font-size:11px">Comfort + encouragement. "Someone is having a hard time — send this." Occasion-free gifting ("just because", "pick me up").</td>
-          <td style="font-size:11px;color:var(--GT)">"A cheerful letterbox gift filled with positivity" / "Designed to lift someone's spirits"</td>
-          <td style="font-size:11px">Warm but generic. "Thoughtful" overused. Feed aesthetically inconsistent. Zero dietary presence. Feels volume-led, not premium.</td>
-        </tr>
-        <tr>
-          <td style="font-weight:700;font-size:13px">Bloom &amp; Wild</td>
-          <td style="font-size:11px">284K IG</td>
-          <td style="font-size:11px">"Care Wildly" — acts of care as identity. Giver is the hero. Unscripted gifting moments (empty nest, big sister moving out, life transitions).</td>
-          <td style="font-size:12px;color:var(--GT);font-style:italic">"Caring wildly isn't just for the occasions marked in the calendar, but for all the complicated, unscripted bits in between."</td>
-          <td style="font-size:11px">Strongest emotional positioning of the three — but flowers-only, no dietary angle. Production-heavy; hard to sustain in organic. Zero allergy/dietary presence.</td>
-        </tr>
-        <tr>
-          <td style="font-weight:700;font-size:13px">British Hamper Co.</td>
-          <td style="font-size:11px">7K IG</td>
-          <td style="font-size:11px">Provenance and craft. "Championing Britain's makers, bakers and growers." Heritage positioning.</td>
-          <td style="font-size:11px;color:var(--GT)">"A gastronomic journey across artisan Britain" / "#PassionThroughFlavour"</td>
-          <td style="font-size:11px">Product-out, not buyer-in. No recipient experience in their content. No dietary or allergen presence at all. Feed reads like a catalogue.</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="dnote" style="margin-top:8px;color:var(--GOLD)">EDEN &amp; CO. gap: Not one of these brands talks to the anxious buyer — the person checking the label, navigating dietary needs, afraid of getting it wrong. That content territory is completely uncontested. Bloom &amp; Wild has the closest emotional positioning but has no food product and no dietary angle. EDEN owns "gifts that make people feel seen" and nobody is competing on it.</div>
-  </div>
-
-  <!-- Competitor SWOT — Socials -->
-  <div class="sec">
-    <div class="seclbl">Competitor SWOT — social brands</div>
-    <div class="dnote" style="margin-bottom:14px">Where competitors are strong, where they are weak, and where EDEN has uncontested ground. Use this to brief Edith and prioritise content angles.</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
-
-      <div class="card" style="border-top:3px solid var(--GOLD)">
-        <div class="ctitle" style="margin-bottom:10px">Treatbox <span style="font-size:10px;color:var(--GMD);font-weight:400">260K IG</span></div>
-        <div style="font-size:10px;font-weight:700;color:var(--OK);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Strengths</div>
-        <ul style="margin:0 0 10px;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
-          <li>High volume, consistent UGC machine</li>
-          <li>Strong "just because" and pick-me-up angle</li>
-          <li>Broad audience recognition — known brand</li>
-        </ul>
-        <div style="font-size:10px;font-weight:700;color:var(--RED);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Weaknesses</div>
-        <ul style="margin:0 0 10px;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
-          <li>Zero dietary positioning — no vegan/GF angle</li>
-          <li>Aesthetically inconsistent feed</li>
-          <li>Feels volume-led, not premium</li>
-          <li>"Thoughtful" overused and generic</li>
-        </ul>
-        <div style="font-size:10px;font-weight:700;color:var(--GOLD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">EDEN opportunity</div>
-        <div style="font-size:11px;color:var(--GDK);line-height:1.6">Own the same "just because" emotional territory with dietary safety layered in. Treatbox cannot follow without rebuilding their product range.</div>
-      </div>
-
-      <div class="card" style="border-top:3px solid var(--GOLD)">
-        <div class="ctitle" style="margin-bottom:10px">Bloom &amp; Wild <span style="font-size:10px;color:var(--GMD);font-weight:400">284K IG</span></div>
-        <div style="font-size:10px;font-weight:700;color:var(--OK);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Strengths</div>
-        <ul style="margin:0 0 10px;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
-          <li>Best emotional positioning in the category</li>
-          <li>"Care Wildly" — giver as hero, unscripted moments</li>
-          <li>High production quality, strong brand consistency</li>
-        </ul>
-        <div style="font-size:10px;font-weight:700;color:var(--RED);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Weaknesses</div>
-        <ul style="margin:0 0 10px;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
-          <li>Flowers only — no food, no dietary angle possible</li>
-          <li>Production-heavy content is hard to compete with organically</li>
-          <li>Cannot address dietary anxiety at all</li>
-        </ul>
-        <div style="font-size:10px;font-weight:700;color:var(--GOLD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">EDEN opportunity</div>
-        <div style="font-size:11px;color:var(--GDK);line-height:1.6">Match their emotional depth but add the dietary resolution layer. "Care wildly — and make sure everyone can eat it." Territory they structurally cannot occupy.</div>
-      </div>
-
-      <div class="card" style="border-top:3px solid var(--GOLD)">
-        <div class="ctitle" style="margin-bottom:10px">British Hamper Co. <span style="font-size:10px;color:var(--GMD);font-weight:400">7K IG</span></div>
-        <div style="font-size:10px;font-weight:700;color:var(--OK);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Strengths</div>
-        <ul style="margin:0 0 10px;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
-          <li>Clear provenance positioning</li>
-          <li>Traditional hamper buyer appeal</li>
-        </ul>
-        <div style="font-size:10px;font-weight:700;color:var(--RED);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Weaknesses</div>
-        <ul style="margin:0 0 10px;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
-          <li>Product-out content — no buyer emotion</li>
-          <li>Zero dietary presence</li>
-          <li>Feed reads like a catalogue</li>
-          <li>Small audience, low engagement</li>
-        </ul>
-        <div style="font-size:10px;font-weight:700;color:var(--GOLD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">EDEN opportunity</div>
-        <div style="font-size:11px;color:var(--GDK);line-height:1.6">No real competition here. Different buyer. EDEN's buyer is not looking for provenance — they're looking for safety and emotional resonance. Ignore.</div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="sec">
-    <div class="dnote">Source: Typeform (1,499 gift designer responses, 69 corporate leads). Google Reviews (4.82/5 quality, 766 responses). Social intelligence updated weekly by Social Overview agent. Refresh buyer data: <code>python3 scripts/build-marketing-cache.py</code> &mdash; <span id="mkt-intel-dnote">Loading...</span></div>
-  </div>
-
-  <!-- Social Platform Analysis -->
-  <hr class="sec-divider gold">
-  <div class="sec">
-    <div class="sec-head">Social platform performance — Dream Value analysis</div>
-    <div style="font-size:11px;color:var(--GMD);margin-bottom:18px">Rate any post across the four Dream Value axes to understand why it performed. High scorers become creative briefs for Edith.</div>
-
-    <!-- Dream Value Equation — reference -->
-    <div class="card" style="padding:20px 24px">
-      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:6px">
-        <div class="ctitle" style="margin:0">Dream Value Equation — content framework</div>
-      </div>
-      <div style="background:var(--G);border-radius:var(--r4);padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:16px">
-        <div style="font-size:13px;color:#fff;font-family:var(--FM);white-space:nowrap;flex-shrink:0">Score = (Dream × Likelihood) ÷ (Time × Effort)</div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.65);line-height:1.5">Higher score = more compelling post. Maximise the top (aspiration + believability), minimise the bottom (instant + frictionless). Every post Edith creates should push towards the top-right quadrant: high dream, high belief, instant, zero effort.</div>
-      </div>
-
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
-
-        <div style="background:var(--GXP);border-radius:var(--r4);padding:16px;border-top:3px solid var(--G)">
-          <div style="font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--G);margin-bottom:4px">Dream Outcome</div>
-          <div style="font-size:11px;color:var(--GMD);margin-bottom:12px;line-height:1.5">Show the deeply desirable result. The 8am text. The recipient's face. The gift landing perfectly for someone who never expects to be included.</div>
-          <div style="font-size:10px;font-weight:700;color:var(--G);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">EDEN post ideas</div>
-          <ul style="margin:0;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
-            <li>Rosie reading a review: "she texted me at 8am"</li>
-            <li>Unboxing — recipient's reaction, not product close-up</li>
-            <li>"For a change, I got to eat everything" — real review, let it breathe</li>
-          </ul>
-        </div>
-
-        <div style="background:var(--GXP);border-radius:var(--r4);padding:16px;border-top:3px solid var(--OK)">
-          <div style="font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--OK);margin-bottom:4px">Perceived Likelihood</div>
-          <div style="font-size:11px;color:var(--GMD);margin-bottom:12px;line-height:1.5">Make it feel achievable. Real proof. Real names. "I've done this myself." Social proof from people who look like the buyer — not brand polish.</div>
-          <div style="font-size:10px;font-weight:700;color:var(--G);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">EDEN post ideas</div>
-          <ul style="margin:0;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
-            <li>Named customer review — Adrienne, real quote, real stars</li>
-            <li>Rosie: "I ordered one for my mum last week. This is what she said."</li>
-            <li>Before/after: "I was the person reading labels at midnight. Here's what I do now."</li>
-          </ul>
-        </div>
-
-        <div style="background:var(--CREAM);border-radius:var(--r4);padding:16px;border-top:3px solid var(--AMB)">
-          <div style="font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--GOM);margin-bottom:4px">Time Delay</div>
-          <div style="font-size:11px;color:var(--GMD);margin-bottom:12px;line-height:1.5">Lower = better. Remove the gap between seeing the post and imagining receiving the gift. Instant satisfaction. "Order tonight, delivered tomorrow."</div>
-          <div style="font-size:10px;font-weight:700;color:var(--G);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">EDEN post ideas</div>
-          <ul style="margin:0;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
-            <li>"Order before 2pm — out today." Next-day framing in caption or CTA</li>
-            <li>Packing bench shot: "This one goes out in an hour"</li>
-            <li>Before/after same day: ordered at 9am, unboxed at 3pm</li>
-          </ul>
-        </div>
-
-        <div style="background:var(--CREAM);border-radius:var(--r4);padding:16px;border-top:3px solid var(--AMB)">
-          <div style="font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--GOM);margin-bottom:4px">Effort &amp; Sacrifice</div>
-          <div style="font-size:11px;color:var(--GMD);margin-bottom:12px;line-height:1.5">Lower = better. Remove friction. "You don't need to research. You don't need to check labels. You can close the other tab." One click, done, right.</div>
-          <div style="font-size:10px;font-weight:700;color:var(--G);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">EDEN post ideas</div>
-          <ul style="margin:0;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
-            <li>"You don't have to check the label. We already did that." — caption</li>
-            <li>Post 3 (Label Flipper): validation of the effort they currently make, then the relief of not having to</li>
-            <li>Rosie: "I still get that dread. This is what I send now."</li>
-          </ul>
-        </div>
-
-      </div>
-
-      <div style="margin-top:18px;border:1px solid var(--GOLD);border-radius:var(--r4);padding:16px 18px">
-        <div style="font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--GOLD);margin-bottom:10px">Example — high-scoring post (Dream 9 × Likelihood 8 ÷ Time 2 × Effort 1 = score 36)</div>
-        <div style="font-size:12px;line-height:1.8;color:var(--G);font-style:italic;border-left:3px solid var(--GOLD);padding-left:14px">
-          Someone ordered on Thursday night, just as a thought.<br>
-          She texted me Friday morning: "I can't believe you remembered. She was able to eat everything."<br><br>
-          That's the whole thing. Not the hamper. The text the morning after.
-        </div>
-        <div style="font-size:10px;color:var(--GMD);margin-top:8px">Dream: shows the ideal outcome (8am text) · Likelihood: specific, named, real · Time: overnight, next morning · Effort: "just as a thought" — no research, one impulse</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Competitor-inspired content angles -->
-  <div class="sec">
-    <hr class="sec-divider gold">
-    <div class="seclbl">Competitor-inspired content angles — reworked for EDEN &amp; CO.</div>
-    <div class="dnote" style="margin-bottom:16px">Based on top-performing posts from Treatbox UK, British Blanket Company, The Newt, and similar brands. Language is human and collective — "we/us" not "I/Rosie". Each post includes the source inspiration and why it works.</div>
-
-    <div style="display:flex;flex-direction:column;gap:14px">
-
-      <div class="ccard">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-          <div class="ctitle-lg" style="margin:0">Post 1 — The everyday send</div>
-          <div style="display:flex;gap:6px">
-            <span style="font-size:9px;background:var(--GXP);color:var(--GOLD);border-radius:3px;padding:2px 7px;font-weight:700">IG / TikTok caption</span>
-            <span style="font-size:9px;background:var(--GXP);color:var(--GMD);border-radius:3px;padding:2px 7px;font-weight:700">Inspired by: Treatbox</span>
-          </div>
-        </div>
-        <div style="font-size:12px;line-height:1.9;color:var(--G);border-left:3px solid var(--GOLD);padding-left:14px;margin-bottom:10px">
-          Some of the best ones we send have no occasion at all.<br><br>
-          No birthday. No anniversary. Just someone thinking of someone else on a Tuesday.<br><br>
-          Those are our favourites.
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px">
-            <div style="font-size:9px;font-weight:700;color:var(--GMD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Why it works</div>
-            <div style="font-size:11px;color:var(--GDK);line-height:1.6">Treatbox's strongest performing posts are "just because" framing — occasion-free gifting. It lowers the barrier to purchase and creates relatability. The short paragraph rhythm stops the scroll.</div>
-          </div>
-          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px">
-            <div style="font-size:9px;font-weight:700;color:var(--GMD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Original inspiration</div>
-            <div style="font-size:11px;color:var(--GDK);line-height:1.6">Treatbox: "Sometimes you just want to send someone a little bit of happy. No reason needed." — consistently high engagement, used repeatedly across formats.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="ccard">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-          <div class="ctitle-lg" style="margin:0">Post 2 — The unboxing moment</div>
-          <div style="display:flex;gap:6px">
-            <span style="font-size:9px;background:var(--GXP);color:var(--GOLD);border-radius:3px;padding:2px 7px;font-weight:700">IG Reel / UGC prompt</span>
-            <span style="font-size:9px;background:var(--GXP);color:var(--GMD);border-radius:3px;padding:2px 7px;font-weight:700">Inspired by: The Newt</span>
-          </div>
-        </div>
-        <div style="font-size:12px;line-height:1.9;color:var(--G);border-left:3px solid var(--GOLD);padding-left:14px;margin-bottom:10px">
-          We pack every box knowing it'll be opened by someone who needed this.<br><br>
-          Sometimes we get to see it. Sometimes someone sends us a video at 8am.<br><br>
-          Those are the ones we save.
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px">
-            <div style="font-size:9px;font-weight:700;color:var(--GMD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Why it works</div>
-            <div style="font-size:11px;color:var(--GDK);line-height:1.6">The Newt leads with the human behind the product — maker intention, recipient experience. The "8am" detail is specific and real (from EDEN's own reviews). Specificity kills generic.</div>
-          </div>
-          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px">
-            <div style="font-size:9px;font-weight:700;color:var(--GMD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Original inspiration</div>
-            <div style="font-size:11px;color:var(--GDK);line-height:1.6">The Newt: "Every jar is made here. We watch it leave, then sometimes we hear what happens next." — founder-voice storytelling, product as vehicle not hero.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="ccard">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-          <div class="ctitle-lg" style="margin:0">Post 3 — The label reader</div>
-          <div style="display:flex;gap:6px">
-            <span style="font-size:9px;background:var(--GXP);color:var(--GOLD);border-radius:3px;padding:2px 7px;font-weight:700">IG / TikTok caption</span>
-            <span style="font-size:9px;background:var(--GXP);color:var(--GMD);border-radius:3px;padding:2px 7px;font-weight:700">Inspired by: Treatbox UGC</span>
-          </div>
-        </div>
-        <div style="font-size:12px;line-height:1.9;color:var(--G);border-left:3px solid var(--GOLD);padding-left:14px;margin-bottom:10px">
-          For anyone who's ever bought a gift and quietly checked the label three times before sending it.<br><br>
-          We made the whole box so you don't have to.
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px">
-            <div style="font-size:9px;font-weight:700;color:var(--GMD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Why it works</div>
-            <div style="font-size:11px;color:var(--GDK);line-height:1.6">Addresses the primary buyer anxiety (69.7% arrive with dietary worry) without leading on allergens. Validates the giver's effort without making it about restrictions. Short, punchy, two-line payoff.</div>
-          </div>
-          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px">
-            <div style="font-size:9px;font-weight:700;color:var(--GMD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Original inspiration</div>
-            <div style="font-size:11px;color:var(--GDK);line-height:1.6">Treatbox UGC: buyers in comments describing checking the label before gifting. High save rate on posts that validate anxiety then resolve it. Pattern observed repeatedly in their comment sections.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="ccard">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-          <div class="ctitle-lg" style="margin:0">Post 4 — The cosy season frame</div>
-          <div style="display:flex;gap:6px">
-            <span style="font-size:9px;background:var(--GXP);color:var(--GOLD);border-radius:3px;padding:2px 7px;font-weight:700">IG static / carousel</span>
-            <span style="font-size:9px;background:var(--GXP);color:var(--GMD);border-radius:3px;padding:2px 7px;font-weight:700">Inspired by: British Blanket Co.</span>
-          </div>
-        </div>
-        <div style="font-size:12px;line-height:1.9;color:var(--G);border-left:3px solid var(--GOLD);padding-left:14px;margin-bottom:10px">
-          Not every gift needs an occasion.<br><br>
-          Some of the most appreciated ones arrive on a grey Wednesday when someone needed to feel remembered.<br><br>
-          That's what we're here for.
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px">
-            <div style="font-size:9px;font-weight:700;color:var(--GMD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Why it works</div>
-            <div style="font-size:11px;color:var(--GDK);line-height:1.6">British Blanket Co. excels at ambient lifestyle framing — the gift as comfort object, not purchase. "Grey Wednesday" is a specific image that creates feeling without sentimentality. Works in product flat lay context.</div>
-          </div>
-          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px">
-            <div style="font-size:9px;font-weight:700;color:var(--GMD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Original inspiration</div>
-            <div style="font-size:11px;color:var(--GDK);line-height:1.6">British Blanket Co.: "The right blanket for a dark evening when you need something soft." — sensory, atmospheric, sells a feeling not a product. Consistently top engagement on non-promotional posts.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="ccard">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-          <div class="ctitle-lg" style="margin:0">Post 5 — The review, let breathe</div>
-          <div style="display:flex;gap:6px">
-            <span style="font-size:9px;background:var(--GXP);color:var(--GOLD);border-radius:3px;padding:2px 7px;font-weight:700">IG static — quote card</span>
-            <span style="font-size:9px;background:var(--GXP);color:var(--GMD);border-radius:3px;padding:2px 7px;font-weight:700">Inspired by: Treatbox + The Newt</span>
-          </div>
-        </div>
-        <div style="font-size:12px;line-height:1.9;color:var(--G);border-left:3px solid var(--GOLD);padding-left:14px;margin-bottom:10px">
-          "For a change, I got to eat everything."<br><br>
-          — One of our reviews. We think about this one a lot.
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px">
-            <div style="font-size:9px;font-weight:700;color:var(--GMD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Why it works</div>
-            <div style="font-size:11px;color:var(--GDK);line-height:1.6">The review does the work. The second line ("we think about this one a lot") adds brand voice without narrating over the customer. Both Treatbox and The Newt use this format — high save rate, strong comment trigger.</div>
-          </div>
-          <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 12px">
-            <div style="font-size:9px;font-weight:700;color:var(--GMD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Original inspiration</div>
-            <div style="font-size:11px;color:var(--GDK);line-height:1.6">Treatbox + The Newt both run single-quote posts with one sentence of brand response. No context, no selling. The review speaks. The brand simply says "this." High-performing, low-production format.</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="sec">
-    <div class="dnote">Source: Typeform (1,499 gift designer responses, 69 corporate leads). Google Reviews (4.82/5 quality, 766 responses). Social intelligence updated weekly by Social Overview agent. Refresh buyer data: <code>python3 scripts/build-marketing-cache.py</code> &mdash; <span id="mkt-intel-dnote">Loading...</span></div>
-  </div>
-
-</div></div>
-
-<!-- ═══════════════════════════════════
-     CORPORATE TAB
-═══════════════════════════════════ -->
-<div class="panel" id="tab-corporate"><div class="page">
-
-  <div class="sec">
-    <div class="sec-head">Corporate gifting intelligence</div>
-    <div class="sec-head-sub">Why corporate buyers buy, what stops them, where the market gaps are, and the blog and LinkedIn content that intercepts them at the right moment.</div>
-  </div>
-
-  <!-- Why they buy + pain points -->
-  <div class="sec">
-    <div class="seclbl">Why corporate buyers buy — and what stops them</div>
-    <div class="g2">
-
-      <div class="card acc-gold">
-        <div class="ctitle-lg" style="color:var(--GOLD)">Why they buy <span style="font-size:11px;font-weight:400;color:var(--GMD)">— real buyer language</span></div>
-        <table class="dt">
-          <thead><tr><th>Motivation</th><th style="font-size:10px;color:var(--GT)">Verbatim buyer phrase</th></tr></thead>
-          <tbody>
-            <tr><td>Gratitude at scale</td><td style="font-size:12px;color:var(--GT)">"Nothing builds a relationship like a thoughtful and memorable gift"</td></tr>
-            <tr><td>Inclusivity removes anxiety</td><td style="font-size:12px;color:var(--GT);font-style:italic">"A perfect gift for a varied group you don't know very well"</td></tr>
-            <tr><td>Onboarding / Day 1 signal</td><td style="font-size:12px;color:var(--GT);font-style:italic">"Makes new hires feel valued before you know their dietary needs"</td></tr>
-            <tr><td>Proof of attention</td><td style="font-size:12px;color:var(--GT);font-style:italic">"Food gifts aren't just snacks. They're proof of attention."</td></tr>
-            <tr><td>Avoid the regift</td><td style="font-size:12px;color:var(--GT);font-style:italic">"Something they wouldn't buy themselves on a Tuesday"</td></tr>
-            <tr><td>Branded gifting</td><td style="font-size:12px;color:var(--GT);font-style:italic">"Personalised — rolls out across the whole team, tells a story"</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="card">
-        <div class="ctitle-lg" style="color:var(--RED)">Pain points <span style="font-size:11px;font-weight:400;color:var(--GMD)">— what makes them hesitate</span></div>
-        <table class="dt">
-          <thead><tr><th>Pain point</th><th style="font-size:10px;color:var(--GT)">Verbatim</th></tr></thead>
-          <tbody>
-            <tr><td style="color:var(--RED);font-weight:700;font-size:12px">Dietary blindness — #1 failure</td><td style="font-size:12px;color:var(--GT);font-style:italic">"Turning gratitude into a guilt trip"</td></tr>
-            <tr><td>Generic = no signal</td><td style="font-size:12px;color:var(--GT);font-style:italic">"Store-bought signals appreciation is a checkbox on someone's task list"</td></tr>
-            <tr><td>Swag is oversaturated</td><td style="font-size:12px;color:var(--GT);font-style:italic">"I have the maximum number of insulated tumblers I need"</td></tr>
-            <tr><td>Food gifts at scale are risky</td><td style="font-size:12px;color:var(--GT);font-style:italic">"Eliminated half the items — I'm gluten intolerant"</td></tr>
-            <tr><td>ROI doubt</td><td style="font-size:12px;color:var(--GT);font-style:italic">"Many managers view gifting as unnecessary expense not investment"</td></tr>
-            <tr><td>One-size-fits-all fails</td><td style="font-size:12px;color:var(--GT);font-style:italic">"Many providers still offer one-size-fits-all but that doesn't work in 2025"</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- Gaps from research -->
-  <div class="sec">
-    <div class="seclbl">Market gaps EDEN &amp; CO. can own</div>
-    <table class="dt">
-      <thead><tr><th>#</th><th>Gap</th><th>What buyers say</th><th>EDEN positioning</th></tr></thead>
-      <tbody>
-        <tr>
-          <td style="color:var(--GOLD);font-weight:700">1</td>
-          <td style="font-weight:700;font-size:13px">Safe default for groups</td>
-          <td style="font-size:12px;color:var(--GT);font-style:italic">"Works for everyone on the team — no dietary guesswork"</td>
-          <td style="font-size:11px">"One hamper that works for everyone. No exclusions. No alternatives needed."</td>
-        </tr>
-        <tr>
-          <td style="color:var(--GOLD);font-weight:700">2</td>
-          <td style="font-weight:700;font-size:13px;color:var(--GOLD)">Onboarding gift gap</td>
-          <td style="font-size:12px;color:var(--GT);font-style:italic">"You don't know new hire dietary needs on Day 1 — but you still need to send something"</td>
-          <td style="font-size:11px">"A thoughtful Day 1 welcome — before you know everyone's dietary needs."</td>
-        </tr>
-        <tr>
-          <td style="color:var(--GOLD);font-weight:700">3</td>
-          <td style="font-weight:700;font-size:13px">Remote team gifting</td>
-          <td style="font-size:12px;color:var(--GT);font-style:italic">"Remote employees receive the most impersonal gifts — or nothing"</td>
-          <td style="font-size:11px">"Delivered to every desk. Enjoyed by everyone."</td>
-        </tr>
-        <tr>
-          <td style="color:var(--GOLD);font-weight:700">4</td>
-          <td style="font-weight:700;font-size:13px">The gift nobody regifts</td>
-          <td style="font-size:12px;color:var(--GT);font-style:italic">"Tumblers and swag get instantly donated"</td>
-          <td style="font-size:11px">"Something they wouldn't buy themselves. Nothing they'll pass on."</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Blog + LinkedIn ideas -->
-  <div class="sec">
-    <div class="seclbl">Content ideas for corporate audience</div>
-    <div class="g2">
-
-      <div class="ccard">
-        <div class="ctitle-lg">3 Blog post titles</div>
-        <table class="dt">
-          <thead><tr><th>#</th><th>Title</th><th style="font-size:10px;color:var(--GT)">Target reader</th></tr></thead>
-          <tbody>
-            <tr>
-              <td style="color:var(--GOLD);font-weight:700">1</td>
-              <td><strong>"Why Your Employee Gifts Keep Excluding People (And What to Send Instead)"</td>
-              <td style="font-size:11px;color:var(--GT)">HR manager who's had a gifting complaint</td>
-            </tr>
-            <tr>
-              <td style="color:var(--GOLD);font-weight:700">2</td>
-              <td><strong>"The One Gift You Can Send Before You Know Anyone's Dietary Needs"</td>
-              <td style="font-size:11px;color:var(--GT)">People &amp; Culture / onboarding buyer</td>
-            </tr>
-            <tr>
-              <td style="color:var(--GOLD);font-weight:700">3</td>
-              <td><strong>"Corporate Gifting at Scale: How to Send 50 Hampers Without Getting a Single Complaint"</td>
-              <td style="font-size:11px;color:var(--GT)">EA or marketing manager buying in volume</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="ccard">
-        <div class="ctitle-lg">3 LinkedIn post titles</div>
-        <table class="dt">
-          <thead><tr><th>#</th><th>Title / hook</th><th style="font-size:10px;color:var(--GT)">Angle</th></tr></thead>
-          <tbody>
-            <tr>
-              <td style="color:var(--GOLD);font-weight:700">1</td>
-              <td><strong>"We surveyed 700 people buying corporate gifts. Their #1 worry wasn't price. It was this."</td>
-              <td style="font-size:11px;color:var(--GT)">Data-led. Curiosity hook. Links to blog.</td>
-            </tr>
-            <tr>
-              <td style="color:var(--GOLD);font-weight:700">2</td>
-              <td><strong>"The most overlooked gifting moment in every company's calendar (it's not Christmas)"</strong></td>
-              <td style="font-size:11px;color:var(--GT)">Onboarding angle. Contrarian hook.</td>
-            </tr>
-            <tr>
-              <td style="color:var(--GOLD);font-weight:700">3</td>
-              <td><strong>"I was gifted a ham for the holidays. I'm Jewish. Here's what companies still get wrong about corporate gifts."</strong></td>
-              <td style="font-size:11px;color:var(--GT)">Verbatim buyer quote. High share potential. Empathy-first.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- Email campaign examples -->
-  <div class="sec">
-    <div class="seclbl">Corporate email campaigns — 3 examples from Rosie</div>
-    <div class="dnote" style="margin-bottom:20px">Kennedy structure applies. These are B2B emails to HR managers, EAs, and marketing teams. The frame is the same: Rosie has been in the exact situation the reader is in. First person. Specific. Never selling. The difference from B2C: the emotional job is the sender's professional reputation, not personal relationship.</div>
-
-    <div style="display:flex;flex-direction:column;gap:14px">
-
-      <div class="ccard">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div class="ctitle-lg" style="margin:0">Email 1 — The dietary incident</div>
-          <div style="display:flex;gap:6px">
-            <span style="font-size:9px;border:1px solid var(--GOLD);color:var(--GOLD);border-radius:3px;padding:2px 7px;font-weight:700">It happened on my watch too</span>
-            <span style="font-size:9px;background:var(--G);color:#fff;border-radius:3px;padding:2px 7px;font-weight:700">FROM ROSIE</span>
-          </div>
-        </div>
-        <div style="font-size:12px;line-height:1.8;color:var(--G);border-left:3px solid var(--GOLD);padding-left:14px;margin-bottom:10px">
-          <p style="margin:0 0 10px">Subject: <strong>The hamper arrived. Three people couldn't eat it.</strong></p>
-          <p style="margin:0 0 8px;color:var(--GMD);font-style:italic">Hi [first name],</p>
-          <p style="margin:0 0 12px">I spoke to an HR manager last month who'd ordered fifty hampers for her team at Christmas. They looked great. Three people came back to her on the day and couldn't eat anything in theirs. She'd done everything right — the supplier said they were "suitable for most dietary needs." That phrase is doing a lot of work.</p>
-          <p style="margin:0 0 12px">I know this because I've been on the receiving end of it. Every product in every EDEN &amp; CO. hamper is plant-based, gluten free and dairy free. Not "most of them." The whole box. <a href="https://www.edenandco.com/collections/signature-hamper" style="color:var(--GOLD)">Read why that was the only brief I gave myself when I started this.</a></p>
-          <p style="margin:0 0 12px">If you're buying for a team this quarter and want to stop worrying about this, <a href="https://www.edenandco.com/collections/signature-hamper" style="color:var(--GOLD)">the Signature is where most corporate orders start</a>. Volume pricing from 10 units. Branded inserts available.</p>
-          <p style="margin:0;color:var(--GMD)">Rosie x</p>
-          <p style="margin:10px 0 0;font-style:italic;color:var(--GT);font-size:11px">PS: Adrienne Ayres left this after opening hers: "I usually have to watch other people eating treats because they've not thought about my allergies — this time the whole hamper was curated for me." <a href="https://www.edenandco.com/collections/signature-hamper" style="color:var(--GOLD)">673 reviews, same story.</a></p>
-        </div>
-        <div class="dnote">Use for: cold outreach to HR managers, EA lists, gifting platform profiles. Opens on a third party's incident — reader thinks "that could be me." Para 2 is Rosie's own experience. Para 3 is direct but not a pitch.</div>
-      </div>
-
-      <div class="ccard">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div class="ctitle-lg" style="margin:0">Email 2 — The Q4 planning window</div>
-          <div style="display:flex;gap:6px">
-            <span style="font-size:9px;border:1px solid var(--GOLD);color:var(--GOLD);border-radius:3px;padding:2px 7px;font-weight:700">Q4 always starts sooner than it feels</span>
-            <span style="font-size:9px;background:var(--G);color:#fff;border-radius:3px;padding:2px 7px;font-weight:700">FROM ROSIE</span>
-          </div>
-        </div>
-        <div style="font-size:12px;line-height:1.8;color:var(--G);border-left:3px solid var(--GOLD);padding-left:14px;margin-bottom:10px">
-          <p style="margin:0 0 10px">Subject: <strong>The companies that got this right in December started in September.</strong></p>
-          <p style="margin:0 0 8px;color:var(--GMD);font-style:italic">Hi [first name],</p>
-          <p style="margin:0 0 12px">Every October I get the same message. "We need 80 hampers by the 15th of December." I take as many as I can. I have to say no to some. Last year I had to turn away a company that had bought from us the year before because they'd left it six weeks too late and we were out of stock on two key lines.</p>
-          <p style="margin:0 0 12px">The companies I never have to say no to are the ones who booked in September. They got the stock reserved, the branded inserts confirmed, the dietary split sorted. Nothing was a problem because there was enough time to make nothing a problem. <a href="https://www.edenandco.com/collections/grand-hamper" style="color:var(--GOLD)">Here's what the teams who booked early sent.</a></p>
-          <p style="margin:0 0 12px">If Q4 gifting is something you're thinking about this year, I'd rather talk now than in October when the answer might be different. <a href="mailto:rosie@edenandco.com" style="color:var(--GOLD)">Rosie@edenandco.com is the fastest way to reach me.</a></p>
-          <p style="margin:0;color:var(--GMD)">Rosie x</p>
-          <p style="margin:10px 0 0;font-style:italic;color:var(--GT);font-size:11px">PS: Michelle Tilson, after her team opened theirs last December: "Their faces light up every time they open the box." <a href="https://www.edenandco.com/collections/signature-hamper" style="color:var(--GOLD)">The one her team opened.</a></p>
-        </div>
-        <div class="dnote">Use for: September–November corporate push, warm leads, returning corporate buyers. Opens on a Rosie incident (had to say no), creates urgency without pressure. Para 2 rewards those who plan ahead.</div>
-      </div>
-
-      <div class="ccard">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div class="ctitle-lg" style="margin:0">Email 3 — The onboarding gift</div>
-          <div style="display:flex;gap:6px">
-            <span style="font-size:9px;border:1px solid var(--GOLD);color:var(--GOLD);border-radius:3px;padding:2px 7px;font-weight:700">Day one is the one they remember</span>
-            <span style="font-size:9px;background:var(--G);color:#fff;border-radius:3px;padding:2px 7px;font-weight:700">FROM ROSIE</span>
-          </div>
-        </div>
-        <div style="font-size:12px;line-height:1.8;color:var(--G);border-left:3px solid var(--GOLD);padding-left:14px;margin-bottom:10px">
-          <p style="margin:0 0 10px">Subject: <strong>She started on Monday. She's already told three people about the hamper.</strong></p>
-          <p style="margin:0 0 8px;color:var(--GMD);font-style:italic">Hi [first name],</p>
-          <p style="margin:0 0 12px">I started a new job once where the onboarding gift was a branded pen and a "welcome to the team" card that had been photocopied. I still think about that first impression. Not fondly.</p>
-          <p style="margin:0 0 12px">We do a lot of new-starter hampers. The pattern in the reviews is always the same — the new hire mentions it to people outside the company. It becomes a thing the company is known for. One HR director told me she's had three candidates mention it at interview because a friend told them. <a href="https://www.edenandco.com/collections/signature-hamper" style="color:var(--GOLD)">The Signature is the one that travels by word of mouth.</a></p>
-          <p style="margin:0 0 12px">If you're onboarding people regularly and want to talk about a standing order rather than one-off purchases, <a href="mailto:rosie@edenandco.com" style="color:var(--GOLD)">drop me a line</a>. We handle everything from one unit to a hundred.</p>
-          <p style="margin:0;color:var(--GMD)">Rosie x</p>
-          <p style="margin:10px 0 0;font-style:italic;color:var(--GT);font-size:11px">PS: Tim Weston, after sending one to a new starter: "Recently learnt he is now dairy and gluten intolerant — this was a great indulgent gift." <a href="https://www.edenandco.com/collections/signature-hamper" style="color:var(--GOLD)">The Signature he sent.</a></p>
-        </div>
-        <div class="dnote">Use for: HR / People & Culture teams, onboarding sequences, standing order pitch. Opens on Rosie's bad first day. Para 2 has a real referral story. Para 3 pitches standing orders directly.</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- B2B Competitor SWOT -->
-  <div class="sec">
-    <div class="seclbl">Competitor SWOT — B2B corporate gifting</div>
-    <div class="dnote" style="margin-bottom:14px">Direct competitors targeting HR, EA, and marketing buyers. Evaluated on outreach approach, site copy, blog content, and social presence. Use to sharpen EDEN's B2B positioning and identify gaps.</div>
-
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:14px">
-
-      <div class="card" style="border-top:3px solid var(--RED)">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px">
-          <div class="ctitle">Wellbox UK</div>
-          <div style="font-size:10px;color:var(--GMD)">Direct B2B competitor</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
-          <div>
-            <div style="font-size:10px;font-weight:700;color:var(--OK);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Strengths</div>
-            <ul style="margin:0;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
-              <li>Built explicitly for B2B gifting — corporate-first positioning</li>
-              <li>Strong HR/wellbeing angle ("employee wellbeing" messaging)</li>
-              <li>Platform integrations — ReachDesk, Sendoso presence</li>
-              <li>Subscription model for repeat corporate orders</li>
-            </ul>
-          </div>
-          <div>
-            <div style="font-size:10px;font-weight:700;color:var(--RED);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Weaknesses</div>
-            <ul style="margin:0;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
-              <li>Site copy is functional, not emotional — reads like a procurement catalogue</li>
-              <li>No dietary inclusion angle — standard products, mixed allergen risk</li>
-              <li>Social presence thin and infrequent</li>
-              <li>Blog content generic — "top corporate gift ideas" listicles</li>
-            </ul>
-          </div>
-        </div>
-        <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 14px">
-          <div style="font-size:10px;font-weight:700;color:var(--GOLD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">EDEN counter-positioning</div>
-          <div style="font-size:11px;color:var(--GDK);line-height:1.6">Wellbox owns "wellbeing" but not "inclusion." EDEN copy should lead with: "A gift that works for everyone on the team — no dietary guesswork, no exclusions." Wellbox cannot make that claim without reformulating their range.</div>
-        </div>
-      </div>
-
-      <div class="card" style="border-top:3px solid var(--RED)">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px">
-          <div class="ctitle">Social Stories Club</div>
-          <div style="font-size:10px;color:var(--GMD)">B2B + impact gifting</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
-          <div>
-            <div style="font-size:10px;font-weight:700;color:var(--OK);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Strengths</div>
-            <ul style="margin:0;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
-              <li>Strong ESG/impact angle — social enterprise credentials</li>
-              <li>B2B gifting with purpose-led narrative</li>
-              <li>Good blog content — thought leadership on ethical gifting</li>
-              <li>Active LinkedIn presence targeting HR and CSR buyers</li>
-            </ul>
-          </div>
-          <div>
-            <div style="font-size:10px;font-weight:700;color:var(--RED);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Weaknesses</div>
-            <ul style="margin:0;padding:0 0 0 14px;font-size:11px;color:var(--GDK);line-height:1.7">
-              <li>Impact story overshadows product experience — recipient not the centre</li>
-              <li>Dietary inclusion not a core claim</li>
-              <li>Premium positioning inconsistent — price points vary widely</li>
-              <li>Site copy heavy on mission, light on "why this gift for this person"</li>
-            </ul>
-          </div>
-        </div>
-        <div style="background:var(--GXP);border-radius:var(--r4);padding:10px 14px">
-          <div style="font-size:10px;font-weight:700;color:var(--GOLD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">EDEN counter-positioning</div>
-          <div style="font-size:11px;color:var(--GDK);line-height:1.6">Social Stories Club wins the ESG buyer. EDEN does not need to compete on impact credentials. Counter with emotional clarity: the recipient experience, dietary safety, and the gift that makes people feel seen — not why the brand deserves the sale.</div>
-        </div>
-      </div>
-
-    </div>
-
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px">
-
-      <div class="card" style="border-top:3px solid var(--AMB)">
-        <div class="ctitle" style="margin-bottom:10px">Reachdesk <span style="font-size:10px;color:var(--GMD);font-weight:400">Platform (not supplier)</span></div>
-        <div style="font-size:10px;font-weight:700;color:var(--OK);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Their positioning</div>
-        <div style="font-size:11px;color:var(--GDK);line-height:1.6;margin-bottom:8px">Enterprise gifting platform. Buyer — not a competitor. Blog content targets marketing and sales teams with gifting ROI framing. Heavy on ABM and pipeline acceleration.</div>
-        <div style="font-size:10px;font-weight:700;color:var(--GOLD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">EDEN angle</div>
-        <div style="font-size:11px;color:var(--GDK);line-height:1.6">Be the dietary-safe default in the Reachdesk catalogue. Their buyers ask "will this work for everyone?" — EDEN is the answer. Pitch copy should emphasise catalogue-level inclusion guarantee.</div>
-      </div>
-
-      <div class="card" style="border-top:3px solid var(--AMB)">
-        <div class="ctitle" style="margin-bottom:10px">Virgin Experience Days <span style="font-size:10px;color:var(--GMD);font-weight:400">30% commission</span></div>
-        <div style="font-size:10px;font-weight:700;color:var(--OK);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Their positioning</div>
-        <div style="font-size:11px;color:var(--GDK);line-height:1.6;margin-bottom:8px">Experiential gifting. Targets corporate buyers who want memorable over consumable. No food/dietary angle possible. Strong brand recognition.</div>
-        <div style="font-size:10px;font-weight:700;color:var(--GOLD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">EDEN angle</div>
-        <div style="font-size:11px;color:var(--GDK);line-height:1.6">Different buyer category. EDEN competes on consumable premium gifting. Counter: "An experience in a box — one that everyone on the team can actually enjoy."</div>
-      </div>
-
-      <div class="card" style="border-top:3px solid var(--AMB)">
-        <div class="ctitle" style="margin-bottom:10px">Hotel Chocolat / M&amp;S Corporate</div>
-        <div style="font-size:10px;font-weight:700;color:var(--OK);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Their positioning</div>
-        <div style="font-size:11px;color:var(--GDK);line-height:1.6;margin-bottom:8px">Default corporate food gift. Brand recognition does the selling — no outreach strategy, no dietary differentiation. Buyers use them because everyone knows the name.</div>
-        <div style="font-size:10px;font-weight:700;color:var(--GOLD);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">EDEN angle</div>
-        <div style="font-size:11px;color:var(--GDK);line-height:1.6">Attack the "safe default" position: "Hotel Chocolat is the safe choice — until someone on the team is dairy free." EDEN is the gift that removes the risk entirely.</div>
-      </div>
-
-    </div>
-
-    <!-- SWOT summary bar -->
-    <div style="background:var(--G);border-radius:var(--r4);padding:16px 20px">
-      <div style="font-size:10px;font-weight:700;color:var(--GOLD);text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px">EDEN B2B competitive summary</div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
-        <div>
-          <div style="font-size:10px;color:var(--OK);font-weight:700;margin-bottom:4px">Strengths vs field</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.8);line-height:1.6">Only brand with guaranteed dietary inclusion across full range. Emotional copy territory uncontested. Premium positioning without corporate-catalogue tone.</div>
-        </div>
-        <div>
-          <div style="font-size:10px;color:var(--RED);font-weight:700;margin-bottom:4px">Weaknesses vs field</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.8);line-height:1.6">Lower brand recognition than Hotel Chocolat and M&amp;S. No ESG credentials vs Social Stories Club. Smaller catalogue than platform suppliers.</div>
-        </div>
-        <div>
-          <div style="font-size:10px;color:var(--AMB);font-weight:700;margin-bottom:4px">Opportunities</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.8);line-height:1.6">New-hire gifting gap uncontested. International shipping for remote-first teams. Dietary blindness is a growing HR risk — EDEN solves it. Corporate standing orders not being pitched by any competitor.</div>
-        </div>
-        <div>
-          <div style="font-size:10px;color:var(--GMD);font-weight:700;margin-bottom:4px">Threats</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.8);line-height:1.6">Large food brands entering dietary-safe range. Platform consolidation reducing discovery. Budget-first procurement buyers defaulting to known names.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- LinkedIn/YouTube resources -->
-  <div class="sec">
-    <div class="seclbl">Corporate gifting — top resources</div>
-    <div class="g3">
-      <div class="ccard">
-        <div class="ctitle">LinkedIn posts worth studying</div>
-        <div style="display:flex;flex-direction:column;gap:10px;font-size:12px">
-          <div style="border-left:3px solid var(--GOLD);padding-left:10px">
-            <div style="font-weight:700;color:var(--G);margin-bottom:2px">"Why your corporate gifts fail (and what to do instead)"</div>
-            <div style="color:var(--GMD);font-size:11px">High-engagement LinkedIn format. Problem-first, solution-second. Data hook in opening line.</div>
-          </div>
-          <div style="border-left:3px solid var(--GOLD);padding-left:10px">
-            <div style="font-weight:700;color:var(--G);margin-bottom:2px">"I've received 50 corporate gifts this year. Here's what I actually remembered."</div>
-            <div style="color:var(--GMD);font-size:11px">First-person recipient POV. Performs well with HR/EA audience. Quote format drives shares.</div>
-          </div>
-          <div style="border-left:3px solid var(--GOLD);padding-left:10px">
-            <div style="font-weight:700;color:var(--G);margin-bottom:2px">"The ROI of a good onboarding gift (it's not what you think)"</div>
-            <div style="color:var(--GMD);font-size:11px">Data-led. Referral and retention angle. Targets People & Culture leaders specifically.</div>
-          </div>
-        </div>
-      </div>
-      <div class="ccard">
-        <div class="ctitle">YouTube — corporate gifting strategy</div>
-        <div style="display:flex;flex-direction:column;gap:10px;font-size:12px">
-          <div style="border-left:3px solid var(--OK);padding-left:10px">
-            <div style="font-weight:700;color:var(--G);margin-bottom:2px">"How to Build a Corporate Gifting Programme" — Reachdesk</div>
-            <div style="color:var(--GMD);font-size:11px">Platform perspective. Good for understanding buyer expectations at scale. 40 min.</div>
-          </div>
-          <div style="border-left:3px solid var(--OK);padding-left:10px">
-            <div style="font-weight:700;color:var(--G);margin-bottom:2px">"Gifting as a Sales Strategy" — Sendoso webinar</div>
-            <div style="color:var(--GMD);font-size:11px">How enterprise buyers use gifting platforms. Useful for Reachdesk/Sendoso pitch positioning.</div>
-          </div>
-          <div style="border-left:3px solid var(--OK);padding-left:10px">
-            <div style="font-weight:700;color:var(--G);margin-bottom:2px">"Employee Experience &amp; Gifting ROI" — CIPD / HR Grapevine</div>
-            <div style="color:var(--GMD);font-size:11px">HR-facing content. Retention and engagement framing. Use in outreach to People teams.</div>
-          </div>
-        </div>
-      </div>
-      <div class="ccard">
-        <div class="ctitle">Weekly research update</div>
-        <div style="font-size:11px;color:var(--GMD);line-height:1.6">Updated every Monday by Social Intelligence Agent. Sources: Ask a Manager, Reddit r/jobs, LinkedIn trending, Trustpilot corporate reviews, industry buyer guides.</div>
-        <div style="margin-top:12px;font-size:11px;color:var(--G);font-weight:600">Last updated: 2026-03-29</div>
-        <div style="margin-top:8px;font-size:12px;color:var(--G);line-height:1.6">
-          Current gaps competitors are missing:<br>
-          <span style="color:var(--GMD)">— Dietary transparency at volume (confirmed gap in Reachdesk catalogue)<br>
-          — New-hire gifting with inclusion messaging<br>
-          — International shipping for remote-first teams</span>
-        </div>
-      </div>
-    </div>
+    <div class="seclbl" style="margin-bottom:8px">Latest reviews</div>
+    <div id="sm-latest-reviews" style="display:flex;flex-direction:column;gap:8px"><div style="color:var(--GMD);font-size:12px;padding:12px">Loading reviews…</div></div>
   </div>
 
 </div></div>
@@ -2340,14 +902,15 @@ svg.sp{display:block;width:100%;overflow:visible}
   </div>
 
   <div class="sec">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
       <div class="seclbl" style="margin:0;flex:1" id="plt-chart-period-lbl">Monthly revenue — rolling 12 months</div>
       <div class="ktog"><button class="kb active" id="plt-period-p12m" onclick="window.EDEN.components.platforms.setPeriod('p12m')">P12M</button><button class="kb" id="plt-period-ytd" onclick="window.EDEN.components.platforms.setPeriod('ytd')">YTD</button></div>
     </div>
-    <div class="ktog" id="plt-chart-tabs" style="flex-wrap:wrap;gap:4px;margin-bottom:10px"></div>
-    <div class="card" style="padding:14px 14px 10px">
-      <div id="plt-chart-meta" style="display:flex;gap:20px;margin-bottom:10px;font-size:10px;letter-spacing:0.07em;font-family:var(--F);align-items:center"></div>
-      <svg id="plt-monthly-chart" viewBox="0 0 700 240" preserveAspectRatio="xMidYMid meet" style="width:100%;height:240px;display:block;overflow:visible"></svg>
+    <div class="card" style="padding:0">
+      <table class="dt">
+        <thead><tr><th>Month</th><th class="r">Total</th><th class="r">Shopify</th><th class="r">Amazon</th><th class="r">NOTHS</th><th class="r">Etsy</th><th class="r">Corporate</th><th class="r">Other</th><th class="r">vs Prior Yr</th></tr></thead>
+        <tbody id="plt-monthly-table"><tr><td colspan="9" style="text-align:center;color:var(--GMD);padding:16px">Loading...</td></tr></tbody>
+      </table>
     </div>
   </div>
 
@@ -2388,16 +951,15 @@ svg.sp{display:block;width:100%;overflow:visible}
           <table class="dt">
             <tbody>
               <tr><td style="font-weight:700">VAT Number</td><td style="font-weight:700">GB334583591000</td></tr>
-              <tr class="rowa"><td style="font-weight:700">EORI Number</td><td style="font-weight:700">GB334583591000</td></tr>
               <tr><td style="font-weight:700">IOSS Number</td><td style="font-weight:700">IM4420001405</td></tr>
               <tr class="rowa"><td style="font-weight:700">Incoterm</td><td>DAP (Delivered At Place)</td></tr>
-              <tr><td style="font-weight:700">Commodity Code (full)</td><td style="font-weight:700">1806 90 9091 7007</td></tr>
-              <tr class="rowa"><td style="font-size:11px;color:var(--GMD)">HS + Meursing</td><td style="font-size:11px;color:var(--GMD)">1806.90.9091 + Meursing 7007 — chocolate gifts, retail-ready</td></tr>
+              <tr><td style="font-weight:700">Commodity Code</td><td style="font-weight:700">1806 90 9091</td></tr>
+              <tr class="rowa"><td style="font-weight:700">Meursing Code</td><td style="font-weight:700">7007</td></tr>
               <tr class="rowa"><td style="font-weight:700">Customs description</td><td style="font-size:11px">Retail-ready UK chocolate selection — Country of origin: GB</td></tr>
               <tr><td style="font-weight:700">UPS Account Number</td><td style="font-weight:700">000002502G</td></tr>
               <tr class="rowa"><td style="font-weight:700">Royal Mail Customer Acc.</td><td style="font-weight:700">0681941000</td></tr>
               <tr><td style="font-weight:700">Royal Mail Legal Entity</td><td style="font-weight:700">1000425494</td></tr>
-              <tr><td style="font-weight:700">DPD Local Account</td><td style="font-weight:700">Eden Plant Based Living Ltd: 3017486</td></tr>
+              
             </tbody>
           </table>
         </div>
@@ -2409,7 +971,7 @@ svg.sp{display:block;width:100%;overflow:visible}
               <tr><td>Royal Mail — Small Wheels (24/7)</td><td>0117 9022 366</td><td style="font-size:11px;color:var(--GMD)">Standard red van collection year-round</td></tr>
               <tr class="rowa"><td>Royal Mail — Large Wheels (24/7)</td><td>0117 9022310</td><td style="font-size:11px;color:var(--GMD)">Seasonal YORK collection</td></tr>
               <tr><td>Royal Mail General</td><td>03457 950 950</td><td style="font-size:11px;color:var(--GMD)">business.royalmail.com</td></tr>
-              <tr class="rowa"><td>DPD Local</td><td>0121 275 4824</td><td style="font-size:11px;color:var(--GMD)">Acc: Eden Plant Based Living Ltd 3017486</td></tr>
+              
               <tr><td>UPS Account Manager</td><td>07929 105349</td><td style="font-size:11px;color:var(--GMD)">Francisco Jorge — fjorge@ups.com</td></tr>
               <tr class="rowa"><td>RH Fibreboard (packaging)</td><td colspan="2">rbolt@rhfibreboard.co.uk</td></tr>
               <tr><td>Artas Pack (gift tubes)</td><td colspan="2">beyza.ocak@artaspack.com</td></tr>
@@ -2423,11 +985,10 @@ svg.sp{display:block;width:100%;overflow:visible}
           <table class="dt">
             <thead><tr><th>Service</th><th class="r">Up to 100g</th><th class="r">Up to 500g</th><th class="r">Up to 1kg</th><th class="r">Up to 2kg</th></tr></thead>
             <tbody>
-              <tr><td>1st Class Large Letter</td><td class="r">£1.35</td><td class="r">£2.20</td><td class="r">—</td><td class="r">—</td></tr>
-              <tr class="rowa"><td>2nd Class Large Letter</td><td class="r">£1.10</td><td class="r">£1.60</td><td class="r">—</td><td class="r">—</td></tr>
-              <tr><td>Tracked 24</td><td class="r">£2.70</td><td class="r">£3.30</td><td class="r">£3.90</td><td class="r">£4.90</td></tr>
-              <tr class="rowa"><td>Tracked 48</td><td class="r">£2.10</td><td class="r">£2.60</td><td class="r">£3.10</td><td class="r">£4.10</td></tr>
-              <tr><td>Special Delivery (1pm)</td><td class="r">£7.45</td><td class="r">£8.95</td><td class="r">£10.45</td><td class="r">£13.45</td></tr>
+              <tr><td>2nd Class Standard Letter</td><td class="r">78p</td><td class="r">—</td><td class="r">—</td><td class="r">—</td></tr>
+              <tr class="rowa"><td>Tracked 24 <span style="font-size:10px;color:var(--GMD)">Parcel only</span></td><td class="r">£3.15</td><td class="r">£3.30</td><td class="r">£3.90</td><td class="r">£4.90</td></tr>
+              <tr><td>Tracked 48 <span style="font-size:10px;color:var(--GMD)">Parcel only</span></td><td class="r">£2.75</td><td class="r">£2.60</td><td class="r">£3.10</td><td class="r">£4.10</td></tr>
+              <tr class="rowa"><td>Special Delivery (1pm)</td><td class="r">£7.45</td><td class="r">£8.95</td><td class="r">£10.45</td><td class="r">£13.45</td></tr>
             </tbody>
           </table>
           <div class="dnote" style="margin-top:4px">Business account rates lower. Confirm with RM account manager. Rates as of early 2026.</div>
@@ -2449,23 +1010,7 @@ svg.sp{display:block;width:100%;overflow:visible}
 
       <!-- Croatia customs composition record -->
       <div style="margin-top:16px;border-top:2px solid var(--GOLD);padding-top:14px">
-        <div style="font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--AMB);font-weight:700;margin-bottom:10px">Croatia customs — active case (composition response)</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-          <div>
-            <table class="dt">
-              <tbody>
-                <tr><td style="font-weight:700">Meursing Code</td><td style="font-weight:700">7007</td></tr>
-                <tr class="rowa"><td style="font-weight:700">EU CN Code</td><td>1806 90 9091 7007 (Meursing 7007)</td></tr>
-                <tr><td style="font-weight:700">US HTS Code</td><td style="font-weight:700;color:var(--G)">1806.90.9091</td></tr>
-                <tr><td>Milk fat</td><td>0% — plant-based, no dairy</td></tr>
-                <tr class="rowa"><td>Milk proteins</td><td>0% — plant-based, no dairy</td></tr>
-                <tr><td>Sucrose</td><td>37.9%</td></tr>
-                <tr class="rowa"><td>Starch / glucose</td><td>12.3%</td></tr>
-                <tr><td>Cocoa solids</td><td>43% minimum</td></tr>
-                <tr class="rowa"><td>Country of origin</td><td>United Kingdom</td></tr>
-              </tbody>
-            </table>
-          </div>
+        
           <div>
             <div style="background:var(--ABL);border:1px solid var(--GOLD);border-radius:var(--r8);padding:14px;font-size:12px;line-height:1.7;color:var(--AMB)">
               <div style="font-weight:700;margin-bottom:8px;color:var(--G)">Case notes — priority clearance</div>
@@ -2475,50 +1020,11 @@ svg.sp{display:block;width:100%;overflow:visible}
             </div>
           </div>
         </div>
-      </div>
 
     </div>
   </div>
 
-  <div class="sec">
-    <div class="seclbl">EU clearance cost breakdown — £30 Chocolate Gift (1kg)</div>
-    <div class="card" style="border-top:3px solid var(--GOLD)">
-      <div style="font-size:11px;color:var(--GMD);margin-bottom:14px">
-        Basis: £30 product · £8 est. shipping · EU duty 8% on £30 (HS 1806.90) = £2.40 · GC fee £1.82 flat + 15% of D&amp;T.
-        VAT assessed on (product + shipping + duty). <strong>Clearance ceiling: £12 to EDEN.</strong>
-        Target brokerage: <strong style="color:var(--G)">75%</strong>.
-      </div>
-      <table class="dt">
-        <thead>
-          <tr>
-            <th>Country</th>
-            <th class="r">Contract fee</th>
-            <th class="r">VAT rate</th>
-            <th class="r">VAT amount</th>
-            <th class="r">D&amp;T total</th>
-            <th class="r">GC 15% fee</th>
-            <th class="r">50% brokerage</th>
-            <th class="r">Total @ 50%</th>
-            <th class="r" style="color:var(--G);font-weight:700">75% brokerage</th>
-            <th class="r" style="color:var(--G);font-weight:700">Total @ 75%</th>
-            <th class="r">Saving</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="row-crit"><td>Ireland</td><td class="r">£24.00</td><td class="r">23%</td><td class="r">£9.29</td><td class="r">£11.69</td><td class="r">£1.75</td><td class="r">£12.00</td><td class="r" style="color:var(--RED);font-weight:700">£15.57</td><td class="r" style="color:var(--G);font-weight:700">£6.00</td><td class="r" style="color:var(--G);font-weight:700">£9.57</td><td class="r">−£6.00</td></tr>
-          <tr class="rowa row-crit"><td>Spain</td><td class="r">£17.00</td><td class="r">21%</td><td class="r">£8.48</td><td class="r">£10.88</td><td class="r">£1.63</td><td class="r">£8.50</td><td class="r" style="color:var(--RED);font-weight:700">£11.95</td><td class="r" style="color:var(--AMB);font-weight:700">£4.25</td><td class="r" style="color:var(--AMB);font-weight:700">£7.70</td><td class="r">−£4.25</td></tr>
-          <tr><td>France</td><td class="r">£12.00</td><td class="r">20%</td><td class="r">£8.08</td><td class="r">£10.48</td><td class="r">£1.57</td><td class="r">£6.00</td><td class="r" style="color:var(--AMB);font-weight:700">£9.39</td><td class="r" style="color:var(--G);font-weight:700">£3.00</td><td class="r" style="color:var(--G);font-weight:700">£6.39</td><td class="r">−£3.00</td></tr>
-          <tr class="rowa"><td>Germany</td><td class="r">£10.00</td><td class="r">19%</td><td class="r">£7.67</td><td class="r">£10.07</td><td class="r">£1.51</td><td class="r">£5.00</td><td class="r" style="color:var(--AMB);font-weight:700">£8.33</td><td class="r" style="color:var(--G);font-weight:700">£2.50</td><td class="r" style="color:var(--G);font-weight:700">£5.83</td><td class="r">−£2.50</td></tr>
-          <tr><td>Netherlands</td><td class="r">£8.00</td><td class="r">21%</td><td class="r">£8.48</td><td class="r">£10.88</td><td class="r">£1.63</td><td class="r">£4.00</td><td class="r" style="color:var(--GMD)">£7.45</td><td class="r" style="color:var(--G);font-weight:700">£2.00</td><td class="r" style="color:var(--G);font-weight:700">£5.45</td><td class="r">−£2.00</td></tr>
-          <tr class="rowa"><td>Italy</td><td class="r">£8.00</td><td class="r">22%</td><td class="r">£8.89</td><td class="r">£11.29</td><td class="r">£1.69</td><td class="r">£4.00</td><td class="r" style="color:var(--GMD)">£7.51</td><td class="r" style="color:var(--G);font-weight:700">£2.00</td><td class="r" style="color:var(--G);font-weight:700">£5.51</td><td class="r">−£2.00</td></tr>
-        </tbody>
-      </table>
-      <div class="dnote" style="margin-top:8px">
-        Red = above £12 ceiling at 50% brokerage. Green columns = 75% target rate. Ireland and Spain above ceiling at 50% — require 75% to be viable.
-        GC fee = £1.82 flat + 15% of (duty + VAT). D&amp;T = EU duty + VAT combined. Contract fee is annual fee amortised per-order at expected volume.
-      </div>
-    </div>
-  </div>
+  
 
 
 </div></div>
@@ -2543,54 +1049,61 @@ svg.sp{display:block;width:100%;overflow:visible}
     </div>
   </div>
 
-  <div class="sec">
-    <div class="seclbl">Product stock — velocity &amp; component lead times</div>
-    <div class="card" style="border-top:3px solid var(--G)">
-      <table class="dt">
-        <thead><tr><th>Product</th><th class="r">COGS</th><th class="r">30d Vel.</th><th class="r">60d Vel.</th><th class="r">Longest-lead component</th><th class="r">Min safety stock</th><th class="r" style="color:var(--RED)">Order by</th></tr></thead>
-        <tbody id="stock-vel-body">
-          <tr><td colspan="7" style="text-align:center;color:var(--GMD);padding:12px">Loading...</td></tr>
-        </tbody>
-      </table>
-      <div class="dnote" id="stock-vel-note">Velocity computed live from ShipStation orders. Lead times are estimates — confirm each supplier directly. Safety stock = velocity × lead time. Order by = today minus lead time from projected stockout.</div>
-    </div>
-  </div>
+  
 
-  <div class="sec">
-    <div class="seclbl" style="color:var(--AMB)">Packaging stock — separate lead times</div>
-    <div class="card" style="border-top:3px solid var(--GOLD);background:var(--CREAM)">
+  
+
+
+  <!-- BoM Matrix -->
+
+  <!-- BoM Matrix -->
+
+  <div class="sec" id="shipping-calc-section">
+    <div class="seclbl">International shipping rates — tracked parcel</div>
+    <div class="card" style="padding:20px 24px;overflow-x:auto">
       <table class="dt">
-        <thead><tr><th>Packaging Item</th><th>Supplier</th><th class="r">Cost/unit</th><th class="r">Annual vol.</th><th class="r">Est. lead time</th><th class="r">Used in</th><th></th></tr></thead>
+        <thead>
+          <tr>
+            <th>Weight</th><th class="r">Germany</th><th class="r">France</th><th class="r">Italy</th><th class="r">Spain</th><th class="r">Poland</th><th class="r">Sweden</th><th class="r">Netherlands</th><th class="r">Belgium</th><th class="r">Ireland</th><th class="r">Croatia</th><th class="r">USA</th>
+          </tr>
+        </thead>
         <tbody>
-          <tr class="row-crit"><td><span class="pn">Gift Tube</span><div class="ps">80mm dia × 220mm · KRAFT · CMYK matt lam · hot foil · REDESIGN PENDING</div></td><td>Chinese factory</td><td class="r">£0.92–£1.08</td><td class="r">9,000</td><td class="r" style="color:var(--RED);font-weight:700">6–8 weeks</td><td>Petite</td><td><button class="expbtn" onclick="tog('pk1',this)">Detail &#9660;</button></td></tr>
-          <tr class="detrow" id="pk1"><td colspan="7" class="detcell">MOQ: 3,000 @ £1.024 · 5,000 @ £0.895 · 7,500 @ £0.835 · 24/case, 60×40×40cm. Chinese supplier = longest packaging lead time across the range. At 19 Petite/day, 6-week lead = 800 units minimum order window. Redesign pending — confirm design freeze before placing order.</td></tr>
-          <tr class="rowa"><td><span class="pn">Wicker Hamper Basket (18")</span><div class="ps">45/42 × 30/26 × 20/17cm · REDESIGN PENDING</div></td><td>Gadsby</td><td class="r">£11.00</td><td class="r">1,000</td><td class="r" style="color:var(--AMB);font-weight:700">4–6 weeks</td><td>Prestige</td><td><button class="expbtn" onclick="tog('pk2',this)">Detail &#9660;</button></td></tr>
-          <tr class="detrow" id="pk2"><td colspan="7" class="detcell">Wicker basket is the highest unit-cost packaging item (£11.00). Very low volume (Prestige <0.1/day). However, lead time is the second longest after gift tubes — order well in advance for Q4.</td></tr>
-          <tr><td><span class="pn">Small Hamper Box (Standard)</span><div class="ps">304×240×98mm · litho 4-colour · recycled board · REDESIGN PENDING</div></td><td>RH Fibreboard</td><td class="r">£1.40</td><td class="r">10,000</td><td class="r" style="color:var(--AMB);font-weight:700">3–4 weeks</td><td>Cocoa, Signature, Pamper</td><td><button class="expbtn" onclick="tog('pk3',this)">Detail &#9660;</button></td></tr>
-          <tr class="detrow" id="pk3"><td colspan="7" class="detcell">RHF412628/A · E200K200T board · litho 4-colour both sides. Serves three product lines: Cocoa (9.8/day), Signature (5.5/day), Pamper. Combined demand ~15–16 units/day. At 3-week lead = 315 units minimum safety stock. Redesign pending — confirm before reordering.</td></tr>
-          <tr class="rowa"><td><span class="pn">Single Postal Outer</span><div class="ps">395×248×105mm · flexo 2-colour · seal strip</div></td><td>RH Fibreboard</td><td class="r">£0.70</td><td class="r">7,000</td><td class="r">3–4 weeks</td><td>Petite</td><td><button class="expbtn" onclick="tog('pk4',this)">Detail &#9660;</button></td></tr>
-          <tr class="detrow" id="pk4"><td colspan="7" class="detcell">RHF413029/A · B200K200T · flexo 2-colour. Used for Petite (19/day). At 3-week lead = 399 units minimum safety stock. This is a high-frequency reorder item.</td></tr>
-          <tr><td><span class="pn">Double Postal Outer</span><div class="ps">457×248×105mm · flexo 2-colour · seal strip</div></td><td>RH Fibreboard</td><td class="r">£0.77</td><td class="r">3,000</td><td class="r">3–4 weeks</td><td>Cocoa, Signature, Pamper</td><td><button class="expbtn" onclick="tog('pk5',this)">Detail &#9660;</button></td></tr>
-          <tr class="detrow" id="pk5"><td colspan="7" class="detcell">RHF412760/A · B200K200T · flexo 2-colour. Shared across Cocoa, Signature, Pamper — combined ~15–16/day. At 3-week lead = 315 units minimum safety stock.</td></tr>
-          <tr class="rowa"><td><span class="pn">Large Hamper Box</span><div class="ps">380×270×150mm · litho · REDESIGN PENDING</div></td><td>RH Fibreboard</td><td class="r">£3.00</td><td class="r">1,000</td><td class="r">3–4 weeks</td><td>Grand</td><td><button class="expbtn" onclick="tog('pk6',this)">Detail &#9660;</button></td></tr>
-          <tr class="detrow" id="pk6"><td colspan="7" class="detcell">LARGE LITHO quote ~£3.00/unit at 1,000. Low volume (Grand 0.6/day). At 3-week lead = 13 units safety stock. Redesign pending — new size: 380×270×150mm vs old 440×343×163mm.</td></tr>
-          <tr><td><span class="pn">Large Postal Outer</span><div class="ps">For Grand and Prestige · flexo 2-colour</div></td><td>RH Fibreboard</td><td class="r">£0.70</td><td class="r">1,000</td><td class="r">3–4 weeks</td><td>Grand, Prestige</td><td><button class="expbtn" onclick="tog('pk7',this)">Detail &#9660;</button></td></tr>
-          <tr class="detrow" id="pk7"><td colspan="7" class="detcell">Shared across Grand + Prestige. Very low combined volume. At 3-week lead = 13 units safety stock.</td></tr>
-          <tr class="rowa"><td><span class="pn">Greetings Cards (themed)</span><div class="ps">All 10 themes: LOVE, BABY, BIRTHDAY, CELEBRATE, JFY, THANKU, MUM, DAD, XMAS, EDEN</div></td><td>Printed.com</td><td class="r">£0.11–£0.19</td><td class="r">20,000+</td><td class="r" style="color:var(--OK)">5–7 days</td><td>All products</td><td><button class="expbtn" onclick="tog('pk8',this)">Detail &#9660;</button></td></tr>
-          <tr class="detrow" id="pk8"><td colspan="7" class="detcell">Christmas: £0.11 at 10,000. All others: £0.13–£0.19 at 250–1,000. Short lead time makes this low-risk. REDESIGN PENDING on postcards. Redesign paper quality flagged in BOM.</td></tr>
-          <tr><td><span class="pn">Shredded Paper Fill (Zig Zag 10KG Cream)</span><div class="ps">Fills ~300 standard hampers or 30–40 large per bag · "Currently looks cheap" — flagged</div></td><td>RajaPack</td><td class="r">£0.30/hamper</td><td class="r">45 bags/yr</td><td class="r" style="color:var(--OK)">3–5 days</td><td>All hampers</td><td><button class="expbtn" onclick="tog('pk9',this)">Detail &#9660;</button></td></tr>
-          <tr class="detrow" id="pk9"><td colspan="7" class="detcell">£29.99 per 10KG bag. Note from BOM: "Currently looks cheap" — flagged for quality review. Short lead and commodity item — not a reorder risk. Review whether premium alternative improves unboxing.</td></tr>
+          <tr><td>1kg</td><td class="r">£12.50</td><td class="r">£11.50</td><td class="r">£13.50</td><td class="r">£13.00</td><td class="r">£13.50</td><td class="r">£13.00</td><td class="r">£11.50</td><td class="r">£11.50</td><td class="r">£9.50</td><td class="r">£14.50</td><td class="r">£18.50</td></tr>
+          <tr><td>3kg</td><td class="r">£18.50</td><td class="r">£17.50</td><td class="r">£19.50</td><td class="r">£19.00</td><td class="r">£19.50</td><td class="r">£19.00</td><td class="r">£17.50</td><td class="r">£17.50</td><td class="r">£13.50</td><td class="r">£21.50</td><td class="r">£28.50</td></tr>
+          <tr><td>5kg</td><td class="r">£24.50</td><td class="r">£23.50</td><td class="r">£26.50</td><td class="r">£26.00</td><td class="r">£26.50</td><td class="r">£25.50</td><td class="r">£23.50</td><td class="r">£23.50</td><td class="r">£17.50</td><td class="r">£28.50</td><td class="r">£39.50</td></tr>
+          <tr><td>10kg</td><td class="r">£38.50</td><td class="r">£37.50</td><td class="r">£41.50</td><td class="r">£41.00</td><td class="r">£41.50</td><td class="r">£40.50</td><td class="r">£37.50</td><td class="r">£37.50</td><td class="r">£27.50</td><td class="r">£44.50</td><td class="r">£64.50</td></tr>
         </tbody>
       </table>
-      <div class="dnote">All RH Fibreboard packaging is REDESIGN PENDING — do not place large orders until design is confirmed. Gift Tubes (Chinese supplier) have the longest lead in the entire supply chain at 6–8 weeks. AERY (Pamper components) is the longest-lead food/product supplier at est. 14–21 days. Lead times are estimated — confirm with each supplier before using for reorder planning.</div>
+      <div class="dnote" style="margin-top:8px">Royal Mail tracked international parcel rates. Confirm current rates at royalmail.com before quoting customers.</div>
     </div>
   </div>
 
-
-  <!-- BoM Matrix -->
-
-  <!-- BoM Matrix -->
-
+  <div class="sec">
+    <div class="seclbl">EU clearance cost — worked example</div>
+    <div class="card" style="padding:20px 24px">
+      <div class="ctitle" style="margin-bottom:14px">£30 Chocolate Gift (1kg) — Germany example</div>
+      <table class="dt" style="margin-bottom:16px">
+        <thead><tr><th>Cost item</th><th class="r">Amount</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Product price (inc. UK VAT)</td><td class="r">£30.00</td><td style="font-size:11px;color:var(--GMD)">Charged to customer</td></tr>
+          <tr class="rowa"><td>International shipping (1kg, Germany)</td><td class="r">£12.50</td><td style="font-size:11px;color:var(--GMD)">Royal Mail / UPS — business rate approx</td></tr>
+          <tr><td>EU import duty (1806 90 9091)</td><td class="r">£0.00</td><td style="font-size:11px;color:var(--GMD)">Under IOSS €150 threshold — zero duty</td></tr>
+          <tr class="rowa"><td>EU VAT (collected via IOSS)</td><td class="r">£0.00</td><td style="font-size:11px;color:var(--GMD)">Collected at checkout via IOSS IM4420001405</td></tr>
+          <tr><td style="font-weight:700">Total landed cost to customer</td><td class="r" style="font-weight:700">£42.50</td><td style="font-size:11px;color:var(--GMD)">Product + shipping only — no additional charges</td></tr>
+        </tbody>
+      </table>
+      <div class="ctitle" style="margin-bottom:10px">Order above €150 threshold (standard shipping quoted at cost)</div>
+      <table class="dt">
+        <thead><tr><th>Cost item</th><th class="r">Amount</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>EU import duty (1806 90 9091)</td><td class="r">8% on value</td><td style="font-size:11px;color:var(--GMD)">Applied by recipient's customs. Standard choc rate.</td></tr>
+          <tr class="rowa"><td>EU VAT (destination country)</td><td class="r">Local rate</td><td style="font-size:11px;color:var(--GMD)">Germany 19%, France 20%, Ireland 23%, Italy 22%</td></tr>
+          <tr><td>Customs clearance admin fee</td><td class="r">£5–12</td><td style="font-size:11px;color:var(--GMD)">Carrier admin charge — varies by carrier</td></tr>
+        </tbody>
+      </table>
+      <div class="dnote" style="margin-top:10px">IOSS number: IM4420001405 · Commodity: 1806 90 9091 · Meursing: 7007 · Incoterm: DAP. For orders under €150, no additional charges apply to the recipient. Include IOSS number on all EU manifests.</div>
+    </div>
+  </div>
 
 </div></div>
 
@@ -2598,125 +1111,6 @@ svg.sp{display:block;width:100%;overflow:visible}
      CUSTOMERS TAB
 ═══════════════════════════════════ -->
 
-<!-- ═══════════════════════════════════
-     SCENARIO TAB
-═══════════════════════════════════ -->
-<div class="panel" id="tab-scenario"><div class="page">
-
-  <!-- ── SECTION 1: Product Test ───────────────────────────────── -->
-  <div class="sec">
-    <div class="seclbl">Product test — per unit economics</div>
-    <div class="card">
-
-      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:12px;margin-bottom:16px">
-        <div class="sc-in" style="grid-column:span 2"><div class="sc-lbl">Product name</div><input class="sc-input" type="text" value="Signature Hamper" id="pt-name" oninput="calcProduct()"></div>
-        <div class="sc-in"><div class="sc-lbl">RRP inc VAT (£)</div><input class="sc-input" type="number" value="65" step="0.01" id="pt-rrp-input" oninput="calcProduct()"></div>
-        <div class="sc-in"><div class="sc-lbl">COGS (£)</div><input class="sc-input" type="number" value="23.21" step="0.01" id="pt-cogs" oninput="calcProduct()"></div>
-        <div class="sc-in"><div class="sc-lbl">P&amp;P (£)</div><input class="sc-input" type="number" value="4.50" step="0.01" id="pt-pp" oninput="calcProduct()"></div>
-        <div class="sc-in"><div class="sc-lbl">Discount %</div><input class="sc-input" type="number" value="0" min="0" max="100" id="pt-disc" oninput="calcProduct()"></div>
-        <div class="sc-in"><div class="sc-lbl">Units target</div><input class="sc-input" type="number" value="100" id="pt-units" oninput="calcProduct()"></div>
-      </div>
-
-      <!-- Per-unit summary -->
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px">
-        <div class="sc-res" style="background:var(--G)"><div class="sc-rl">RRP (inc VAT)</div><div class="sc-rv" id="pt-rrp">—</div></div>
-        <div class="sc-res" style="background:var(--GDK)"><div class="sc-rl">Ex-VAT revenue</div><div class="sc-rv" id="pt-exvat">—</div></div>
-        <div class="sc-res" style="background:var(--GDK)"><div class="sc-rl">Net after COGS + P&amp;P</div><div class="sc-rv" id="pt-gross">—</div></div>
-        <div class="sc-res" style="background:rgba(180,162,105,0.85)"><div class="sc-rl">Gross margin %</div><div class="sc-rv" id="pt-margin">—</div></div>
-        <div class="sc-res" style="background:var(--G)"><div class="sc-rl">Total profit (<span id="pt-units-lbl">100</span> units)</div><div class="sc-rv" id="pt-total">—</div></div>
-      </div>
-
-      <!-- Platform breakdown -->
-      <div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--GOM);margin-bottom:10px">Amount made per platform (per unit, after commission)</div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px" id="pt-platform-grid">
-        <div class="sc-in" style="display:flex;flex-direction:column;align-items:flex-start">
-          <div style="font-size:10px;color:var(--G);font-weight:700;margin-bottom:4px">Shopify <span style="font-weight:400;color:var(--GMD)">2.5%</span></div>
-          <div style="font-size:22px;font-weight:700;color:var(--G)" id="pt-pl-shopify">—</div>
-        </div>
-        <div class="sc-in" style="display:flex;flex-direction:column;align-items:flex-start">
-          <div style="font-size:10px;color:var(--G);font-weight:700;margin-bottom:4px">Amazon <span style="font-weight:400;color:var(--GMD)">15%</span></div>
-          <div style="font-size:22px;font-weight:700;color:var(--G)" id="pt-pl-amazon">—</div>
-        </div>
-        <div class="sc-in" style="display:flex;flex-direction:column;align-items:flex-start">
-          <div style="font-size:10px;color:var(--AMB);font-weight:700;margin-bottom:4px">NOTHS / Yumbles <span style="font-weight:400;color:var(--GMD)">25%</span></div>
-          <div style="font-size:22px;font-weight:700;color:var(--AMB)" id="pt-pl-noths">—</div>
-        </div>
-        <div class="sc-in" style="display:flex;flex-direction:column;align-items:flex-start">
-          <div style="font-size:10px;color:var(--RED);font-weight:700;margin-bottom:4px">Virgin <span style="font-weight:400;color:var(--GMD)">30%</span></div>
-          <div style="font-size:22px;font-weight:700;color:var(--RED)" id="pt-pl-virgin">—</div>
-        </div>
-        <div class="sc-in" style="display:flex;flex-direction:column;align-items:flex-start">
-          <div style="font-size:10px;color:var(--G);font-weight:700;margin-bottom:4px">GiftSenda <span style="font-weight:400;color:var(--GMD)">15%</span></div>
-          <div style="font-size:22px;font-weight:700;color:var(--G)" id="pt-pl-giftsenda">—</div>
-        </div>
-        <div class="sc-in" style="display:flex;flex-direction:column;align-items:flex-start">
-          <div style="font-size:10px;color:var(--G);font-weight:700;margin-bottom:4px">Sendoso <span style="font-weight:400;color:var(--GMD)">10%</span></div>
-          <div style="font-size:22px;font-weight:700;color:var(--G)" id="pt-pl-sendoso">—</div>
-        </div>
-        <div class="sc-in" style="display:flex;flex-direction:column;align-items:flex-start">
-          <div style="font-size:10px;color:var(--AMB);font-weight:700;margin-bottom:4px">Needi <span style="font-weight:400;color:var(--GMD)">20%</span></div>
-          <div style="font-size:22px;font-weight:700;color:var(--AMB)" id="pt-pl-needi">—</div>
-        </div>
-        <div class="sc-in" style="display:flex;flex-direction:column;align-items:flex-start">
-          <div style="font-size:10px;color:var(--RED);font-weight:700;margin-bottom:4px">ReachDesk <span style="font-weight:400;color:var(--GMD)">27%</span></div>
-          <div style="font-size:22px;font-weight:700;color:var(--RED)" id="pt-pl-reachdesk">—</div>
-        </div>
-      </div>
-
-      <!-- Custom commission -->
-      <div style="background:var(--LG);border-radius:var(--r4);padding:12px 14px">
-        <div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--GDK);margin-bottom:8px">Custom commission test</div>
-        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
-          <div class="sc-in" style="width:160px"><div class="sc-lbl">Commission %</div><input class="sc-input" type="number" value="20" min="0" max="100" id="pt-custom-comm" oninput="calcProduct()"></div>
-          <div><div style="font-size:10px;color:var(--GMD)">Profit per unit</div><div style="font-size:24px;font-weight:700;color:var(--G)" id="pt-custom-profit">—</div></div>
-          <div><div style="font-size:10px;color:var(--GMD)">Margin %</div><div style="font-size:24px;font-weight:700;color:var(--G)" id="pt-custom-margin">—</div></div>
-          <div><div style="font-size:10px;color:var(--GMD)">Total (<span id="pt-units-lbl2">100</span> units)</div><div style="font-size:24px;font-weight:700;color:var(--G)" id="pt-custom-total">—</div></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ── SECTION 2: Annual target calculator ───────────────────── -->
-  <div class="sec">
-    <div class="seclbl">Annual target calculator</div>
-    <div class="card">
-
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">
-        <div class="sc-in"><div class="sc-lbl">Annual target (£)</div><input class="sc-input" type="number" value="1000000" id="yr-target" oninput="calcYear()"></div>
-        <div class="sc-in"><div class="sc-lbl">Average order value (£)</div><input class="sc-input" type="number" value="54.57" id="yr-aov" oninput="calcYear()"></div>
-        <div class="sc-in"><div class="sc-lbl">Gross profit margin %</div><input class="sc-input" type="number" value="45" min="0" max="100" id="yr-margin" oninput="calcYear()"></div>
-      </div>
-
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
-        <div class="sc-res" style="background:var(--G)"><div class="sc-rl">Orders per day required</div><div class="sc-rv" id="yr-orders-day">—</div></div>
-        <div class="sc-res" style="background:var(--GDK)"><div class="sc-rl">Orders per month required</div><div class="sc-rv" id="yr-orders-month">—</div></div>
-        <div class="sc-res" style="background:var(--GDK)"><div class="sc-rl">Total orders needed (year)</div><div class="sc-rv" id="yr-orders-year">—</div></div>
-        <div class="sc-res" style="background:rgba(180,162,105,0.85)"><div class="sc-rl">Gross profit at target</div><div class="sc-rv" id="yr-profit">—</div></div>
-      </div>
-
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
-        <div style="background:var(--GXP);border-radius:var(--r4);padding:14px">
-          <div style="font-size:10px;color:var(--GMD);margin-bottom:4px">COGS to produce (year)</div>
-          <div style="font-size:22px;font-weight:700;color:var(--G)" id="yr-cogs">—</div>
-          <div style="font-size:10px;color:var(--GMD);margin-top:4px">Total material cost at target volume</div>
-        </div>
-        <div style="background:var(--GXP);border-radius:var(--r4);padding:14px">
-          <div style="font-size:10px;color:var(--GMD);margin-bottom:4px">Gap to target from current run rate</div>
-          <div style="font-size:22px;font-weight:700;color:var(--AMB)" id="yr-gap">—</div>
-          <div style="font-size:10px;color:var(--GMD);margin-top:4px" id="yr-gap-meta">Based on YTD revenue</div>
-        </div>
-        <div style="background:var(--GXP);border-radius:var(--r4);padding:14px">
-          <div style="font-size:10px;color:var(--GMD);margin-bottom:4px">Extra orders/day needed vs now</div>
-          <div style="font-size:22px;font-weight:700;color:var(--RED)" id="yr-extra-day">—</div>
-          <div style="font-size:10px;color:var(--GMD);margin-top:4px" id="yr-extra-meta">vs current pace</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-</div></div>
 
 
 <!-- ═══════════════════════════════════
@@ -2742,12 +1136,7 @@ svg.sp{display:block;width:100%;overflow:visible}
 
   <div class="tp-demo-bar" id="tp-demo-bar">Demo mode — paste your Sheet ID into TP_SHEET_ID in goals.js to show live data</div>
 
-  <div class="tp-qtr-bar">
-    <div class="tp-q" id="tp-q1"><div class="tp-qlbl">Q1 · Jan–Mar</div><div class="tp-qtheme">Plan · Research · Maintain</div><div class="tp-qjobs"><span class="tp-qjob">BOM finalised</span><span class="tp-qjob">Corp deck</span><span class="tp-qjob">PPC audit</span><span class="tp-qjob">Premises prep</span></div></div>
-    <div class="tp-q" id="tp-q2"><div class="tp-qlbl">Q2 · Apr–Jun</div><div class="tp-qtheme">Implement · Test</div><div class="tp-qjobs"><span class="tp-qjob am">Premises move</span><span class="tp-qjob am">New packaging</span><span class="tp-qjob">B2B live</span><span class="tp-qjob">PPC 25/day</span></div></div>
-    <div class="tp-q" id="tp-q3"><div class="tp-qlbl">Q3 · Jul–Sep</div><div class="tp-qtheme">Refine</div><div class="tp-qjobs"><span class="tp-qjob bl">EU Amazon</span><span class="tp-qjob bl">Photoshoot</span><span class="tp-qjob bl">Website</span><span class="tp-qjob bl">Q4 stock</span></div></div>
-    <div class="tp-q" id="tp-q4"><div class="tp-qlbl">Q4 · Oct–Dec</div><div class="tp-qtheme">Deliver Perfection</div><div class="tp-qjobs"><span class="tp-qjob pu">Xmas production</span><span class="tp-qjob pu">B2B push</span><span class="tp-qjob pu">BF/CM</span></div></div>
-  </div>
+
 
   <div class="tp-sum-bar">
     <div class="tp-sc"><div class="tp-sc-lbl">Jon — done YTD</div><div class="tp-sc-val g" id="tp-ytd-jon">–</div></div>
@@ -2758,23 +1147,8 @@ svg.sp{display:block;width:100%;overflow:visible}
 
   <div class="tp-main" id="tp-lanes"><div style="grid-column:1/-1;padding:60px;text-align:center;color:var(--GMD)">Loading…</div></div>
 
-  <div class="tp-meeting-bar">
-    <div class="tp-mtg-toggle" onclick="document.getElementById('tp-mtg-body').classList.toggle('open');document.getElementById('tp-mtg-arrow').classList.toggle('open')">
-      <div><div class="tp-mtg-lbl">Meeting Protocol</div><div class="tp-mtg-title">Friday review. Monday decisions. Rosie convenes 9:50am.</div></div>
-      <div class="tp-mtg-arrow" id="tp-mtg-arrow">&#9658;</div>
-    </div>
-    <div class="tp-mtg-body" id="tp-mtg-body">
-      <div class="tp-mtg-grid">
-        <div class="tp-mtg-step"><div class="tp-step-num">FRIDAY · by 5pm</div><div class="tp-step-title">Review and mark up</div><div class="tp-step-body">Review your weekly tasks. Mark each done or not done. If not done, add a one-line note: what happened and what the plan is. Updates submitted before Monday — not raised during it.</div></div>
-        <div class="tp-mtg-step"><div class="tp-step-num">MONDAY · 9:50am</div><div class="tp-step-title">Rosie convenes</div><div class="tp-step-body">Each person confirms status in one sentence. Concerns and AOB raised here are added to the panel by Rosie before the meeting closes. The meeting ends at 10:20am.</div></div>
-      </div>
-      <div class="tp-mtg-rules">
-        <div class="tp-rule"><div class="tp-rule-dot"></div>Every task is either complete or has a clear next step and date.</div>
-        <div class="tp-rule"><div class="tp-rule-dot"></div>Issues are raised as soon as they are known — not at the Monday meeting.</div>
-        <div class="tp-rule"><div class="tp-rule-dot"></div>Decisions made in the meeting are acted on the same day.</div>
-        <div class="tp-rule"><div class="tp-rule-dot"></div>The meeting is 30 minutes. Anything requiring more time is a separate conversation.</div>
-      </div>
-    </div>
+  <div id="tp-quote-bar" style="background:var(--G);border-left:4px solid var(--GOLD);padding:22px 32px;margin:0;text-align:center">
+    <div id="tp-quote-text" style="font-size:17px;font-style:italic;color:#fff;font-family:var(--FS);letter-spacing:0.02em;line-height:1.65">—</div>
   </div>
 
   <div class="tp-concerns">
@@ -2800,7 +1174,7 @@ svg.sp{display:block;width:100%;overflow:visible}
       <div class="term"><div class="term-n">ACOS</div><div class="term-d">Advertising Cost of Sale. Amazon-specific metric. Ad spend ÷ ad-attributed revenue on Amazon only. Target below 25%.</div></div>
       <div class="term"><div class="term-n">CPA</div><div class="term-d">Cost Per Acquisition. Ad spend ÷ number of orders. Google ceiling: £15.90 blended. By SKU: Petite £3.25, Cocoa £6.25, Signature £10.91, Pamper £11.62, Grand £19.00, Prestige £27.88.</div></div>
       <div class="term"><div class="term-n">PMAX</div><div class="term-d">Performance Max. Google Ads campaign type that serves across all Google surfaces (Search, Shopping, Display, YouTube, Gmail, Maps) from a single campaign. Asset-based. EDEN &amp; CO. PMAX runs at £45/day focused on letterbox gifts and select chocolate/signature hampers.</div></div>
-      <div class="term"><div class="term-n">tROAS</div><div class="term-d">Target ROAS. Google Smart Bidding strategy that sets bids to achieve a specified return on ad spend. EDEN &amp; CO. Search campaigns reduced from 300% to 200% tROAS in March 2026 to expand reach while maintaining margin.</div></div>
+      <div class="term"><div class="term-n">tROAS</div><div class="term-d">Target ROAS. Google Smart Bidding strategy that sets bids to achieve a specified return on ad spend. EDEN &amp; CO. Search campaigns reduced from 300% to 200% tROAS on 6 March 2026 to expand reach while maintaining margin.</div></div>
     </div>
 
     <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--G);padding:18px 0 6px;border-bottom:2px solid var(--G);margin-bottom:12px">Commercial &amp; Financial</div>
@@ -2852,34 +1226,34 @@ svg.sp{display:block;width:100%;overflow:visible}
 
 </div></div>
 
-<div class="footer">EDEN &amp; CO. CEO FLIGHT DECK &nbsp;·&nbsp; v5.1 &nbsp;·&nbsp; 8 APRIL 2026 &nbsp;·&nbsp; SHEET: 1Zx4fyaKGOuOcfpWmTyn2LZHBzWSUC-8sbOVqCFoh9fE</div>
+<div class="footer">EDEN &amp; CO. CEO FLIGHT DECK &nbsp;·&nbsp; v5.1 &nbsp;·&nbsp; 19 APRIL 2026 &nbsp;·&nbsp; SHEET: 1Zx4fyaKGOuOcfpWmTyn2LZHBzWSUC-8sbOVqCFoh9fE</div>
 
 
 <!-- Data layer (load order matters) -->
-<script src="data/config.js?v=20260408"></script>
-<script src="data/orders-cache.js?v=20260408"></script>
-<script src="data/marketing-cache.js?v=20260408"></script>
-<script src="data/sheets.js?v=20260408"></script>
-<script src="data/transform.js?v=20260408"></script>
-<script src="data/metrics.js?v=20260408"></script>
+<script src="data/config.js"></script>
+<script src="data/orders-cache.js"></script>
+<script src="data/marketing-cache.js"></script>
+<script src="data/sheets.js"></script>
+<script src="data/transform.js"></script>
+<script src="data/metrics.js"></script>
 <!-- Component renderers -->
-<script src="components/overview.js?v=20260408"></script>
-<script src="components/marketing.js?v=20260408"></script>
-<script src="components/klaviyo.js?v=20260408"></script>
-<script src="components/google-ads.js?v=20260408"></script>
-<script src="components/amazon.js?v=20260408"></script>
-<script src="components/platforms.js?v=20260408"></script>
-<script src="components/operations.js?v=20260408"></script>
-<script src="components/customers.js?v=20260408"></script>
-<script src="data/stock-cache.js?v=20260408"></script>
-<script src="data/adspend-cache.js?v=20260408"></script>
-<script src="data/klaviyo-cache.js?v=20260408"></script>
-<script src="data/team-pulse-cache.js?v=20260408"></script>
-<script src="data/bom-cache.js?v=20260408"></script>
-<script src="components/goals.js?v=20260408"></script>
-<script src="components/scenario.js?v=20260408"></script>
+<script src="components/overview.js"></script>
+<script src="components/marketing.js?v=20260419b"></script>
+<script src="components/klaviyo.js"></script>
+<script src="components/google-ads.js"></script>
+<script src="components/amazon.js"></script>
+<script src="components/platforms.js?v=20260419c"></script>
+<script src="components/operations.js?v=20260419b"></script>
+<script src="components/customers.js"></script>
+<script src="data/stock-cache.js?v=20260330b"></script>
+<script src="data/adspend-cache.js"></script>
+<script src="data/klaviyo-cache.js"></script>
+<script src="data/team-pulse-cache.js?v=20260329d"></script>
+<script src="data/bom-cache.js?v=20260330a"></script>
+<script src="components/goals.js?v=20260419b"></script>
+<script src="components/scenario.js"></script>
 <!-- App init (must be last) -->
-<script src="app.js?v=20260408"></script>
+<script src="app.js"></script>
 
 <script>
 function fmt(n) { return '£' + Math.round(n).toLocaleString('en-GB'); }

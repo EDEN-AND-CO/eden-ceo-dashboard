@@ -198,22 +198,10 @@ window.EDEN.components = window.EDEN.components || {};
     console.log('[EDEN] Platforms tab rendered.');
   }
 
-  // ── Monthly platform bar chart ──────────────────────────────────────────────
+  // ── Monthly revenue table ──────────────────────────────────────────────────
 
-  var CHART_TABS = [
-    { key: 'Total',     label: 'All',       color: '#3a5a8a' },
-    { key: 'Shopify',   label: 'Shopify',   color: '#1a7a5e' },
-    { key: 'Amazon',    label: 'Amazon',    color: '#c8830a' },
-    { key: 'NOTHS',     label: 'NOTHS',     color: '#8a3a6a' },
-    { key: 'Yumbles',   label: 'Yumbles',   color: '#6a3a8a' },
-    { key: 'Etsy',      label: 'Etsy',      color: '#c85a1a' },
-    { key: 'Virgin',    label: 'Virgin',    color: '#c81a1a' },
-    { key: 'Corporate', label: 'Corporate', color: '#1a5a8a' }
-  ];
-
-  var _chartPlatform = 'Total';
-  var _chartOrders   = null;
-  var _chartPeriod   = 'p12m';
+  var _chartOrders = null;
+  var _chartPeriod = 'p12m';
 
   function bucketChannel(ch) {
     if (ch === 'Amazon UK' || ch === 'Amazon IRE') return 'Amazon';
@@ -225,217 +213,109 @@ window.EDEN.components = window.EDEN.components || {};
     return date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0');
   }
 
-  function drawBarChart(platform) {
-    var svg = document.getElementById('plt-monthly-chart');
-    var meta = document.getElementById('plt-chart-meta');
-    if (!svg || !_chartOrders) return;
-
-    _chartPlatform = platform;
-
-    // Update tab active state
-    var tabs = document.getElementById('plt-chart-tabs');
-    if (tabs) {
-      tabs.querySelectorAll('.kb').forEach(function (b) {
-        b.classList.toggle('active', b.getAttribute('data-plt') === platform);
-      });
-    }
+  function drawMonthlyTable() {
+    var tbl = document.getElementById('plt-monthly-table');
+    if (!tbl || !_chartOrders) return;
 
     var now = new Date();
     var months = [];
+
     if (_chartPeriod === 'ytd') {
-      // Jan 1 to current month
       for (var i = 0; i <= now.getMonth(); i++) {
         var d = new Date(now.getFullYear(), i, 1);
         var mk = getMonthKey(d);
-        var py = d.getFullYear() - 1;
-        var pmk = py + '-' + String(d.getMonth() + 1).padStart(2, '0');
-        months.push({ key: mk, priorKey: pmk, label: d.toLocaleString('en-GB', { month: 'short' }), year: d.getFullYear() });
+        var pmk = (d.getFullYear() - 1) + '-' + String(d.getMonth() + 1).padStart(2, '0');
+        months.push({ key: mk, priorKey: pmk, label: d.toLocaleString('en-GB', { month: 'short', year: '2-digit' }) });
       }
     } else {
-      // Rolling 12 months
       for (var i = 11; i >= 0; i--) {
         var d = new Date(now.getFullYear(), now.getMonth() - i, 1);
         var mk = getMonthKey(d);
-        var py = d.getFullYear() - 1;
-        var pmk = py + '-' + String(d.getMonth() + 1).padStart(2, '0');
-        months.push({ key: mk, priorKey: pmk, label: d.toLocaleString('en-GB', { month: 'short' }), year: d.getFullYear() });
+        var pmk = (d.getFullYear() - 1) + '-' + String(d.getMonth() + 1).padStart(2, '0');
+        months.push({ key: mk, priorKey: pmk, label: d.toLocaleString('en-GB', { month: 'short', year: '2-digit' }) });
       }
     }
 
-    var curVals   = months.map(function () { return 0; });
-    var priorVals = months.map(function () { return 0; });
+    var COLS = ['Shopify', 'Amazon', 'NOTHS', 'Etsy', 'Corporate', 'Other'];
+    var curMk = getMonthKey(now);
+
+    // Aggregate revenue by month + channel
+    var data = {};
+    months.forEach(function (m) {
+      data[m.key] = { total: 0, prior: 0 };
+      COLS.forEach(function (c) { data[m.key][c] = 0; });
+    });
 
     _chartOrders.forEach(function (o) {
       if (!o.order_date) return;
-      var mk      = getMonthKey(new Date(o.order_date));
-      var ch      = o.channel || 'Unknown';
-      var bucket  = bucketChannel(ch);
-      var match   = platform === 'Total' || bucket === platform || ch === platform;
-      if (!match) return;
-
-      months.forEach(function (m, idx) {
-        if (mk === m.key)      curVals[idx]   += o.amount_paid;
-        if (mk === m.priorKey) priorVals[idx] += o.amount_paid;
-      });
-    });
-
-    var seriesCfg = CHART_TABS.filter(function (t) { return t.key === platform; })[0] || CHART_TABS[0];
-    var barColor  = seriesCfg.color;
-
-    var allVals = curVals.concat(priorVals);
-    var maxVal  = Math.max.apply(null, allVals) || 1;
-
-    // SVG dimensions
-    var W = 700, H = 240;
-    var PAD_L = 44, PAD_R = 10, PAD_T = 12, PAD_B = 26;
-    var chartW = W - PAD_L - PAD_R;
-    var chartH = H - PAD_T - PAD_B;
-    var n      = months.length;
-    var slotW  = chartW / n;
-    var barW   = slotW * 0.55;
-    var gap    = (slotW - barW) / 2;
-
-    function xSlot(i) { return PAD_L + i * slotW; }
-    function barX(i)  { return xSlot(i) + gap; }
-    function yBase()  { return PAD_T + chartH; }
-    function yTop(v)  { return PAD_T + chartH - (v / maxVal) * chartH; }
-    function barH(v)  { return (v / maxVal) * chartH; }
-
-    // Y-axis labels (4 ticks)
-    var yLabHtml = '';
-    var gridHtml = '';
-    for (var g = 0; g <= 3; g++) {
-      var frac = g / 3;
-      var yy   = PAD_T + (1 - frac) * chartH;
-      var val  = maxVal * frac;
-      var lbl  = val >= 1000 ? '£' + Math.round(val / 1000) + 'k' : '£' + Math.round(val);
-      gridHtml  += '<line x1="' + PAD_L + '" y1="' + yy + '" x2="' + (W - PAD_R) + '" y2="' + yy + '" stroke="#e8ecea" stroke-width="0.6"/>';
-      yLabHtml  += '<text x="' + (PAD_L - 4) + '" y="' + (yy + 3) + '" text-anchor="end" fill="#9ab0ab" font-size="8" font-family="var(--F)">' + lbl + '</text>';
-    }
-
-    // Bars
-    var barsHtml = '';
-    curVals.forEach(function (v, i) {
-      var isCurrentMonth = (months[i].key === getMonthKey(now));
-      var opacity = isCurrentMonth ? '0.55' : '1';
-      var h = barH(v);
-      if (h < 0.5) h = 0.5;
-      barsHtml += '<rect x="' + barX(i) + '" y="' + yTop(v) + '" width="' + barW + '" height="' + h + '" fill="' + barColor + '" opacity="' + opacity + '" rx="1.5"/>';
-    });
-
-    // Prior year line
-    var linePts = priorVals.map(function (v, i) {
-      return (xSlot(i) + slotW / 2) + ',' + yTop(v);
-    }).join(' ');
-    var lineHtml = '<polyline points="' + linePts + '" fill="none" stroke="#aabfb8" stroke-width="1.4" stroke-dasharray="4,3" stroke-linejoin="round" stroke-linecap="round"/>';
-
-    // Prior year dots
-    var priorDots = '';
-    priorVals.forEach(function (v, i) {
-      if (v > 0) {
-        priorDots += '<circle cx="' + (xSlot(i) + slotW / 2) + '" cy="' + yTop(v) + '" r="2.2" fill="#aabfb8"/>';
+      var mk = getMonthKey(new Date(o.order_date));
+      var bucket = bucketChannel(o.channel || 'Unknown');
+      var col = COLS.indexOf(bucket) !== -1 ? bucket : 'Other';
+      if (data[mk]) {
+        data[mk].total += o.amount_paid;
+        data[mk][col]  += o.amount_paid;
       }
-    });
-
-    // X-axis labels
-    var xLabHtml = '';
-    months.forEach(function (m, i) {
-      xLabHtml += '<text x="' + (xSlot(i) + slotW / 2) + '" y="' + (H - 6) + '" text-anchor="middle" fill="#9ab0ab" font-size="8" font-family="var(--F)" letter-spacing="0.05em">' + m.label.toUpperCase() + '</text>';
-    });
-
-    // Hover columns (invisible, for tooltip)
-    var hoverHtml = '';
-    months.forEach(function (m, i) {
-      var cx   = Math.round(xSlot(i) + slotW / 2);
-      var tipX = cx > W - 140 ? cx - 136 : cx + 6;
-      var cur  = Math.round(curVals[i]).toLocaleString('en-GB');
-      var pri  = Math.round(priorVals[i]).toLocaleString('en-GB');
-      var chg  = priorVals[i] > 0 ? Math.round(((curVals[i] - priorVals[i]) / priorVals[i]) * 1000) / 10 : null;
-      var chgTxt = chg === null ? 'NEW' : (chg >= 0 ? '+' + chg + '%' : chg + '%');
-      var tipData = [m.label + ' ' + m.year, platform + ': £' + cur, 'Prior: £' + pri, chgTxt].join('|');
-      hoverHtml += '<rect class="plt-hcol" x="' + xSlot(i) + '" y="' + PAD_T + '" width="' + slotW + '" height="' + chartH + '" fill="transparent" data-tip="' + tipData + '" data-tipx="' + tipX + '" data-tipy="' + (PAD_T + 2) + '"/>';
-    });
-
-    svg.innerHTML =
-      gridHtml + yLabHtml +
-      '<line x1="' + PAD_L + '" y1="' + yBase() + '" x2="' + (W - PAD_R) + '" y2="' + yBase() + '" stroke="#cdd8d4" stroke-width="0.8"/>' +
-      barsHtml + lineHtml + priorDots + xLabHtml + hoverHtml +
-      '<g id="plt-bar-tip" opacity="0" pointer-events="none">' +
-        '<rect id="plt-bt-bg" x="0" y="0" width="130" height="66" rx="4" fill="#f4f8f6" stroke="#cdd8d4" stroke-width="0.8"/>' +
-        '<text id="plt-bt-0" x="8" y="16" font-size="9" font-weight="700" fill="' + barColor + '" font-family="var(--F)"></text>' +
-        '<text id="plt-bt-1" x="8" y="30" font-size="8.5" fill="#2d4a40" font-family="var(--F)"></text>' +
-        '<text id="plt-bt-2" x="8" y="44" font-size="8" fill="#9ab0ab" font-family="var(--F)"></text>' +
-        '<text id="plt-bt-3" x="8" y="58" font-size="8.5" font-weight="700" fill="#2d4a40" font-family="var(--F)"></text>' +
-      '</g>';
-
-    svg.querySelectorAll('.plt-hcol').forEach(function (col) {
-      col.addEventListener('mouseenter', function () {
-        var tip  = document.getElementById('plt-bar-tip');
-        if (!tip) return;
-        var lines = col.getAttribute('data-tip').split('|');
-        var tx    = parseFloat(col.getAttribute('data-tipx'));
-        var ty    = parseFloat(col.getAttribute('data-tipy'));
-        tip.setAttribute('opacity', '1');
-        tip.querySelector('#plt-bt-bg').setAttribute('x', tx);
-        tip.querySelector('#plt-bt-bg').setAttribute('y', ty);
-        [0,1,2,3].forEach(function (n) {
-          var el = tip.querySelector('#plt-bt-' + n);
-          el.textContent = lines[n] || '';
-          el.setAttribute('x', tx + 8);
-          el.setAttribute('y', ty + 16 + n * 14);
-        });
-        // Colour the change text
-        var chgEl = tip.querySelector('#plt-bt-3');
-        var chgVal = parseFloat(lines[3]);
-        chgEl.setAttribute('fill', isNaN(chgVal) ? '#9ab0ab' : (chgVal >= 0 ? '#1a7a5e' : '#c0392b'));
-      });
-      col.addEventListener('mouseleave', function () {
-        var tip = document.getElementById('plt-bar-tip');
-        if (tip) tip.setAttribute('opacity', '0');
+      months.forEach(function (m) {
+        if (mk === m.priorKey && data[m.key]) {
+          data[m.key].prior += o.amount_paid;
+        }
       });
     });
 
-    // Meta legend
-    if (meta) {
-      meta.innerHTML =
-        '<span style="display:flex;align-items:center;gap:6px;color:#2d4a40;font-weight:700">' +
-          '<span style="width:14px;height:10px;background:' + barColor + ';border-radius:2px;display:inline-block"></span>' + platform + ' revenue' +
-        '</span>' +
-        '<span style="display:flex;align-items:center;gap:6px;color:#9ab0ab;font-weight:600">' +
-          '<span style="width:14px;border-top:2px dashed #aabfb8;display:inline-block"></span>Prior year' +
-        '</span>' +
-        '<span style="color:#9ab0ab;font-weight:400;font-size:9px;margin-left:auto">Faded bar = current (partial) month</span>';
-    }
+    // Build rows (oldest to newest — scroll to bottom for latest)
+    var rows = months.map(function (m) {
+      var d = data[m.key];
+      var chg = d.prior > 0 ? Math.round(((d.total - d.prior) / d.prior) * 100) : null;
+      var isCur = m.key === curMk;
+      var rowStyle = isCur ? ' style="opacity:0.75"' : '';
+      var partialNote = isCur ? ' <span style="font-size:9px;color:var(--GMD)">(MTD)</span>' : '';
+      var chgHtml = chg === null ? '<span style="color:var(--GMD)">—</span>' : chgSpan(chg, false);
+      var cols = COLS.map(function (c) {
+        var v = d[c];
+        return '<td class="r">' + (v > 50 ? fmtGBP(v) : '<span style="color:var(--GP)">—</span>') + '</td>';
+      }).join('');
+      return '<tr' + rowStyle + '>' +
+        '<td style="white-space:nowrap;font-weight:600">' + m.label + partialNote + '</td>' +
+        '<td class="r" style="font-weight:700">' + fmtGBP(d.total) + '</td>' +
+        cols +
+        '<td class="r">' + chgHtml + '</td>' +
+        '</tr>';
+    }).join('');
+
+    // Totals row
+    var grandTotal = 0;
+    var colTotals = {};
+    COLS.forEach(function (c) { colTotals[c] = 0; });
+    months.forEach(function (m) {
+      var d = data[m.key];
+      grandTotal += d.total;
+      COLS.forEach(function (c) { colTotals[c] += d[c]; });
+    });
+    var totalCols = COLS.map(function (c) {
+      return '<td class="r" style="font-weight:700">' + fmtGBP(colTotals[c]) + '</td>';
+    }).join('');
+    rows += '<tr class="bom-sum-row"><td style="font-weight:700">Total</td>' +
+      '<td class="r" style="font-weight:700">' + fmtGBP(grandTotal) + '</td>' +
+      totalCols + '<td class="r">—</td></tr>';
+
+    tbl.innerHTML = rows;
+
+    var lbl = document.getElementById('plt-chart-period-lbl');
+    if (lbl) lbl.textContent = _chartPeriod === 'ytd' ? 'Monthly revenue — year to date' : 'Monthly revenue — rolling 12 months';
   }
 
   function renderMonthlyChart(orders) {
     _chartOrders = orders;
-
-    var tabs = document.getElementById('plt-chart-tabs');
-    if (tabs && !tabs.hasChildNodes()) {
-      CHART_TABS.forEach(function (t, i) {
-        var btn = document.createElement('button');
-        btn.className = 'kb' + (i === 0 ? ' active' : '');
-        btn.textContent = t.label;
-        btn.setAttribute('data-plt', t.key);
-        btn.onclick = function () { drawBarChart(t.key); };
-        tabs.appendChild(btn);
-      });
-    }
-
-    drawBarChart(_chartPlatform);
+    drawMonthlyTable();
   }
 
   function setView(view, btn) {
     if (!_cachedOrders) return;
     _currentView = view;
-
-    // Toggle button states
     var mtdBtn = document.getElementById('plt-btn-mtd');
     var ytdBtn = document.getElementById('plt-btn-ytd');
     if (mtdBtn) mtdBtn.classList.toggle('active', view === 'mtd');
     if (ytdBtn) ytdBtn.classList.toggle('active', view === 'ytd');
-
     renderPlatformTable(_cachedOrders, view);
   }
 
@@ -445,9 +325,7 @@ window.EDEN.components = window.EDEN.components || {};
     var ytdBtn = document.getElementById('plt-period-ytd');
     if (p12Btn) p12Btn.classList.toggle('active', period === 'p12m');
     if (ytdBtn) ytdBtn.classList.toggle('active', period === 'ytd');
-    var lbl = document.getElementById('plt-chart-period-lbl');
-    if (lbl) lbl.textContent = period === 'ytd' ? 'Monthly revenue — year to date' : 'Monthly revenue — rolling 12 months';
-    if (_chartOrders) drawBarChart(_chartPlatform);
+    if (_chartOrders) drawMonthlyTable();
   }
 
   window.EDEN.components.platforms = { render: render, setView: setView, setPeriod: setPeriod };

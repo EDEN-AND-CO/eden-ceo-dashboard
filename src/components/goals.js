@@ -11,7 +11,7 @@ window.EDEN.components = window.EDEN.components || {};
   'use strict';
 
   // ── Config ──────────────────────────────────────────────────────
-  var TP_OPEX      = 11205;
+  var TP_OPEX = 10230;
   var TP_ORDER_TGT = 50;
 
   // ── Person metadata — role, focus, noise (not in the sheet) ─────
@@ -23,6 +23,45 @@ window.EDEN.components = window.EDEN.components || {};
   };
 
   var PEOPLE = ['Jon', 'Rosie', 'Edith', 'Phoebe'];
+
+  var TP_QUOTES = [
+    "Discipline is the bridge between goals and accomplishment.",
+    "Small daily improvements over time lead to stunning results.",
+    "Don't watch the clock. Do what it does. Keep going.",
+    "The secret of getting ahead is getting started.",
+    "Success is the sum of small efforts repeated day in and day out.",
+    "Focus on being productive instead of busy.",
+    "You don't have to be great to start, but you have to start to be great.",
+    "Work hard in silence. Let success make the noise.",
+    "Don't count the days, make the days count.",
+    "The harder you work for something, the greater you'll feel when you achieve it.",
+    "Dream big. Start small. Act now.",
+    "Push yourself, because no one else is going to do it for you.",
+    "Great things never come from comfort zones.",
+    "It always seems impossible until it's done.",
+    "Don't stop when you're tired. Stop when you're done.",
+    "Wake up with determination. Go to bed with satisfaction.",
+    "Do something today that your future self will thank you for.",
+    "Little things make big days.",
+    "It's going to be hard, but hard is not impossible.",
+    "Don't wait for opportunity. Create it.",
+    "Sometimes we're tested not to show our weaknesses, but to discover our strengths.",
+    "The key to success is to focus on goals, not obstacles.",
+    "Dream it. Wish it. Do it.",
+    "Stay focused and never give up.",
+    "Believe you can and you're halfway there.",
+    "Act as if what you do makes a difference. It does.",
+    "Success is not final, failure is not fatal — it is the courage to continue that counts.",
+    "You are never too old to set another goal or dream a new dream.",
+    "Knowing is not enough; we must apply. Wishing is not enough; we must do."
+  ];
+
+  function setWeeklyQuote(weekKey) {
+    var el = document.getElementById('tp-quote-text');
+    if (!el) return;
+    var wn = weekKey ? parseInt(weekKey.split('-W')[1], 10) || 0 : 0;
+    el.textContent = '\u201c' + TP_QUOTES[wn % TP_QUOTES.length] + '\u201d';
+  }
 
   // ── State ────────────────────────────────────────────────────────
   // Completed tasks hidden by default
@@ -337,6 +376,7 @@ window.EDEN.components = window.EDEN.components || {};
       }
 
       var wk     = cache.current_week;
+      setWeeklyQuote(wk);
       var cg     = cache.core_goals || {};
       var weekly = cache.weekly     || {};
 
@@ -362,6 +402,8 @@ window.EDEN.components = window.EDEN.components || {};
   // ── Public ───────────────────────────────────────────────────────
   window.tpInit = function() {
     updateInfoBar();
+    var cache = window.EDEN && window.EDEN.teamPulse;
+    setWeeklyQuote(cache ? cache.current_week : null);
     fetchAndRender();
   };
 

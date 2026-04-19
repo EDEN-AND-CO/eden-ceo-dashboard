@@ -1,5 +1,5 @@
 // EDEN & CO. CEO Flight Deck — Stock Cache
-// Generated: 2026-04-08T09:48:33Z
+// Generated: 2026-04-12T15:01:29Z
 // Source: EDEN_CO_Weekly_Status.xlsx · Stock tab
 // Do not edit manually. Run: python3 scripts/build-stock-cache.py
 
@@ -64,4 +64,4 @@ window.EDEN._packagingStock = [
     "notes": ""
   }
 ];
-window.EDEN._stockCacheDate = '2026-04-08T09:48:33Z';
+window.EDEN._stockCacheDate = '2026-04-12T15:01:29Z';

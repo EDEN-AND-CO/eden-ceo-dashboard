@@ -336,7 +336,7 @@ window.EDEN = window.EDEN || {};
 
     // ── Retained profit MTD (contribution margin £) ──
     var cmAbs       = m.contributionMargin(mtd);
-    var opex        = 10230; // placeholder until OpEx tab is live
+    var opex = 10230; // confirmed April 2026 until OpEx tab is live
     var opexCovered = cmAbs >= opex;
     var opexPct     = Math.min(100, Math.round((cmAbs / opex) * 100));
 
@@ -363,10 +363,13 @@ window.EDEN = window.EDEN || {};
     var adSpendValid = adSpend > 0 && !isLastMonth;
     var ovSpendLabel = adSpendValid ? ('£' + Math.round(adSpend).toLocaleString('en-GB') + ' total ad spend MTD') : '—';
 
+    // Ex-VAT revenue for ROAS and TACOS — ad spend is ex-VAT; using inc-VAT overstates ROAS ~20% and understates TACOS ~17%
+    var revMTDExVat = m.totalRevenueExVat ? m.totalRevenueExVat(mtd) : (revMTD / 1.2);
+
     // Revenue vs ad spend card (always populate revenue; ROAS when adSpend known and in MTD mode)
-    setHTML('ov-roas-rev', fmtGBP(revMTD));
+    setHTML('ov-roas-rev', fmtGBP(revMTDExVat));
     if (adSpendValid) {
-      var blendedRoas = revMTD / adSpend;
+      var blendedRoas = revMTDExVat / adSpend;
       setHTML('ov-roas-spend', fmtGBP(adSpend));
       setHTML('ov-roas-val', (Math.round(blendedRoas * 10) / 10) + 'x');
       setHTML('ov-roas-insight', blendedRoas >= 4 ? 'On target (4x+)' : blendedRoas >= 3 ? 'Below target — 4x needed' : 'Below baseline — action required');
@@ -379,8 +382,8 @@ window.EDEN = window.EDEN || {};
       setHTML('ov-roas-insight', isLastMonth ? 'Ad spend cache is MTD — switch to MTD view for ROAS' : 'Ad spend from Google Ads MCP · Amazon/Meta via Coupler when available');
     }
 
-    if (adSpendValid && revMTD > 0) {
-      var tacosPct  = (adSpend / revMTD) * 100;
+    if (adSpendValid && revMTDExVat > 0) {
+      var tacosPct  = (adSpend / revMTDExVat) * 100;
       var tacosRag  = m.ragStatus(tacosPct, cfg.rag.tacos_pct);
       var tacosDisp = Math.round(tacosPct * 10) / 10 + '%';
       setHTML('ov-tacos-val', tacosDisp);
@@ -563,7 +566,9 @@ window.EDEN = window.EDEN || {};
     var ytdPctLbl = document.getElementById('ov-ytd-pct-lbl');
 
     if (ytdValEl) ytdValEl.textContent = fmtGBP(revYTD);
-    if (ytdMetaEl) ytdMetaEl.textContent = daysElapsedYTD + ' days elapsed · ' + Math.round(ytdPct * 10) / 10 + '% of £1m';
+    var MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var todayLabel = MONTHS_SHORT[now.getMonth()] + ' ' + now.getDate();
+    if (ytdMetaEl) ytdMetaEl.textContent = 'Jan 1 \u2013 ' + todayLabel + ' \u00b7 ' + Math.round(ytdPct * 10) / 10 + '% of £1m';
     if (ytdVsEl) {
       if (ytdVsPrior !== null) {
         var vsRounded = Math.round(Math.abs(ytdVsPrior) * 10) / 10;

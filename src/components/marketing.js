@@ -111,13 +111,8 @@ window.EDEN.components = window.EDEN.components || {};
     window.EDEN._adSpend = window.EDEN._adSpend || {};
     // Read spend from adspend-cache.js (objects with .spend) or component-set numbers
     function getSpend(v) { return (v && typeof v === 'object') ? (v.spend || 0) : (v || 0); }
-    var adSpendRaw = getSpend(window.EDEN._adSpend.google) + getSpend(window.EDEN._adSpend.amazon) + getSpend(window.EDEN._adSpend.meta);
-    var revMTD  = mtd.reduce(function (s, o) { return s + (o.amount_paid || 0); }, 0);
-    // Sanity: ad spend > 5x revenue is impossible for a functioning account
-    var adSpend = (adSpendRaw > 0 && revMTD > 0 && adSpendRaw > revMTD * 5) ? 0 : adSpendRaw;
-    if (adSpend !== adSpendRaw && adSpendRaw > 0) {
-      console.error('[EDEN Marketing] SANITY FAIL — ad spend £' + adSpendRaw + ' vs revenue £' + revMTD + '. Suppressing TACOS.');
-    }
+    var adSpend = getSpend(window.EDEN._adSpend.google) + getSpend(window.EDEN._adSpend.amazon) + getSpend(window.EDEN._adSpend.meta);
+    var revMTD  = mtd.reduce(function (s, o) { return s + o.amount_paid; }, 0);
 
     function setEl(id, html)  { var el = document.getElementById(id); if (el) el.innerHTML = html; }
     function setAttr(id, attr, val) { var el = document.getElementById(id); if (el) el.setAttribute('style', attr + ':' + val); }
@@ -163,9 +158,6 @@ window.EDEN.components = window.EDEN.components || {};
 
     // Trigger TACOS tile refresh now that meta spend is set
     if (window.EDEN.refreshAdTiles) window.EDEN.refreshAdTiles();
-
-    // Re-run intel renderer to ensure reviews/ratings are always populated
-    renderIntel();
 
     console.log('[EDEN] Marketing tab rendered. Occasions:', occList.length, '| Add-ons: gin=' + ginCount + ' mock=' + mocktailCount + ' pro=' + proseccoCount);
   }
@@ -371,7 +363,41 @@ window.EDEN.components = window.EDEN.components || {};
     setEl('corp-qty-med',  corp.qty_median || '—');
     setEl('corp-qty-mean', corp.qty_mean   || '—');
 
+    renderPlatformSummary();
     console.log('[EDEN] Marketing intelligence rendered. GD:', gdTotal, '| Corp:', corpTotal);
+  }
+
+
+  function renderPlatformSummary() {
+    var orders = (window.EDEN._orders || []);
+    var ad = window.EDEN._adSpend || {};
+    var now = new Date();
+    var y = now.getFullYear(), m = now.getMonth();
+
+    var mtd = orders.filter(function(o) {
+      var d = new Date(o.order_date || o.date || '');
+      return d.getFullYear() === y && d.getMonth() === m;
+    });
+
+    function chanRev(rows, ch) {
+      return rows.filter(function(o) {
+        var s = (o.source || o.channel || '').toLowerCase();
+        return s.indexOf(ch) !== -1;
+      }).reduce(function(s, o) {
+        return s + (o.amount_ex_vat || ((o.amount_paid || 0) / 1.2));
+      }, 0);
+    }
+    function fmt(v) { return v > 0 ? '£' + Math.round(v).toLocaleString('en-GB') : '—'; }
+    function fmtR(s, sp) { return (sp > 0 && s > 0) ? (s / sp).toFixed(2) + 'x' : '—'; }
+    function set(id, v) { var el = document.getElementById(id); if (el) el.textContent = v; }
+
+    var gS = chanRev(mtd, 'google'), gSp = ad.google ? ad.google.spend : 0;
+    var aS = chanRev(mtd, 'amazon'), aSp = ad.amazon ? ad.amazon.spend : 0;
+    var mS = chanRev(mtd, 'facebook') || chanRev(mtd, 'meta'), mSp = ad.meta ? ad.meta.spend : 0;
+
+    set('ps-g-spend-mtd', fmt(gSp)); set('ps-g-sales-mtd', fmt(gS)); set('ps-g-roas-mtd', fmtR(gS, gSp));
+    set('ps-a-spend-mtd', fmt(aSp)); set('ps-a-sales-mtd', fmt(aS)); set('ps-a-roas-mtd', fmtR(aS, aSp));
+    set('ps-m-spend-mtd', fmt(mSp)); set('ps-m-sales-mtd', fmt(mS)); set('ps-m-roas-mtd', fmtR(mS, mSp));
   }
 
   // Expose and auto-run after DOM is ready
