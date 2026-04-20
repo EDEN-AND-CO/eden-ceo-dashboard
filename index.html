@@ -13,7 +13,8 @@
   document.documentElement.innerHTML='<body style="font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;background:#004437;color:#fff;font-size:14px">Access denied.</body>';
 })();
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="eden-reskin.css?v=20260420a">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -545,6 +546,56 @@ svg.sp{display:block;width:100%;overflow:visible}
     </div>
   </div>
 </div>
+
+<div class="app-shell">
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="sidebar-wordmark">EDEN &amp; CO.</div>
+    <div class="sidebar-tagline">CEO Flight Deck</div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-nav-label">Performance</div>
+    <div class="tab active" onclick="showTab('overview',this,'Overview')">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Overview
+    </div>
+    <div class="tab" onclick="showTab('marketing',this,'PPC &amp; Email')">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      PPC &amp; Email
+    </div>
+    <div class="tab" onclick="showTab('platforms',this,'Platforms')">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Platforms
+    </div>
+    <div class="tab" onclick="showTab('operations',this,'Operations')">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      Operations
+    </div>
+
+    <div class="sidebar-nav-label" style="margin-top:16px">Team</div>
+    <div class="tab" onclick="showTab('goals',this,'Weekly Pulse');tpActivate()">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      Weekly Pulse
+    </div>
+    <div class="tab" onclick="showTab('knowledge',this,'Knowledge Base')">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Knowledge Base
+    </div>
+  </nav>
+
+  <div class="sidebar-foot">
+    <div style="margin-bottom:6px">
+      <span class="live-dot"></span> Live data
+    </div>
+    <div id="sidebar-status" style="font-size:10px;line-height:1.8"></div>
+  </div>
+</aside>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<div class="shell-main">
 
 <!-- HEADER -->
 <div class="topbar">
@@ -1253,7 +1304,10 @@ svg.sp{display:block;width:100%;overflow:visible}
 
 </div></div>
 
-<div class="footer">EDEN &amp; CO. CEO FLIGHT DECK &nbsp;·&nbsp; v5.1 &nbsp;·&nbsp; 19 APRIL 2026 &nbsp;·&nbsp; SHEET: 1Zx4fyaKGOuOcfpWmTyn2LZHBzWSUC-8sbOVqCFoh9fE</div>
+<div class="footer">EDEN &amp; CO. CEO FLIGHT DECK &nbsp;·&nbsp; v6.0 &nbsp;·&nbsp; 20 APRIL 2026</div>
+
+</div><!-- /shell-main -->
+</div><!-- /app-shell -->
 
 
 <!-- Data layer (load order matters) -->
