@@ -533,12 +533,9 @@ window.EDEN = window.EDEN || {};
     for (var j = 0; j < chartEnds.length; j++) chartEnds[j].textContent = endLabel;
 
     // ── YTD Revenue → £1m progress bar ──
-    // Current year YTD
+    // Current year YTD — use canonical metrics filter (consistent with all other date ranges)
     var ytdStart = new Date(now.getFullYear(), 0, 1);
-    var ytdOrders = orders.filter(function(o) {
-      var od = o.order_date ? new Date(o.order_date) : null;
-      return od && od >= ytdStart && od <= now;
-    });
+    var ytdOrders = m.getYTDOrders(orders);
     var revYTD = m.totalRevenue(ytdOrders);
 
     // Prior year YTD — same number of days into last year

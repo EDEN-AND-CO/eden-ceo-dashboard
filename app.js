@@ -754,6 +754,13 @@ window.EDEN = window.EDEN || {};
     setTs('ts-google-ppc', ad.google_updated, H24);
     setTs('ts-amazon-ppc', ad.amazon_updated, H24);
     setTs('ts-meta-ppc', ad.meta_updated, H24);
+    // TACOS / ROAS tiles — use most recent ad platform update
+    var adLatest = ad.google_updated || ad.amazon_updated || ad.meta_updated || null;
+    setTs('ts-tacos-mkt', adLatest, H24);
+    setTs('ts-roas-mkt', adLatest, H24);
+    // Operations timestamps
+    setTs('ts-bom-ops', window.EDEN._bomCacheDate || null, H48 * 3);
+    setTs('ts-stock-ops', window.EDEN._stockCacheDate || null, H48 * 3);
     var klvDate = (window.EDEN._klaviyoData && window.EDEN._klaviyoData._built) || (mkt.klaviyo && mkt.klaviyo.updated) || mkt._built || null;
     setTs('ts-klaviyo', klvDate, H48);
   }

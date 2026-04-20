@@ -303,6 +303,59 @@ window.EDEN.components = window.EDEN.components || {};
       setEl('sm-top-reviews', topRevs.map(function(q) { return reviewCardHtml(q, false); }).join(''));
     }
 
+    // ── Sentiment summary (AI summary card, left column) ──────────────────────
+    var allTags = {};
+    (gbp.top_quotes || []).forEach(function(q) {
+      (q.tags || []).forEach(function(t) { allTags[t] = (allTags[t] || 0) + 1; });
+    });
+    var TAG_THEME_LABELS = {
+      'dietary_resolved': 'Dietary needs fully met',
+      'dietary_anxiety':  'Dietary anxiety addressed',
+      'recipient_joy':    'Recipient delight',
+      'gifting_emotion':  'Gifting emotion captured',
+      'quality_surprise': 'Quality exceeded expectations',
+      'repeat_buyer':     'Repeat purchase intent',
+      'brand_trust':      'Brand trust',
+      'delivery':         'Delivery experience',
+      'corporate':        'Corporate use case',
+      'new_hire':         'New hire gifting'
+    };
+    var TAG_ORDER = ['dietary_resolved','dietary_anxiety','recipient_joy','gifting_emotion','quality_surprise','repeat_buyer','brand_trust','delivery','corporate','new_hire'];
+    var quoteCount = (gbp.top_quotes || []).length;
+    var diet = gbp.dietary_mentions || {};
+    var dietItems = Object.keys(diet).sort(function(a, b) { return diet[b] - diet[a]; });
+
+    var sumHtml = '<div style="background:var(--GXP);border-radius:var(--r4);padding:14px 16px">';
+    sumHtml += '<div style="font-size:12px;font-weight:700;color:var(--G);margin-bottom:12px">'
+      + '&#9733; ' + (gbp.avg_rating || '—') + '/5 &nbsp;&middot;&nbsp; '
+      + (gbp.total || '—') + ' reviews &nbsp;&middot;&nbsp; '
+      + (gbp.pct_positive || '—') + '% positive</div>';
+
+    sumHtml += '<div style="font-size:10px;font-weight:700;color:var(--G);letter-spacing:.07em;text-transform:uppercase;margin-bottom:7px">Key sentiment themes</div>';
+    var themeCount = 0;
+    TAG_ORDER.forEach(function(t) {
+      if (!allTags[t]) return;
+      themeCount++;
+      var label = TAG_THEME_LABELS[t] || t;
+      sumHtml += '<div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">'
+        + '<span style="font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;background:var(--G);color:#fff;white-space:nowrap">' + label + '</span>'
+        + '<span style="font-size:10px;color:var(--GMD)">' + allTags[t] + ' of ' + quoteCount + ' featured quotes</span>'
+        + '</div>';
+    });
+    if (!themeCount) sumHtml += '<div style="font-size:11px;color:var(--GMD)">No theme data</div>';
+
+    if (dietItems.length) {
+      sumHtml += '<div style="font-size:10px;font-weight:700;color:var(--G);letter-spacing:.07em;text-transform:uppercase;margin:12px 0 7px">Dietary mentions in reviews</div>';
+      dietItems.forEach(function(k) {
+        sumHtml += '<div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px solid var(--GP)">'
+          + '<span>' + k + '</span>'
+          + '<span style="font-weight:700;color:var(--G)">' + diet[k] + '</span>'
+          + '</div>';
+      });
+    }
+    sumHtml += '</div>';
+    setEl('sm-review-summary', sumHtml);
+
     // ── Corp pipeline IDs ────────────────────────────────────────────────────
     var corpOcc = corp.occasion || {};
     // Map corp occasion keys to IDs (partial match)

@@ -141,6 +141,7 @@ window.EDEN.components = window.EDEN.components || {};
 
     _cachedOrders = orders;
     _currentView  = 'mtd';
+    _chartPeriod  = 'ytd';
 
     renderPlatformTable(orders, 'mtd');
     renderMonthlyChart(orders);
@@ -201,7 +202,7 @@ window.EDEN.components = window.EDEN.components || {};
   // ── Monthly revenue table ──────────────────────────────────────────────────
 
   var _chartOrders = null;
-  var _chartPeriod = 'p12m';
+  var _chartPeriod = 'ytd';
 
   function bucketChannel(ch) {
     if (ch === 'Amazon UK' || ch === 'Amazon IRE') return 'Amazon';
@@ -221,14 +222,14 @@ window.EDEN.components = window.EDEN.components || {};
     var months = [];
 
     if (_chartPeriod === 'ytd') {
-      for (var i = 0; i <= now.getMonth(); i++) {
+      for (var i = now.getMonth(); i >= 0; i--) {
         var d = new Date(now.getFullYear(), i, 1);
         var mk = getMonthKey(d);
         var pmk = (d.getFullYear() - 1) + '-' + String(d.getMonth() + 1).padStart(2, '0');
         months.push({ key: mk, priorKey: pmk, label: d.toLocaleString('en-GB', { month: 'short', year: '2-digit' }) });
       }
     } else {
-      for (var i = 11; i >= 0; i--) {
+      for (var i = 0; i <= 11; i++) {
         var d = new Date(now.getFullYear(), now.getMonth() - i, 1);
         var mk = getMonthKey(d);
         var pmk = (d.getFullYear() - 1) + '-' + String(d.getMonth() + 1).padStart(2, '0');

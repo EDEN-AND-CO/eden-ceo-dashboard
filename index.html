@@ -777,6 +777,35 @@ svg.sp{display:block;width:100%;overflow:visible}
 ═══════════════════════════════════ -->
 <div class="panel" id="tab-marketing"><div class="page">
 
+  <!-- ── Customer Reviews (top of section) ── -->
+  <div class="sec">
+    <div class="seclbl">Customer reviews — Google Business Profile</div>
+    <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+      <div class="chip" style="background:var(--G);border:none">
+        <div class="tlbl" style="color:rgba(255,255,255,0.65)">Avg rating</div>
+        <div class="tval lg" id="sm-gr-quality" style="color:#fff">—</div>
+        <div class="tmeta" id="sm-gr-quality-n" style="font-size:9px;color:rgba(255,255,255,0.55)">—</div>
+      </div>
+      <div class="chip" style="background:var(--G);border:none">
+        <div class="tlbl" style="color:rgba(255,255,255,0.65)">5-star %</div>
+        <div class="tval lg" id="sm-gr-pct" style="color:#fff">—</div>
+        <div class="tmeta" style="font-size:9px;color:rgba(255,255,255,0.55)">of all reviews</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start">
+      <div>
+        <div class="ctitle" style="margin-bottom:10px">Sentiment analysis</div>
+        <div id="sm-review-summary"><div style="color:var(--GMD);font-size:12px;padding:8px">Loading…</div></div>
+      </div>
+      <div>
+        <div class="ctitle" style="margin-bottom:10px">Top reviews</div>
+        <div id="sm-top-reviews" style="display:flex;flex-direction:column;gap:8px"><div style="color:var(--GMD);font-size:12px;padding:8px">Loading…</div></div>
+      </div>
+    </div>
+    <div class="dnote" style="margin-top:10px">Data last updated: <span id="sm-last-updated">—</span> · Google Business Profile via Make pipeline</div>
+  </div>
+
+  <!-- ── Ad performance ── -->
   <div class="sec">
     <div class="seclbl" style="font-size:14px">Ad performance — MTD vs prior period</div>
     <div class="g2" style="margin-bottom:14px">
@@ -787,6 +816,7 @@ svg.sp{display:block;width:100%;overflow:visible}
         <div class="prog-lbls"><span>Target: &lt;15%</span><span id="mkt-tacos-status"></span></div>
         <div class="pbar"><div class="pf" id="mkt-tacos-bar" style="width:0%"></div></div>
         <div class="insight" id="mkt-tacos-insight">Total ad spend ÷ total revenue (all channels incl. organic). Target &lt;15%.</div>
+        <div class="dnote" style="margin-top:6px">Ad spend data: <span class="data-ts" id="ts-tacos-mkt"></span></div>
       </div>
       <div class="tile" id="mkt-roas-tile">
         <div class="tlbl">Blended ROAS — All Channels</div>
@@ -795,6 +825,7 @@ svg.sp{display:block;width:100%;overflow:visible}
         <div class="prog-lbls"><span>Target: 4x+</span><span id="mkt-roas-status"></span></div>
         <div class="pbar"><div class="pf" id="mkt-roas-bar" style="width:0%"></div></div>
         <div class="insight" id="mkt-roas-insight">Total ad revenue ÷ total ad spend (Google + Amazon + Meta). Target 4x+.</div>
+        <div class="dnote" style="margin-top:6px">Ad spend data: <span class="data-ts" id="ts-roas-mkt"></span></div>
       </div>
     </div>
     <div>
@@ -859,6 +890,7 @@ svg.sp{display:block;width:100%;overflow:visible}
     </div>
   </div>
 
+  <!-- ── Top keywords ── -->
   <div class="sec">
     <div class="seclbl">Top converting search terms — Google Ads (MCP 31 Mar)</div>
     <div class="card" style="padding:0">
@@ -868,17 +900,6 @@ svg.sp{display:block;width:100%;overflow:visible}
       </table>
     </div>
     <div class="dnote" style="margin-top:6px">Top 10 converting terms by conversion volume. Refresh via Google Ads MCP.</div>
-  </div>
-
-  <div class="sec">
-    <div class="seclbl">Customer reviews — Google Business Profile</div>
-    <div style="display:flex;gap:10px;margin-bottom:14px">
-      <div class="chip ta"><div class="tlbl">Avg rating</div><div class="tval lg" id="sm-gr-quality">—</div><div class="tmeta" id="sm-gr-quality-n" style="font-size:9px;color:var(--GMD)">—</div></div>
-      <div class="chip ta"><div class="tlbl">5-star %</div><div class="tval lg" id="sm-gr-pct">—</div><div class="tmeta" style="font-size:9px;color:var(--GMD)">of all reviews</div></div>
-      <div class="chip ta"><div class="tlbl">Last updated</div><div class="tval" style="font-size:13px" id="sm-last-updated">—</div></div>
-    </div>
-    <div class="seclbl" style="margin-bottom:8px">Latest reviews</div>
-    <div id="sm-latest-reviews" style="display:flex;flex-direction:column;gap:8px"><div style="color:var(--GMD);font-size:12px;padding:12px">Loading reviews…</div></div>
   </div>
 
 </div></div>
@@ -904,7 +925,7 @@ svg.sp{display:block;width:100%;overflow:visible}
   <div class="sec">
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
       <div class="seclbl" style="margin:0;flex:1" id="plt-chart-period-lbl">Monthly revenue — rolling 12 months</div>
-      <div class="ktog"><button class="kb active" id="plt-period-p12m" onclick="window.EDEN.components.platforms.setPeriod('p12m')">P12M</button><button class="kb" id="plt-period-ytd" onclick="window.EDEN.components.platforms.setPeriod('ytd')">YTD</button></div>
+      <div class="ktog"><button class="kb" id="plt-period-p12m" onclick="window.EDEN.components.platforms.setPeriod('p12m')">P12M</button><button class="kb active" id="plt-period-ytd" onclick="window.EDEN.components.platforms.setPeriod('ytd')">YTD</button></div>
     </div>
     <div class="card" style="padding:0">
       <table class="dt">
@@ -1033,6 +1054,12 @@ svg.sp{display:block;width:100%;overflow:visible}
      OPERATIONS TAB
 ═══════════════════════════════════ -->
 <div class="panel" id="tab-operations"><div class="page">
+
+  <!-- ── Data timestamps ── -->
+  <div style="display:flex;gap:20px;padding:8px 0 12px;border-bottom:1px solid var(--GP);margin-bottom:16px;font-size:11px;color:var(--GMD);flex-wrap:wrap">
+    <span>BoM last rebuilt: <span class="data-ts" id="ts-bom-ops"></span></span>
+    <span>Stock last calculated: <span class="data-ts" id="ts-stock-ops"></span></span>
+  </div>
 
   <!-- ── Hamper Stock Tiles ── -->
   <div id="hamper-stock-tiles" style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:20px"></div>
@@ -1237,19 +1264,19 @@ svg.sp{display:block;width:100%;overflow:visible}
 <script src="data/transform.js"></script>
 <script src="data/metrics.js"></script>
 <!-- Component renderers -->
-<script src="components/overview.js"></script>
-<script src="components/marketing.js?v=20260419b"></script>
+<script src="components/overview.js?v=20260419d"></script>
+<script src="components/marketing.js?v=20260419d"></script>
 <script src="components/klaviyo.js"></script>
 <script src="components/google-ads.js"></script>
 <script src="components/amazon.js"></script>
-<script src="components/platforms.js?v=20260419c"></script>
+<script src="components/platforms.js?v=20260419d"></script>
 <script src="components/operations.js?v=20260419b"></script>
 <script src="components/customers.js"></script>
 <script src="data/stock-cache.js?v=20260330b"></script>
 <script src="data/adspend-cache.js"></script>
 <script src="data/klaviyo-cache.js"></script>
 <script src="data/team-pulse-cache.js?v=20260329d"></script>
-<script src="data/bom-cache.js?v=20260330a"></script>
+<script src="data/bom-cache.js?v=20260419d"></script>
 <script src="components/goals.js?v=20260419b"></script>
 <script src="components/scenario.js"></script>
 <!-- App init (must be last) -->
