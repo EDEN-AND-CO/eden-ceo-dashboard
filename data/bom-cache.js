@@ -1,10 +1,11 @@
 // EDEN & CO. CEO Flight Deck — BoM Cache
-// Generated: 2026-04-20T09:00:29Z
+// Generated: 2026-04-20T17:32:36Z
 // Do not edit manually. Run: python3 scripts/build-bom-cache.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN.bomData = {
-  "generated": "2026-04-20T09:00:29Z",
+  "generated": "2026-04-20T17:32:36Z",
+  "source": "google_sheets",
   "hampers": [
     "LETTERBOX",
     "COCOA",
@@ -27,26 +28,26 @@ window.EDEN.bomData = {
     "LETTERBOX": 30,
     "COCOA": 50,
     "SIGNATURE": 65,
-    "PAMPER": 85,
+    "PAMPER": 90,
     "GRAND": 125,
     "PRESTIGE": 175,
     "ADDON": 0
   },
   "hamperCogs": {
-    "LETTERBOX": 13.16,
-    "COCOA": 22.51,
-    "SIGNATURE": 23.56,
-    "PAMPER": 39.79,
-    "GRAND": 35.16,
-    "PRESTIGE": 48.0,
+    "LETTERBOX": 13.31,
+    "COCOA": 23.44,
+    "SIGNATURE": 24.49,
+    "PAMPER": 40.72,
+    "GRAND": 36.89,
+    "PRESTIGE": 48.05,
     "ADDON": 44.0
   },
   "hamperMargin": {
-    "LETTERBOX": 47.4,
-    "COCOA": 46.0,
-    "SIGNATURE": 56.5,
-    "PAMPER": 43.8,
-    "GRAND": 66.2,
+    "LETTERBOX": 46.8,
+    "COCOA": 43.7,
+    "SIGNATURE": 54.8,
+    "PAMPER": 45.7,
+    "GRAND": 64.6,
     "PRESTIGE": 67.1,
     "ADDON": 0
   },
@@ -118,7 +119,7 @@ window.EDEN.bomData = {
       "caseQty": null,
       "weightG": 150.0,
       "privateLabel": true,
-      "cost": 2.1,
+      "cost": 2.08,
       "rrp": 5.99,
       "vatable": true,
       "hampers": {
@@ -135,7 +136,7 @@ window.EDEN.bomData = {
       "name": "House Chai Box",
       "section": "Products",
       "supplier": "Blendsmiths",
-      "caseQty": null,
+      "caseQty": 42,
       "weightG": 250.0,
       "privateLabel": true,
       "cost": 2.75,
@@ -155,7 +156,7 @@ window.EDEN.bomData = {
       "name": "House Chocolate",
       "section": "Products",
       "supplier": "Blendsmiths",
-      "caseQty": null,
+      "caseQty": 42,
       "weightG": 250.0,
       "privateLabel": true,
       "cost": 3.25,
@@ -175,7 +176,7 @@ window.EDEN.bomData = {
       "name": "House Chocolate Sachet",
       "section": "Products",
       "supplier": "Blendsmiths",
-      "caseQty": null,
+      "caseQty": 300,
       "weightG": 35.0,
       "privateLabel": true,
       "cost": 0.5,
@@ -195,7 +196,7 @@ window.EDEN.bomData = {
       "name": "White Chocolate Sachet",
       "section": "Products",
       "supplier": "Blendsmiths",
-      "caseQty": null,
+      "caseQty": 300,
       "weightG": 35.0,
       "privateLabel": true,
       "cost": 0.4,
@@ -212,7 +213,7 @@ window.EDEN.bomData = {
       }
     },
     {
-      "name": "Chocolate Granola",
+      "name": "Apple Crumble Granola",
       "section": "Products",
       "supplier": "Green Fingers Family",
       "caseQty": null,
@@ -232,22 +233,42 @@ window.EDEN.bomData = {
       }
     },
     {
-      "name": "Energy Balls",
+      "name": "Black Forest - Bliss Balls",
       "section": "Products",
       "supplier": "Green Fingers Family",
       "caseQty": null,
       "weightG": 300.0,
       "privateLabel": true,
-      "cost": 1.65,
+      "cost": 1.9,
       "rrp": 4.5,
       "vatable": false,
       "hampers": {
         "LETTERBOX": false,
         "COCOA": true,
-        "SIGNATURE": true,
-        "PAMPER": true,
+        "SIGNATURE": false,
+        "PAMPER": false,
         "GRAND": true,
         "PRESTIGE": true,
+        "ADDON": false
+      }
+    },
+    {
+      "name": "Salted Caramel & Peanut  - Bliss Balls",
+      "section": "Products",
+      "supplier": "Green Fingers Family",
+      "caseQty": null,
+      "weightG": 300.0,
+      "privateLabel": true,
+      "cost": 1.9,
+      "rrp": 4.5,
+      "vatable": false,
+      "hampers": {
+        "LETTERBOX": false,
+        "COCOA": false,
+        "SIGNATURE": true,
+        "PAMPER": true,
+        "GRAND": false,
+        "PRESTIGE": false,
         "ADDON": false
       }
     },
@@ -304,8 +325,8 @@ window.EDEN.bomData = {
       "hampers": {
         "LETTERBOX": true,
         "COCOA": true,
-        "SIGNATURE": true,
-        "PAMPER": true,
+        "SIGNATURE": false,
+        "PAMPER": false,
         "GRAND": true,
         "PRESTIGE": true,
         "ADDON": false
@@ -324,8 +345,8 @@ window.EDEN.bomData = {
       "hampers": {
         "LETTERBOX": true,
         "COCOA": true,
-        "SIGNATURE": false,
-        "PAMPER": false,
+        "SIGNATURE": true,
+        "PAMPER": true,
         "GRAND": true,
         "PRESTIGE": true,
         "ADDON": false
@@ -360,26 +381,6 @@ window.EDEN.bomData = {
       "privateLabel": false,
       "cost": 3.53,
       "rrp": 5.99,
-      "vatable": true,
-      "hampers": {
-        "LETTERBOX": false,
-        "COCOA": false,
-        "SIGNATURE": false,
-        "PAMPER": false,
-        "GRAND": true,
-        "PRESTIGE": true,
-        "ADDON": false
-      }
-    },
-    {
-      "name": "Prosecco (Non Alcoholic)",
-      "section": "Products",
-      "supplier": "Nozeco",
-      "caseQty": null,
-      "weightG": 750.0,
-      "privateLabel": false,
-      "cost": 3.05,
-      "rrp": 3.99,
       "vatable": true,
       "hampers": {
         "LETTERBOX": false,
@@ -452,10 +453,30 @@ window.EDEN.bomData = {
       }
     },
     {
+      "name": "Prosecco (Non Alcoholic)",
+      "section": "Alcohol",
+      "supplier": "Nozeco",
+      "caseQty": 6,
+      "weightG": 750.0,
+      "privateLabel": false,
+      "cost": 3.05,
+      "rrp": 3.99,
+      "vatable": true,
+      "hampers": {
+        "LETTERBOX": false,
+        "COCOA": false,
+        "SIGNATURE": false,
+        "PAMPER": false,
+        "GRAND": true,
+        "PRESTIGE": true,
+        "ADDON": false
+      }
+    },
+    {
       "name": "Prosecco Gold",
-      "section": "Products",
+      "section": "Alcohol",
       "supplier": "Bottega",
-      "caseQty": null,
+      "caseQty": 24,
       "weightG": 200.0,
       "privateLabel": false,
       "cost": 3.74,
@@ -473,7 +494,7 @@ window.EDEN.bomData = {
     },
     {
       "name": "Mocktail / Botanical Drink",
-      "section": "Products",
+      "section": "Alcohol",
       "supplier": "Bodha",
       "caseQty": null,
       "weightG": 200.0,
@@ -492,10 +513,10 @@ window.EDEN.bomData = {
       }
     },
     {
-      "name": "Gin Liqueur in Gift Tube",
-      "section": "Products",
+      "name": "Gin Liqueur in Gift Tube (200ml)",
+      "section": "Alcohol",
       "supplier": "Friary",
-      "caseQty": null,
+      "caseQty": 12,
       "weightG": 200.0,
       "privateLabel": true,
       "cost": 7.5,
@@ -512,48 +533,8 @@ window.EDEN.bomData = {
       }
     },
     {
-      "name": "Fudge Box (Chocolate Flavour)",
-      "section": "Products",
-      "supplier": "Buttermilk",
-      "caseQty": null,
-      "weightG": 100.0,
-      "privateLabel": true,
-      "cost": 1.67,
-      "rrp": 5.99,
-      "vatable": false,
-      "hampers": {
-        "LETTERBOX": false,
-        "COCOA": false,
-        "SIGNATURE": false,
-        "PAMPER": false,
-        "GRAND": false,
-        "PRESTIGE": false,
-        "ADDON": false
-      }
-    },
-    {
-      "name": "Fudge Box (Non-Chocolate Flavours)",
-      "section": "Products",
-      "supplier": "Buttermilk",
-      "caseQty": null,
-      "weightG": 100.0,
-      "privateLabel": true,
-      "cost": 1.67,
-      "rrp": 5.99,
-      "vatable": false,
-      "hampers": {
-        "LETTERBOX": false,
-        "COCOA": false,
-        "SIGNATURE": false,
-        "PAMPER": false,
-        "GRAND": false,
-        "PRESTIGE": false,
-        "ADDON": false
-      }
-    },
-    {
       "name": "Candle",
-      "section": "Products",
+      "section": "Pamper",
       "supplier": "AERY",
       "caseQty": null,
       "weightG": null,
@@ -573,7 +554,7 @@ window.EDEN.bomData = {
     },
     {
       "name": "Hand Moisturiser",
-      "section": "Products",
+      "section": "Pamper",
       "supplier": "AERY",
       "caseQty": null,
       "weightG": null,
@@ -593,7 +574,7 @@ window.EDEN.bomData = {
     },
     {
       "name": "Pillow Mist",
-      "section": "Products",
+      "section": "Pamper",
       "supplier": "AERY",
       "caseQty": null,
       "weightG": null,
@@ -613,7 +594,7 @@ window.EDEN.bomData = {
     },
     {
       "name": "Diffuser (Nordic / Cedar Leaf)",
-      "section": "Products",
+      "section": "Pamper",
       "supplier": "AERY",
       "caseQty": null,
       "weightG": null,
@@ -638,7 +619,7 @@ window.EDEN.bomData = {
       "caseQty": 400,
       "weightG": 300.0,
       "privateLabel": true,
-      "cost": 3.0,
+      "cost": 4.68,
       "rrp": null,
       "vatable": false,
       "hampers": {
@@ -648,6 +629,26 @@ window.EDEN.bomData = {
         "PAMPER": false,
         "GRAND": true,
         "PRESTIGE": false,
+        "ADDON": false
+      }
+    },
+    {
+      "name": "Postal Outer - Large Hamper",
+      "section": "Packaging",
+      "supplier": "RH Fibreboard",
+      "caseQty": 400,
+      "weightG": null,
+      "privateLabel": true,
+      "cost": 0.52,
+      "rrp": null,
+      "vatable": false,
+      "hampers": {
+        "LETTERBOX": false,
+        "COCOA": false,
+        "SIGNATURE": false,
+        "PAMPER": false,
+        "GRAND": true,
+        "PRESTIGE": true,
         "ADDON": false
       }
     },
@@ -678,7 +679,7 @@ window.EDEN.bomData = {
       "caseQty": 5000,
       "weightG": 150.0,
       "privateLabel": true,
-      "cost": 0.92,
+      "cost": 1.0,
       "rrp": null,
       "vatable": false,
       "hampers": {
@@ -712,13 +713,13 @@ window.EDEN.bomData = {
       }
     },
     {
-      "name": "Small Postal Outer",
+      "name": "Postal Outer - Gift Tube",
       "section": "Packaging",
       "supplier": "RH Fibreboard",
       "caseQty": 400,
       "weightG": null,
       "privateLabel": true,
-      "cost": 0.4,
+      "cost": 0.47,
       "rrp": null,
       "vatable": false,
       "hampers": {
@@ -732,7 +733,7 @@ window.EDEN.bomData = {
       }
     },
     {
-      "name": "Double postal Outer",
+      "name": "Postal Outer - Single Hamper",
       "section": "Packaging",
       "supplier": "RH Fibreboard",
       "caseQty": 400,
@@ -752,22 +753,22 @@ window.EDEN.bomData = {
       }
     },
     {
-      "name": "large Postal Outer",
+      "name": "Postal Outer - Double Hamper",
       "section": "Packaging",
       "supplier": "RH Fibreboard",
       "caseQty": 400,
-      "weightG": null,
+      "weightG": 150.0,
       "privateLabel": true,
       "cost": 0.7,
       "rrp": null,
       "vatable": false,
       "hampers": {
         "LETTERBOX": false,
-        "COCOA": false,
-        "SIGNATURE": false,
-        "PAMPER": false,
-        "GRAND": true,
-        "PRESTIGE": true,
+        "COCOA": true,
+        "SIGNATURE": true,
+        "PAMPER": true,
+        "GRAND": false,
+        "PRESTIGE": false,
         "ADDON": false
       }
     },
@@ -852,11 +853,11 @@ window.EDEN.bomData = {
       }
     },
     {
-      "name": "Postage / SHipping",
+      "name": "Postage / Shipping",
       "section": "Packaging",
       "supplier": "Royal Mail",
       "caseQty": 1,
-      "weightG": null,
+      "weightG": 0.0,
       "privateLabel": true,
       "cost": 3.66,
       "rrp": null,

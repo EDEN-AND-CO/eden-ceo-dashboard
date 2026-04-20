@@ -1,372 +1,14 @@
 // EDEN & CO. CEO Flight Deck — Team Pulse Cache
-// Generated: 2026-04-20T09:39:44Z
-// Source: EDEN_CO_Weekly_Status.xlsx
+// Generated: 2026-04-20T17:28:56Z
+// Source: Google Sheets (live pubhtml)
 // Do not edit manually. Run: python3 scripts/build-team-pulse.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN.teamPulse = {
-  "generated": "2026-04-20T09:39:44Z",
+  "generated": "2026-04-20T17:28:56Z",
   "current_week": "2026-W17",
-  "core_goals": {
-    "Jon": {
-      "PPC - Blended ROAS 5x": {
-        "status": "on",
-        "goals": [
-          {
-            "t": "Blended ROAS reviewed weekly",
-            "m": "Target 5x"
-          },
-          {
-            "t": "Google PPC",
-            "m": "Target 3x (5x Peak)"
-          },
-          {
-            "t": "Amazon ACOS checked weekly",
-            "m": "ACOS <25%"
-          }
-        ]
-      },
-      "B2B - 2 key accounts/month": {
-        "status": "on",
-        "goals": [
-          {
-            "t": "Corporate ecosystem built",
-            "m": "Due: May"
-          },
-          {
-            "t": "2 accounts progressed or closed",
-            "m": "2/month"
-          },
-          {
-            "t": "Proposal within 24hrs of enquiry",
-            "m": "SLA: 24hr"
-          }
-        ]
-      },
-      "International - shipping + Amz": {
-        "status": "on",
-        "goals": [
-          {
-            "t": "ShipStation + UPS API working",
-            "m": "Due: Jun"
-          },
-          {
-            "t": "EU EEA triggered - DE, FR, IE",
-            "m": "Due: Jul"
-          },
-          {
-            "t": "DDP guaranteed, no recipient charges",
-            "m": "Always"
-          }
-        ]
-      },
-      "Business Strategy & Performance": {
-        "status": "on",
-        "goals": [
-          {
-            "t": "Identify Biggest Opportunities of Profit, Remove Noise",
-            "m": "Platform Review"
-          },
-          {
-            "t": "Weekly Finance Check",
-            "m": "Ensure Figures are On Track"
-          },
-          {
-            "t": "Team Performance Reviews",
-            "m": "Weekly Team 1:2:1 Reviews"
-          }
-        ]
-      }
-    },
-    "Rosie": {
-      "Content brand QA every piece": {
-        "status": "on",
-        "goals": [
-          {
-            "t": "Every Edith piece checked before publish",
-            "m": "Before publish"
-          },
-          {
-            "t": "2 x Weekly Founder-Led Content Pieces",
-            "m": "Weekly"
-          },
-          {
-            "t": "2 x UGC collab content reviewed",
-            "m": "2 Per Month"
-          }
-        ]
-      },
-      "Team training needs - identify + act": {
-        "status": "on",
-        "goals": [
-          {
-            "t": "Weekly check - anyone stuck or unclear?",
-            "m": "Every Mon / Wed"
-          },
-          {
-            "t": "Training flags to Jon within 48hrs",
-            "m": "SLA: 48hr"
-          },
-          {
-            "t": "Phoebe - one new skill owned per week",
-            "m": "Weekly"
-          }
-        ]
-      },
-      "Customer satisfaction": {
-        "status": "on",
-        "goals": [
-          {
-            "t": "Google reviews - Check all replied within 24 Hours",
-            "m": "4.8★ target"
-          },
-          {
-            "t": "Google reviews - Check on brand Replies",
-            "m": "4.8★ target"
-          },
-          {
-            "t": "Anything Mentioned 3x, Liase with Phoebe/Jon plan in place",
-            "m": "Resolution Within 1 Week"
-          },
-          {
-            "t": "Review Review Themes - Discuss Content Angles with Edith to capture trending motivations and language",
-            "m": "Weekly Ideas Plan"
-          }
-        ]
-      },
-      "Stock + product QA": {
-        "status": "on",
-        "goals": [
-          {
-            "t": "Packaging quotes - chase RH Fibreboard",
-            "m": "This week"
-          },
-          {
-            "t": "Product packaging & Quality Assurance Check",
-            "m": "Top Class Experience"
-          },
-          {
-            "t": "Q3 photoshoot brief + photographer booked",
-            "m": "Critcal Path POA"
-          },
-          {
-            "t": "Production Process is optimised",
-            "m": "Maximise Effeciency"
-          },
-          {
-            "t": "B2B & D2C Moment-Led Experience is Upheld from First Click to Last Bite",
-            "m": "World Class Experience"
-          }
-        ]
-      }
-    },
-    "Edith": {
-      "Social Media Content": {
-        "status": "on",
-        "goals": [
-          {
-            "t": "2 Recipient Focused Posts",
-            "m": "Captures Recipients Thinking"
-          },
-          {
-            "t": "3 Buyer Focused Posts",
-            "m": "Captures Buyers Thinking"
-          },
-          {
-            "t": "2 Brand Focused Posts",
-            "m": "Captures Brand Experience"
-          },
-          {
-            "t": "Respond to Messages Comments",
-            "m": "Within 4 Working Hours"
-          },
-          {
-            "t": "Reported in Monday Meeting",
-            "m": "Increased Reach + Followers"
-          }
-        ]
-      },
-      "Email Campaigns": {
-        "status": "on",
-        "goals": [
-          {
-            "t": "3 emails - subject line approved first",
-            "m": "3/week"
-          },
-          {
-            "t": "1 promotional - clear offer, clear CTA",
-            "m": "1 promo"
-          },
-          {
-            "t": "Reported in Monday Meeting",
-            "m": "40% Open Rate + 5% CTR"
-          }
-        ]
-      },
-      "Meta UGC & Creatives": {
-        "status": "on",
-        "goals": [
-          {
-            "t": "16 UGC pieces per Month",
-            "m": "8 New Creatives Every 14 Days"
-          },
-          {
-            "t": "2 Creators Onboarded Per Month",
-            "m": "Booked 6 weeks ahead"
-          },
-          {
-            "t": "CPA tracked (14 Day Test Per Creative)",
-            "m": "CPA <£5"
-          },
-          {
-            "t": "Fully Planned Story Board Ahead of Post",
-            "m": "Explain Message in 1 Sentence"
-          }
-        ]
-      },
-      "Q4 campaign calendar by Aug 31": {
-        "status": "on",
-        "goals": [
-          {
-            "t": "Full Oct–Dec calendar mapped",
-            "m": "Due: Aug 31"
-          },
-          {
-            "t": "BF/CM campaign live Nov 28",
-            "m": "Sep: Aug 30th"
-          },
-          {
-            "t": "BF/CM campaign live Nov 28",
-            "m": "Sep: Aug 30th"
-          },
-          {
-            "t": "Veganuary 2027 briefed by Nov 30",
-            "m": "Due: Nov 30"
-          }
-        ]
-      },
-      "Team Support": {
-        "status": "on",
-        "goals": [
-          {
-            "t": "Pack Day Support",
-            "m": "Sep: Sep 30th"
-          },
-          {
-            "t": "Can Lead a Despatch team by October",
-            "m": "Sep: Sep 30th"
-          }
-        ]
-      }
-    },
-    "Phoebe": {
-      "Customer service - 4hr SLA": {
-        "status": "on",
-        "goals": [
-          {
-            "t": "All queries responded within 4hrs Mon–Fri",
-            "m": "SLA: 4hr"
-          },
-          {
-            "t": "Damaged/missing resolved same day",
-            "m": "Same day"
-          },
-          {
-            "t": "SOP for decion framework",
-            "m": "Owns Decisions"
-          }
-        ]
-      },
-      "Order satisfaction + despatch": {
-        "status": "on",
-        "goals": [
-          {
-            "t": "Orders despatched same day before 4pm",
-            "m": "SLA always"
-          },
-          {
-            "t": "Pick accuracy tracked weekly",
-            "m": "<0.5% errors"
-          },
-          {
-            "t": "ShipStation labels confirmed daily",
-            "m": "Daily"
-          }
-        ]
-      },
-      "Stock planning": {
-        "status": "on",
-        "goals": [
-          {
-            "t": "Planning & managing Stock Forecasting & Ordering",
-            "m": "Forecasting, Ordering Promptly"
-          },
-          {
-            "t": "Actions Low Value Orders (£500/month) - Prosecco, Gift Cards, Nozecco",
-            "m": "Always in Stock"
-          },
-          {
-            "t": "Q4 Production Rota",
-            "m": "By June 30th"
-          },
-          {
-            "t": "Tracks and Informs Invoices Dates",
-            "m": "No Overdue Payments"
-          },
-          {
-            "t": "Warehouse Date ManagementIn Place",
-            "m": "No Overdue Payments"
-          },
-          {
-            "t": "Reconciles PO, Del Slips & Invoices",
-            "m": "100% Accuracy"
-          },
-          {
-            "t": "Q4 stock PO placed",
-            "m": "By June 30th"
-          }
-        ]
-      },
-      "Website listings accurate": {
-        "status": "on",
-        "goals": [
-          {
-            "t": "Update & Review Platform Listings",
-            "m": "Monthly Review"
-          },
-          {
-            "t": "Update Stock where needed",
-            "m": "As Needed"
-          },
-          {
-            "t": "Amazon Listsing Alerts",
-            "m": "Oversee Fix - 48 Hours"
-          }
-        ]
-      },
-      "Admin & Finance": {
-        "status": "on",
-        "goals": [
-          {
-            "t": "Reports Monthly on Key Platform Sales and Expenditures",
-            "m": "Monthly Team Report"
-          },
-          {
-            "t": "Identifies and Implements Process where operational practices are missing",
-            "m": "SOP Implementation"
-          },
-          {
-            "t": "Invoices for Monthly Corporate Platfoms",
-            "m": "Monthly Invoicing"
-          },
-          {
-            "t": "Payroll Creation",
-            "m": "Creates Monthly Payroll Hours"
-          }
-        ]
-      }
-    }
-  },
+  "source": "google_sheets",
+  "core_goals": {},
   "weekly": {
     "Jon": [
       {
@@ -379,12 +21,57 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
+        "week": "2026-W14",
+        "category": "This week",
+        "task": "Support Phoebe - Orders Despatch",
+        "status": "done",
+        "parent": "Business Strategy & Performance",
+        "note": "Mon-Thu Practice",
+        "other": ""
+      },
+      {
         "week": "2026-W16",
         "category": "This week",
         "task": "Teach Phoebe Invoicing",
         "status": "on-track",
         "parent": "Business Strategy & Performance",
         "note": "Monday Teaching",
+        "other": ""
+      },
+      {
+        "week": "2026-W14",
+        "category": "This week",
+        "task": "Payroll",
+        "status": "done",
+        "parent": "Business Strategy & Performance",
+        "note": "Monday Update",
+        "other": ""
+      },
+      {
+        "week": "2026-W14",
+        "category": "This week",
+        "task": "Launch New Dashboard",
+        "status": "done",
+        "parent": "Business Strategy & Performance",
+        "note": "Monday Meeting Unveil",
+        "other": ""
+      },
+      {
+        "week": "2026-W14",
+        "category": "This week",
+        "task": "Finalise 2026 Product Range",
+        "status": "done",
+        "parent": "Business Strategy & Performance",
+        "note": "GreenFingers Outstanding",
+        "other": ""
+      },
+      {
+        "week": "2026-W14",
+        "category": "This week",
+        "task": "Monitor International Orders",
+        "status": "done",
+        "parent": "International - shipping + Amz",
+        "note": "UPS checkin",
         "other": ""
       },
       {
@@ -408,7 +95,7 @@ window.EDEN.teamPulse = {
       {
         "week": "2026-W17",
         "category": "This week",
-        "task": "Checking With Corp Campaigns: Virgin, PIPL, SmartCurrencyExchange",
+        "task": "Checking WIth Corp Campaigns: Virgin, PIPL, SmartCurrencyExchange",
         "status": "on-track",
         "parent": "B2B - 2 key accounts/month",
         "note": "Email each Monday",
@@ -416,11 +103,20 @@ window.EDEN.teamPulse = {
       },
       {
         "week": "2026-W17",
-        "category": "This week",
+        "category": "This Week",
         "task": "PPC Check-in & Update",
         "status": "on-track",
         "parent": "PPC - Blended ROAS 5x",
         "note": "",
+        "other": ""
+      },
+      {
+        "week": "",
+        "category": "Other",
+        "task": "Create Brochure (Inbox)",
+        "status": "done",
+        "parent": "",
+        "note": "Create Product Deck",
         "other": ""
       },
       {
@@ -465,7 +161,7 @@ window.EDEN.teamPulse = {
         "task": "Create B2B Landing page",
         "status": "on-track",
         "parent": "B2B - 2 key accounts/month",
-        "note": "Focused Messaging on Core pillars (see Wellbox) and visual callouts",
+        "note": "Focused Messaging on Core pillars (see WellBox) and visual callouts",
         "other": ""
       },
       {
@@ -474,7 +170,7 @@ window.EDEN.teamPulse = {
         "task": "Integrate AI in B2B Workflow",
         "status": "on-track",
         "parent": "B2B - 2 key accounts/month",
-        "note": "Use AI to join up workflow and not require manual input",
+        "note": "Use AI to join up wprkflow and not require manual input",
         "other": ""
       },
       {
@@ -483,16 +179,7 @@ window.EDEN.teamPulse = {
         "task": "Streamline EC homepage",
         "status": "on-track",
         "parent": "Business Strategy & Performance",
-        "note": "Focus on Hampers and their Stories on Homepage",
-        "other": ""
-      },
-      {
-        "week": "",
-        "category": "Other",
-        "task": "Create Brochure (Inbox)",
-        "status": "",
-        "parent": "",
-        "note": "",
+        "note": "Focus on Hampers and their Storeis on Homepage",
         "other": ""
       }
     ],
@@ -507,7 +194,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W14",
+        "week": "2026-W16",
         "category": "This week",
         "task": "Checkin Founder Content with Edith",
         "status": "done",
@@ -516,10 +203,10 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W14",
+        "week": "2026-W16",
         "category": "This week",
         "task": "Checkin UGC Content with Edith",
-        "status": "overdue",
+        "status": "on-track",
         "parent": "Stock + product QA",
         "note": "",
         "other": ""
@@ -534,7 +221,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W17",
+        "week": "2026-W16",
         "category": "This week",
         "task": "W/House Assemble Plan with Phoebe + Jon",
         "status": "on-track",
@@ -543,7 +230,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W17",
+        "week": "2026-W16",
         "category": "This week",
         "task": "Continue Despatch Training Phoebe",
         "status": "on-track",
@@ -599,34 +286,7 @@ window.EDEN.teamPulse = {
       {
         "week": "2026-W17",
         "category": "This week",
-        "task": "Content QA — all Edith pieces checked before publish",
-        "status": "on-track",
-        "parent": "Content brand QA every piece",
-        "note": "",
-        "other": ""
-      },
-      {
-        "week": "2026-W17",
-        "category": "This week",
-        "task": "2x Founder-led content pieces",
-        "status": "on-track",
-        "parent": "Content brand QA every piece",
-        "note": "",
-        "other": ""
-      },
-      {
-        "week": "2026-W17",
-        "category": "This week",
-        "task": "Google reviews — all replied within 24hrs",
-        "status": "on-track",
-        "parent": "Customer satisfaction",
-        "note": "",
-        "other": ""
-      },
-      {
-        "week": "2026-W17",
-        "category": "This week",
-        "task": "W/House move planning — stock on pallets",
+        "task": "Stock of STD hampers - PALLET",
         "status": "on-track",
         "parent": "Stock + product QA",
         "note": "",
@@ -635,10 +295,10 @@ window.EDEN.teamPulse = {
     ],
     "Edith": [
       {
-        "week": "2026-W17",
+        "week": "2026-W14",
         "category": "This week",
-        "task": "UGC content production — current batch",
-        "status": "on-track",
+        "task": "Finish @MillzCooksContent by Wednesday",
+        "status": "done",
         "parent": "16 UGC + 4 Meta groups",
         "note": "",
         "other": ""
@@ -671,18 +331,54 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W17",
+        "week": "2026-W14",
         "category": "This week",
         "task": "Create a 3 Step Sign-off Plan for Content & Emails",
-        "status": "on-track",
+        "status": "done",
         "parent": "Team Support",
         "note": "Monday: \nOne Sentence Concept - What's The Message?\nWhat's the Hook, Retain, Reward\nDescribe Visual (words)\n2 Brand, 2 Recipient, 3 Buyer. \n\nWednesday:\nFully Completed Sign-off / Review \n\nFriday: \nAmends Made / Sign-off",
         "other": ""
       },
       {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "Email briefs to UGC",
+        "status": "done",
+        "parent": "Meta UGC & Creatives",
+        "note": "",
+        "other": ""
+      },
+      {
         "week": "2026-W17",
         "category": "This week",
-        "task": "2x Recipient-focused posts",
+        "task": "Create micro UGC offer",
+        "status": "on-track",
+        "parent": "Meta UGC & Creatives",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W17",
+        "category": "This week",
+        "task": "3X emails ready to send",
+        "status": "on-track",
+        "parent": "3 emails per week (1 promo)",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W17",
+        "category": "This week",
+        "task": "7 content pieces",
+        "status": "done",
+        "parent": "Social Media Content",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W17",
+        "category": "This week",
+        "task": "7 pieces of content",
         "status": "on-track",
         "parent": "Social Media Content",
         "note": "",
@@ -691,25 +387,25 @@ window.EDEN.teamPulse = {
       {
         "week": "2026-W17",
         "category": "This week",
-        "task": "3x Buyer-focused posts",
+        "task": "3x emails ready to send",
         "status": "on-track",
-        "parent": "Social Media Content",
+        "parent": "3 emails per week (1 promo)",
         "note": "",
         "other": ""
       },
       {
         "week": "2026-W17",
         "category": "This week",
-        "task": "3 emails ready — subject lines approved first",
+        "task": "Message ugc creators",
         "status": "on-track",
-        "parent": "Email Campaigns",
+        "parent": "Meta UGC & Creatives",
         "note": "",
         "other": ""
       },
       {
         "week": "2026-W17",
         "category": "This week",
-        "task": "UGC batch check-in with Rosie",
+        "task": "Follow up UGC creators",
         "status": "on-track",
         "parent": "Meta UGC & Creatives",
         "note": "",
@@ -718,25 +414,25 @@ window.EDEN.teamPulse = {
     ],
     "Phoebe": [
       {
-        "week": "2026-W14",
+        "week": "2026-W16",
         "category": "This week",
         "task": "Support Whouse Despatch",
-        "status": "done",
+        "status": "on-track",
         "parent": "Order satisfaction + despatch",
         "note": "Goal: Teach Edith Despatch process in full by end of April",
         "other": ""
       },
       {
-        "week": "2026-W14",
+        "week": "2026-W16",
         "category": "This week",
         "task": "Learn Admin Despatch",
-        "status": "done",
+        "status": "on-track",
         "parent": "Order satisfaction + despatch",
         "note": "Goal: Teach Rosie Despatch process in full by end of April",
         "other": ""
       },
       {
-        "week": "2026-W17",
+        "week": "2026-W16",
         "category": "This week",
         "task": "Learn Invoicing & Purchase Order",
         "status": "on-track",
@@ -745,7 +441,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W14",
+        "week": "2026-W16",
         "category": "This week",
         "task": "Pack GiftTubes",
         "status": "done",
@@ -754,53 +450,134 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W17",
+        "week": "2026-W16",
         "category": "This week",
-        "task": "Orders despatched same day before 4pm",
+        "task": "Royal Mail Returns (#87440935)",
         "status": "on-track",
         "parent": "Order satisfaction + despatch",
-        "note": "",
+        "note": "Request RM Refund for Wrong Delivery Address using form \"EDEN-CO-Declaration-of-Non-Receipt (Claims Form)\"",
         "other": ""
       },
       {
-        "week": "2026-W17",
+        "week": "2026-W16",
         "category": "This week",
-        "task": "Stock levels checked + low stock flagged",
+        "task": "Sort return for order E11983170",
+        "status": "done",
+        "parent": "Customer service - 4hr SLA",
+        "note": "Wrong gin received (elderflower out of stock). Customer wishes to return",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "Follow up amazon return",
+        "status": "done",
+        "parent": "Customer service - 4hr SLA",
+        "note": "Customer has not got back on whether they wish for us to sort a return.",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "Email customer regaridng order E11989060",
+        "status": "done",
+        "parent": "Customer service - 4hr SLA",
+        "note": "Customer wishes to include elderflower gin with their order but this is out of stock. Will send them alternative options",
+        "other": ""
+      },
+      {
+        "week": "2026-W16",
+        "category": "This week",
+        "task": "New suppliers",
         "status": "on-track",
         "parent": "Stock planning",
-        "note": "",
+        "note": "Look into x2 new supplier emails",
         "other": ""
       },
       {
-        "week": "2026-W17",
+        "week": "2026-W16",
         "category": "This week",
-        "task": "Customer queries — 4hr SLA",
+        "task": "Reachdesk invoices",
+        "status": "done",
+        "parent": "Admin & Finance",
+        "note": "Look into reachdesk invoices",
+        "other": ""
+      },
+      {
+        "week": "",
+        "category": "This week",
+        "task": "Files and platforms",
+        "status": "on-track",
+        "parent": "Admin & Finance",
+        "note": "Go through filing and platforms to undersatnd what is saved where",
+        "other": ""
+      },
+      {
+        "week": "",
+        "category": "This week",
+        "task": "Amazon account",
         "status": "on-track",
         "parent": "Customer service - 4hr SLA",
-        "note": "",
+        "note": "Verify my amazon account",
         "other": ""
       },
       {
-        "week": "2026-W17",
+        "week": "",
         "category": "This week",
-        "task": "ShipStation labels confirmed daily",
+        "task": "Google review chocolate",
         "status": "on-track",
-        "parent": "Order satisfaction + despatch",
-        "note": "",
+        "parent": "Stock planning",
+        "note": "Confirm chocolate order for google review gifts.",
+        "other": ""
+      },
+      {
+        "week": "",
+        "category": "This week",
+        "task": "Google review responses",
+        "status": "on-track",
+        "parent": "Customer service - 4hr SLA",
+        "note": "Get up to date on google review responses",
+        "other": ""
+      },
+      {
+        "week": "",
+        "category": "This week",
+        "task": "Product builder",
+        "status": "on-track",
+        "parent": "Stock planning",
+        "note": "Update the project builder spreadsheet as discussed on Monday. Deadline is 20 April.",
+        "other": ""
+      },
+      {
+        "week": "",
+        "category": "This week",
+        "task": "Wholesale investigation",
+        "status": "on-track",
+        "parent": "Stock planning",
+        "note": "Look into other wholesalers for price of bulk prosecco",
+        "other": ""
+      },
+      {
+        "week": "",
+        "category": "This week",
+        "task": "Prosecco stock",
+        "status": "on-track",
+        "parent": "Stock planning",
+        "note": "Order more stock (5). Check if there is anything else we need to order from Chaple and Jenkins.",
         "other": ""
       }
     ]
   },
   "ytd": {
-    "Jon": 5,
+    "Jon": 6,
     "Rosie": 3,
-    "Edith": 3,
-    "Phoebe": 3
+    "Edith": 7,
+    "Phoebe": 5
   },
   "streak": {
-    "Jon": 1,
-    "Rosie": 1,
-    "Edith": 1,
+    "Jon": 3,
+    "Rosie": 2,
+    "Edith": 3,
     "Phoebe": 1
   },
   "concerns": [
@@ -815,7 +592,7 @@ window.EDEN.teamPulse = {
       "title": "Change Return Process",
       "owner": "Jon + Phoebe",
       "level": "high",
-      "action": "Offer Labelless as standard (find our cost first), all not damaged / or mistake based refunds instead incur a £7.50 restocking fee.",
+      "action": "Offer Labeless as standard (find our cost first), all not damaged / or mistake based refunds instead incur a £7.50 restocking fee.",
       "due": "2026-04-17"
     },
     {
