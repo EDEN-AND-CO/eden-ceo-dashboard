@@ -1,11 +1,11 @@
 // EDEN & CO. CEO Flight Deck — Team Pulse Cache
-// Generated: 2026-04-20T09:24:22Z
+// Generated: 2026-04-20T09:39:44Z
 // Source: EDEN_CO_Weekly_Status.xlsx
 // Do not edit manually. Run: python3 scripts/build-team-pulse.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN.teamPulse = {
-  "generated": "2026-04-20T09:24:22Z",
+  "generated": "2026-04-20T09:39:44Z",
   "current_week": "2026-W17",
   "core_goals": {
     "Jon": {
@@ -498,7 +498,7 @@ window.EDEN.teamPulse = {
     ],
     "Rosie": [
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "Chase RH Fibreboard - packaging quotes",
         "status": "on-track",
@@ -534,7 +534,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "W/House Assemble Plan with Phoebe + Jon",
         "status": "on-track",
@@ -543,7 +543,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "Continue Despatch Training Phoebe",
         "status": "on-track",
@@ -552,7 +552,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "Decide on new Product lines",
         "status": "on-track",
@@ -570,7 +570,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This Month",
         "task": "Process new Alcohol Licence",
         "status": "on-track",
@@ -579,7 +579,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This Month",
         "task": "Reg. Food Biz",
         "status": "on-track",
@@ -588,7 +588,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "Other",
         "task": "Close down operations/ suppliers to Estune",
         "status": "on-track",
@@ -597,7 +597,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "Content QA — all Edith pieces checked before publish",
         "status": "on-track",
@@ -606,7 +606,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "2x Founder-led content pieces",
         "status": "on-track",
@@ -615,7 +615,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "Google reviews — all replied within 24hrs",
         "status": "on-track",
@@ -624,7 +624,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "W/House move planning — stock on pallets",
         "status": "on-track",
@@ -635,7 +635,7 @@ window.EDEN.teamPulse = {
     ],
     "Edith": [
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "UGC content production — current batch",
         "status": "on-track",
@@ -671,7 +671,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "Create a 3 Step Sign-off Plan for Content & Emails",
         "status": "on-track",
@@ -680,7 +680,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "2x Recipient-focused posts",
         "status": "on-track",
@@ -689,7 +689,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "3x Buyer-focused posts",
         "status": "on-track",
@@ -698,7 +698,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "3 emails ready — subject lines approved first",
         "status": "on-track",
@@ -707,7 +707,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "UGC batch check-in with Rosie",
         "status": "on-track",
@@ -736,7 +736,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "Learn Invoicing & Purchase Order",
         "status": "on-track",
@@ -754,7 +754,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "Orders despatched same day before 4pm",
         "status": "on-track",
@@ -763,7 +763,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "Stock levels checked + low stock flagged",
         "status": "on-track",
@@ -772,7 +772,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "Customer queries — 4hr SLA",
         "status": "on-track",
@@ -781,7 +781,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "ShipStation labels confirmed daily",
         "status": "on-track",
