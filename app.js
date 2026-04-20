@@ -759,7 +759,7 @@ window.EDEN = window.EDEN || {};
     setTs('ts-tacos-mkt', adLatest, H24);
     setTs('ts-roas-mkt', adLatest, H24);
     // Operations timestamps
-    setTs('ts-bom-ops', window.EDEN._bomCacheDate || null, H48 * 3);
+    setTs('ts-bom-ops', (window.EDEN.bomData && window.EDEN.bomData.generated) || null, H48 * 3);
     setTs('ts-stock-ops', window.EDEN._stockCacheDate || null, H48 * 3);
     var klvDate = (window.EDEN._klaviyoData && window.EDEN._klaviyoData._built) || (mkt.klaviyo && mkt.klaviyo.updated) || mkt._built || null;
     setTs('ts-klaviyo', klvDate, H48);

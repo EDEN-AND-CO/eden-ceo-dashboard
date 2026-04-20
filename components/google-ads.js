@@ -1,50 +1,50 @@
 /**
  * EDEN & CO. CEO Flight Deck - Google Ads Component
  * Campaign + search term data — refreshed via Google Ads MCP.
- * Last MCP refresh: 2026-03-31T16:00:00Z (30-day window)
+ * Last MCP refresh: 2026-04-20T09:00:00Z (MTD Apr 1–20)
  * To refresh: run Google Ads MCP queries in Claude and update CAMPAIGNS + SEARCH_TERMS below.
  */
 window.EDEN = window.EDEN || {};
 window.EDEN.components = window.EDEN.components || {};
 
 // Timestamp used by Flight Check panel
-window.EDEN._gadsFetched = '2026-03-31T16:00:00Z';
+window.EDEN._gadsFetched = '2026-04-20T09:00:00Z';
 
 (function () {
   'use strict';
 
-  // ── Live data — Google Ads MCP, 31 Mar 2026, LAST_30_DAYS ───────────────
+  // ── Live data — Google Ads MCP, 20 Apr 2026, MTD Apr 1–20 ───────────────
   // To update: ask Claude to run Google Ads MCP campaign + search term queries
 
   var CAMPAIGNS = [
-    { name: 'Search - Generic',            spend: 1692.63, clicks: 1756, conv: 87.14,  conv_value: 4253.02, avg_cpc: 0.96 },
-    { name: 'PMAX',                         spend: 1328.51, clicks: 1558, conv: 91.99,  conv_value: 4542.16, avg_cpc: 0.85 },
-    { name: 'Shopping - Brand',             spend: 182.06,  clicks: 258,  conv: 14.92,  conv_value: 898.99,  avg_cpc: 0.71 },
-    { name: 'Search - Brand',               spend: 74.15,   clicks: 226,  conv: 15.03,  conv_value: 879.90,  avg_cpc: 0.33 },
-    { name: 'Shopping - Generic (Catch All)', spend: 1.30,  clicks: 35,   conv: 2.00,   conv_value: 44.40,   avg_cpc: 0.04 }
+    { name: 'Search - Generic',              spend: 768.93,  clicks: 756,  conv: 37.00,  conv_value: 1847.98, avg_cpc: 1.02 },
+    { name: 'PMAX',                           spend: 914.39,  clicks: 707,  conv: 41.00,  conv_value: 1929.23, avg_cpc: 1.29 },
+    { name: 'Shopping - Brand',               spend: 103.67,  clicks: 144,  conv: 10.97,  conv_value: 507.87,  avg_cpc: 0.72 },
+    { name: 'Search - Brand',                 spend: 46.22,   clicks: 136,  conv: 7.00,   conv_value: 251.60,  avg_cpc: 0.34 },
+    { name: 'Shopping - Generic (Catch All)', spend: 0.31,    clicks: 11,   conv: 0.00,   conv_value: 0.00,    avg_cpc: 0.03 }
   ];
 
   var SEARCH_TERMS = [
-    { term: 'gluten free hampers',              clicks: 73,  conv: 10.06, cost: 81.95,  cpc: 1.12 },
-    { term: 'eden and co',                      clicks: 102, conv: 7.03,  cost: 32.73,  cpc: 0.32 },
-    { term: 'vegan hamper',                     clicks: 97,  conv: 4.75,  cost: 107.78, cpc: 1.11 },
-    { term: 'gluten free hamper',               clicks: 121, conv: 4.56,  cost: 124.28, cpc: 1.03 },
-    { term: 'eden and co hampers',              clicks: 28,  conv: 3.00,  cost: 10.35,  cpc: 0.37 },
-    { term: 'eden treats',                      clicks: 9,   conv: 3.00,  cost: 2.78,   cpc: 0.31 },
-    { term: 'eden & co',                        clicks: 49,  conv: 2.00,  cost: 16.07,  cpc: 0.33 },
-    { term: 'vegetarian gift hamper',           clicks: 3,   conv: 2.00,  cost: 3.86,   cpc: 1.29 },
-    { term: 'vegan hamper uk',                  clicks: 34,  conv: 2.00,  cost: 40.56,  cpc: 1.19 },
-    { term: 'vegan hampers',                    clicks: 29,  conv: 2.00,  cost: 42.88,  cpc: 1.48 },
-    { term: 'gluten free dairy free hamper',    clicks: 4,   conv: 1.06,  cost: 5.23,   cpc: 1.31 },
-    { term: 'dairy and gluten free',            clicks: 1,   conv: 1.00,  cost: 1.31,   cpc: 1.31 },
-    { term: 'gluten and dairy free hamper',     clicks: 5,   conv: 1.00,  cost: 2.23,   cpc: 0.45 },
-    { term: 'gluten and dairy free hampers',    clicks: 7,   conv: 1.00,  cost: 9.74,   cpc: 1.39 },
-    { term: 'gluten free gift hampers',         clicks: 1,   conv: 1.00,  cost: 0.93,   cpc: 0.93 },
-    { term: 'gluten free gifts',                clicks: 11,  conv: 1.00,  cost: 9.64,   cpc: 0.88 },
-    { term: 'gluten free goodies',              clicks: 1,   conv: 1.00,  cost: 0.73,   cpc: 0.73 },
-    { term: 'gluten free luxury hamper',        clicks: 5,   conv: 1.00,  cost: 5.46,   cpc: 1.09 },
-    { term: 'vegan gluten free gift baskets',   clicks: 1,   conv: 1.00,  cost: 0.51,   cpc: 0.51 },
-    { term: 'vegetarian hampers',               clicks: 9,   conv: 1.00,  cost: 17.09,  cpc: 1.90 }
+    { term: 'gluten free hampers',              clicks: 49,  conv: 3.00, cost: 51.28,  cpc: 1.05 },
+    { term: 'vegan hampers',                    clicks: 17,  conv: 3.00, cost: 36.56,  cpc: 2.15 },
+    { term: 'eden & co',                        clicks: 41,  conv: 2.00, cost: 10.59,  cpc: 0.26 },
+    { term: 'eden and co hampers',              clicks: 19,  conv: 2.00, cost: 7.22,   cpc: 0.38 },
+    { term: 'vegan hamper uk',                  clicks: 13,  conv: 2.00, cost: 15.89,  cpc: 1.22 },
+    { term: 'gluten free hamper',               clicks: 36,  conv: 1.00, cost: 38.24,  cpc: 1.06 },
+    { term: 'vegan hamper',                     clicks: 29,  conv: 1.00, cost: 31.45,  cpc: 1.08 },
+    { term: 'eden and co',                      clicks: 28,  conv: 1.00, cost: 7.84,   cpc: 0.28 },
+    { term: 'gluten free gift hamper',          clicks: 12,  conv: 1.00, cost: 13.56,  cpc: 1.13 },
+    { term: 'gluten free gifts',                clicks: 8,   conv: 1.00, cost: 7.12,   cpc: 0.89 },
+    { term: 'vegan gift hamper',                clicks: 7,   conv: 1.00, cost: 9.03,   cpc: 1.29 },
+    { term: 'gluten and dairy free hampers',    clicks: 6,   conv: 1.00, cost: 8.31,   cpc: 1.39 },
+    { term: 'dairy free hamper',                clicks: 5,   conv: 1.00, cost: 6.45,   cpc: 1.29 },
+    { term: 'gluten free luxury hamper',        clicks: 4,   conv: 1.00, cost: 4.72,   cpc: 1.18 },
+    { term: 'vegetarian hampers',               clicks: 4,   conv: 1.00, cost: 7.60,   cpc: 1.90 },
+    { term: 'gluten free dairy free hamper',    clicks: 3,   conv: 1.00, cost: 3.93,   cpc: 1.31 },
+    { term: 'gluten free hamper uk',            clicks: 3,   conv: 1.00, cost: 3.39,   cpc: 1.13 },
+    { term: 'eden treats',                      clicks: 6,   conv: 1.00, cost: 1.86,   cpc: 0.31 },
+    { term: 'vegan gluten free hamper',         clicks: 3,   conv: 1.00, cost: 3.87,   cpc: 1.29 },
+    { term: 'vegetarian gift hamper',           clicks: 2,   conv: 1.00, cost: 2.58,   cpc: 1.29 }
   ];
 
   // Computed totals
@@ -153,7 +153,7 @@ window.EDEN._gadsFetched = '2026-03-31T16:00:00Z';
     }
     if (window.EDEN.refreshAdTiles) window.EDEN.refreshAdTiles();
 
-    console.log('[EDEN] Google Ads rendered (MCP 31 Mar). Spend: ' + fmtGBP(totalSpend) + ' | Conv: ' + Math.round(totalConv) + ' | ROAS: ' + fmt2(blendedROAS) + 'x | CPA: ' + fmtGBPd(blendedCPA));
+    console.log('[EDEN] Google Ads rendered (MCP 20 Apr MTD). Spend: ' + fmtGBP(totalSpend) + ' | Conv: ' + Math.round(totalConv) + ' | ROAS: ' + fmt2(blendedROAS) + 'x | CPA: ' + fmtGBPd(blendedCPA));
   }
 
   window.EDEN.components['google-ads'] = { render: render };
