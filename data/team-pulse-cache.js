@@ -812,20 +812,6 @@ window.EDEN.teamPulse = {
       "due": "2026-04-04"
     },
     {
-      "title": "Hampers on Pallets",
-      "owner": "Rosie",
-      "level": "high",
-      "action": "Start Building Pallets and clearing shelves for move",
-      "due": "2026-04-04"
-    },
-    {
-      "title": "TikTok Login",
-      "owner": "Rosie",
-      "level": "med",
-      "action": "Find and Give Edith Access",
-      "due": "2026-04-04"
-    },
-    {
       "title": "Change Return Process",
       "owner": "Jon + Phoebe",
       "level": "high",
@@ -833,25 +819,46 @@ window.EDEN.teamPulse = {
       "due": "2026-04-17"
     },
     {
-      "title": "Laptop Battery Maintenance",
-      "owner": "Team",
-      "level": "med",
-      "action": "Drain your batteries down, don't leave cables plugged in all the time.",
-      "due": "2026-04-17"
-    },
-    {
-      "title": "Large Hamper Outers",
-      "owner": "Jon + Phoebe",
+      "title": "Stanard Hamper Outers",
+      "owner": "Jon + Phoebe + Rosie",
       "level": "high",
       "action": "Order Hamper Postal Outers",
-      "due": "2026-04-15"
+      "due": "2026-04-19"
     },
     {
-      "title": "Turn Off Prime / Back On",
-      "owner": "Jon + Phoebe",
+      "title": "INTERNET",
+      "owner": "Rosie",
       "level": "high",
-      "action": "Turn off Prime Monday / On Wed",
-      "due": "2026-04-15"
+      "action": "Delay installation",
+      "due": "2026-04-20"
+    },
+    {
+      "title": "Aery Delivery",
+      "owner": "Phoebe",
+      "level": "high",
+      "action": "Chase outstanding Stock",
+      "due": "2026-04-24"
+    },
+    {
+      "title": "Prosecco Stock Levels",
+      "owner": "Phoebe & Rosie",
+      "level": "high",
+      "action": "Check & Decide on Order",
+      "due": "2026-04-24"
+    },
+    {
+      "title": "Postal Outers Stock Levels",
+      "owner": "Phoebe & Rosie",
+      "level": "high",
+      "action": "Check & Decide on Order - New Stock Due 27th - Chase RH F First",
+      "due": "2026-04-24"
+    },
+    {
+      "title": "Use Sonnet",
+      "owner": "All Team",
+      "level": "high",
+      "action": "Avoid AI Use Limit - Use Sonnet Model",
+      "due": "2026-04-24"
     }
   ]
 };
