@@ -373,18 +373,9 @@ window.EDEN.teamPulse = {
         "week": "2026-W16",
         "category": "This week",
         "task": "Amazon Account Validation (VAT + Phone)",
-        "status": "on-track",
+        "status": "done",
         "parent": "B2B - 2 key accounts/month",
         "note": "Contact Accountants & Chase Amazon",
-        "other": ""
-      },
-      {
-        "week": "2026-W16",
-        "category": "This week",
-        "task": "Support Phoebe - Orders Despatch",
-        "status": "on-track",
-        "parent": "Business Strategy & Performance",
-        "note": "Mon-Thu Practice",
         "other": ""
       },
       {
@@ -397,43 +388,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W14",
-        "category": "This week",
-        "task": "Payroll",
-        "status": "done",
-        "parent": "Business Strategy & Performance",
-        "note": "Monday Update",
-        "other": ""
-      },
-      {
-        "week": "2026-W14",
-        "category": "This week",
-        "task": "Launch New Dashboard",
-        "status": "done",
-        "parent": "Business Strategy & Performance",
-        "note": "Monday Meeting Unveil",
-        "other": ""
-      },
-      {
-        "week": "2026-W16",
-        "category": "This week",
-        "task": "Finalise 2026 Product Range",
-        "status": "on-track",
-        "parent": "Business Strategy & Performance",
-        "note": "GreenFingers Outstanding",
-        "other": ""
-      },
-      {
-        "week": "2026-W14",
-        "category": "This week",
-        "task": "Monitor International Orders",
-        "status": "done",
-        "parent": "International - shipping + Amz",
-        "note": "UPS checkin",
-        "other": ""
-      },
-      {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "GlobalCheckout Setup",
         "status": "on-track",
@@ -442,7 +397,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W16",
+        "week": "2026-W17",
         "category": "This week",
         "task": "Bread&Jam Tickets",
         "status": "on-track",
@@ -451,21 +406,84 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W14",
+        "week": "2026-W17",
         "category": "This week",
-        "task": "Checking WIth Corp Campaigns: Virgin, PIPL, SmartCurrencyExchange",
-        "status": "done",
+        "task": "Checking With Corp Campaigns: Virgin, PIPL, SmartCurrencyExchange",
+        "status": "on-track",
         "parent": "B2B - 2 key accounts/month",
         "note": "Email each Monday",
         "other": ""
       },
       {
-        "week": "2026-W14",
+        "week": "2026-W17",
         "category": "This week",
         "task": "PPC Check-in & Update",
-        "status": "done",
+        "status": "on-track",
         "parent": "PPC - Blended ROAS 5x",
         "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W19",
+        "category": "This Month",
+        "task": "Setup Instantly",
+        "status": "on-track",
+        "parent": "B2B - 2 key accounts/month",
+        "note": "Warm-up Email Accounts for 30 Days",
+        "other": ""
+      },
+      {
+        "week": "2026-W19",
+        "category": "This Month",
+        "task": "Build Lead Magnets Corp Outreach",
+        "status": "on-track",
+        "parent": "B2B - 2 key accounts/month",
+        "note": "4 x Lead Magnets",
+        "other": ""
+      },
+      {
+        "week": "2026-W19",
+        "category": "This Month",
+        "task": "Create Apollo Lists for Corp Outbound",
+        "status": "on-track",
+        "parent": "B2B - 2 key accounts/month",
+        "note": "Filter Lists be EA, HR, Sales & marketing Exec's",
+        "other": ""
+      },
+      {
+        "week": "2026-W19",
+        "category": "This Month",
+        "task": "Create Emails for B2B Outreach",
+        "status": "on-track",
+        "parent": "B2B - 2 key accounts/month",
+        "note": "Outbound Email Creations",
+        "other": ""
+      },
+      {
+        "week": "2026-W19",
+        "category": "This Month",
+        "task": "Create B2B Landing page",
+        "status": "on-track",
+        "parent": "B2B - 2 key accounts/month",
+        "note": "Focused Messaging on Core pillars (see Wellbox) and visual callouts",
+        "other": ""
+      },
+      {
+        "week": "2026-W19",
+        "category": "This Month",
+        "task": "Integrate AI in B2B Workflow",
+        "status": "on-track",
+        "parent": "B2B - 2 key accounts/month",
+        "note": "Use AI to join up workflow and not require manual input",
+        "other": ""
+      },
+      {
+        "week": "2026-W21",
+        "category": "This Month",
+        "task": "Streamline EC homepage",
+        "status": "on-track",
+        "parent": "Business Strategy & Performance",
+        "note": "Focus on Hampers and their Stories on Homepage",
         "other": ""
       },
       {
@@ -474,51 +492,6 @@ window.EDEN.teamPulse = {
         "task": "Create Brochure (Inbox)",
         "status": "",
         "parent": "",
-        "note": "",
-        "other": ""
-      },
-      {
-        "week": "2026-W16",
-        "category": "This week",
-        "task": "PPC Weekly Audit — Google + Amazon + Meta",
-        "status": "on-track",
-        "parent": "PPC - Blended ROAS 5x",
-        "note": "",
-        "other": ""
-      },
-      {
-        "week": "2026-W16",
-        "category": "This week",
-        "task": "Corp outreach — Virgin, PIPL, SmartCurrencyExchange",
-        "status": "on-track",
-        "parent": "B2B - 2 key accounts/month",
-        "note": "",
-        "other": ""
-      },
-      {
-        "week": "2026-W16",
-        "category": "This week",
-        "task": "Weekly Finance + Dashboard Review",
-        "status": "on-track",
-        "parent": "Business Strategy & Performance",
-        "note": "",
-        "other": ""
-      },
-      {
-        "week": "2026-W16",
-        "category": "This week",
-        "task": "Team 1:1 Reviews",
-        "status": "on-track",
-        "parent": "Business Strategy & Performance",
-        "note": "",
-        "other": ""
-      },
-      {
-        "week": "2026-W16",
-        "category": "This week",
-        "task": "International Orders — UPS check-in",
-        "status": "on-track",
-        "parent": "International - shipping + Amz",
         "note": "",
         "other": ""
       }
