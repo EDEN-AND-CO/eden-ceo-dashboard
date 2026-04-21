@@ -20,10 +20,10 @@
   --ec-gold-600:     #a4904e;
   --ec-gold-300:     #d2c498;
   --ec-gold-100:     #ece3c7;
-  --ec-cream:        #f5efe4;
-  --ec-cream-soft:   #faf6ec;
-  --ec-stone:        #e8e0d0;
-  --ec-stone-warm:   #d9cdb5;
+  --ec-cream:        #FFFDEF;
+  --ec-cream-soft:   #F1F2F2;
+  --ec-stone:        rgba(180,162,105,0.2);
+  --ec-stone-warm:   rgba(180,162,105,0.35);
   --ec-ink:          #1d1a15;
   --ec-grey-700:     #414042;
   --ec-grey-500:     #6b6a67;
@@ -43,15 +43,15 @@
   --GOS:   #b4a269;
   --GOLD:  #b4a269;
   --GOM:   #8d7d4d;
-  --CREAM: #f5efe4;
-  --LG:    #f5efe4;
+  --CREAM: #FFFDEF;
+  --LG:    #F1F2F2;
   --GDK:   #1d1a15;
   --GMD:   #6b6a67;
   --GFL:   #f3f7eb;
   --W:     #ffffff;
-  --PG:    #f5efe4;
-  --GXP:   #f3f7eb;
-  --GP:    #e8e0d0;
+  --PG:    #FFFDEF;
+  --GXP:   #F1F2F2;
+  --GP:    rgba(180,162,105,0.2);
   --RED:   #9a3a2e;
   --RDL:   #fdf0ee;
   --AMB:   #b58a3c;
@@ -110,8 +110,8 @@ html, body {
    Sidebar
    -------------------------------------------------------------------------- */
 .sidebar {
-  background: var(--ec-cream-soft);
-  border-right: 1px solid var(--ec-stone);
+  background: #ffffff;
+  border-right: 1px solid rgba(180,162,105,0.18);
   display: flex;
   flex-direction: column;
   position: sticky;
@@ -122,7 +122,7 @@ html, body {
 
 .sidebar-brand {
   padding: 26px 22px 22px;
-  border-bottom: 1px solid var(--ec-stone);
+  border-bottom: 1px solid rgba(180,162,105,0.18);
   flex-shrink: 0;
 }
 
@@ -412,7 +412,7 @@ html, body {
    -------------------------------------------------------------------------- */
 .tile, .chip, .ccard, .rv-panel, .card, .ctile, .occ, .adblk, .sc-in, .term {
   background: #ffffff;
-  border: 1px solid var(--ec-stone);
+  border: 1px solid rgba(180,162,105,0.18);
   border-radius: 0 !important;
   padding: 24px 28px;
 }
@@ -426,7 +426,7 @@ html, body {
 
 /* Chart cards: gold top rule */
 .ccard, .rv-panel {
-  background: var(--ec-cream-soft) !important;
+  background: #ffffff !important;
   border-top: 2px solid var(--ec-gold) !important;
 }
 
@@ -574,9 +574,9 @@ html, body {
   letter-spacing: 0.18em !important;
   text-transform: uppercase !important;
   color: var(--ec-grey-500) !important;
-  background: var(--ec-cream-soft) !important;
+  background: #F1F2F2 !important;
   padding: 10px 10px !important;
-  border-bottom: 1px solid var(--ec-stone) !important;
+  border-bottom: 1px solid rgba(180,162,105,0.2) !important;
   text-align: left;
 }
 .dt td, .tbl td {
@@ -632,8 +632,8 @@ html, body {
    Ad blocks
    -------------------------------------------------------------------------- */
 .adblk {
-  background: var(--ec-cream-soft) !important;
-  border: 1px solid var(--ec-stone) !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(180,162,105,0.18) !important;
   border-left: 4px solid var(--ec-light-green) !important;
   border-radius: 0 !important;
   padding: 20px 24px !important;
@@ -685,8 +685,8 @@ html, body {
    Occasions tiles
    -------------------------------------------------------------------------- */
 .occ {
-  background: var(--ec-cream-soft) !important;
-  border: 1px solid var(--ec-stone) !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(180,162,105,0.18) !important;
   border-left: 3px solid var(--ec-gold) !important;
   border-radius: 0 !important;
   padding: 16px 18px !important;
@@ -752,8 +752,8 @@ html, body {
 
 /* Terms */
 .term {
-  background: var(--ec-cream-soft) !important;
-  border: 1px solid var(--ec-stone) !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(180,162,105,0.18) !important;
   border-top: 2px solid var(--ec-gold) !important;
   border-radius: 0 !important;
   padding: 18px 20px !important;
@@ -868,10 +868,18 @@ html, body {
 #tab-goals .tp-sc-val.g { color: var(--ec-success) !important; }
 #tab-goals .tp-sc-val.r { color: var(--ec-error) !important; }
 
-/* Lane grid */
-#tab-goals .tp-main { background: var(--ec-stone) !important; gap: 1px !important; }
-#tab-goals .tp-lane { background: var(--ec-cream-soft) !important; }
-#tab-goals .tp-lane:nth-child(even) { background: #fff !important; }
+/* Lane grid — overflow fix: ensure lanes constrain to grid cell width */
+#tab-goals .tp-main {
+  background: rgba(180,162,105,0.15) !important;
+  gap: 1px !important;
+  overflow: visible !important;
+}
+#tab-goals .tp-lane {
+  background: #ffffff !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+#tab-goals .tp-lane:nth-child(even) { background: #fafaf7 !important; }
 
 /* Lane top accent */
 #tab-goals .tp-lane:nth-child(1) { border-top: 3px solid var(--ec-dark-green) !important; }
@@ -881,11 +889,11 @@ html, body {
 
 /* Lane header */
 #tab-goals .tp-lane-hd {
-  background: var(--ec-cream-soft) !important;
-  border-bottom: 1px solid var(--ec-stone) !important;
+  background: #F1F2F2 !important;
+  border-bottom: 1px solid rgba(180,162,105,0.2) !important;
   padding: 20px 22px 16px !important;
 }
-#tab-goals .tp-lane:nth-child(even) .tp-lane-hd { background: rgba(255,255,255,0.8) !important; }
+#tab-goals .tp-lane:nth-child(even) .tp-lane-hd { background: #F1F2F2 !important; }
 #tab-goals .tp-lane-name {
   font-family: var(--F) !important;
   font-size: 11px !important;
@@ -933,8 +941,8 @@ html, body {
   margin-bottom: 8px !important;
 }
 #tab-goals .tp-task-hd {
-  background: var(--ec-cream-soft) !important;
-  border-bottom-color: var(--ec-stone) !important;
+  background: #F1F2F2 !important;
+  border-bottom-color: rgba(180,162,105,0.2) !important;
   padding: 10px 14px !important;
 }
 #tab-goals .tp-task.week { background: #fff !important; border-color: rgba(180,162,105,0.25) !important; }
@@ -954,6 +962,9 @@ html, body {
   font-weight: 400 !important;
   color: var(--ec-ink) !important;
   line-height: 1.4 !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  min-width: 0 !important;
 }
 
 /* Status dot */
@@ -977,18 +988,18 @@ html, body {
 /* Notes */
 #tab-goals .tp-note-btn { border-radius: 0 !important; font-family: var(--F) !important; font-size: 10px !important; letter-spacing: 0.08em !important; background: #fff !important; border: 1px solid var(--ec-stone) !important; color: var(--ec-grey-500) !important; }
 #tab-goals .tp-note-btn:hover { background: var(--ec-dark-green) !important; color: var(--ec-cream) !important; border-color: var(--ec-dark-green) !important; }
-#tab-goals .tp-note { background: var(--ec-cream-soft) !important; border-top-color: var(--ec-stone) !important; }
+#tab-goals .tp-note { background: #F1F2F2 !important; border-top-color: rgba(180,162,105,0.2) !important; }
 
 /* Sub-goals */
-#tab-goals .tp-goals { background: var(--ec-cream-soft) !important; border-top-color: var(--ec-stone) !important; }
-#tab-goals .tp-goal-row { border-bottom-color: var(--ec-stone) !important; color: var(--ec-ink) !important; }
+#tab-goals .tp-goals { background: #F1F2F2 !important; border-top-color: rgba(180,162,105,0.2) !important; }
+#tab-goals .tp-goal-row { border-bottom-color: rgba(180,162,105,0.2) !important; color: var(--ec-ink) !important; }
 #tab-goals .tp-mgdot { border-radius: 0 !important; border-color: var(--ec-stone-warm) !important; }
 #tab-goals .tp-mgdot.done { background: var(--ec-dark-green) !important; border-color: var(--ec-dark-green) !important; }
 #tab-goals .tp-metric { border-radius: 0 !important; font-family: var(--F) !important; font-size: 10px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; color: var(--ec-gold-700) !important; background: rgba(180,162,105,0.08) !important; border: 1px solid rgba(180,162,105,0.18) !important; }
 #tab-goals .tp-metric.am { color: var(--ec-warn) !important; background: rgba(181,138,60,0.08) !important; border-color: rgba(181,138,60,0.2) !important; }
 
 /* Noise bucket */
-#tab-goals .tp-noise { border-radius: 0 !important; border: 1px dashed var(--ec-stone-warm) !important; background: var(--ec-cream-soft) !important; }
+#tab-goals .tp-noise { border-radius: 0 !important; border: 1px dashed rgba(180,162,105,0.3) !important; background: #F1F2F2 !important; }
 #tab-goals .tp-noise-item { border-radius: 0 !important; border: 1px solid var(--ec-stone) !important; background: #fff !important; }
 
 /* Meeting protocol */
@@ -996,7 +1007,7 @@ html, body {
 #tab-goals .tp-mtg-step { border-radius: 0 !important; }
 
 /* Concerns */
-#tab-goals .tp-concerns { background: var(--ec-cream-soft) !important; border-top: 1px solid var(--ec-stone) !important; padding: 32px 40px !important; }
+#tab-goals .tp-concerns { background: #F1F2F2 !important; border-top: 1px solid rgba(180,162,105,0.2) !important; padding: 32px 40px !important; }
 #tab-goals .tp-concerns-title { font-family: var(--F) !important; font-size: 10px !important; font-weight: 500 !important; letter-spacing: 0.24em !important; color: var(--ec-gold) !important; }
 #tab-goals .tp-concern {
   background: #fff !important;
