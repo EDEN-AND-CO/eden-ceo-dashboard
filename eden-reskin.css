@@ -446,6 +446,13 @@ html, body {
 .chip.tr   { background: rgba(154,58,46,0.07) !important; border-color: rgba(154,58,46,0.18) !important; }
 .chip.tgold{ background: rgba(180,162,105,0.08) !important; border-color: rgba(180,162,105,0.22) !important; }
 
+/* Inverted chip — dark green background, white text */
+.chip.inv { border: none !important; }
+.chip.inv .tval,
+.chip.inv .tval.lg { color: #ffffff !important; }
+.chip.inv .tlbl    { color: rgba(255,255,255,0.65) !important; }
+.chip.inv .tmeta   { color: rgba(255,255,255,0.5) !important; }
+
 /* Metric label */
 .tlbl {
   font-family: var(--F) !important;
