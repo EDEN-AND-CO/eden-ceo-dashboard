@@ -14,7 +14,7 @@
 })();
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="eden-reskin.css?v=20260421d">
+<link rel="stylesheet" href="eden-reskin.css?v=20260421e">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -22,8 +22,8 @@
   --GOLD:#B4A269;--GOM:#908254;
   --CREAM:#FFFDEF;--LG:#F1F2F2;--GDK:#414042;--GMD:#6D6E71;--GFL:#F1F2F2;--W:#fff;
   --PG:#FFFDEF;--GP:rgba(180,162,105,0.25);--GXP:#ffffff;
-  --RED:#9a3a2e;--RDL:#fdf0ee;--AMB:#b58a3c;--ABL:#fdf5e6;
-  --OK:#4a7c59;--OKL:#edf5f0;
+  --RED:#8c2020;--RDL:#faeaea;--AMB:#7a4800;--ABL:#fdf3dc;
+  --OK:#0f4028;--OKL:#e0f0e8;
   --F:'Josefin Sans',Montserrat,'Helvetica Neue',Arial,sans-serif;
   --FM:'The Seasons','Freight Text','Cormorant Garamond',Montserrat,Georgia,serif;
   --r4:0;--r8:0;--r12:0;--r20:0;
@@ -642,12 +642,12 @@ svg.sp{display:block;width:100%;overflow:visible}
 <!-- ═══════════════════════════════════
      OVERVIEW TAB
 ═══════════════════════════════════ -->
-<div class="panel active" id="tab-overview"><div class="page">
+<div class="panel active" id="tab-overview">
 
-  <!-- CEO HERO COMMAND BAR -->
+  <!-- CEO HERO COMMAND BAR — outside .page so it can be full-width -->
   <div class="ceo-hero-bar">
     <div class="ceo-hero-kpi">
-      <span class="ceo-hero-lbl">Orders Today</span>
+      <span class="ceo-hero-lbl">Orders / Day</span>
       <span class="ceo-hero-val" id="hero-orders">—</span>
       <span class="ceo-hero-sub">Target 50 / day</span>
     </div>
@@ -675,6 +675,7 @@ svg.sp{display:block;width:100%;overflow:visible}
     </div>
   </div>
 
+<div class="page">
   <div class="sec">
     <div class="seclbl" style="display:flex;align-items:center;justify-content:space-between">
       <span id="ov-period-label">Month to date — primary performance</span>
@@ -853,7 +854,7 @@ svg.sp{display:block;width:100%;overflow:visible}
     </div>
   </div>
 
-</div></div>
+</div></div><!-- /.page --></div><!-- /#tab-overview -->
 
 <!-- ═══════════════════════════════════
      PPC & EMAIL TAB

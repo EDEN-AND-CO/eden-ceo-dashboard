@@ -1182,8 +1182,8 @@ html, body {
   display: flex !important;
   align-items: center !important;
   gap: 0 !important;
-  margin: -40px -48px 40px !important;
-  width: calc(100% + 96px) !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
 }
 .ceo-hero-kpi {
   flex: 1 !important;
