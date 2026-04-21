@@ -22,8 +22,8 @@
   --ec-gold-100:     #ece3c7;
   --ec-cream:        #FFFDEF;
   --ec-cream-soft:   #F1F2F2;
-  --ec-stone:        rgba(180,162,105,0.2);
-  --ec-stone-warm:   rgba(180,162,105,0.35);
+  --ec-stone:        rgba(180,162,105,0.25);
+  --ec-stone-warm:   rgba(180,162,105,0.4);
   --ec-ink:          #1d1a15;
   --ec-grey-700:     #414042;
   --ec-grey-500:     #6b6a67;
@@ -50,8 +50,8 @@
   --GFL:   #f3f7eb;
   --W:     #ffffff;
   --PG:    #FFFDEF;
-  --GXP:   #F1F2F2;
-  --GP:    rgba(180,162,105,0.2);
+  --GXP:   #ffffff;
+  --GP:    rgba(180,162,105,0.25);
   --RED:   #9a3a2e;
   --RDL:   #fdf0ee;
   --AMB:   #b58a3c;
@@ -110,8 +110,8 @@ html, body {
    Sidebar
    -------------------------------------------------------------------------- */
 .sidebar {
-  background: #ffffff;
-  border-right: 1px solid rgba(180,162,105,0.18);
+  background: #fefdf8;
+  border-right: 1px solid rgba(180,162,105,0.25);
   display: flex;
   flex-direction: column;
   position: sticky;
@@ -195,7 +195,7 @@ html, body {
 .sidebar .tab.active {
   color: var(--ec-dark-green) !important;
   border-left-color: var(--ec-gold) !important;
-  background: rgba(0,68,55,0.06) !important;
+  background: rgba(180,162,105,0.1) !important;
   font-weight: 600;
 }
 
@@ -342,10 +342,14 @@ html, body {
 .page {
   background: var(--ec-cream) !important;
   padding: 40px 48px 80px !important;
-  max-width: none !important;
-  margin: 0 !important;
+  max-width: 1240px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
   flex: 1;
 }
+
+/* Weekly Pulse is full-bleed by design (green bars span edge-to-edge) */
+#tab-goals .page { max-width: none !important; margin: 0 !important; padding: 0 !important; }
 
 /* Panels fill their parent */
 .panel { background: var(--ec-cream); }
@@ -364,7 +368,7 @@ html, body {
   margin-bottom: 20px !important;
 }
 .seclbl::after {
-  background: linear-gradient(90deg, var(--ec-stone-warm) 0%, var(--ec-stone) 40%, transparent 100%) !important;
+  background: linear-gradient(90deg, rgba(180,162,105,0.45) 0%, rgba(180,162,105,0.2) 40%, transparent 100%) !important;
   height: 1px !important;
 }
 .seclbl.urgent { color: var(--ec-error) !important; }
@@ -412,9 +416,10 @@ html, body {
    -------------------------------------------------------------------------- */
 .tile, .chip, .ccard, .rv-panel, .card, .ctile, .occ, .adblk, .sc-in, .term {
   background: #ffffff;
-  border: 1px solid rgba(180,162,105,0.18);
+  border: 1px solid rgba(180,162,105,0.25);
   border-radius: 0 !important;
-  padding: 24px 28px;
+  padding: 22px 24px;
+  box-shadow: 0 1px 3px rgba(29,26,21,0.06), 0 1px 2px rgba(29,26,21,0.03);
 }
 
 /* Tile: colored left accent */
@@ -473,9 +478,9 @@ html, body {
 /* Progress bars — 4px, square, EDEN fill */
 .pbar {
   height: 4px !important;
-  background: rgba(0,68,55,0.08) !important;
+  background: rgba(0,68,55,0.1) !important;
   border-radius: 0 !important;
-  overflow: visible !important;
+  overflow: hidden !important;
   margin-top: 6px !important;
 }
 .pf {
@@ -570,13 +575,13 @@ html, body {
 .dt th, .tbl th {
   font-family: var(--F) !important;
   font-size: 9px !important;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
   letter-spacing: 0.18em !important;
   text-transform: uppercase !important;
-  color: var(--ec-grey-500) !important;
-  background: #F1F2F2 !important;
-  padding: 10px 10px !important;
-  border-bottom: 1px solid rgba(180,162,105,0.2) !important;
+  color: var(--ec-dark-green) !important;
+  background: #F3F3F1 !important;
+  padding: 11px 12px !important;
+  border-bottom: 2px solid rgba(180,162,105,0.35) !important;
   text-align: left;
 }
 .dt td, .tbl td {
@@ -586,7 +591,8 @@ html, body {
   vertical-align: middle;
 }
 .dt tr:last-child td, .tbl tr:last-child td { border-bottom: none !important; }
-.dt tr:hover td, .tbl tr:hover td { background: rgba(0,68,55,0.025) !important; }
+.dt tr:nth-child(even) td, .tbl tr:nth-child(even) td { background: #fafaf6 !important; }
+.dt tr:hover td, .tbl tr:hover td { background: rgba(180,162,105,0.06) !important; }
 .dt th.r, .dt td.r, .tbl th.r, .tbl td.r { text-align: right !important; }
 .tbl .num { text-align: right; font-variant-numeric: tabular-nums; }
 .tbl .num.serif { font-family: var(--FM) !important; font-size: 16px !important; }
@@ -711,7 +717,7 @@ html, body {
 /* --------------------------------------------------------------------------
    BoM
    -------------------------------------------------------------------------- */
-.bom-matrix th { background: var(--ec-dark-green) !important; letter-spacing: 0.14em !important; }
+.bom-matrix th { background: var(--ec-dark-green) !important; color: rgba(255,255,255,0.9) !important; letter-spacing: 0.14em !important; border-bottom: none !important; }
 .bom-matrix .bom-prod-col { background: var(--ec-dark-green) !important; }
 .bom-sec-row td { background: var(--ec-green-050) !important; color: var(--ec-dark-green) !important; border-top-color: var(--ec-light-green) !important; }
 .bom-prod-row td { border-bottom-color: var(--ec-grey-100) !important; }
@@ -726,7 +732,7 @@ html, body {
 .bom-htab { border-radius: 0 !important; background: #fff !important; border-color: var(--ec-stone) !important; }
 .bom-htab.active { background: var(--ec-dark-green) !important; border-color: var(--ec-dark-green) !important; }
 .bom-hsum { border-radius: 0 !important; }
-.bom-htable th { background: var(--ec-dark-green) !important; }
+.bom-htable th { background: var(--ec-dark-green) !important; color: rgba(255,255,255,0.9) !important; border-bottom: none !important; }
 .bom-alt td { background: var(--ec-cream-soft) !important; }
 .bom-pl { border-radius: 0 !important; background: rgba(181,138,60,0.1) !important; color: var(--ec-warn) !important; border-color: rgba(181,138,60,0.25) !important; }
 
@@ -825,7 +831,9 @@ html, body {
 /* Quarter bar */
 #tab-goals .tp-qtr-bar {
   background: var(--ec-dark-green) !important;
-  border-bottom: 1px solid rgba(180,162,105,0.3) !important;
+  border-bottom: 2px solid rgba(180,162,105,0.4) !important;
+  max-width: 1240px !important;
+  margin: 0 auto !important;
 }
 #tab-goals .tp-q { border-right-color: rgba(180,162,105,0.12) !important; }
 #tab-goals .tp-q:hover,
@@ -847,10 +855,12 @@ html, body {
 
 /* Stats bar */
 #tab-goals .tp-sum-bar {
-  background: var(--ec-stone) !important;
-  border-bottom: 1px solid var(--ec-stone-warm) !important;
+  background: #F3F3F1 !important;
+  border-bottom: 2px solid rgba(180,162,105,0.3) !important;
+  max-width: 1240px !important;
+  margin: 0 auto !important;
 }
-#tab-goals .tp-sc { background: #fff !important; border-right-color: var(--ec-stone) !important; }
+#tab-goals .tp-sc { background: #ffffff !important; border-right-color: rgba(180,162,105,0.2) !important; box-shadow: none !important; }
 #tab-goals .tp-sc-lbl {
   font-family: var(--F) !important;
   font-size: 10px !important;
@@ -860,7 +870,7 @@ html, body {
 }
 #tab-goals .tp-sc-val {
   font-family: var(--FM) !important;
-  font-size: 52px !important;
+  font-size: 44px !important;
   font-weight: 400 !important;
   letter-spacing: -0.02em !important;
   color: var(--ec-dark-green) !important;
@@ -868,18 +878,26 @@ html, body {
 #tab-goals .tp-sc-val.g { color: var(--ec-success) !important; }
 #tab-goals .tp-sc-val.r { color: var(--ec-error) !important; }
 
-/* Lane grid — overflow fix: ensure lanes constrain to grid cell width */
+/* Lane grid — constrained to 1240px, overflow fix */
 #tab-goals .tp-main {
   background: rgba(180,162,105,0.15) !important;
   gap: 1px !important;
-  overflow: visible !important;
+  overflow: hidden !important;
+  max-width: 1240px !important;
+  margin: 0 auto !important;
 }
 #tab-goals .tp-lane {
   background: #ffffff !important;
   min-width: 0 !important;
   overflow: hidden !important;
 }
-#tab-goals .tp-lane:nth-child(even) { background: #fafaf7 !important; }
+#tab-goals .tp-lane:nth-child(even) { background: #fefef9 !important; }
+
+/* Lane body — grey tray so white task tiles have contrast */
+#tab-goals .tp-lane-body {
+  background: #F3F3F1 !important;
+  padding: 14px 14px !important;
+}
 
 /* Lane top accent */
 #tab-goals .tp-lane:nth-child(1) { border-top: 3px solid var(--ec-dark-green) !important; }
@@ -932,12 +950,12 @@ html, body {
   padding-bottom: 7px !important;
 }
 
-/* Task cards */
+/* Task cards — white tiles on grey tray */
 #tab-goals .tp-task {
   border-radius: 0 !important;
-  border: 1px solid var(--ec-stone) !important;
-  box-shadow: none !important;
-  background: #fff !important;
+  border: 1px solid rgba(180,162,105,0.22) !important;
+  box-shadow: 0 1px 3px rgba(29,26,21,0.06) !important;
+  background: #ffffff !important;
   margin-bottom: 8px !important;
 }
 #tab-goals .tp-task-hd {
@@ -1007,14 +1025,17 @@ html, body {
 #tab-goals .tp-mtg-step { border-radius: 0 !important; }
 
 /* Concerns */
-#tab-goals .tp-concerns { background: #F1F2F2 !important; border-top: 1px solid rgba(180,162,105,0.2) !important; padding: 32px 40px !important; }
-#tab-goals .tp-concerns-title { font-family: var(--F) !important; font-size: 10px !important; font-weight: 500 !important; letter-spacing: 0.24em !important; color: var(--ec-gold) !important; }
+#tab-goals .tp-concerns { background: #F3F3F1 !important; border-top: 1px solid rgba(180,162,105,0.2) !important; padding: 32px 40px !important; }
+#tab-goals .tp-concerns-hd,
+#tab-goals .tp-concerns-grid { max-width: 1240px !important; margin-left: auto !important; margin-right: auto !important; }
+#tab-goals .tp-concerns-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important; gap: 16px !important; }
+#tab-goals .tp-concerns-title { font-family: var(--F) !important; font-size: 10px !important; font-weight: 600 !important; letter-spacing: 0.24em !important; color: var(--ec-dark-green) !important; margin-bottom: 18px !important; }
 #tab-goals .tp-concern {
-  background: #fff !important;
-  border: 1px solid var(--ec-stone) !important;
-  border-top: 2px solid var(--ec-stone-warm) !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(180,162,105,0.22) !important;
+  border-top: 3px solid rgba(180,162,105,0.4) !important;
   border-radius: 0 !important;
-  box-shadow: none !important;
+  box-shadow: 0 1px 3px rgba(29,26,21,0.06) !important;
   padding: 18px 20px !important;
 }
 #tab-goals .tp-concern.high  { border-top-color: var(--ec-error) !important; background: var(--RDL) !important; }
@@ -1046,3 +1067,107 @@ html, body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(0,68,55,0.15); border-radius: 0; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(0,68,55,0.3); }
+
+/* --------------------------------------------------------------------------
+   CEO Dashboard polish — finishing layer
+   -------------------------------------------------------------------------- */
+
+/* Inline-styled grey containers in overview HTML (bg:var(--GXP) pattern)
+   --GXP is now #fff so these render as white cards automatically.
+   Additional shadow patch to catch any that don't use a card class. */
+[style*="background:var(--GXP)"],
+[style*="background: var(--GXP)"] {
+  box-shadow: 0 1px 3px rgba(29,26,21,0.05) !important;
+  border-radius: 0 !important;
+}
+
+/* AOV tile inline-styled — ensure square */
+[style*="border-left:5px solid var(--RED)"],
+[style*="border-left: 5px solid var(--RED)"] { border-radius: 0 !important; }
+
+/* Section spacing — consistent rhythm between sections */
+.sec { margin-bottom: 40px !important; }
+
+/* SEC headings refinement */
+.seclbl {
+  padding-bottom: 10px !important;
+  border-bottom: none !important;
+}
+
+/* Topbar: show current section name at full opacity */
+.hdr-section {
+  color: rgba(245,239,228,0.75) !important;
+  font-size: 11px !important;
+}
+
+/* Livepill green dot — vivid, on dark green bar */
+.ldot { border-radius: 50% !important; }
+
+/* Tile label — increase contrast */
+.tlbl { color: var(--ec-grey-700) !important; }
+
+/* Subtle row separators for section dividers */
+.sec-divider { margin: 32px 0 28px !important; }
+
+/* Summary band (dark green header across full width in PPC/overview panels) */
+.sumbar {
+  border-left: 4px solid var(--ec-gold) !important;
+  box-shadow: 0 2px 8px rgba(0,68,55,0.12) !important;
+}
+
+/* Chip coloured surfaces — ensure text legibility */
+.chip .tlbl { opacity: 0.8 !important; }
+
+/* Score circles / edit-score targets */
+.score-hi { color: var(--ec-success) !important; }
+.score-mid { color: var(--ec-warn) !important; }
+.score-lo { color: var(--ec-error) !important; }
+
+/* Lane header focus text — right-align, italic, smaller */
+#tab-goals .tp-focus {
+  font-family: var(--FM) !important;
+  font-style: italic !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  color: var(--ec-gold-700) !important;
+  line-height: 1.4 !important;
+  text-align: right !important;
+  max-width: 160px !important;
+}
+
+/* Category label in lanes — cleaner separator */
+#tab-goals .tp-cat-lbl {
+  border-bottom: 1px solid rgba(180,162,105,0.25) !important;
+  padding-bottom: 6px !important;
+  margin-bottom: 10px !important;
+}
+
+/* Concerns section heading — serif for CEO feel */
+#tab-goals .tp-concerns-title {
+  font-family: var(--FM) !important;
+  font-size: 20px !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  letter-spacing: -0.01em !important;
+  color: var(--ec-dark-green) !important;
+  margin-bottom: 20px !important;
+}
+
+/* Concern high/overdue — stronger red top */
+#tab-goals .tp-concern.high,
+#tab-goals .tp-concern.overdue { border-top-width: 3px !important; }
+
+/* BoM tab switching buttons */
+.bom-htab {
+  border-radius: 0 !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(180,162,105,0.25) !important;
+  box-shadow: none !important;
+}
+.bom-htab.active { background: var(--ec-dark-green) !important; color: #fff !important; border-color: var(--ec-dark-green) !important; }
+
+/* Insight pill — cleaner */
+.insight { padding: 4px 10px !important; margin-top: 10px !important; display: inline-block !important; }
+
+/* RAG badges — larger padding for readability */
+.rag { padding: 4px 10px !important; }
