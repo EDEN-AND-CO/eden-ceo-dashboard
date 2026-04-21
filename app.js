@@ -822,3 +822,34 @@ window.EDEN = window.EDEN || {};
   }
 
 })();
+
+/* ── Persistent bar sync ────────────────────────────────────────────────── */
+(function() {
+  var map = [
+    ['pb-rev',   'ov-rev-val'],
+    ['pb-opd',   'ov-opd-val'],
+    ['pb-roas',  'ov-roas-val'],
+    ['pb-cm',    'ov-cm-val'],
+    ['pb-tacos', 'ov-tacos-val'],
+  ];
+
+  function sync() {
+    map.forEach(function(pair) {
+      var src = document.getElementById(pair[1]);
+      var dst = document.getElementById(pair[0]);
+      if (src && dst) {
+        var t = src.textContent.trim();
+        if (t && t !== 'Loading...') dst.textContent = t;
+      }
+    });
+  }
+
+  // Poll lightly after data loads
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(sync, 1200);
+    setTimeout(sync, 3000);
+    setTimeout(sync, 6000);
+    // Then every 30s
+    setInterval(sync, 30000);
+  });
+})();

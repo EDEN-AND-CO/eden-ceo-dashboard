@@ -14,7 +14,7 @@
 })();
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="eden-reskin.css?v=20260421m">
+<link rel="stylesheet" href="eden-reskin.css?v=20260421n">
 <style>
 /* ══ WEEKLY PULSE — EDEN & CO ══════════════════════════════════════════ */
 #tab-goals{font-family:'Josefin Sans',sans-serif;font-size:14px;line-height:1.7;background:var(--GXP);color:var(--GDK)}
@@ -48,12 +48,12 @@
 #tab-goals .tp-qjob.bl{background:rgba(255,255,255,0.06);color:var(--GL);border-color:rgba(255,255,255,0.1)}
 #tab-goals .tp-qjob.pu{background:rgba(255,255,255,0.06);color:var(--GLD);border-color:rgba(255,255,255,0.1)}
 
-/* STATS BAR — dark green, reversed from original warm neutral */
-#tab-goals .tp-sum-bar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--GL);border-bottom:2px solid var(--GL)}
-#tab-goals .tp-sc{padding:22px 32px 18px;border-right:1px solid var(--GL);position:relative;background:var(--W)}
+/* STATS BAR — light green background for YTD differentiation */
+#tab-goals .tp-sum-bar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--GL);border-bottom:2px solid var(--GLD);gap:2px}
+#tab-goals .tp-sc{padding:22px 32px 20px;border-right:none;position:relative;background:var(--GL)}
 #tab-goals .tp-sc:last-child{border-right:none}
-#tab-goals .tp-sc-lbl{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--GMD);margin-bottom:8px;font-family:'Josefin Sans',sans-serif;font-weight:700;display:block}
-#tab-goals .tp-sc-val{font-size:40px;font-weight:700;font-family:var(--FM);line-height:1;color:var(--G);display:block}
+#tab-goals .tp-sc-lbl{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--G);margin-bottom:8px;font-family:'Josefin Sans',sans-serif;font-weight:700;display:block;opacity:0.7}
+#tab-goals .tp-sc-val{font-size:46px;font-weight:700;font-family:var(--FM);line-height:1;color:var(--G);display:block}
 #tab-goals .tp-sc-val.g{color:var(--OK)}
 #tab-goals .tp-sc-val.r{color:var(--RED)}
 
@@ -112,7 +112,7 @@
 #tab-goals .tp-num{width:20px;height:20px;min-width:20px;border-radius:3px;background:var(--W);color:var(--G);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:var(--FM);flex-shrink:0}
 #tab-goals .tp-num.action{background:var(--W);color:var(--G)}
 #tab-goals .tp-num.other{background:var(--GMD);font-size:14px;font-weight:300}
-#tab-goals .tp-task-title{font-size:13px;font-weight:500;color:var(--G);flex:1;line-height:1.4}
+#tab-goals .tp-task-title{font-size:15px;font-weight:500;color:var(--G);flex:1;line-height:1.4}
 #tab-goals .tp-task-title.struck{text-decoration:line-through;color:var(--GMD);font-weight:400}
 
 /* STATUS DOT */
@@ -130,7 +130,7 @@
 
 /* SUB-GOALS */
 #tab-goals .tp-goals{padding:9px 14px 11px 44px;background:var(--LG);border-top:1px solid var(--GL)}
-#tab-goals .tp-goal-row{display:flex;align-items:flex-start;gap:10px;padding:5px 0;border-bottom:1px solid var(--GL);font-size:12px;color:var(--GDK)}
+#tab-goals .tp-goal-row{display:flex;align-items:flex-start;gap:10px;padding:5px 0;border-bottom:1px solid var(--GL);font-size:13px;color:var(--GDK)}
 #tab-goals .tp-goal-row:last-child{border-bottom:none}
 #tab-goals .tp-mgdot{width:7px;height:7px;min-width:7px;border-radius:50%;border:1.5px solid var(--GLD);background:transparent;margin-top:4px;cursor:pointer;flex-shrink:0;transition:all 0.12s}
 #tab-goals .tp-mgdot.done{background:var(--G);border-color:var(--G)}
@@ -250,16 +250,34 @@
 <!-- ═══════════════ MAIN ═══════════════ -->
 <div class="shell-main">
 
-<!-- HEADER -->
-<div class="topbar">
-  <div class="topbar-date" id="hdr-section">EDEN &amp; CO. &nbsp;·&nbsp; CEO FLIGHT DECK</div>
-  <div class="topbar-search">
-    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <input type="text" placeholder="Search panels...">
+<!-- PERSISTENT STATS BAR -->
+<div class="persistent-bar">
+  <div class="pb-brand">EDEN &amp; CO.</div>
+  <div class="pb-stats">
+    <div class="pb-stat">
+      <span class="pb-lbl">Rev MTD</span>
+      <span class="pb-val" id="pb-rev">—</span>
+    </div>
+    <div class="pb-stat">
+      <span class="pb-lbl">Orders/Day</span>
+      <span class="pb-val" id="pb-opd">—</span>
+    </div>
+    <div class="pb-stat">
+      <span class="pb-lbl">Blended ROAS</span>
+      <span class="pb-val" id="pb-roas">—</span>
+    </div>
+    <div class="pb-stat">
+      <span class="pb-lbl">CM%</span>
+      <span class="pb-val" id="pb-cm">—</span>
+    </div>
+    <div class="pb-stat">
+      <span class="pb-lbl">TACOS</span>
+      <span class="pb-val" id="pb-tacos">—</span>
+    </div>
   </div>
-  <div class="topbar-right">
+  <div class="pb-right">
     <div style="position:relative">
-      <div class="topbar-btn status-btn" onclick="toggleStatusPanel(event)" title="Data source status">
+      <div class="pb-btn status-btn" onclick="toggleStatusPanel(event)" title="Data sources">
         <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
         <div class="status-dot" id="status-dot"></div>
       </div>
@@ -268,21 +286,22 @@
         <div id="sp-rows"></div>
       </div></div>
     </div>
-    <div class="topbar-btn alert-btn" onclick="openFlightCheck()" title="Flight Check — data integrity">FC</div>
-    <div class="topbar-btn alert-btn" onclick="openDrawer()" title="View alerts">
+    <div class="pb-btn" onclick="openFlightCheck()" title="Flight Check">FC</div>
+    <div class="pb-btn alert-btn" onclick="openDrawer()" title="Alerts">
       <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
       <div class="alert-count" id="alert-count">3</div>
     </div>
-    <div class="livepill"><div class="ldot"></div><span class="ltxt">LIVE</span></div>
+    <div class="pb-live"><div class="pb-live-dot"></div>LIVE</div>
   </div>
 </div>
 
-<!-- Stale data alert banner -->
-<div id="stale-banner" onclick="this.style.display='none'">
+<!-- Hidden legacy IDs for JS compat -->
+<span id="hdr-section" style="display:none"></span>
+<div id="stale-banner" onclick="this.style.display='none'" style="display:none">
   <strong>Data alert:</strong> <span id="stale-banner-msg"></span> &nbsp;·&nbsp; Click to dismiss
 </div>
 
-<!-- TAB BAR -->
+<!-- TAB BAR (hidden — sidebar handles navigation) -->
 <div class="tab-bar">
   <div class="tab active" onclick="showTab('overview',this,'Overview')"><div class="tdot a"></div>Overview</div>
   <div class="tab" onclick="showTab('goals',this,'Weekly Pulse');tpActivate()"><div class="tdot g"></div>Weekly Pulse</div>
@@ -299,51 +318,7 @@
 
 <div class="page">
 
-  <!-- ── INLINE ALERTS ── -->
-  <div class="alerts-block">
-    <div class="alerts-left-panel">
-      <div class="alerts-left-eyebrow">Attention</div>
-      <div class="alerts-left-title">Action required</div>
-      <div class="alerts-left-count">3 active alerts</div>
-    </div>
-    <div class="alerts-rows">
-      <div class="alert-row al-red" id="da1">
-        <div class="alert-icon-box">!</div>
-        <div class="alert-row-body">
-          <div class="alert-row-title">Petite — High Velocity</div>
-          <div class="alert-row-text">Running at 19.0 units/day (30d average). At 7d lead time, minimum safety stock is 133 units. Confirm on-hand count.</div>
-        </div>
-        <div class="alert-row-action">Review</div>
-        <button class="alert-row-dismiss" onclick="dimDrawerAlert('da1')">&#10005;</button>
-      </div>
-      <div class="alert-row al-amb" id="da2">
-        <div class="alert-icon-box">~</div>
-        <div class="alert-row-body">
-          <div class="alert-row-title">Google Ads — Policy Appeal Pending</div>
-          <div class="alert-row-text">3 ad groups suppressed. Appeal submitted 6 Mar. Check clearance status in Google Ads.</div>
-        </div>
-        <div class="alert-row-action">Check</div>
-        <button class="alert-row-dismiss" onclick="dimDrawerAlert('da2')">&#10005;</button>
-      </div>
-      <div class="alert-row al-amb" id="da3">
-        <div class="alert-icon-box">~</div>
-        <div class="alert-row-body">
-          <div class="alert-row-title">AOV Below Target</div>
-          <div class="alert-row-text">AOV £35.08, 30% below £50 target. Petite mix at 35% of orders is pulling blended AOV down.</div>
-        </div>
-        <div class="alert-row-action">Review</div>
-        <button class="alert-row-dismiss" onclick="dimDrawerAlert('da3')">&#10005;</button>
-      </div>
-      <div class="alert-row al-ok" id="da4">
-        <div class="alert-icon-box">&#10003;</div>
-        <div class="alert-row-body">
-          <div class="alert-row-title">Amazon ROAS — Above Target</div>
-          <div class="alert-row-text">7.2x MTD, above 5x target. Dairy Free campaign leading. No action needed.</div>
-        </div>
-        <button class="alert-row-dismiss" onclick="dimDrawerAlert('da4')">&#10005;</button>
-      </div>
-    </div>
-  </div>
+  <!-- Hidden alert IDs for JS compat (da1-da4 kept in drawer) -->
 
   <div class="sec">
     <!-- Section header -->
@@ -548,39 +523,12 @@
 ═══════════════════════════════════ -->
 <div class="panel" id="tab-marketing"><div class="page">
 
-  <!-- ── Customer Reviews (top of section) ── -->
-  <div class="sec">
-    <div class="section-head-block">
-      <div>
-        <div class="sec-eyebrow">PPC &amp; Email</div>
-        <h2 class="sec-title">Performance overview</h2>
-        <div class="sec-meta">Ad spend, ROAS, customer sentiment</div>
-      </div>
+  <div class="section-head-block" style="margin-bottom:32px">
+    <div>
+      <div class="sec-eyebrow">PPC</div>
+      <h2 class="sec-title">Ad performance</h2>
+      <div class="sec-meta">Google · Amazon · Meta — spend, ROAS, CPA</div>
     </div>
-    <div class="sec-eyebrow" style="margin-bottom:12px">Customer reviews — Google Business Profile</div>
-    <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
-      <div class="chip inv" style="background:var(--G);border:none">
-        <div class="tlbl" style="color:rgba(255,255,255,0.65)">Avg rating</div>
-        <div class="tval lg" id="sm-gr-quality" style="color:#fff">—</div>
-        <div class="tmeta" id="sm-gr-quality-n" style="font-size:9px;color:rgba(255,255,255,0.55)">—</div>
-      </div>
-      <div class="chip inv" style="background:var(--G);border:none">
-        <div class="tlbl" style="color:rgba(255,255,255,0.65)">5-star %</div>
-        <div class="tval lg" id="sm-gr-pct" style="color:#fff">—</div>
-        <div class="tmeta" style="font-size:9px;color:rgba(255,255,255,0.55)">of all reviews</div>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start">
-      <div>
-        <div class="ctitle" style="margin-bottom:10px">Sentiment analysis</div>
-        <div id="sm-review-summary"><div style="color:var(--GMD);font-size:12px;padding:8px">Loading…</div></div>
-      </div>
-      <div>
-        <div class="ctitle" style="margin-bottom:10px">Top reviews</div>
-        <div id="sm-top-reviews" style="display:flex;flex-direction:column;gap:8px"><div style="color:var(--GMD);font-size:12px;padding:8px">Loading…</div></div>
-      </div>
-    </div>
-    <div class="dnote" style="margin-top:10px">Data last updated: <span id="sm-last-updated">—</span> · Google Business Profile via Make pipeline</div>
   </div>
 
   <!-- ── Ad performance ── -->
@@ -834,8 +782,27 @@
 ═══════════════════════════════════ -->
 <div class="panel" id="tab-operations"><div class="page">
 
+  <!-- ── Customer Reviews strip ── -->
+  <div class="reviews-strip">
+    <div class="reviews-left">
+      <div class="reviews-left-label">Google reviews</div>
+      <div class="reviews-left-score" id="sm-gr-quality">—</div>
+      <div class="reviews-left-count" id="sm-gr-quality-n">—</div>
+      <div style="margin-top:10px;font-family:'Josefin Sans',sans-serif;font-size:10px;color:rgba(207,221,187,0.55)"><span id="sm-gr-pct">—</span> five-star</div>
+    </div>
+    <div class="reviews-middle">
+      <div class="ctitle" style="margin-bottom:12px">Sentiment</div>
+      <div id="sm-review-summary"><div style="color:var(--GMD);font-size:12px">Loading…</div></div>
+      <div class="dnote" style="margin-top:10px">Updated: <span id="sm-last-updated">—</span></div>
+    </div>
+    <div class="reviews-right">
+      <div class="ctitle" style="margin-bottom:12px">Top reviews</div>
+      <div id="sm-top-reviews"><div style="color:var(--GMD);font-size:12px">Loading…</div></div>
+    </div>
+  </div>
+
   <!-- ── Data timestamps ── -->
-  <div style="display:flex;gap:20px;padding:8px 0 12px;border-bottom:1px solid var(--GP);margin-bottom:16px;font-size:11px;color:var(--GMD);flex-wrap:wrap">
+  <div style="display:flex;gap:20px;padding:8px 0 12px;border-bottom:1px solid var(--GP);margin-bottom:16px;font-size:12px;color:var(--GMD);flex-wrap:wrap">
     <span>BoM last rebuilt: <span class="data-ts" id="ts-bom-ops"></span></span>
     <span>Stock last calculated: <span class="data-ts" id="ts-stock-ops"></span></span>
   </div>
@@ -972,7 +939,7 @@
   <div class="sec">
     <div class="seclbl">Key terms index — EDEN &amp; CO. complete reference</div>
 
-    <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--G);padding:10px 0 6px;border-bottom:2px solid var(--GOLD);margin-bottom:12px">Advertising &amp; PPC</div>
+    <div class="kb-section-head">Advertising &amp; PPC</div>
     <div class="terms">
       <div class="term"><div class="term-n">ROAS</div><div class="term-d">Return on Ad Spend. Revenue ÷ ad spend. Google target 3x+. Amazon/Meta target 5x+. Blended target 4x+.</div></div>
       <div class="term"><div class="term-n">Blended ROAS</div><div class="term-d">All paid channels combined. Total revenue attributable to ads ÷ total ad spend across Google, Amazon, and Meta.</div></div>
@@ -983,7 +950,7 @@
       <div class="term"><div class="term-n">tROAS</div><div class="term-d">Target ROAS. Google Smart Bidding strategy that sets bids to achieve a specified return on ad spend. EDEN &amp; CO. Search campaigns reduced from 300% to 200% tROAS on 6 March 2026 to expand reach while maintaining margin.</div></div>
     </div>
 
-    <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--G);padding:18px 0 6px;border-bottom:2px solid var(--GOLD);margin-bottom:12px">Commercial &amp; Financial</div>
+    <div class="kb-section-head">Commercial &amp; Financial</div>
     <div class="terms">
       <div class="term"><div class="term-n">AOV</div><div class="term-d">Average Order Value. Total revenue ÷ total orders. Target £50. Current blended forecast: £54.57. Key lever: upsell from Letterbox to Signature.</div></div>
       <div class="term"><div class="term-n">Contribution Margin</div><div class="term-d">Revenue minus COGS, platform commission, and ad spend. Target 45–50%. Shopify is the only full-margin channel at ~2.5% commission. Amazon is double-hit: 15% commission + PPC costs.</div></div>
@@ -995,12 +962,12 @@
       <div class="term"><div class="term-n">Attach Rate</div><div class="term-d">Percentage of orders that include an add-on product (greeting card, candle, personalisation). Each 1pp increase in attach rate adds approximately £0.75 to blended AOV. Data currently partial — derived from SKU suffix in ShipStation.</div></div>
     </div>
 
-    <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--G);padding:18px 0 6px;border-bottom:2px solid var(--GOLD);margin-bottom:12px">Product &amp; Stock</div>
+    <div class="kb-section-head">Product &amp; Stock</div>
     <div class="terms">
       <div class="term"><div class="term-n">SKU</div><div class="term-d">Stock Keeping Unit. Unique identifier for each product variant. Used in ShipStation, Amazon Seller Central, and Shopify to track inventory, fulfilment, and ad performance by product line.</div></div>
     </div>
 
-    <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--G);padding:18px 0 6px;border-bottom:2px solid var(--GOLD);margin-bottom:12px">Logistics &amp; Shipping</div>
+    <div class="kb-section-head">Logistics &amp; Shipping</div>
     <div class="terms">
       <div class="term"><div class="term-n">DDP</div><div class="term-d">Delivered Duty Paid. Shipping term meaning the seller covers all duties, taxes, and import fees. What the customer pays at checkout is the final price — no customs charges on delivery.</div></div>
       <div class="term"><div class="term-n">DDU</div><div class="term-d">Delivered Duty Unpaid. The recipient pays import duties and fees on arrival. EDEN &amp; CO. avoids DDU for consumer orders — it creates a bad unboxing experience and damages brand trust.</div></div>
@@ -1010,7 +977,7 @@
       <div class="term"><div class="term-n">WorldEase</div><div class="term-d">UPS cross-border solution for DDP shipping to EU and US. Recommended long-term international carrier for EDEN &amp; CO. Currently in UPS setup phase (March 2026).</div></div>
     </div>
 
-    <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--G);padding:18px 0 6px;border-bottom:2px solid var(--GOLD);margin-bottom:12px">Dietary &amp; Allergens</div>
+    <div class="kb-section-head">Dietary &amp; Allergens</div>
     <div class="terms">
       <div class="term"><div class="term-n">Plant-Based</div><div class="term-d">EDEN &amp; CO. preferred term for vegan products. Framing: abundant and delicious, not restrictive. "Plant-based" avoids the health-food connotation of "vegan" and sits better in a premium gifting context.</div></div>
       <div class="term"><div class="term-n">Vegan</div><div class="term-d">Contains no animal-derived ingredients including dairy, eggs, honey, gelatin, carmine, and beeswax. All EDEN &amp; CO. products are vegan. Brand language: "plant-based", not "vegan" as the primary lead (dietary is always sixth in the messaging hierarchy).</div></div>
@@ -1019,7 +986,7 @@
       <div class="term"><div class="term-n">Coeliac</div><div class="term-d">Autoimmune condition triggered by gluten ingestion. Stricter than "gluten free preference" — cross-contamination risk matters. Coeliac customers scrutinise "may contain" warnings closely. Mentioned in 6 of 673 Google reviews. High-trust segment: a coeliac who trusts EDEN &amp; CO. becomes a loyal repeat buyer.</div></div>
     </div>
 
-    <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--G);padding:18px 0 6px;border-bottom:2px solid var(--GOLD);margin-bottom:12px">Sales Platforms</div>
+    <div class="kb-section-head">Sales Platforms</div>
     <div class="terms">
       <div class="term"><div class="term-n">NOTHS</div><div class="term-d">Not On The High Street. UK gifting marketplace. 25% commission. Do not run paid traffic to NOTHS — margin is below target when combined with ad spend.</div></div>
       <div class="term"><div class="term-n">ReachDesk</div><div class="term-d">Corporate gifting platform. 27% commission — highest of all corporate platforms. Only viable because of repeat order potential from corporate accounts. Do not run paid traffic.</div></div>
