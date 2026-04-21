@@ -14,18 +14,19 @@
 })();
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="eden-reskin.css?v=20260421c">
+<link rel="stylesheet" href="eden-reskin.css?v=20260421d">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --G:#004437;--GM:#005a49;--GL:#CFDDBB;--GLD:#a8c490;--GOS:#c8b990;
+  --G:#004437;--GM:#0A5847;--GL:#CFDDBB;--GLD:#a8c490;--GOS:#B4A269;
   --GOLD:#B4A269;--GOM:#908254;
-  --CREAM:#FFFDEF;--LG:#F4F5F6;--GDK:#414042;--GMD:#6D6E71;--GFL:#F1F2F2;--W:#fff;
-  --PG:#e2ecce;--GP:#b8cfa0;--GXP:#eef6e2;
-  --RED:#8c2020;--RDL:#faeaea;--AMB:#7a4800;--ABL:#fdf3dc;
-  --OK:#0f4028;--OKL:#e0f0e8;
-  --F:'Josefin Sans',sans-serif;--FM:'Outfit',sans-serif;
-  --r4:4px;--r8:8px;--r12:12px;--r20:20px;
+  --CREAM:#FFFDEF;--LG:#F1F2F2;--GDK:#414042;--GMD:#6D6E71;--GFL:#F1F2F2;--W:#fff;
+  --PG:#FFFDEF;--GP:rgba(180,162,105,0.25);--GXP:#ffffff;
+  --RED:#9a3a2e;--RDL:#fdf0ee;--AMB:#b58a3c;--ABL:#fdf5e6;
+  --OK:#4a7c59;--OKL:#edf5f0;
+  --F:'Josefin Sans',Montserrat,'Helvetica Neue',Arial,sans-serif;
+  --FM:'The Seasons','Freight Text','Cormorant Garamond',Montserrat,Georgia,serif;
+  --r4:0;--r8:0;--r12:0;--r20:0;
   --WBRD:var(--WBRD);--WBG1:var(--WBG1);--WBG2:var(--WBG2);--WBG3:var(--WBG3);--WBG4:var(--WBG4);
 }
 body{font-family:var(--F);background:var(--PG);color:var(--GDK);font-size:14px;line-height:1.55;min-height:100vh}
@@ -642,6 +643,37 @@ svg.sp{display:block;width:100%;overflow:visible}
      OVERVIEW TAB
 ═══════════════════════════════════ -->
 <div class="panel active" id="tab-overview"><div class="page">
+
+  <!-- CEO HERO COMMAND BAR -->
+  <div class="ceo-hero-bar">
+    <div class="ceo-hero-kpi">
+      <span class="ceo-hero-lbl">Orders Today</span>
+      <span class="ceo-hero-val" id="hero-orders">—</span>
+      <span class="ceo-hero-sub">Target 50 / day</span>
+    </div>
+    <div class="ceo-hero-div"></div>
+    <div class="ceo-hero-kpi">
+      <span class="ceo-hero-lbl">Revenue MTD</span>
+      <span class="ceo-hero-val" id="hero-rev">—</span>
+      <span class="ceo-hero-sub">Target £50,000</span>
+    </div>
+    <div class="ceo-hero-div"></div>
+    <div class="ceo-hero-kpi">
+      <span class="ceo-hero-lbl">Blended CPA</span>
+      <span class="ceo-hero-val" id="hero-cpa">—</span>
+      <span class="ceo-hero-sub">Target £15.90</span>
+    </div>
+    <div class="ceo-hero-div"></div>
+    <div class="ceo-hero-kpi">
+      <span class="ceo-hero-lbl">Blended ROAS</span>
+      <span class="ceo-hero-val" id="hero-roas">—</span>
+      <span class="ceo-hero-sub">Target 4.0×</span>
+    </div>
+    <div class="ceo-hero-rag" id="hero-rag-block">
+      <div class="ceo-hero-rag-dot" id="hero-rag-dot"></div>
+      <div class="ceo-hero-rag-txt" id="hero-rag-txt">Status</div>
+    </div>
+  </div>
 
   <div class="sec">
     <div class="seclbl" style="display:flex;align-items:center;justify-content:space-between">

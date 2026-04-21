@@ -585,6 +585,60 @@ window.EDEN = window.EDEN || {};
     }
     if (ytdPctLbl) ytdPctLbl.textContent = Math.round(ytdPct * 10) / 10 + '% there';
 
+    // ── CEO Hero Command Bar ──
+    (function() {
+      function heroEl(id) { return document.getElementById(id); }
+      function heroClass(el, cls) { if (el) el.className = 'ceo-hero-val ' + cls; }
+
+      var ordersEl = heroEl('hero-orders');
+      if (ordersEl) {
+        ordersEl.textContent = Math.round(opd * 10) / 10 + '/day';
+        heroClass(ordersEl, opdRag === 'g' ? 'ok' : opdRag === 'a' ? 'wn' : 'bad');
+      }
+
+      var revEl = heroEl('hero-rev');
+      if (revEl) {
+        revEl.textContent = fmtGBP(revMTD);
+        heroClass(revEl, revRag === 'g' ? 'ok' : revRag === 'a' ? 'wn' : 'bad');
+      }
+
+      var cpaEl = heroEl('hero-cpa');
+      if (cpaEl && adSpendValid && totalMTD > 0) {
+        var blCPA = adSpend / totalMTD;
+        cpaEl.textContent = fmtGBP(blCPA);
+        heroClass(cpaEl, blCPA <= 15.9 ? 'ok' : blCPA <= 20 ? 'wn' : 'bad');
+      } else if (cpaEl) {
+        cpaEl.textContent = '—';
+      }
+
+      var roasEl = heroEl('hero-roas');
+      if (roasEl && adSpendValid) {
+        var br = revMTDExVat / adSpend;
+        roasEl.textContent = (Math.round(br * 10) / 10) + 'x';
+        heroClass(roasEl, br >= 4 ? 'ok' : br >= 3 ? 'wn' : 'bad');
+      } else if (roasEl) {
+        roasEl.textContent = '—';
+      }
+
+      var ragDot = heroEl('hero-rag-dot');
+      var ragTxt = heroEl('hero-rag-txt');
+      if (ragDot && ragTxt) {
+        var overallRag = [revRag, cmRag, opdRag].filter(function(r){ return r; });
+        var hasRed = overallRag.indexOf('r') > -1;
+        var hasAmb = overallRag.indexOf('a') > -1;
+        if (hasRed) {
+          ragDot.className = 'ceo-hero-rag-dot bad';
+          ragTxt.textContent = 'Needs attention';
+        } else if (hasAmb) {
+          ragDot.className = 'ceo-hero-rag-dot wn';
+          ragTxt.textContent = 'Monitor';
+        } else {
+          ragDot.className = 'ceo-hero-rag-dot';
+          ragTxt.textContent = 'On track';
+        }
+      }
+    })();
+
     console.log('[EDEN Overview] Rendered. MTD rev: ' + fmtGBP(revMTD) + ', YTD: ' + fmtGBP(revYTD) + ', Orders: ' + totalMTD + ', OPD: ' + Math.round(opd) + ', CM: ' + fmtPct(cmPct));
   }
 

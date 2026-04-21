@@ -1173,6 +1173,90 @@ html, body {
 .rag { padding: 4px 10px !important; }
 
 /* --------------------------------------------------------------------------
+   CEO Hero Command Bar
+   -------------------------------------------------------------------------- */
+.ceo-hero-bar {
+  background: var(--ec-dark-green) !important;
+  border-bottom: 3px solid var(--ec-gold) !important;
+  padding: 28px 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+  margin: -40px -48px 40px !important;
+  width: calc(100% + 96px) !important;
+}
+.ceo-hero-kpi {
+  flex: 1 !important;
+  text-align: center !important;
+  padding: 0 24px !important;
+}
+.ceo-hero-div {
+  width: 1px !important;
+  height: 52px !important;
+  background: rgba(207,221,187,0.2) !important;
+  flex-shrink: 0 !important;
+}
+.ceo-hero-lbl {
+  font-family: var(--F) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  color: rgba(207,221,187,0.65) !important;
+  margin-bottom: 10px !important;
+  display: block !important;
+}
+.ceo-hero-val {
+  font-family: var(--FM) !important;
+  font-size: 48px !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.02em !important;
+  color: #FFFDEF !important;
+  line-height: 1 !important;
+  margin-bottom: 8px !important;
+  display: block !important;
+}
+.ceo-hero-val.ok  { color: #a8d4b5 !important; }
+.ceo-hero-val.wn  { color: var(--ec-gold) !important; }
+.ceo-hero-val.bad { color: #e09080 !important; }
+.ceo-hero-sub {
+  font-family: var(--F) !important;
+  font-size: 11px !important;
+  color: rgba(245,239,228,0.4) !important;
+  letter-spacing: 0.08em !important;
+  display: block !important;
+}
+.ceo-hero-rag {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 16px 28px !important;
+  border: 1px solid rgba(180,162,105,0.25) !important;
+  margin-left: 24px !important;
+  flex-shrink: 0 !important;
+  min-width: 130px !important;
+}
+.ceo-hero-rag-dot {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  background: var(--ec-success) !important;
+  flex-shrink: 0 !important;
+}
+.ceo-hero-rag-dot.wn { background: var(--ec-warn) !important; }
+.ceo-hero-rag-dot.bad { background: var(--ec-error) !important; }
+.ceo-hero-rag-txt {
+  font-family: var(--F) !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: rgba(245,239,228,0.7) !important;
+  text-align: center !important;
+}
+
+/* --------------------------------------------------------------------------
    Global font floor — nothing below 11px (footnotes), 12px for content
    -------------------------------------------------------------------------- */
 
