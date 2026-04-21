@@ -8,23 +8,28 @@
    Design tokens — authoritative values
    -------------------------------------------------------------------------- */
 :root {
-  /* Brand */
+  /* Brand — exact tokens from Claude Design prototype */
   --ec-dark-green:   #004437;
   --ec-green-900:    #002b22;
+  --ec-green-800:    #003529;
+  --ec-green-700:    #004437;
   --ec-green-600:    #0a5a4b;
+  --ec-green-500:    #1c7565;
   --ec-green-100:    #e6efd9;
   --ec-green-050:    #f3f7eb;
   --ec-light-green:  #cfddbb;
   --ec-gold:         #b4a269;
   --ec-gold-700:     #8d7d4d;
   --ec-gold-600:     #a4904e;
+  --ec-gold-500:     #b4a269;
   --ec-gold-300:     #d2c498;
   --ec-gold-100:     #ece3c7;
-  --ec-cream:        #FFFDEF;
-  --ec-cream-soft:   #F1F2F2;
-  --ec-stone:        rgba(180,162,105,0.25);
-  --ec-stone-warm:   rgba(180,162,105,0.4);
+  --ec-cream:        #f5efe4;
+  --ec-cream-soft:   #faf6ec;
+  --ec-stone:        #e8e0d0;
+  --ec-stone-warm:   #d9cdb5;
   --ec-ink:          #1d1a15;
+  --ec-grey-900:     #2a2824;
   --ec-grey-700:     #414042;
   --ec-grey-500:     #6b6a67;
   --ec-grey-400:     #8f8d88;
@@ -43,13 +48,13 @@
   --GOS:   #b4a269;
   --GOLD:  #b4a269;
   --GOM:   #8d7d4d;
-  --CREAM: #FFFDEF;
-  --LG:    #F1F2F2;
+  --CREAM: #f5efe4;
+  --LG:    #faf6ec;
   --GDK:   #1d1a15;
   --GMD:   #6b6a67;
   --GFL:   #f3f7eb;
   --W:     #ffffff;
-  --PG:    #FFFDEF;
+  --PG:    #f5efe4;
   --GXP:   #ffffff;
   --GP:    rgba(180,162,105,0.25);
   --RED:   #9a3a2e;
@@ -66,16 +71,16 @@
   /* Radii — all square */
   --r4: 0; --r8: 0; --r12: 0; --r20: 0;
 
-  /* App semantic aliases used in app.css widget rules */
-  --app-bg:          var(--ec-cream);
-  --app-bg-alt:      var(--ec-cream-soft);
+  /* App semantic aliases — match design prototype exactly */
+  --app-bg:          #f5efe4;
+  --app-bg-alt:      #faf6ec;
   --app-surface:     #ffffff;
-  --app-surface-alt: #faf6ec;
-  --app-border:      var(--ec-stone);
-  --app-fg:          var(--ec-dark-green);
-  --app-fg-muted:    var(--ec-grey-700);
-  --app-fg-subtle:   var(--ec-grey-500);
-  --app-accent:      var(--ec-gold);
+  --app-surface-alt: #fbf7ed;
+  --app-border:      #e8e0d0;
+  --app-fg:          #004437;
+  --app-fg-muted:    #414042;
+  --app-fg-subtle:   #6b6a67;
+  --app-accent:      #b4a269;
   --app-ink-soft:    rgba(0,68,55,0.06);
   --app-ink-softer:  rgba(0,68,55,0.03);
 
@@ -88,11 +93,11 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html, body {
-  background: var(--ec-cream) !important;
+  background: #f5efe4 !important;
   color: var(--ec-ink);
   font-family: var(--F);
-  font-size: 14px;
-  line-height: 1.55;
+  font-size: 15px;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -110,8 +115,8 @@ html, body {
    Sidebar
    -------------------------------------------------------------------------- */
 .sidebar {
-  background: #fefdf8;
-  border-right: 1px solid rgba(180,162,105,0.25);
+  background: #faf6ec;
+  border-right: 1px solid #e8e0d0;
   display: flex;
   flex-direction: column;
   position: sticky;
@@ -122,7 +127,7 @@ html, body {
 
 .sidebar-brand {
   padding: 26px 22px 22px;
-  border-bottom: 1px solid rgba(180,162,105,0.18);
+  border-bottom: 1px solid #e8e0d0;
   flex-shrink: 0;
 }
 
@@ -209,7 +214,7 @@ html, body {
 
 .sidebar-foot {
   padding: 18px 22px;
-  border-top: 1px solid var(--ec-stone);
+  border-top: 1px solid #e8e0d0;
   font-family: var(--F);
   font-size: 10px;
   letter-spacing: 0.1em;
@@ -240,15 +245,15 @@ html, body {
   flex-direction: column;
   min-height: 100vh;
   min-width: 0;
-  background: var(--ec-cream);
+  background: #f5efe4;
 }
 
 /* --------------------------------------------------------------------------
    Topbar — cream background, premium editorial feel
    -------------------------------------------------------------------------- */
 .topbar {
-  background: var(--ec-cream) !important;
-  border-bottom: 1px solid rgba(180,162,105,0.25) !important;
+  background: #f5efe4 !important;
+  border-bottom: 1px solid #e8e0d0 !important;
   padding: 0 32px !important;
   height: 52px !important;
   position: sticky;
@@ -341,7 +346,7 @@ html, body {
    Page layout
    -------------------------------------------------------------------------- */
 .page {
-  background: var(--ec-cream) !important;
+  background: #f5efe4 !important;
   padding: 40px 48px 80px !important;
   max-width: 1240px !important;
   margin: 0 auto !important;
@@ -353,7 +358,7 @@ html, body {
 #tab-goals .page { max-width: none !important; margin: 0 !important; padding: 0 !important; }
 
 /* Panels fill their parent */
-.panel { background: var(--ec-cream); }
+.panel { background: #f5efe4; }
 
 /* --------------------------------------------------------------------------
    Section labels — gold eyebrow treatment
@@ -417,10 +422,10 @@ html, body {
    -------------------------------------------------------------------------- */
 .tile, .chip, .ccard, .rv-panel, .card, .ctile, .occ, .adblk, .sc-in, .term {
   background: #ffffff;
-  border: 1px solid rgba(180,162,105,0.25);
+  border: 1px solid #e8e0d0;
   border-radius: 0 !important;
-  padding: 22px 24px;
-  box-shadow: 0 1px 3px rgba(29,26,21,0.06), 0 1px 2px rgba(29,26,21,0.03);
+  padding: 28px 32px;
+  box-shadow: 0 1px 2px rgba(29,26,21,0.04), 0 1px 1px rgba(29,26,21,0.03);
 }
 
 /* Tile: colored left accent */
@@ -647,7 +652,7 @@ html, body {
    -------------------------------------------------------------------------- */
 .adblk {
   background: #ffffff !important;
-  border: 1px solid rgba(180,162,105,0.18) !important;
+  border: 1px solid #e8e0d0 !important;
   border-left: 4px solid var(--ec-light-green) !important;
   border-radius: 0 !important;
   padding: 20px 24px !important;
@@ -688,19 +693,19 @@ html, body {
 /* --------------------------------------------------------------------------
    Grids — slightly larger gaps
    -------------------------------------------------------------------------- */
-.g2  { gap: 20px !important; }
-.g3  { gap: 20px !important; }
-.g4  { gap: 20px !important; }
-.g21 { gap: 20px !important; }
-.g31 { gap: 20px !important; }
-.g12 { gap: 20px !important; }
+.g2  { gap: 24px !important; }
+.g3  { gap: 24px !important; }
+.g4  { gap: 24px !important; }
+.g21 { gap: 24px !important; }
+.g31 { gap: 24px !important; }
+.g12 { gap: 24px !important; }
 
 /* --------------------------------------------------------------------------
    Occasions tiles
    -------------------------------------------------------------------------- */
 .occ {
   background: #ffffff !important;
-  border: 1px solid rgba(180,162,105,0.18) !important;
+  border: 1px solid #e8e0d0 !important;
   border-left: 3px solid var(--ec-gold) !important;
   border-radius: 0 !important;
   padding: 16px 18px !important;
@@ -767,7 +772,7 @@ html, body {
 /* Terms */
 .term {
   background: #ffffff !important;
-  border: 1px solid rgba(180,162,105,0.18) !important;
+  border: 1px solid #e8e0d0 !important;
   border-top: 2px solid var(--ec-gold) !important;
   border-radius: 0 !important;
   padding: 18px 20px !important;
@@ -811,10 +816,10 @@ html, body {
    Weekly Pulse — full reskin
    -------------------------------------------------------------------------- */
 #tab-goals {
-  background: var(--ec-cream) !important;
+  background: #f5efe4 !important;
   font-family: var(--F) !important;
 }
-#tab-goals .page { background: var(--ec-cream) !important; padding: 0 !important; }
+#tab-goals .page { background: #f5efe4 !important; padding: 0 !important; }
 
 /* Info bar */
 #tab-goals .tp-info-bar {
