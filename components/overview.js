@@ -602,22 +602,17 @@ window.EDEN = window.EDEN || {};
         heroClass(revEl, revRag === 'g' ? 'ok' : revRag === 'a' ? 'wn' : 'bad');
       }
 
-      var cpaEl = heroEl('hero-cpa');
-      if (cpaEl && adSpendValid && totalMTD > 0) {
-        var blCPA = adSpend / totalMTD;
-        cpaEl.textContent = fmtGBP(blCPA);
-        heroClass(cpaEl, blCPA <= 15.9 ? 'ok' : blCPA <= 20 ? 'wn' : 'bad');
-      } else if (cpaEl) {
-        cpaEl.textContent = '—';
+      var cmHeroEl = heroEl('hero-cpa');
+      if (cmHeroEl) {
+        cmHeroEl.textContent = fmtPct(cmPct);
+        heroClass(cmHeroEl, cmRag === 'g' ? 'ok' : cmRag === 'a' ? 'wn' : 'bad');
       }
 
-      var roasEl = heroEl('hero-roas');
-      if (roasEl && adSpendValid) {
-        var br = revMTDExVat / adSpend;
-        roasEl.textContent = (Math.round(br * 10) / 10) + 'x';
-        heroClass(roasEl, br >= 4 ? 'ok' : br >= 3 ? 'wn' : 'bad');
-      } else if (roasEl) {
-        roasEl.textContent = '—';
+      var forecastEl = heroEl('hero-roas');
+      if (forecastEl) {
+        var forecast = daysElapsed > 0 ? revMTD / daysElapsed * daysInMonthN : 0;
+        forecastEl.textContent = fmtGBP(forecast);
+        heroClass(forecastEl, forecast >= 50000 ? 'ok' : forecast >= 42500 ? 'wn' : 'bad');
       }
 
       var ragDot = heroEl('hero-rag-dot');

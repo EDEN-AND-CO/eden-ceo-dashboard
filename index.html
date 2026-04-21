@@ -14,20 +14,20 @@
 })();
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="eden-reskin.css?v=20260421h">
+<link rel="stylesheet" href="eden-reskin.css?v=20260421i">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
   --G:#004437;--GM:#0A5847;--GL:#CFDDBB;--GLD:#a8c490;--GOS:#B4A269;
-  --GOLD:#B4A269;--GOM:#908254;
-  --CREAM:#FFFDEF;--LG:#F1F2F2;--GDK:#414042;--GMD:#6D6E71;--GFL:#F1F2F2;--W:#fff;
+  --GOLD:#B4A269;--GOM:#8d7d4d;
+  --CREAM:#FFFDEF;--LG:#F1F2F2;--GDK:#414042;--GMD:#6b6a67;--GFL:#F1F2F2;--W:#fff;
   --PG:#FFFDEF;--GP:rgba(180,162,105,0.25);--GXP:#ffffff;
-  --RED:#8c2020;--RDL:#faeaea;--AMB:#7a4800;--ABL:#fdf3dc;
-  --OK:#0f4028;--OKL:#e0f0e8;
+  --RED:#9a3a2e;--RDL:#fdf0ee;--AMB:#b58a3c;--ABL:#fdf5e6;
+  --OK:#4a7c59;--OKL:#edf5f0;
+  --GT:#6b6a67;--FS:'Josefin Sans',sans-serif;
   --F:'Josefin Sans',Montserrat,'Helvetica Neue',Arial,sans-serif;
-  --FM:'The Seasons','Freight Text','Cormorant Garamond',Montserrat,Georgia,serif;
+  --FM:'Cormorant Garamond',Georgia,serif;
   --r4:0;--r8:0;--r12:0;--r20:0;
-  --WBRD:var(--WBRD);--WBG1:var(--WBG1);--WBG2:var(--WBG2);--WBG3:var(--WBG3);--WBG4:var(--WBG4);
 }
 body{font-family:var(--F);background:var(--PG);color:var(--GDK);font-size:14px;line-height:1.55;min-height:100vh}
 
@@ -659,15 +659,15 @@ svg.sp{display:block;width:100%;overflow:visible}
     </div>
     <div class="ceo-hero-div"></div>
     <div class="ceo-hero-kpi">
-      <span class="ceo-hero-lbl">Blended CPA</span>
+      <span class="ceo-hero-lbl">Contribution Margin</span>
       <span class="ceo-hero-val" id="hero-cpa">—</span>
-      <span class="ceo-hero-sub">Target £15.90</span>
+      <span class="ceo-hero-sub">Target 45–50%</span>
     </div>
     <div class="ceo-hero-div"></div>
     <div class="ceo-hero-kpi">
-      <span class="ceo-hero-lbl">Blended ROAS</span>
+      <span class="ceo-hero-lbl">Month-end Forecast</span>
       <span class="ceo-hero-val" id="hero-roas">—</span>
-      <span class="ceo-hero-sub">Target 4.0×</span>
+      <span class="ceo-hero-sub">Target £50,000</span>
     </div>
     <div class="ceo-hero-rag" id="hero-rag-block">
       <div class="ceo-hero-rag-dot" id="hero-rag-dot"></div>
@@ -681,13 +681,13 @@ svg.sp{display:block;width:100%;overflow:visible}
       <span id="ov-period-label">Month to date — primary performance</span>
       <button id="ov-toggle-btn" onclick="window.EDEN.overview && window.EDEN.overview.toggleLastMonth()"
         style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-family:var(--FS);
-               padding:5px 12px;border-radius:20px;border:1.5px solid var(--GP);background:var(--W);
+               padding:5px 12px;border-radius:0;border:1.5px solid var(--GP);background:var(--W);
                color:var(--G);cursor:pointer;transition:all .2s"
         onmouseover="this.style.background='var(--GXP)'"
         onmouseout="if(!this.classList.contains('active'))this.style.background='var(--W)'"
         title="Toggle last full month for comparison">Last Month</button>
     </div>
-    <div id="ov-mode-banner" style="display:none;align-items:center;padding:8px 14px;background:var(--GXP);border:1px solid var(--GP);border-radius:var(--r8);font-size:11px;margin-bottom:12px;color:var(--G)"></div>
+    <div id="ov-mode-banner" style="display:none;align-items:center;padding:8px 14px;background:var(--GXP);border:1px solid var(--GP);border-radius:0;font-size:11px;margin-bottom:12px;color:var(--G)"></div>
     <div class="g4">
       <div class="tile ta" id="ov-rev-tile">
         <div class="tlbl">Total Revenue MTD</div>
@@ -746,9 +746,9 @@ svg.sp{display:block;width:100%;overflow:visible}
       </div>
       <div id="ov-aov-tile" style="background:var(--RDL);border:1px solid rgba(140,32,32,0.15);border-left:5px solid var(--RED);border-radius:var(--r8);padding:18px 20px">
         <div style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--RED);font-weight:700;margin-bottom:8px;opacity:0.8">AOV</div>
-        <div id="ov-aov-val" style="font-size:46px;font-weight:700;color:var(--RED);line-height:1;letter-spacing:-0.02em;margin-bottom:8px">—</div>
+        <div id="ov-aov-val" style="font-size:46px;font-weight:400;font-family:var(--FM);color:var(--RED);line-height:1;letter-spacing:-0.02em;margin-bottom:8px">—</div>
         <div id="ov-aov-change" style="font-size:12px;font-weight:700;margin-bottom:6px"></div>
-        <div style="height:6px;background:rgba(140,32,32,0.12);border-radius:3px;overflow:hidden;margin-bottom:5px"><div id="ov-aov-bar" style="width:0%;height:100%;background:var(--RED);border-radius:3px"></div></div>
+        <div style="height:6px;background:rgba(140,32,32,0.12);border-radius:0;overflow:hidden;margin-bottom:5px"><div id="ov-aov-bar" style="width:0%;height:100%;background:var(--RED);border-radius:0"></div></div>
         <div id="ov-aov-sub" style="font-size:10px;opacity:0.65;margin-bottom:10px"></div>
       </div>
     </div>
@@ -773,19 +773,19 @@ svg.sp{display:block;width:100%;overflow:visible}
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0 10px">
           <div style="text-align:center">
             <div style="font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--GMD);margin-bottom:4px">Total Rev MTD</div>
-            <div style="font-size:22px;font-weight:700;color:var(--G)" id="ov-roas-rev">—</div>
+            <div style="font-size:26px;font-weight:400;font-family:var(--FM);color:var(--G)" id="ov-roas-rev">—</div>
           </div>
           <div style="text-align:center">
             <div style="font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--GMD);margin-bottom:4px">Ad Spend MTD</div>
-            <div style="font-size:22px;font-weight:700;color:var(--GOLD)" id="ov-roas-spend">—</div>
+            <div style="font-size:26px;font-weight:400;font-family:var(--FM);color:var(--GOLD)" id="ov-roas-spend">—</div>
           </div>
           <div style="text-align:center">
             <div style="font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--GMD);margin-bottom:4px">Blended ROAS</div>
-            <div style="font-size:22px;font-weight:700;color:var(--OK)" id="ov-roas-val">—</div>
+            <div style="font-size:26px;font-weight:400;font-family:var(--FM);color:var(--OK)" id="ov-roas-val">—</div>
           </div>
         </div>
-        <div style="height:6px;background:rgba(15,64,40,0.1);border-radius:3px;overflow:hidden;margin-bottom:8px">
-          <div id="ov-roas-bar" style="height:100%;background:var(--OK);border-radius:3px;width:0%;transition:width .4s"></div>
+        <div style="height:6px;background:rgba(15,64,40,0.1);border-radius:0;overflow:hidden;margin-bottom:8px">
+          <div id="ov-roas-bar" style="height:100%;background:var(--OK);border-radius:0;width:0%;transition:width .4s"></div>
         </div>
         <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--GMD)"><span>0x</span><span style="color:var(--GOLD)">3x baseline</span><span style="color:var(--OK)">4x target</span><span>6x</span></div>
         <div class="insight" id="ov-roas-insight">Ad spend from Google Ads MCP — Amazon/Meta via Coupler when available</div>
@@ -822,7 +822,11 @@ svg.sp{display:block;width:100%;overflow:visible}
         <div class="tmeta" id="ov-opd-meta"></div>
         <div class="pbar" style="background:rgba(15,64,40,0.12);margin-top:6px"><div class="pf" id="ov-opd-bar" style="width:0%"></div></div>
       </div>
-      
+      <div class="chip tgold" id="ov-express-chip">
+        <div class="tlbl">Express Orders MTD</div>
+        <div class="tval" style="font-size:36px" id="ov-express-val">—</div>
+        <div class="tmeta" id="ov-express-meta"></div>
+      </div>
     </div>
   </div>
 
@@ -842,9 +846,9 @@ svg.sp{display:block;width:100%;overflow:visible}
           <div style="font-size:11px;color:var(--GMD);margin-top:6px" id="ov-ytd-runrate"></div>
         </div>
       </div>
-      <div style="position:relative;height:12px;background:rgba(0,68,55,0.08);border-radius:6px;overflow:visible;margin-bottom:8px">
-        <div id="ov-ytd-bar" style="height:100%;background:var(--G);border-radius:6px;width:0%;transition:width 0.6s;max-width:100%"></div>
-        <div id="ov-ytd-marker" style="position:absolute;top:-4px;width:2px;height:20px;background:var(--GOLD);border-radius:1px;left:0%" title="£1m target"></div>
+      <div style="position:relative;height:12px;background:rgba(0,68,55,0.08);border-radius:0;overflow:visible;margin-bottom:8px">
+        <div id="ov-ytd-bar" style="height:100%;background:var(--G);border-radius:0;width:0%;transition:width 0.6s;max-width:100%"></div>
+        <div id="ov-ytd-marker" style="position:absolute;top:-4px;width:2px;height:20px;background:var(--GOLD);border-radius:0;left:0%" title="£1m target"></div>
       </div>
       <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--GMD)">
         <span>£0</span>
@@ -891,7 +895,7 @@ svg.sp{display:block;width:100%;overflow:visible}
 
   <!-- ── Ad performance ── -->
   <div class="sec">
-    <div class="seclbl" style="font-size:14px">Ad performance — MTD vs prior period</div>
+    <div class="seclbl">Ad performance — MTD</div>
     <div class="g2" style="margin-bottom:14px">
       <div class="tile" id="mkt-tacos-tile">
         <div class="tlbl">TACOS — Total Ad Cost of Sale</div>
@@ -902,7 +906,7 @@ svg.sp{display:block;width:100%;overflow:visible}
         <div class="insight" id="mkt-tacos-insight">Total ad spend ÷ total revenue (all channels incl. organic). Target &lt;15%.</div>
         <div class="dnote" style="margin-top:6px">Ad spend data: <span class="data-ts" id="ts-tacos-mkt"></span></div>
       </div>
-      <div class="tile" id="mkt-roas-tile">
+      <div class="tile" id="mkt-roas-tile" style="display:none">
         <div class="tlbl">Blended ROAS — All Channels</div>
         <div class="tval lg" id="mkt-roas-val">—</div>
         <div class="tmeta" id="mkt-roas-meta" style="color:var(--GMD);font-size:10px">Ad spend data pending</div>
@@ -913,6 +917,7 @@ svg.sp{display:block;width:100%;overflow:visible}
       </div>
     </div>
     <div>
+      <div class="seclbl" style="margin-bottom:16px">Channel performance — Google · Amazon · Meta</div>
       <div>
         <div id="gads-adblk" class="adblk ok">
           <div class="adhead"><div class="adname">Google Ads<span class="data-ts" id="ts-google-ppc"></span></div><span class="rag a">Loading...</span></div>
@@ -1259,7 +1264,7 @@ svg.sp{display:block;width:100%;overflow:visible}
   <div class="tp-main" id="tp-lanes"><div style="grid-column:1/-1;padding:60px;text-align:center;color:var(--GMD)">Loading…</div></div>
 
   <div id="tp-quote-bar" style="background:var(--G);border-left:4px solid var(--GOLD);padding:22px 32px;margin:0;text-align:center">
-    <div id="tp-quote-text" style="font-size:17px;font-style:italic;color:#fff;font-family:var(--FS);letter-spacing:0.02em;line-height:1.65">—</div>
+    <div id="tp-quote-text" style="font-size:20px;font-style:italic;color:#fff;font-family:var(--FM);letter-spacing:0.01em;line-height:1.65">—</div>
   </div>
 
   <div class="tp-concerns">
@@ -1277,7 +1282,7 @@ svg.sp{display:block;width:100%;overflow:visible}
   <div class="sec">
     <div class="seclbl">Key terms index — EDEN &amp; CO. complete reference</div>
 
-    <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--G);padding:10px 0 6px;border-bottom:2px solid var(--G);margin-bottom:12px">Advertising &amp; PPC</div>
+    <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--G);padding:10px 0 6px;border-bottom:2px solid var(--GOLD);margin-bottom:12px">Advertising &amp; PPC</div>
     <div class="terms">
       <div class="term"><div class="term-n">ROAS</div><div class="term-d">Return on Ad Spend. Revenue ÷ ad spend. Google target 3x+. Amazon/Meta target 5x+. Blended target 4x+.</div></div>
       <div class="term"><div class="term-n">Blended ROAS</div><div class="term-d">All paid channels combined. Total revenue attributable to ads ÷ total ad spend across Google, Amazon, and Meta.</div></div>
@@ -1288,7 +1293,7 @@ svg.sp{display:block;width:100%;overflow:visible}
       <div class="term"><div class="term-n">tROAS</div><div class="term-d">Target ROAS. Google Smart Bidding strategy that sets bids to achieve a specified return on ad spend. EDEN &amp; CO. Search campaigns reduced from 300% to 200% tROAS on 6 March 2026 to expand reach while maintaining margin.</div></div>
     </div>
 
-    <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--G);padding:18px 0 6px;border-bottom:2px solid var(--G);margin-bottom:12px">Commercial &amp; Financial</div>
+    <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--G);padding:18px 0 6px;border-bottom:2px solid var(--GOLD);margin-bottom:12px">Commercial &amp; Financial</div>
     <div class="terms">
       <div class="term"><div class="term-n">AOV</div><div class="term-d">Average Order Value. Total revenue ÷ total orders. Target £50. Current blended forecast: £54.57. Key lever: upsell from Letterbox to Signature.</div></div>
       <div class="term"><div class="term-n">Contribution Margin</div><div class="term-d">Revenue minus COGS, platform commission, and ad spend. Target 45–50%. Shopify is the only full-margin channel at ~2.5% commission. Amazon is double-hit: 15% commission + PPC costs.</div></div>
@@ -1300,12 +1305,12 @@ svg.sp{display:block;width:100%;overflow:visible}
       <div class="term"><div class="term-n">Attach Rate</div><div class="term-d">Percentage of orders that include an add-on product (greeting card, candle, personalisation). Each 1pp increase in attach rate adds approximately £0.75 to blended AOV. Data currently partial — derived from SKU suffix in ShipStation.</div></div>
     </div>
 
-    <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--G);padding:18px 0 6px;border-bottom:2px solid var(--G);margin-bottom:12px">Product &amp; Stock</div>
+    <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--G);padding:18px 0 6px;border-bottom:2px solid var(--GOLD);margin-bottom:12px">Product &amp; Stock</div>
     <div class="terms">
       <div class="term"><div class="term-n">SKU</div><div class="term-d">Stock Keeping Unit. Unique identifier for each product variant. Used in ShipStation, Amazon Seller Central, and Shopify to track inventory, fulfilment, and ad performance by product line.</div></div>
     </div>
 
-    <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--G);padding:18px 0 6px;border-bottom:2px solid var(--G);margin-bottom:12px">Logistics &amp; Shipping</div>
+    <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--G);padding:18px 0 6px;border-bottom:2px solid var(--GOLD);margin-bottom:12px">Logistics &amp; Shipping</div>
     <div class="terms">
       <div class="term"><div class="term-n">DDP</div><div class="term-d">Delivered Duty Paid. Shipping term meaning the seller covers all duties, taxes, and import fees. What the customer pays at checkout is the final price — no customs charges on delivery.</div></div>
       <div class="term"><div class="term-n">DDU</div><div class="term-d">Delivered Duty Unpaid. The recipient pays import duties and fees on arrival. EDEN &amp; CO. avoids DDU for consumer orders — it creates a bad unboxing experience and damages brand trust.</div></div>
@@ -1315,7 +1320,7 @@ svg.sp{display:block;width:100%;overflow:visible}
       <div class="term"><div class="term-n">WorldEase</div><div class="term-d">UPS cross-border solution for DDP shipping to EU and US. Recommended long-term international carrier for EDEN &amp; CO. Currently in UPS setup phase (March 2026).</div></div>
     </div>
 
-    <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--G);padding:18px 0 6px;border-bottom:2px solid var(--G);margin-bottom:12px">Dietary &amp; Allergens</div>
+    <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--G);padding:18px 0 6px;border-bottom:2px solid var(--GOLD);margin-bottom:12px">Dietary &amp; Allergens</div>
     <div class="terms">
       <div class="term"><div class="term-n">Plant-Based</div><div class="term-d">EDEN &amp; CO. preferred term for vegan products. Framing: abundant and delicious, not restrictive. "Plant-based" avoids the health-food connotation of "vegan" and sits better in a premium gifting context.</div></div>
       <div class="term"><div class="term-n">Vegan</div><div class="term-d">Contains no animal-derived ingredients including dairy, eggs, honey, gelatin, carmine, and beeswax. All EDEN &amp; CO. products are vegan. Brand language: "plant-based", not "vegan" as the primary lead (dietary is always sixth in the messaging hierarchy).</div></div>
@@ -1324,7 +1329,7 @@ svg.sp{display:block;width:100%;overflow:visible}
       <div class="term"><div class="term-n">Coeliac</div><div class="term-d">Autoimmune condition triggered by gluten ingestion. Stricter than "gluten free preference" — cross-contamination risk matters. Coeliac customers scrutinise "may contain" warnings closely. Mentioned in 6 of 673 Google reviews. High-trust segment: a coeliac who trusts EDEN &amp; CO. becomes a loyal repeat buyer.</div></div>
     </div>
 
-    <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--G);padding:18px 0 6px;border-bottom:2px solid var(--G);margin-bottom:12px">Sales Platforms</div>
+    <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--G);padding:18px 0 6px;border-bottom:2px solid var(--GOLD);margin-bottom:12px">Sales Platforms</div>
     <div class="terms">
       <div class="term"><div class="term-n">NOTHS</div><div class="term-d">Not On The High Street. UK gifting marketplace. 25% commission. Do not run paid traffic to NOTHS — margin is below target when combined with ad spend.</div></div>
       <div class="term"><div class="term-n">ReachDesk</div><div class="term-d">Corporate gifting platform. 27% commission — highest of all corporate platforms. Only viable because of repeat order potential from corporate accounts. Do not run paid traffic.</div></div>
@@ -1351,7 +1356,7 @@ svg.sp{display:block;width:100%;overflow:visible}
 <script src="data/transform.js"></script>
 <script src="data/metrics.js"></script>
 <!-- Component renderers -->
-<script src="components/overview.js?v=20260419d"></script>
+<script src="components/overview.js?v=20260421i"></script>
 <script src="components/marketing.js?v=20260419d"></script>
 <script src="components/klaviyo.js"></script>
 <script src="components/google-ads.js?v=20260420a"></script>

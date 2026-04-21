@@ -61,7 +61,7 @@
 
   /* Typography */
   --F:  'Josefin Sans', Montserrat, 'Helvetica Neue', Arial, sans-serif;
-  --FM: 'The Seasons', 'Freight Text', 'Cormorant Garamond', Montserrat, Georgia, serif;
+  --FM: 'Cormorant Garamond', Georgia, serif;
 
   /* Radii — all square */
   --r4: 0; --r8: 0; --r12: 0; --r20: 0;
@@ -244,11 +244,11 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
-   Topbar — slimmer, cleaner
+   Topbar — cream background, premium editorial feel
    -------------------------------------------------------------------------- */
 .topbar {
-  background: var(--ec-dark-green) !important;
-  border-bottom: none !important;
+  background: var(--ec-cream) !important;
+  border-bottom: 1px solid rgba(180,162,105,0.25) !important;
   padding: 0 32px !important;
   height: 52px !important;
   position: sticky;
@@ -264,18 +264,18 @@ html, body {
 
 .hdr-section {
   font-family: var(--F);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.22em;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(245,239,228,0.55);
+  color: #004437 !important;
 }
 
 .brand-sub {
   font-family: var(--FM);
   font-style: italic;
   font-size: 12px;
-  color: var(--ec-gold-300);
+  color: var(--ec-gold-700);
   letter-spacing: 0;
   text-transform: none;
   margin-top: 2px;
@@ -284,34 +284,34 @@ html, body {
 .htime {
   font-family: var(--F);
   font-size: 10px;
-  color: var(--ec-gold-300);
-  letter-spacing: 0.12em;
-  opacity: 1;
+  color: rgba(0,68,55,0.6) !important;
+  letter-spacing: 0.10em;
   line-height: 1.5;
 }
 
 .livepill {
-  background: rgba(180,162,105,0.12) !important;
-  border: 1px solid rgba(180,162,105,0.3) !important;
+  background: rgba(0,68,55,0.05) !important;
+  border: 1px solid rgba(0,68,55,0.15) !important;
   border-radius: 0 !important;
   padding: 5px 12px !important;
 }
 
-.ldot { background: var(--ec-success) !important; }
+.ldot { background: var(--ec-success) !important; border-radius: 50% !important; }
 .ltxt {
   font-family: var(--F) !important;
   font-size: 9px !important;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
   letter-spacing: 0.16em !important;
-  color: #a8d4b5 !important;
+  color: rgba(0,68,55,0.7) !important;
 }
 
 .alert-btn, .status-btn {
   border-radius: 0 !important;
-  background: rgba(245,239,228,0.06) !important;
-  border: 1px solid rgba(245,239,228,0.14) !important;
+  background: rgba(0,68,55,0.04) !important;
+  border: 1px solid rgba(0,68,55,0.14) !important;
 }
-.alert-btn:hover, .status-btn:hover { background: rgba(245,239,228,0.12) !important; }
+.alert-btn:hover, .status-btn:hover { background: rgba(0,68,55,0.1) !important; }
+.alert-btn svg, .status-btn svg { stroke: rgba(0,68,55,0.65) !important; }
 .alert-count {
   border-radius: 0 !important;
   background: var(--ec-gold) !important;
@@ -319,6 +319,7 @@ html, body {
   border: none !important;
   font-weight: 700 !important;
 }
+.hdr-divider { background: rgba(0,68,55,0.15) !important; }
 
 /* Alert drawer */
 .drawer { border-radius: 0 !important; }
@@ -1101,9 +1102,9 @@ html, body {
   border-bottom: none !important;
 }
 
-/* Topbar: show current section name at full opacity */
+/* Topbar: section name — dark green on cream background */
 .hdr-section {
-  color: rgba(245,239,228,0.75) !important;
+  color: #004437 !important;
   font-size: 11px !important;
 }
 
@@ -1229,7 +1230,7 @@ html, body {
 .ceo-hero-sub {
   font-family: var(--F) !important;
   font-size: 11px !important;
-  color: rgba(245,239,228,0.4) !important;
+  color: rgba(245,239,228,0.65) !important;
   letter-spacing: 0.08em !important;
   display: block !important;
 }
