@@ -60,8 +60,8 @@
   --OKL:   #edf5f0;
 
   /* Typography */
-  --F:  'Josefin Sans', 'Helvetica Neue', Arial, sans-serif;
-  --FM: 'Cormorant Garamond', Georgia, serif;
+  --F:  'Josefin Sans', Montserrat, 'Helvetica Neue', Arial, sans-serif;
+  --FM: 'The Seasons', 'Freight Text', 'Cormorant Garamond', Montserrat, Georgia, serif;
 
   /* Radii — all square */
   --r4: 0; --r8: 0; --r12: 0; --r20: 0;
@@ -657,12 +657,12 @@ html, body {
 }
 .amlbl {
   font-family: var(--F) !important;
-  font-size: 9px !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.18em !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.14em !important;
   text-transform: uppercase !important;
   color: var(--ec-grey-500) !important;
-  margin-bottom: 5px !important;
+  margin-bottom: 6px !important;
 }
 .amval {
   font-family: var(--FM) !important;
@@ -675,7 +675,7 @@ html, body {
 .amval.wn { color: var(--ec-warn) !important; }
 .amval.bd { color: var(--ec-error) !important; }
 .amval.na { color: var(--ec-grey-500) !important; font-size: 24px !important; }
-.amtgt { font-family: var(--F) !important; font-size: 11px !important; color: var(--ec-grey-500) !important; margin-top: 3px !important; }
+.amtgt { font-family: var(--F) !important; font-size: 12px !important; color: var(--ec-grey-500) !important; margin-top: 4px !important; }
 
 /* --------------------------------------------------------------------------
    Grids — slightly larger gaps
@@ -828,12 +828,12 @@ html, body {
 #tab-goals .tp-pill.xmas { background: rgba(180,162,105,0.15) !important; color: var(--ec-gold) !important; border-color: rgba(180,162,105,0.3) !important; }
 #tab-goals .tp-show-toggle { color: rgba(245,239,228,0.7) !important; font-family: var(--F) !important; }
 
-/* Quarter bar */
+/* Quarter bar — full-bleed, no width constraint */
 #tab-goals .tp-qtr-bar {
   background: var(--ec-dark-green) !important;
   border-bottom: 2px solid rgba(180,162,105,0.4) !important;
-  max-width: 1240px !important;
-  margin: 0 auto !important;
+  max-width: none !important;
+  margin: 0 !important;
 }
 #tab-goals .tp-q { border-right-color: rgba(180,162,105,0.12) !important; }
 #tab-goals .tp-q:hover,
@@ -853,12 +853,12 @@ html, body {
 }
 #tab-goals .tp-qjob { border-radius: 0 !important; font-family: var(--F) !important; font-size: 10px !important; letter-spacing: 0.08em !important; }
 
-/* Stats bar */
+/* Stats bar — full-bleed */
 #tab-goals .tp-sum-bar {
   background: #F3F3F1 !important;
   border-bottom: 2px solid rgba(180,162,105,0.3) !important;
-  max-width: 1240px !important;
-  margin: 0 auto !important;
+  max-width: none !important;
+  margin: 0 !important;
 }
 #tab-goals .tp-sc { background: #ffffff !important; border-right-color: rgba(180,162,105,0.2) !important; box-shadow: none !important; }
 #tab-goals .tp-sc-lbl {
@@ -878,13 +878,13 @@ html, body {
 #tab-goals .tp-sc-val.g { color: var(--ec-success) !important; }
 #tab-goals .tp-sc-val.r { color: var(--ec-error) !important; }
 
-/* Lane grid — constrained to 1240px, overflow fix */
+/* Lane grid — full-bleed, no width constraint */
 #tab-goals .tp-main {
   background: rgba(180,162,105,0.15) !important;
   gap: 1px !important;
   overflow: hidden !important;
-  max-width: 1240px !important;
-  margin: 0 auto !important;
+  max-width: none !important;
+  margin: 0 !important;
 }
 #tab-goals .tp-lane {
   background: #ffffff !important;
@@ -1171,3 +1171,88 @@ html, body {
 
 /* RAG badges — larger padding for readability */
 .rag { padding: 4px 10px !important; }
+
+/* --------------------------------------------------------------------------
+   Global font floor — nothing below 11px (footnotes), 12px for content
+   -------------------------------------------------------------------------- */
+
+/* Metric labels */
+.tlbl { font-size: 11px !important; }
+.suml { font-size: 11px !important; }
+.occ-n { font-size: 11px !important; }
+
+/* Pulse category labels — raise from 9px */
+#tab-goals .tp-cat-lbl { font-size: 11px !important; }
+#tab-goals .tp-lane-name { font-size: 12px !important; }
+#tab-goals .tp-lane-role { font-size: 11px !important; }
+#tab-goals .tp-c-level { font-size: 11px !important; }
+#tab-goals .tp-concerns-title { font-size: 20px !important; }
+
+/* Table headers */
+.dt th, .tbl th { font-size: 11px !important; }
+
+/* Section labels */
+.seclbl { font-size: 11px !important; }
+.ctitle-sm, .ctitle { font-size: 11px !important; }
+
+/* Sidebar nav label */
+.sidebar-nav-label { font-size: 11px !important; }
+
+/* Sidebar footer */
+.sidebar-foot { font-size: 11px !important; }
+
+/* Footer */
+.footer { font-size: 11px !important; }
+
+/* Ad block channel name */
+.adname { font-size: 18px !important; }
+
+/* Progress bar labels */
+.prog-lbls { font-size: 11px !important; }
+
+/* Pipeline stage badges */
+.stg { font-size: 11px !important; }
+
+/* Occasion tile label */
+.occ-n { font-size: 11px !important; }
+
+/* Concern level badge */
+#tab-goals .tp-c-level { font-size: 11px !important; }
+#tab-goals .tp-c-action { font-size: 12px !important; }
+
+/* Lane name per-person colour */
+#tab-goals .tp-lane:nth-child(1) .tp-lane-name { color: #004437 !important; }
+#tab-goals .tp-lane:nth-child(2) .tp-lane-name { color: #908254 !important; }
+#tab-goals .tp-lane:nth-child(3) .tp-lane-name { color: #0A5847 !important; }
+#tab-goals .tp-lane:nth-child(4) .tp-lane-name { color: #908254 !important; }
+
+/* --------------------------------------------------------------------------
+   Order Velocity — compact cards
+   -------------------------------------------------------------------------- */
+.tile, .chip {
+  padding: 16px 18px !important;
+}
+
+/* Velocity-specific: tighter value + label spacing */
+.tile .tval { margin-bottom: 8px !important; }
+.tile .tlbl { margin-bottom: 8px !important; }
+
+/* --------------------------------------------------------------------------
+   Knowledge base inline 9px headings — override via attribute selector
+   -------------------------------------------------------------------------- */
+[style*="font-size:9px"],
+[style*="font-size: 9px"] {
+  font-size: 12px !important;
+}
+[style*="font-size:10px"],
+[style*="font-size: 10px"] {
+  font-size: 12px !important;
+}
+
+/* --------------------------------------------------------------------------
+   Colour-coded pulse lane accent borders — per person
+   -------------------------------------------------------------------------- */
+#tab-goals .tp-lane:nth-child(1) { border-top: 4px solid #004437 !important; }
+#tab-goals .tp-lane:nth-child(2) { border-top: 4px solid #B4A269 !important; }
+#tab-goals .tp-lane:nth-child(3) { border-top: 4px solid #0A5847 !important; }
+#tab-goals .tp-lane:nth-child(4) { border-top: 4px solid #908254 !important; }
