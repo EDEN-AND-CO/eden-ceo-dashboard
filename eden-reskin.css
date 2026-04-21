@@ -361,24 +361,46 @@ html, body {
 .panel { background: #f5efe4; }
 
 /* --------------------------------------------------------------------------
-   Section labels — gold eyebrow treatment
+   Section head — eyebrow + large serif title (from Claude Design prototype)
    -------------------------------------------------------------------------- */
-.seclbl {
+.sec-eyebrow, .seclbl {
   font-family: var(--F) !important;
-  font-size: 10px !important;
+  font-size: 11px !important;
   font-weight: 500 !important;
-  letter-spacing: 0.24em !important;
+  letter-spacing: 0.22em !important;
   color: var(--ec-gold) !important;
+  text-transform: uppercase !important;
   opacity: 1 !important;
-  text-transform: uppercase;
-  margin-bottom: 20px !important;
+  margin-bottom: 8px !important;
 }
-.seclbl::after {
-  background: linear-gradient(90deg, rgba(180,162,105,0.45) 0%, rgba(180,162,105,0.2) 40%, transparent 100%) !important;
-  height: 1px !important;
+.seclbl { margin-bottom: 20px !important; }
+
+.sec-title {
+  font-family: var(--FM) !important;
+  font-size: clamp(28px, 3vw, 44px) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.08 !important;
+  color: var(--ec-dark-green) !important;
+  margin: 0 0 8px !important;
 }
-.seclbl.urgent { color: var(--ec-error) !important; }
-.seclbl.urgent::after { background: linear-gradient(90deg, var(--ec-error) 0%, rgba(154,58,46,0.12) 40%, transparent) !important; }
+.sec-meta {
+  font-family: var(--F) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--ec-grey-500) !important;
+}
+.section-head-block {
+  padding-bottom: 20px !important;
+  border-bottom: 1px solid #e8e0d0 !important;
+  margin-bottom: 28px !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: space-between !important;
+  gap: 24px !important;
+}
 
 .sec-head {
   font-family: var(--FM) !important;
@@ -395,12 +417,12 @@ html, body {
   color: var(--ec-grey-500) !important;
   text-transform: uppercase !important;
 }
-.sec-divider { border-top-color: var(--ec-stone) !important; }
+.sec-divider { border-top-color: #e8e0d0 !important; }
 .sec-divider.gold { border-top-color: var(--ec-gold) !important; opacity: 0.45; }
 
 .ctitle-lg {
   font-family: var(--FM) !important;
-  font-size: 18px !important;
+  font-size: 22px !important;
   font-weight: 400 !important;
   color: var(--ec-dark-green) !important;
   text-transform: none !important;
@@ -409,12 +431,12 @@ html, body {
 }
 .ctitle-sm, .ctitle {
   font-family: var(--F) !important;
-  font-size: 10px !important;
+  font-size: 11px !important;
   font-weight: 500 !important;
   letter-spacing: 0.2em !important;
   color: var(--ec-grey-500) !important;
   text-transform: uppercase !important;
-  margin-bottom: 14px !important;
+  margin-bottom: 12px !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -434,6 +456,26 @@ html, body {
 .tile.ta  { border-left-color: var(--ec-warn) !important; }
 .tile.tr  { border-left-color: var(--ec-error) !important; }
 .tile.tgold { border-left-color: var(--ec-gold) !important; }
+
+/* Ink tile — dark green background, cream text */
+.tile.ink, .chip.ink {
+  background: var(--ec-dark-green) !important;
+  border-color: var(--ec-dark-green) !important;
+  border-left: none !important;
+}
+.tile.ink .tlbl  { color: rgba(207,221,187,0.7) !important; }
+.tile.ink .tval  { color: #ffffff !important; }
+.tile.ink .tmeta { color: rgba(245,239,228,0.7) !important; }
+.tile.ink .pbar  { background: rgba(245,239,228,0.12) !important; }
+.tile.ink .pf    { background: var(--ec-gold) !important; }
+.tile.ink .prog-lbls { color: rgba(245,239,228,0.55) !important; }
+.tile.ink .rag.g { background: rgba(207,221,187,0.15) !important; color: #a8d4b5 !important; }
+.tile.ink .rag.a { background: rgba(180,162,105,0.2) !important; color: var(--ec-gold) !important; }
+.tile.ink .rag.r { background: rgba(230,168,158,0.2) !important; color: #e09080 !important; }
+.tile.ink .d.up  { color: #a8d4b5 !important; }
+.tile.ink .d.dn  { color: #e09080 !important; }
+/* Sparkline in ink tile */
+.tile.ink .sp polyline { stroke: rgba(207,221,187,0.6) !important; }
 
 /* Chart cards: gold top rule */
 .ccard, .rv-panel {
@@ -473,15 +515,15 @@ html, body {
 /* Metric value — serif, large */
 .tval {
   font-family: var(--FM) !important;
-  font-size: 42px !important;
+  font-size: 44px !important;
   font-weight: 400 !important;
   letter-spacing: -0.02em !important;
   color: var(--ec-dark-green) !important;
   line-height: 1 !important;
   margin-bottom: 12px !important;
 }
-.tval.lg { font-size: 50px !important; }
-.tval.sm { font-size: 28px !important; }
+.tval.lg { font-size: 52px !important; }
+.tval.sm { font-size: 30px !important; }
 
 .chip.tg   .tval { color: var(--ec-success) !important; }
 .chip.ta   .tval { color: var(--ec-warn) !important; }
@@ -1099,7 +1141,7 @@ html, body {
 [style*="border-left: 5px solid var(--RED)"] { border-radius: 0 !important; }
 
 /* Section spacing — consistent rhythm between sections */
-.sec { margin-bottom: 40px !important; }
+.sec { margin-bottom: 52px !important; }
 
 /* SEC headings refinement */
 .seclbl {

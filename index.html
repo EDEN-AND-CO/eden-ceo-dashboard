@@ -14,7 +14,7 @@
 })();
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="eden-reskin.css?v=20260421j">
+<link rel="stylesheet" href="eden-reskin.css?v=20260421k">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -644,52 +644,35 @@ svg.sp{display:block;width:100%;overflow:visible}
 ═══════════════════════════════════ -->
 <div class="panel active" id="tab-overview">
 
-  <!-- CEO HERO COMMAND BAR — outside .page so it can be full-width -->
-  <div class="ceo-hero-bar">
-    <div class="ceo-hero-kpi">
-      <span class="ceo-hero-lbl">Orders / Day</span>
-      <span class="ceo-hero-val" id="hero-orders">—</span>
-      <span class="ceo-hero-sub">Target 50 / day</span>
-    </div>
-    <div class="ceo-hero-div"></div>
-    <div class="ceo-hero-kpi">
-      <span class="ceo-hero-lbl">Revenue MTD</span>
-      <span class="ceo-hero-val" id="hero-rev">—</span>
-      <span class="ceo-hero-sub">Target £50,000</span>
-    </div>
-    <div class="ceo-hero-div"></div>
-    <div class="ceo-hero-kpi">
-      <span class="ceo-hero-lbl">Contribution Margin</span>
-      <span class="ceo-hero-val" id="hero-cpa">—</span>
-      <span class="ceo-hero-sub">Target 45–50%</span>
-    </div>
-    <div class="ceo-hero-div"></div>
-    <div class="ceo-hero-kpi">
-      <span class="ceo-hero-lbl">Month-end Forecast</span>
-      <span class="ceo-hero-val" id="hero-roas">—</span>
-      <span class="ceo-hero-sub">Target £50,000</span>
-    </div>
-    <div class="ceo-hero-rag" id="hero-rag-block">
-      <div class="ceo-hero-rag-dot" id="hero-rag-dot"></div>
-      <div class="ceo-hero-rag-txt" id="hero-rag-txt">Status</div>
-    </div>
-  </div>
-
 <div class="page">
   <div class="sec">
-    <div class="seclbl" style="display:flex;align-items:center;justify-content:space-between">
-      <span id="ov-period-label">Month to date — primary performance</span>
-      <button id="ov-toggle-btn" onclick="window.EDEN.overview && window.EDEN.overview.toggleLastMonth()"
-        style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;font-family:var(--FS);
-               padding:5px 12px;border-radius:0;border:1.5px solid var(--GP);background:var(--W);
-               color:var(--G);cursor:pointer;transition:all .2s"
-        onmouseover="this.style.background='var(--GXP)'"
-        onmouseout="if(!this.classList.contains('active'))this.style.background='var(--W)'"
-        title="Toggle last full month for comparison">Last Month</button>
+    <!-- Section head — matches Claude Design prototype pattern -->
+    <div class="section-head-block">
+      <div>
+        <div class="sec-eyebrow">Month to date</div>
+        <h2 class="sec-title">Is today healthy?</h2>
+        <div class="sec-meta" id="ov-period-label">Primary performance</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div id="ov-mode-banner" style="display:none;align-items:center;padding:6px 12px;background:var(--GXP);border:1px solid var(--GP);border-radius:0;font-size:11px;color:var(--G)"></div>
+        <div id="hero-rag-block" style="display:flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid #e8e0d0;background:#fff">
+          <div id="hero-rag-dot" style="width:8px;height:8px;border-radius:50%;background:var(--OK);flex-shrink:0"></div>
+          <div id="hero-rag-txt" style="font-family:var(--F);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--GMD)">Status</div>
+        </div>
+        <button id="ov-toggle-btn" onclick="window.EDEN.overview && window.EDEN.overview.toggleLastMonth()"
+          style="font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;font-family:var(--F);
+                 padding:8px 14px;border-radius:0;border:1px solid #e8e0d0;background:#fff;
+                 color:var(--G);cursor:pointer;transition:all .15s"
+          title="Toggle last full month for comparison">Last Month</button>
+      </div>
     </div>
-    <div id="ov-mode-banner" style="display:none;align-items:center;padding:8px 14px;background:var(--GXP);border:1px solid var(--GP);border-radius:0;font-size:11px;margin-bottom:12px;color:var(--G)"></div>
+    <!-- Hidden elements to preserve JS compatibility -->
+    <span id="hero-orders" style="display:none"></span>
+    <span id="hero-rev" style="display:none"></span>
+    <span id="hero-cpa" style="display:none"></span>
+    <span id="hero-roas" style="display:none"></span>
     <div class="g4">
-      <div class="tile ta" id="ov-rev-tile">
+      <div class="tile ink" id="ov-rev-tile">
         <div class="tlbl">Total Revenue MTD</div>
         <div class="tval lg" id="ov-rev-val">Loading...</div>
         <div class="tmeta" id="ov-rev-change"></div>
@@ -724,7 +707,8 @@ svg.sp{display:block;width:100%;overflow:visible}
   </div>
 
   <div class="sec">
-    <div class="seclbl">Revenue breakdown — MTD vs prior MTD</div>
+    <div class="sec-eyebrow">Revenue mix</div>
+    <h3 class="sec-title" style="font-size:clamp(22px,2.5vw,32px)">Platform split</h3>
     <div class="g21">
       <div style="background:var(--GXP);border:1px solid var(--GP);border-radius:var(--r8);padding:18px 22px">
         <div class="ctitle">Platform split</div>
@@ -755,7 +739,8 @@ svg.sp{display:block;width:100%;overflow:visible}
   </div>
 
   <div class="sec">
-    <div class="seclbl">30-day performance trends</div>
+    <div class="sec-eyebrow">Trend</div>
+    <h3 class="sec-title" style="font-size:clamp(22px,2.5vw,32px)">30-day performance</h3>
     <div class="g3">
       <div class="ccard">
         <div class="ctitle">Revenue — current vs prior 30 days</div>
@@ -808,7 +793,8 @@ svg.sp{display:block;width:100%;overflow:visible}
   </div>
 
   <div class="sec">
-    <div class="seclbl">Order velocity — MTD</div>
+    <div class="sec-eyebrow">Order velocity</div>
+    <h3 class="sec-title" style="font-size:clamp(22px,2.5vw,32px)">Orders this month</h3>
     <div class="g3">
       <div class="chip ta" id="ov-orders-chip">
         <div class="tlbl">Total Orders MTD</div>
@@ -831,7 +817,8 @@ svg.sp{display:block;width:100%;overflow:visible}
   </div>
 
   <div class="sec">
-    <div class="seclbl">Year to date — progress to £1m</div>
+    <div class="sec-eyebrow">Annual target</div>
+    <h3 class="sec-title" style="font-size:clamp(22px,2.5vw,32px)">Year to date — progress to £1,000,000</h3>
     <div class="card" style="padding:22px 28px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:14px;gap:20px;flex-wrap:wrap">
         <div>
@@ -867,7 +854,14 @@ svg.sp{display:block;width:100%;overflow:visible}
 
   <!-- ── Customer Reviews (top of section) ── -->
   <div class="sec">
-    <div class="seclbl">Customer reviews — Google Business Profile</div>
+    <div class="section-head-block">
+      <div>
+        <div class="sec-eyebrow">PPC &amp; Email</div>
+        <h2 class="sec-title">Performance overview</h2>
+        <div class="sec-meta">Ad spend, ROAS, customer sentiment</div>
+      </div>
+    </div>
+    <div class="sec-eyebrow" style="margin-bottom:12px">Customer reviews — Google Business Profile</div>
     <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
       <div class="chip inv" style="background:var(--G);border:none">
         <div class="tlbl" style="color:rgba(255,255,255,0.65)">Avg rating</div>
