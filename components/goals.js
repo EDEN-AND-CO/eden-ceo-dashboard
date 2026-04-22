@@ -517,6 +517,8 @@ window.EDEN.components = window.EDEN.components || {};
     if (!tpInitialised) {
       tpInit();
       tpInitialised = true;
+      // Auto-open first person on load
+      setTimeout(function() { tpOpenPerson(PEOPLE[0]); }, 300);
     }
     var edenData = window.EDEN && window.EDEN._data;
     var m = window.EDEN && window.EDEN.metrics;

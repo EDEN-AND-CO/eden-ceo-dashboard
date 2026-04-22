@@ -480,6 +480,47 @@ window.EDEN._marketingData = {
       "2026-01": 62,
       "2026-02": 98,
       "2026-03": 79
+    },
+    "ai_analysis": {
+      "summary": "EDEN & CO. earns consistent five-star praise for solving the dietary gifting problem that most brands ignore \u2014 buyers describe the relief of finding a gift the whole room can enjoy without awkward exceptions. The presentation quality and emotional thoughtfulness of the hampers convert first-time buyers into loyal repeat customers, with many specifically mentioning they return for every gifting occasion throughout the year.",
+      "doing_well": [
+        "Solving the dietary dilemma \u2014 buyers thank EDEN & CO. for making inclusive gifting effortless",
+        "Premium presentation that matches the price point and arrives gift-ready, no rewrapping needed",
+        "Emotional resonance \u2014 recipients describe feeling genuinely seen and appreciated",
+        "Building loyalty \u2014 repeat buyers reference coming back for birthdays, Christmas, and corporate occasions",
+        "Dietary accuracy \u2014 customers with coeliac and dairy-free requirements trust the range completely"
+      ],
+      "gaps": [
+        "More personalisation options \u2014 custom messages, recipient name cards, colour choices",
+        "Corporate bulk ordering with account management and invoice billing",
+        "Wider product variety within each dietary tier \u2014 customers want seasonal rotation"
+      ],
+      "aspects": [
+        {
+          "name": "Product quality",
+          "positive": 96
+        },
+        {
+          "name": "Dietary inclusion",
+          "positive": 98
+        },
+        {
+          "name": "Packaging & presentation",
+          "positive": 94
+        },
+        {
+          "name": "Gifting experience",
+          "positive": 93
+        },
+        {
+          "name": "Value for money",
+          "positive": 81
+        },
+        {
+          "name": "Delivery & fulfilment",
+          "positive": 87
+        }
+      ]
     }
   },
   "_built": "2026-04-19 10:05 UTC",

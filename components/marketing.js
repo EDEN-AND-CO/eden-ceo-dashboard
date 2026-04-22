@@ -303,58 +303,73 @@ window.EDEN.components = window.EDEN.components || {};
       setEl('sm-top-reviews', topRevs.map(function(q) { return reviewCardHtml(q, false); }).join(''));
     }
 
-    // ── Sentiment summary (AI summary card, left column) ──────────────────────
-    var allTags = {};
-    (gbp.top_quotes || []).forEach(function(q) {
-      (q.tags || []).forEach(function(t) { allTags[t] = (allTags[t] || 0) + 1; });
-    });
-    var TAG_THEME_LABELS = {
-      'dietary_resolved': 'Dietary needs fully met',
-      'dietary_anxiety':  'Dietary anxiety addressed',
-      'recipient_joy':    'Recipient delight',
-      'gifting_emotion':  'Gifting emotion captured',
-      'quality_surprise': 'Quality exceeded expectations',
-      'repeat_buyer':     'Repeat purchase intent',
-      'brand_trust':      'Brand trust',
-      'delivery':         'Delivery experience',
-      'corporate':        'Corporate use case',
-      'new_hire':         'New hire gifting'
-    };
-    var TAG_ORDER = ['dietary_resolved','dietary_anxiety','recipient_joy','gifting_emotion','quality_surprise','repeat_buyer','brand_trust','delivery','corporate','new_hire'];
-    var quoteCount = (gbp.top_quotes || []).length;
-    var diet = gbp.dietary_mentions || {};
-    var dietItems = Object.keys(diet).sort(function(a, b) { return diet[b] - diet[a]; });
+    // ── AI-powered review analysis ────────────────────────────────────────────
+    var ai = gbp.ai_analysis || null;
 
-    var sumHtml = '<div style="background:var(--GXP);border-radius:var(--r4);padding:14px 16px">';
-    sumHtml += '<div style="font-size:12px;font-weight:700;color:var(--G);margin-bottom:12px">'
-      + '&#9733; ' + (gbp.avg_rating || '—') + '/5 &nbsp;&middot;&nbsp; '
-      + (gbp.total || '—') + ' reviews &nbsp;&middot;&nbsp; '
-      + (gbp.pct_positive || '—') + '% positive</div>';
+    // Summary paragraph
+    if (ai && ai.summary) {
+      setEl('sm-review-para', '\u201c' + ai.summary + '\u201d');
+    } else {
+      setEl('sm-review-para', 'Run build-marketing-cache.py with ANTHROPIC_API_KEY set to generate AI analysis.');
+    }
 
-    sumHtml += '<div style="font-size:10px;font-weight:700;color:var(--G);letter-spacing:.07em;text-transform:uppercase;margin-bottom:7px">Key sentiment themes</div>';
-    var themeCount = 0;
-    TAG_ORDER.forEach(function(t) {
-      if (!allTags[t]) return;
-      themeCount++;
-      var label = TAG_THEME_LABELS[t] || t;
-      sumHtml += '<div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">'
-        + '<span style="font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;background:var(--G);color:#fff;white-space:nowrap">' + label + '</span>'
-        + '<span style="font-size:10px;color:var(--GMD)">' + allTags[t] + ' of ' + quoteCount + ' featured quotes</span>'
-        + '</div>';
-    });
-    if (!themeCount) sumHtml += '<div style="font-size:11px;color:var(--GMD)">No theme data</div>';
+    // Header chips — doing well (pos) + gaps (gap) as quick-read strip
+    if (ai && (ai.doing_well || ai.gaps)) {
+      var chipHtml = '';
+      (ai.doing_well || []).slice(0,3).forEach(function(d) {
+        chipHtml += '<span class="rv-header-chip pos">+ ' + d + '</span>';
+      });
+      (ai.gaps || []).slice(0,2).forEach(function(g) {
+        chipHtml += '<span class="rv-header-chip gap">\u25b3 ' + g + '</span>';
+      });
+      setEl('sm-review-header-chips', chipHtml);
+    }
 
-    if (dietItems.length) {
-      sumHtml += '<div style="font-size:10px;font-weight:700;color:var(--G);letter-spacing:.07em;text-transform:uppercase;margin:12px 0 7px">Dietary mentions in reviews</div>';
-      dietItems.forEach(function(k) {
-        sumHtml += '<div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px solid var(--GP)">'
-          + '<span>' + k + '</span>'
-          + '<span style="font-weight:700;color:var(--G)">' + diet[k] + '</span>'
+    // Aspect bars (Judge.me style)
+    if (ai && ai.aspects && ai.aspects.length) {
+      var aspHtml = '<div class="rv-aspects">';
+      ai.aspects.forEach(function(a) {
+        var pos = a.positive || 0;
+        var neg = 100 - pos;
+        aspHtml += '<div class="rv-aspect">'
+          + '<div class="rv-aspect-name">' + a.name + '</div>'
+          + '<div class="rv-aspect-track"><div class="rv-aspect-fill" style="width:' + pos + '%"></div></div>'
+          + '<div class="rv-pos-label">+' + pos + '%</div>'
+          + '<div class="rv-neg-label">\u2212' + neg + '%</div>'
           + '</div>';
       });
+      aspHtml += '</div>';
+      setEl('sm-review-aspects', aspHtml);
+    } else {
+      // Fallback: tag-based themes
+      var allTags = {};
+      (gbp.top_quotes || []).forEach(function(q) {
+        (q.tags || []).forEach(function(t) { allTags[t] = (allTags[t] || 0) + 1; });
+      });
+      var TAG_LABELS = { dietary_resolved:'Dietary needs fully met', dietary_anxiety:'Dietary anxiety addressed', recipient_joy:'Recipient delight', gifting_emotion:'Gifting emotion', quality_surprise:'Quality exceeded expectations', repeat_buyer:'Repeat purchase intent', delivery:'Delivery', brand_trust:'Brand trust' };
+      var fbHtml = '<div class="rv-aspects">';
+      Object.keys(TAG_LABELS).forEach(function(t) {
+        if (!allTags[t]) return;
+        fbHtml += '<div class="rv-aspect"><div class="rv-aspect-name">' + TAG_LABELS[t] + '</div>'
+          + '<div class="rv-aspect-track"><div class="rv-aspect-fill" style="width:' + Math.round(allTags[t] / Math.max(...Object.values(allTags)) * 100) + '%"></div></div>'
+          + '<div class="rv-pos-label">' + allTags[t] + '</div><div class="rv-neg-label">&nbsp;</div></div>';
+      });
+      fbHtml += '</div>';
+      setEl('sm-review-aspects', fbHtml);
     }
-    sumHtml += '</div>';
-    setEl('sm-review-summary', sumHtml);
+
+    // Doing well / gaps two-column insight block
+    if (ai && (ai.doing_well || ai.gaps)) {
+      var insHtml = '<div class="rv-insights">'
+        + '<div><div class="rv-insight-hd">What we do well</div><div class="rv-chips">'
+        + (ai.doing_well || []).map(function(d) { return '<div class="rv-chip">+ ' + d + '</div>'; }).join('')
+        + '</div></div>'
+        + '<div><div class="rv-insight-hd gap">What customers want</div><div class="rv-chips">'
+        + (ai.gaps || []).map(function(g) { return '<div class="rv-chip gap">\u25b3 ' + g + '</div>'; }).join('')
+        + '</div></div>'
+        + '</div>';
+      setEl('sm-review-insights', insHtml);
+    }
 
     // ── Corp pipeline IDs ────────────────────────────────────────────────────
     var corpOcc = corp.occasion || {};

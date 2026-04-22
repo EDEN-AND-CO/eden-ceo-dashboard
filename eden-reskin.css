@@ -1405,24 +1405,27 @@ svg.sp { display: block; width: 100%; overflow: visible; }
 /* --------------------------------------------------------------------------
    Reviews block (Operations tab)
    -------------------------------------------------------------------------- */
+/* Reviews strip — full-width header + 2-col body */
 .reviews-strip {
   display: grid;
-  grid-template-columns: 160px 1fr 1fr;
-  gap: 0;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto 1fr;
   border: 1px solid var(--ec-stone);
   margin-bottom: 36px;
   background: var(--ec-white);
 }
 
-.reviews-left {
+.reviews-header {
+  grid-column: 1 / -1;
   background: var(--ec-dark-green);
-  padding: 24px 20px;
+  padding: 22px 32px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 2px solid var(--ec-gold);
 }
-
+.reviews-header-left { display: flex; flex-direction: column; gap: 5px; }
 .reviews-left-label {
   font-family: var(--F);
   font-size: 8px;
@@ -1430,33 +1433,89 @@ svg.sp { display: block; width: 100%; overflow: visible; }
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--ec-gold);
-  margin-bottom: 8px;
 }
-
+.reviews-header-score { display: flex; align-items: baseline; gap: 4px; }
 .reviews-left-score {
   font-family: var(--FM);
-  font-size: 44px;
+  font-size: 48px;
   font-weight: 400;
   color: #fff;
   line-height: 1;
-  margin-bottom: 4px;
 }
-
+.reviews-header-of {
+  font-family: var(--FM);
+  font-size: 20px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1;
+}
 .reviews-left-count {
   font-family: var(--F);
   font-size: 10px;
   color: rgba(207,221,187,0.55);
   letter-spacing: 0.08em;
 }
+.reviews-header-pct {
+  font-family: var(--F);
+  font-size: 10px;
+  color: rgba(207,221,187,0.45);
+  letter-spacing: 0.08em;
+}
+.reviews-header-right {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-content: flex-start;
+  padding-top: 4px;
+}
+.rv-header-chip {
+  font-family: var(--F);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(245,239,228,0.8);
+}
+.rv-header-chip.pos { border-color: rgba(45,122,79,0.5); color: #7ecfa0; }
+.rv-header-chip.gap { border-color: rgba(180,162,105,0.5); color: var(--ec-gold); }
 
-.reviews-middle {
-  padding: 20px 22px;
+.reviews-analysis {
+  grid-column: 1 / 2;
+  padding: 24px 32px;
   border-right: 1px solid var(--ec-stone);
 }
-
-.reviews-right {
-  padding: 20px 22px;
+.reviews-quotes {
+  grid-column: 2 / 3;
+  padding: 24px 28px;
 }
+.reviews-summary-para {
+  font-family: var(--FM);
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.75;
+  color: var(--ec-dark-green);
+  margin-bottom: 20px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--ec-stone);
+}
+
+/* Judge.me style aspect bars */
+.rv-aspects { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+.rv-aspect { display: grid; grid-template-columns: 180px 1fr auto auto; align-items: center; gap: 10px; }
+.rv-aspect-name { font-family: var(--F); font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ec-dark-green); }
+.rv-aspect-track { height: 5px; background: var(--ec-stone); position: relative; }
+.rv-aspect-fill { height: 100%; background: var(--ec-dark-green); transition: width 0.6s ease; }
+.rv-pos-label { font-family: var(--F); font-size: 10px; font-weight: 700; color: #2d7a4f; white-space: nowrap; min-width: 32px; text-align: right; }
+.rv-neg-label { font-family: var(--F); font-size: 10px; color: var(--ec-grey-500); white-space: nowrap; min-width: 32px; }
+
+/* Doing well / gaps */
+.rv-insights { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding-top: 18px; border-top: 1px solid var(--ec-stone); }
+.rv-insight-hd { font-family: var(--F); font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ec-dark-green); margin-bottom: 10px; }
+.rv-insight-hd.gap { color: var(--ec-gold); }
+.rv-chips { display: flex; flex-direction: column; gap: 6px; }
+.rv-chip { font-family: var(--F); font-size: 11px; color: var(--ec-dark-green); padding: 5px 10px; border-left: 2px solid var(--ec-dark-green); background: var(--ec-cream); line-height: 1.4; }
+.rv-chip.gap { border-left-color: var(--ec-gold); color: var(--ec-grey-700); }
 
 .review-card {
   border: 1px solid var(--ec-stone);

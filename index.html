@@ -845,21 +845,35 @@
 
   <!-- ── Customer Reviews strip ── -->
   <div class="reviews-strip">
-    <div class="reviews-left">
-      <div class="reviews-left-label">Google reviews</div>
-      <div class="reviews-left-score" id="sm-gr-quality">—</div>
-      <div class="reviews-left-count" id="sm-gr-quality-n">—</div>
-      <div style="margin-top:10px;font-family:'Josefin Sans',sans-serif;font-size:10px;color:rgba(207,221,187,0.55)"><span id="sm-gr-pct">—</span> five-star</div>
+
+    <!-- Full-width green header -->
+    <div class="reviews-header">
+      <div class="reviews-header-left">
+        <div class="reviews-left-label">Google Reviews</div>
+        <div class="reviews-header-score">
+          <span class="reviews-left-score" id="sm-gr-quality">—</span>
+          <span class="reviews-header-of">/5</span>
+        </div>
+        <div class="reviews-left-count" id="sm-gr-quality-n">—</div>
+        <div class="reviews-header-pct"><span id="sm-gr-pct">—</span> five-star</div>
+      </div>
+      <div class="reviews-header-right" id="sm-review-header-chips"><!-- AI chips injected --></div>
     </div>
-    <div class="reviews-middle">
-      <div class="ctitle" style="margin-bottom:12px">Sentiment</div>
-      <div id="sm-review-summary"><div style="color:var(--GMD);font-size:12px">Loading…</div></div>
-      <div class="dnote" style="margin-top:10px">Updated: <span id="sm-last-updated">—</span></div>
+
+    <!-- Analysis (left 2/3) -->
+    <div class="reviews-analysis">
+      <div class="reviews-summary-para" id="sm-review-para">Loading analysis…</div>
+      <div id="sm-review-aspects"></div>
+      <div id="sm-review-insights"></div>
+      <div class="dnote" style="margin-top:14px">Updated: <span id="sm-last-updated">—</span></div>
     </div>
-    <div class="reviews-right">
-      <div class="ctitle" style="margin-bottom:12px">Top reviews</div>
+
+    <!-- Top reviews (right 1/3) -->
+    <div class="reviews-quotes">
+      <div class="seclbl" style="margin-bottom:12px">Top reviews</div>
       <div id="sm-top-reviews"><div style="color:var(--GMD);font-size:12px">Loading…</div></div>
     </div>
+
   </div>
 
   <!-- ── Data timestamps ── -->
