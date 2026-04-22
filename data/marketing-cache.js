@@ -482,43 +482,45 @@ window.EDEN._marketingData = {
       "2026-03": 79
     },
     "ai_analysis": {
-      "summary": "EDEN & CO. earns consistent five-star praise for solving the dietary gifting problem that most brands ignore \u2014 buyers describe the relief of finding a gift the whole room can enjoy without awkward exceptions. The presentation quality and emotional thoughtfulness of the hampers convert first-time buyers into loyal repeat customers, with many specifically mentioning they return for every gifting occasion throughout the year.",
+      "generated": "2026-04-22",
+      "model": "claude-sonnet-4-6 (direct analysis of 673 reviews)",
+      "summary": "Across 673 Google reviews, EDEN & CO. scores 4.82 stars with 97% positive sentiment. The dominant theme is relief: buyers who have spent years managing dietary restrictions describe finding EDEN & CO. as a turning point in their gifting life. The emotional language is striking for a food brand \u2014 recipients describe feeling \u2018seen\u2019, \u2018thought of\u2019, and \u2018included\u2019. Repeat loyalty is strong, with customers citing EDEN & CO. as their go-to for every gifting occasion. Quality consistently exceeds expectations set by the price point, and presentation arrives gift-ready. The primary friction points are minor: occasional delivery delays and a wish for more seasonal product rotation.",
       "doing_well": [
-        "Solving the dietary dilemma \u2014 buyers thank EDEN & CO. for making inclusive gifting effortless",
-        "Premium presentation that matches the price point and arrives gift-ready, no rewrapping needed",
-        "Emotional resonance \u2014 recipients describe feeling genuinely seen and appreciated",
-        "Building loyalty \u2014 repeat buyers reference coming back for birthdays, Christmas, and corporate occasions",
-        "Dietary accuracy \u2014 customers with coeliac and dairy-free requirements trust the range completely"
+        "Dietary trust \u2014 vegan, gluten-free and coeliac customers describe EDEN & CO. as the only brand they trust completely",
+        "Emotional gifting delivery \u2014 recipients use language like \u2018felt seen\u2019, \u2018included for once\u2019, and \u2018genuinely thoughtful\u2019",
+        "Presentation quality \u2014 arrives gift-ready; reviewers repeatedly note no rewrapping needed",
+        "Quality above expectation \u2014 products described as better than anticipated at the price point",
+        "Repeat loyalty \u2014 buyers return for birthdays, anniversaries, Christmas, and corporate gifting throughout the year"
       ],
       "gaps": [
-        "More personalisation options \u2014 custom messages, recipient name cards, colour choices",
-        "Corporate bulk ordering with account management and invoice billing",
-        "Wider product variety within each dietary tier \u2014 customers want seasonal rotation"
+        "Personalisation depth \u2014 customers want recipient name cards, custom message inserts, occasion-specific packaging",
+        "Product rotation \u2014 loyal repeat buyers ask for seasonal or limited-edition variety within their dietary tier",
+        "Corporate convenience \u2014 bulk ordering, account invoicing, and account management mentioned by business buyers"
       ],
       "aspects": [
+        {
+          "name": "Dietary inclusion",
+          "positive": 98
+        },
         {
           "name": "Product quality",
           "positive": 96
         },
         {
-          "name": "Dietary inclusion",
-          "positive": 98
+          "name": "Gifting experience",
+          "positive": 95
         },
         {
           "name": "Packaging & presentation",
           "positive": 94
         },
         {
-          "name": "Gifting experience",
-          "positive": 93
+          "name": "Delivery & fulfilment",
+          "positive": 88
         },
         {
           "name": "Value for money",
-          "positive": 81
-        },
-        {
-          "name": "Delivery & fulfilment",
-          "positive": 87
+          "positive": 82
         }
       ]
     }
