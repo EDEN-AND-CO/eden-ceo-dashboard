@@ -14,7 +14,7 @@
 })();
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="eden-reskin.css?v=20260421n">
+<link rel="stylesheet" href="eden-reskin.css?v=20260422a">
 <style>
 /* ══ WEEKLY PULSE — EDEN & CO ══════════════════════════════════════════ */
 #tab-goals{font-family:'Josefin Sans',sans-serif;font-size:14px;line-height:1.7;background:var(--GXP);color:var(--GDK)}
@@ -183,6 +183,67 @@
 #tab-goals .tp-c-due.on-time{background:var(--OKL);color:var(--OK)}
 #tab-goals .tp-c-due.soon{background:var(--ABL);color:var(--AMB)}
 #tab-goals .tp-c-due.overdue{background:var(--RDL);color:var(--RED);font-weight:700}
+
+/* SCORECARD STRIP — 4 compact cards, always visible */
+#tab-goals .tp-scorecard{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--GL);border-bottom:2px solid var(--GOLD)}
+#tab-goals .tp-card{background:var(--W);padding:22px 28px 20px;cursor:pointer;transition:background 0.15s;position:relative;border-top:3px solid transparent}
+#tab-goals .tp-card:nth-child(1){border-top-color:var(--G)}
+#tab-goals .tp-card:nth-child(2){border-top-color:var(--GOLD)}
+#tab-goals .tp-card:nth-child(3){border-top-color:var(--GM)}
+#tab-goals .tp-card:nth-child(4){border-top-color:var(--GOM)}
+#tab-goals .tp-card:hover{background:var(--GXP)}
+#tab-goals .tp-card.active{background:var(--G)}
+#tab-goals .tp-card-name{font-family:'Josefin Sans',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--G);margin-bottom:3px}
+#tab-goals .tp-card.active .tp-card-name{color:var(--CREAM)}
+#tab-goals .tp-card-role{font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--GMD);margin-bottom:18px}
+#tab-goals .tp-card.active .tp-card-role{color:rgba(245,239,228,0.55)}
+/* Segmented bar */
+#tab-goals .tp-seg-bar{display:flex;height:5px;width:100%;background:var(--GL);margin-bottom:14px;gap:2px}
+#tab-goals .tp-seg{height:100%;transition:flex 0.5s ease;min-width:0}
+#tab-goals .tp-seg.seg-done{background:#2d7a4f}
+#tab-goals .tp-seg.seg-ontrack{background:var(--GOLD)}
+#tab-goals .tp-seg.seg-overdue{background:var(--RED)}
+#tab-goals .tp-seg.seg-empty{background:var(--GL);flex:1}
+/* Stat chips */
+#tab-goals .tp-card-stats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+#tab-goals .tp-cs{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.06em;padding:3px 9px;text-transform:uppercase}
+#tab-goals .tp-cs.done{background:rgba(45,122,79,0.1);color:#2d7a4f}
+#tab-goals .tp-cs.ontrack{background:rgba(180,162,105,0.15);color:var(--GOM)}
+#tab-goals .tp-cs.overdue{background:rgba(192,57,43,0.12);color:var(--RED)}
+#tab-goals .tp-card.active .tp-cs.done{background:rgba(45,122,79,0.25);color:#7ecfa0}
+#tab-goals .tp-card.active .tp-cs.ontrack{background:rgba(180,162,105,0.25);color:var(--GOLD)}
+#tab-goals .tp-card.active .tp-cs.overdue{background:rgba(192,57,43,0.25);color:#f08080}
+#tab-goals .tp-card-ytd{font-family:'Josefin Sans',sans-serif;font-size:10px;color:var(--GMD);letter-spacing:0.06em;margin-bottom:14px}
+#tab-goals .tp-card.active .tp-card-ytd{color:rgba(245,239,228,0.45)}
+#tab-goals .tp-card-expand{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--G);border-top:1px solid var(--GL);padding-top:12px;margin-top:2px}
+#tab-goals .tp-card.active .tp-card-expand{color:var(--GOLD);border-top-color:rgba(255,255,255,0.1)}
+
+/* DETAIL PANEL — full-width, below concerns */
+#tab-goals .tp-detail{background:var(--W);border-top:3px solid var(--G)}
+#tab-goals .tp-detail-hd{background:var(--G);padding:24px 36px;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;border-bottom:2px solid var(--GOLD)}
+#tab-goals .tp-detail-name{font-family:'Josefin Sans',sans-serif;font-size:20px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--CREAM);margin-bottom:4px}
+#tab-goals .tp-detail-role{font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,239,228,0.55)}
+#tab-goals .tp-detail-focus{font-family:var(--FM);font-size:15px;font-style:italic;color:var(--GOLD);flex:1;text-align:right;line-height:1.6;max-width:380px;align-self:center}
+#tab-goals .tp-detail-close{background:transparent;border:1px solid rgba(245,239,228,0.25);color:rgba(245,239,228,0.7);font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;padding:8px 16px;cursor:pointer;align-self:flex-start;transition:all 0.15s}
+#tab-goals .tp-detail-close:hover{background:rgba(255,255,255,0.1);color:var(--CREAM)}
+/* Detail sections */
+#tab-goals .tp-dsec{border-bottom:1px solid var(--GL)}
+#tab-goals .tp-dsec-hd{display:flex;align-items:center;justify-content:space-between;padding:14px 36px;cursor:pointer;user-select:none;background:var(--GXP)}
+#tab-goals .tp-dsec-hd:hover{background:var(--LG)}
+#tab-goals .tp-dsec-always{cursor:default}
+#tab-goals .tp-dsec-always:hover{background:var(--GXP)}
+#tab-goals .tp-dsec-lbl{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--G)}
+#tab-goals .tp-dsec-count{font-family:var(--FM);font-size:22px;font-weight:400;color:var(--GOM);line-height:1}
+#tab-goals .tp-dsec-toggle{font-family:'Josefin Sans',sans-serif;font-size:10px;color:var(--GOLD);letter-spacing:0.08em;text-transform:uppercase;font-weight:600}
+#tab-goals .tp-dsec-body{padding:20px 36px 28px}
+#tab-goals .tp-dsec-body.collapsed{display:none}
+#tab-goals .tp-dsec-empty{font-size:13px;color:var(--GMD);font-style:italic;padding:4px 0}
+/* Tasks grid in detail panel — 3 cols for full width */
+#tab-goals .tp-detail-tasks{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+/* Completed section — distinct tint */
+#tab-goals .tp-dsec-completed .tp-dsec-hd{background:rgba(45,122,79,0.06)}
+#tab-goals .tp-dsec-completed .tp-dsec-body{background:rgba(45,122,79,0.03)}
+#tab-goals .tp-dsec-completed .tp-task.done{opacity:1}
 
 </style>
 </head>
@@ -909,21 +970,19 @@
 
   <div class="tp-demo-bar" id="tp-demo-bar">Demo mode — paste your Sheet ID into TP_SHEET_ID in goals.js to show live data</div>
 
-
-
-  <div class="tp-sum-bar">
-    <div class="tp-sc"><div class="tp-sc-lbl">Jon — done YTD</div><div class="tp-sc-val g" id="tp-ytd-jon">–</div></div>
-    <div class="tp-sc"><div class="tp-sc-lbl">Rosie — done YTD</div><div class="tp-sc-val g" id="tp-ytd-rosie">–</div></div>
-    <div class="tp-sc"><div class="tp-sc-lbl">Edith — done YTD</div><div class="tp-sc-val g" id="tp-ytd-edith">–</div></div>
-    <div class="tp-sc"><div class="tp-sc-lbl">Phoebe — done YTD</div><div class="tp-sc-val g" id="tp-ytd-phoebe">–</div></div>
+  <!-- Scorecard strip — always visible -->
+  <div class="tp-scorecard" id="tp-scorecard">
+    <div style="grid-column:1/-1;padding:40px;text-align:center;color:var(--GMD)">Loading…</div>
   </div>
 
-  <div class="tp-main" id="tp-lanes"><div style="grid-column:1/-1;padding:60px;text-align:center;color:var(--GMD)">Loading…</div></div>
+  <!-- Detail panel — full-width, one person at a time -->
+  <div class="tp-detail" id="tp-detail" style="display:none"></div>
 
   <div id="tp-quote-bar" style="background:var(--G);border-left:4px solid var(--GOLD);padding:22px 32px;margin:0;text-align:center">
     <div id="tp-quote-text" style="font-size:20px;font-style:italic;color:#fff;font-family:var(--FM);letter-spacing:0.01em;line-height:1.65">—</div>
   </div>
 
+  <!-- Concerns — always visible, bottom of page -->
   <div class="tp-concerns">
     <div class="tp-concerns-hd"><div class="tp-concerns-title">Active concerns</div></div>
     <div class="tp-concerns-grid" id="tp-concerns-grid"></div>

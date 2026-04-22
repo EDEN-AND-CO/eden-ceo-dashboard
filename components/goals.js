@@ -64,9 +64,13 @@ window.EDEN.components = window.EDEN.components || {};
   }
 
   // ── State ────────────────────────────────────────────────────────
-  // Completed tasks hidden by default
   var tpHideDone = true;
   var tpInitialised = false;
+  var _laneData   = {};
+  var _laneNoise  = {};
+  var _ytdMap     = {};
+  var _streakMap  = {};
+  var _openPerson = null;
 
   // ── Helpers ─────────────────────────────────────────────────────
   function esc(s) {
@@ -213,130 +217,193 @@ window.EDEN.components = window.EDEN.components || {};
     return { categories: categories, noise: sheetNoise };
   }
 
-  // ── Lane renderer ────────────────────────────────────────────────
-  function buildLane(name, meta, categories, ytd, streak, extraNoise) {
-    var blockedCount = 0;
-    var catKeys = Object.keys(categories);
-    var catsHtml = '';
+  // ── Scorecard helpers ────────────────────────────────────────────
+  function countWeekTasks(categories) {
+    var tasks = categories['This week'] || [];
+    var done = 0, ontrack = 0, overdue = 0;
+    for (var i = 0; i < tasks.length; i++) {
+      var s = tasks[i].status;
+      if (s === 'done')    done++;
+      else if (s === 'overdue') overdue++;
+      else                 ontrack++;
+    }
+    return { done: done, ontrack: ontrack, overdue: overdue, total: tasks.length };
+  }
 
-    for (var ci = 0; ci < catKeys.length; ci++) {
-      var cat    = catKeys[ci];
-      var tasks  = categories[cat];
-      var isWeek = cat === 'This week';
-      var isOther = cat === 'Other';
-      var catId  = 'tp-cat-' + name + '-' + cat.replace(/\s+/g,'-');
-      var tasksHtml = '';
+  // ── Task renderer (shared by detail panel) ───────────────────────
+  function renderTask(t, isWeekCat, idx) {
+    var done     = t.status === 'done';
+    var isOv     = t.status === 'overdue';
+    var isUrgent = isWeekCat && !!t.urgent;
+    var dotCls   = done ? 'done'
+                 : (t.status === 'on' || t.status === 'on-track') ? 'on'
+                 : t.status === 'blocked' ? 'blocked'
+                 : isOv ? 'overdue' : isUrgent ? 'overdue' : '';
 
-      for (var ti = 0; ti < tasks.length; ti++) {
-        var t    = tasks[ti];
-        var num  = ti + 1;
-        var done = t.status === 'done';
-        var isOverdue = isWeek && t.status === 'overdue';
-        var isUrgent  = isWeek && !!t.urgent;
-        if (!isWeek && !isOther && t.status === 'blocked') blockedCount++;
+    var parentTag = t.parent ? '<div class="tp-parent-tag">\u2191 ' + esc(t.parent) + '</div>' : '';
+    var weekTag   = (t.priorWeek && t.weekLabel)
+                  ? '<div class="tp-parent-tag" style="color:var(--RED,#c0392b)">\u23f0 ' + esc(t.weekLabel) + ' \u2014 not completed</div>' : '';
 
-        var taskCls = done ? ' done' : isUrgent ? ' urgent' : isOverdue ? ' overdue' : '';
-        var dotCls  = done ? 'done'
-                    : (t.status === 'on' || t.status === 'on-track') ? 'on'
-                    : t.status === 'blocked' ? 'blocked'
-                    : isOverdue ? 'overdue'
-                    : isUrgent  ? 'overdue' : '';
+    var noteId  = 'tp-n-' + (t.title || '').replace(/\W/g,'').slice(0,12) + idx;
+    var noteBtn = isWeekCat ? '<button class="tp-note-btn" onclick="document.getElementById(\'' + noteId + '\').classList.toggle(\'open\')">note \u25be</button>' : '';
+    var noteHtml = isWeekCat ? '<div class="tp-note" id="' + noteId + '">' + esc(t.note || 'No note added.') + '</div>' : '';
+    var overdueNote = (isOv && isWeekCat && !t.note) ? '<div class="tp-overdue-note">Not done \u2014 note required before Monday.</div>' : '';
 
-        var numEl  = isWeek  ? '<div class="tp-num action' + (isUrgent ? ' urgent' : '') + '">' + num + '</div>'
-                   : isOther ? '<div class="tp-num other">\xb7</div>'
-                   :           '<div class="tp-num">' + num + '</div>';
-
-        var parentTag = t.parent ? '<div class="tp-parent-tag">\u2191 ' + esc(t.parent) + '</div>' : '';
-        var weekTag = (t.priorWeek && t.weekLabel) ? '<div class="tp-parent-tag" style="color:var(--RED,#c0392b)">\u23f0 ' + esc(t.weekLabel) + ' \u2014 not completed</div>' : '';
-        var noteId    = 'tp-note-' + name + '-' + num;
-        var noteBtn   = isWeek ? '<button class="tp-note-btn" onclick="document.getElementById(\'' + noteId + '\').classList.toggle(\'open\')">note \u25be</button>' : '';
-        var noteHtml  = isWeek ? '<div class="tp-note" id="' + noteId + '">' + esc(t.note || 'No note added.') + '</div>' : '';
-        var overdueNote = (isOverdue && !t.note) ? '<div class="tp-overdue-note">Not done \u2014 note required before Monday.</div>' : '';
-
-        var goalsHtml = '';
-        if (t.goals && t.goals.length) {
-          goalsHtml = '<div class="tp-goals">';
-          for (var gi = 0; gi < t.goals.length; gi++) {
-            var g = t.goals[gi];
-            goalsHtml += '<div class="tp-goal-row"><div class="tp-mgdot" onclick="this.classList.toggle(\'done\')"></div>'
-              + '<div class="tp-goal-text">' + esc(g.t) + '</div>'
-              + (g.m ? '<div class="tp-metric' + (isWeek ? ' am' : '') + '">' + esc(g.m) + '</div>' : '')
-              + '</div>';
-          }
-          goalsHtml += '</div>';
-        }
-
-        tasksHtml += '<div class="tp-task' + (isWeek ? ' week' : '') + taskCls + (done && tpHideDone ? ' hidden' : '') + '">'
-          + '<div class="tp-task-hd' + (t.goals && t.goals.length ? '' : ' bare') + '">' + numEl
-          + '<div style="flex:1"><div class="tp-task-title' + (done ? ' struck' : '') + '">' + esc(t.title) + '</div>' + parentTag + weekTag + '</div>'
-          + noteBtn + '<div class="tp-dot ' + dotCls + '"></div></div>'
-          + goalsHtml + noteHtml + overdueNote
+    var goalsHtml = '';
+    if (t.goals && t.goals.length) {
+      goalsHtml = '<div class="tp-goals">';
+      for (var gi = 0; gi < t.goals.length; gi++) {
+        var g = t.goals[gi];
+        goalsHtml += '<div class="tp-goal-row"><div class="tp-mgdot' + (done ? ' done' : '') + '" onclick="this.classList.toggle(\'done\')"></div>'
+          + '<div class="tp-goal-text">' + esc(g.t) + '</div>'
+          + (g.m ? '<div class="tp-metric">' + esc(g.m) + '</div>' : '')
           + '</div>';
       }
-
-      catsHtml += '<div class="tp-cat-lbl" onclick="var b=document.getElementById(\'' + catId + '\');b.classList.toggle(\'collapsed\');this.querySelector(\'.tp-cat-toggle\').textContent=b.classList.contains(\'collapsed\')?\'show\':\'hide\'">'
-        + esc(cat) + '<span class="tp-cat-toggle">hide</span></div>'
-        + '<div class="tp-cat-body" id="' + catId + '">' + tasksHtml + '</div>';
+      goalsHtml += '</div>';
     }
 
-    var noiseItems = (meta.noise || []).concat(extraNoise || []);
-    var noiseHtml = noiseItems.length
-      ? '<div class="tp-noise"><div class="tp-noise-lbl">Noise bucket \u2014 when there\u2019s time</div><div class="tp-noise-items">'
-        + noiseItems.map(function(n) { return '<span class="tp-noise-item">' + esc(n) + '</span>'; }).join('')
-        + '</div></div>' : '';
+    var taskCls = done ? ' done' : isUrgent ? ' urgent' : isOv ? ' overdue' : '';
+    return '<div class="tp-task' + (isWeekCat ? ' week' : '') + taskCls + '">'
+      + '<div class="tp-task-hd' + (goalsHtml ? '' : ' bare') + '">'
+      + '<div style="flex:1"><div class="tp-task-title' + (done ? ' struck' : '') + '">' + esc(t.title) + '</div>' + parentTag + weekTag + '</div>'
+      + noteBtn + '<div class="tp-dot ' + dotCls + '"></div></div>'
+      + goalsHtml + noteHtml + overdueNote + '</div>';
+  }
 
-    var streakHtml = streak > 1 ? '<span class="tp-streak">' + streak + ' weeks on track</span>' : '';
+  // ── Detail section block ─────────────────────────────────────────
+  function buildDsec(label, id, tasks, isWeekCat, startOpen) {
+    var bodyId = 'tp-ds-' + id;
+    var collapsed = startOpen ? '' : ' collapsed';
+    var toggleTxt = startOpen ? 'hide' : 'show';
+    var tasksHtml = '';
+    for (var i = 0; i < tasks.length; i++) tasksHtml += renderTask(tasks[i], isWeekCat, i);
+    return '<div class="tp-dsec">'
+      + '<div class="tp-dsec-hd" onclick="var b=document.getElementById(\'' + bodyId + '\');b.classList.toggle(\'collapsed\');this.querySelector(\'.tp-dsec-toggle\').textContent=b.classList.contains(\'collapsed\')?\'show\':\'hide\'">'
+      + '<div class="tp-dsec-lbl">' + esc(label) + '</div><span class="tp-dsec-toggle">' + toggleTxt + '</span></div>'
+      + '<div class="tp-dsec-body' + collapsed + '" id="' + bodyId + '"><div class="tp-detail-tasks">' + tasksHtml + '</div></div>'
+      + '</div>';
+  }
 
-    return {
-      html: '<div class="tp-lane">'
-        + '<div class="tp-lane-hd"><div>'
-        + '<div class="tp-lane-name">' + esc(name) + '</div>'
-        + '<div class="tp-lane-role">' + esc(meta.role) + '</div>'
-        + '<div class="tp-lane-meta"><span class="tp-ytd-badge">' + ytd + ' done YTD</span>' + streakHtml + '</div>'
-        + '</div><div class="tp-focus">' + esc(meta.focus) + '</div></div>'
-        + '<div class="tp-lane-body">' + catsHtml + '</div>'
-        + noiseHtml + '</div>',
-      blocked: blockedCount
-    };
+  // ── Build full detail panel for one person ───────────────────────
+  function buildDetailPanel(name, categories, noise, ytd, streak) {
+    var meta = TP_META[name] || { role: '', focus: '' };
+
+    // Completed tasks — pulled from all categories
+    var doneTasks = [];
+    var catKeys = Object.keys(categories);
+    for (var ci = 0; ci < catKeys.length; ci++) {
+      var arr = categories[catKeys[ci]];
+      for (var ti = 0; ti < arr.length; ti++) {
+        if (arr[ti].status === 'done') doneTasks.push(arr[ti]);
+      }
+    }
+    var streakBadge = streak > 1 ? '<span class="tp-ytd-badge" style="margin-left:12px">' + streak + ' wk streak</span>' : '';
+
+    var html = '<div class="tp-detail-hd">'
+      + '<div><div class="tp-detail-name">' + esc(name) + '</div>'
+      + '<div class="tp-detail-role">' + esc(meta.role) + '</div>'
+      + '<div style="margin-top:8px"><span class="tp-ytd-badge">' + ytd + ' done YTD</span>' + streakBadge + '</div></div>'
+      + '<div class="tp-detail-focus">' + esc(meta.focus) + '</div>'
+      + '<button class="tp-detail-close" onclick="tpClosePerson()">\u2715 Close</button>'
+      + '</div>'
+      + '<div class="tp-detail-body">';
+
+    // Tasks completed — always open, no toggle
+    html += '<div class="tp-dsec tp-dsec-completed">'
+      + '<div class="tp-dsec-hd tp-dsec-always"><div class="tp-dsec-lbl">Tasks completed this week</div>'
+      + '<div class="tp-dsec-count">' + doneTasks.length + '</div></div>'
+      + '<div class="tp-dsec-body"><div class="tp-detail-tasks">';
+    if (doneTasks.length) {
+      for (var di = 0; di < doneTasks.length; di++) html += renderTask(doneTasks[di], false, di);
+    } else {
+      html += '<div class="tp-dsec-empty">No tasks completed yet this week.</div>';
+    }
+    html += '</div></div></div>';
+
+    // Core goals — collapsible, default open
+    var cg = categories['Core goals'] || [];
+    if (cg.length) html += buildDsec('Core goals', name + '-cg', cg, false, true);
+
+    // This week active — collapsible, default open
+    var wk = (categories['This week'] || []).filter(function(t) { return t.status !== 'done'; });
+    if (wk.length) html += buildDsec('This week', name + '-wk', wk, true, true);
+
+    // Monthly — collapsible, default open
+    var mo = (categories['Monthly'] || []).filter(function(t) { return t.status !== 'done'; });
+    if (mo.length) html += buildDsec('Monthly', name + '-mo', mo, false, true);
+
+    // Noise — collapsible, default open
+    var noiseItems = noise || [];
+    if (noiseItems.length) {
+      var noiseId = 'tp-ds-' + name + '-noise';
+      html += '<div class="tp-dsec">'
+        + '<div class="tp-dsec-hd" onclick="var b=document.getElementById(\'' + noiseId + '\');b.classList.toggle(\'collapsed\');this.querySelector(\'.tp-dsec-toggle\').textContent=b.classList.contains(\'collapsed\')?\'show\':\'hide\'">'
+        + '<div class="tp-dsec-lbl">Noise bucket \u2014 when there\'s time</div><span class="tp-dsec-toggle">hide</span></div>'
+        + '<div class="tp-dsec-body" id="' + noiseId + '">'
+        + '<div class="tp-noise-items">' + noiseItems.map(function(n) { return '<span class="tp-noise-item">' + esc(n) + '</span>'; }).join('') + '</div>'
+        + '</div></div>';
+    }
+
+    html += '</div>'; // tp-detail-body
+    return html;
   }
 
   // ── Render ───────────────────────────────────────────────────────
   function render(laneData, concerns, ytdMap, streakMap, noiseMap) {
-    var totalBlocked = 0;
-    var lanesHtml = '';
-    for (var pi = 0; pi < PEOPLE.length; pi++) {
-      var name = PEOPLE[pi];
-      var ld   = laneData[name];
-      if (!ld) continue;
-      var r = buildLane(name, TP_META[name] || { role:'', focus:'', noise:[] }, ld, ytdMap[name] || 0, streakMap[name] || 0, (noiseMap && noiseMap[name]) || []);
-      totalBlocked += r.blocked;
-      lanesHtml += r.html;
-    }
+    // Store at module scope for accordion
+    _laneData  = laneData;
+    _laneNoise = noiseMap || {};
+    _ytdMap    = ytdMap;
+    _streakMap = streakMap;
 
-    var lanes = document.getElementById('tp-lanes');
-    if (lanes) lanes.innerHTML = lanesHtml || '<div style="padding:40px;text-align:center;color:var(--tp-muted)">No data — run build-team-pulse.py then refresh.</div>';
+    // Build scorecard cards
+    var scorecard = document.getElementById('tp-scorecard');
+    if (scorecard) {
+      var scHtml = '';
+      for (var pi = 0; pi < PEOPLE.length; pi++) {
+        var name   = PEOPLE[pi];
+        var meta   = TP_META[name] || { role: '' };
+        var cats   = laneData[name] || {};
+        var counts = countWeekTasks(cats);
+        var ytd    = ytdMap[name] || 0;
 
-    var ns = ['jon','rosie','edith','phoebe'];
-    for (var ni = 0; ni < ns.length; ni++) {
-      var el = document.getElementById('tp-ytd-' + ns[ni]);
-      var key = ns[ni].charAt(0).toUpperCase() + ns[ni].slice(1);
-      if (el) el.textContent = ytdMap[key] || 0;
+        var statsHtml = '';
+        if (counts.done)    statsHtml += '<span class="tp-cs done">' + counts.done + ' done</span>';
+        if (counts.ontrack) statsHtml += '<span class="tp-cs ontrack">' + counts.ontrack + ' on track</span>';
+        if (counts.overdue) statsHtml += '<span class="tp-cs overdue">' + counts.overdue + ' overdue</span>';
+        if (!counts.total)  statsHtml += '<span class="tp-cs ontrack">No tasks</span>';
+
+        scHtml += '<div class="tp-card" id="tp-card-' + name + '" onclick="tpOpenPerson(\'' + name + '\')">'
+          + '<div class="tp-card-name">' + esc(name) + '</div>'
+          + '<div class="tp-card-role">' + esc(meta.role) + '</div>'
+          + '<div class="tp-seg-bar">'
+          + (counts.done    ? '<div class="tp-seg seg-done" style="flex:' + counts.done + '"></div>' : '')
+          + (counts.ontrack ? '<div class="tp-seg seg-ontrack" style="flex:' + counts.ontrack + '"></div>' : '')
+          + (counts.overdue ? '<div class="tp-seg seg-overdue" style="flex:' + counts.overdue + '"></div>' : '')
+          + (!counts.total  ? '<div class="tp-seg seg-empty" style="flex:1"></div>' : '')
+          + '</div>'
+          + '<div class="tp-card-stats">' + statsHtml + '</div>'
+          + '<div class="tp-card-ytd">' + ytd + ' done YTD</div>'
+          + '<div class="tp-card-expand">View detail \u25be</div>'
+          + '</div>';
+      }
+      scorecard.innerHTML = scHtml;
     }
 
     // Concerns grid
     var today = new Date(); today.setHours(0,0,0,0);
-    var cgEl = document.getElementById('tp-concerns-grid');
+    var cgEl  = document.getElementById('tp-concerns-grid');
     if (cgEl) {
       if (!concerns || !concerns.length) {
-        cgEl.innerHTML = '<div style="color:var(--tp-muted);font-size:13px;padding:10px 0">No open concerns.</div>';
+        cgEl.innerHTML = '<div style="color:var(--tp-muted);font-size:13px;padding:10px 0">No open concerns this week.</div>';
       } else {
         var cgHtml = '';
         for (var ci = 0; ci < concerns.length; ci++) {
           var c   = concerns[ci];
           var due = c.due ? new Date(c.due) : null;
           if (due) due.setHours(0,0,0,0);
-          var isOv = due && due < today;
-          cgHtml += '<div class="tp-concern ' + (isOv ? 'overdue' : (c.level || 'med')) + '">'
+          var isOv2 = due && due < today;
+          cgHtml += '<div class="tp-concern ' + (isOv2 ? 'overdue' : (c.level || 'med')) + '">'
             + '<div class="tp-c-level">' + (c.level === 'high' ? 'High' : c.level === 'med' ? 'Medium' : esc(c.level || '')) + ' \xb7 ' + esc(c.owner || '') + '</div>'
             + '<div class="tp-c-title">' + esc(c.title) + '</div>'
             + '<div class="tp-c-action">' + esc(c.action || '') + '</div>'
@@ -346,6 +413,45 @@ window.EDEN.components = window.EDEN.components || {};
       }
     }
   }
+
+  // ── Accordion — open one person at a time ────────────────────────
+  window.tpOpenPerson = function(name) {
+    if (_openPerson === name) { tpClosePerson(); return; }
+    _openPerson = name;
+
+    for (var pi = 0; pi < PEOPLE.length; pi++) {
+      var card = document.getElementById('tp-card-' + PEOPLE[pi]);
+      if (!card) continue;
+      var exp = card.querySelector('.tp-card-expand');
+      if (PEOPLE[pi] === name) {
+        card.classList.add('active');
+        if (exp) exp.innerHTML = 'Close \u25b4';
+      } else {
+        card.classList.remove('active');
+        if (exp) exp.innerHTML = 'View detail \u25be';
+      }
+    }
+
+    var panel = document.getElementById('tp-detail');
+    if (panel) {
+      panel.innerHTML = buildDetailPanel(name, _laneData[name] || {}, _laneNoise[name] || [], _ytdMap[name] || 0, _streakMap[name] || 0);
+      panel.style.display = 'block';
+      setTimeout(function() { panel.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60);
+    }
+  };
+
+  window.tpClosePerson = function() {
+    _openPerson = null;
+    for (var pi = 0; pi < PEOPLE.length; pi++) {
+      var card = document.getElementById('tp-card-' + PEOPLE[pi]);
+      if (!card) continue;
+      card.classList.remove('active');
+      var exp = card.querySelector('.tp-card-expand');
+      if (exp) exp.innerHTML = 'View detail \u25be';
+    }
+    var panel = document.getElementById('tp-detail');
+    if (panel) { panel.style.display = 'none'; panel.innerHTML = ''; }
+  };
 
   // ── Toggle completed ─────────────────────────────────────────────
   window.tpToggleHide = function() {
