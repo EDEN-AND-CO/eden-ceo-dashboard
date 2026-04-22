@@ -1,5 +1,5 @@
 // EDEN & CO. Marketing Intelligence Cache
-// Built: 2026-04-22 10:45 UTC
+// Built: 2026-04-22 12:17 UTC
 // Run: python3 scripts/build-marketing-cache.py
 
 window.EDEN = window.EDEN || {};
@@ -187,13 +187,13 @@ window.EDEN._marketingData = {
     }
   },
   "google_reviews": {
-    "total": 1095,
+    "total": 1096,
     "fetched": 1000,
     "quality": {
       "avg": 4.82,
-      "total": 862,
+      "total": 863,
       "five": 736,
-      "four": 108,
+      "four": 109,
       "three": 13,
       "two": 3,
       "one": 2,
@@ -201,8 +201,8 @@ window.EDEN._marketingData = {
     },
     "impression": {
       "avg": 4.72,
-      "total": 840,
-      "five": 654,
+      "total": 841,
+      "five": 655,
       "four": 150,
       "three": 27,
       "two": 6,
@@ -212,7 +212,7 @@ window.EDEN._marketingData = {
     "dietary": {},
     "missed_foods": [],
     "months": {
-      "2024-06": 10,
+      "2024-06": 9,
       "2024-07": 27,
       "2024-08": 4,
       "2024-09": 17,
@@ -231,7 +231,7 @@ window.EDEN._marketingData = {
       "2026-01": 85,
       "2026-02": 126,
       "2026-03": 138,
-      "2026-04": 87
+      "2026-04": 88
     }
   },
   "gbp_reviews": {
@@ -482,6 +482,6 @@ window.EDEN._marketingData = {
       "2026-03": 79
     }
   },
-  "_built": "2026-04-22 10:45 UTC",
+  "_built": "2026-04-22 12:17 UTC",
   "_version": "1.0"
 };
