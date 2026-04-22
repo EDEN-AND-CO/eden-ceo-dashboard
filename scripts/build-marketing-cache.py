@@ -20,8 +20,9 @@ try:
 except ImportError:
     print("Python 3 required"); sys.exit(1)
 
-TOKEN     = os.environ.get("TYPEFORM_TOKEN", "")
-BASE      = "https://api.typeform.com"
+TOKEN           = os.environ.get("TYPEFORM_TOKEN", "")
+ANTHROPIC_KEY   = os.environ.get("ANTHROPIC_API_KEY", "")
+BASE            = "https://api.typeform.com"
 
 if not TOKEN:
     print("[ERROR] TYPEFORM_TOKEN not set — skipping marketing cache build")
@@ -345,6 +346,69 @@ try:
     # Top 10 content angles (same pool, for existing sm-content-angles)
     top_quotes = (priority + other_5)[:10]
 
+    # AI analysis — requires ANTHROPIC_API_KEY
+    ai_analysis = None
+    if ANTHROPIC_KEY and all_reviews:
+        print("  Running AI review analysis...")
+        try:
+            sample = all_reviews[:80]
+            review_texts = "\n".join([f"{'★'*r['stars']} {r['text'][:250]}" for r in sample])
+            prompt = f"""Analyse these {total} Google reviews for EDEN & CO., a UK premium dietary gifting brand (vegan, gluten-free, dairy-free hampers). Rating: {avg}/5, {pct_pos}% positive.
+
+Sample reviews ({len(sample)} of {total}):
+{review_texts}
+
+Return ONLY valid JSON with this exact structure (no markdown, no explanation):
+{{
+  "summary": "2-3 sentence paragraph summarising overall customer sentiment and brand perception. Be specific about what makes EDEN & CO. stand out.",
+  "doing_well": ["concrete thing 1", "concrete thing 2", "concrete thing 3", "concrete thing 4", "concrete thing 5"],
+  "gaps": ["specific gap or unmet desire 1", "specific gap 2", "specific gap 3"],
+  "aspects": [
+    {{"name": "Product quality", "positive": 94}},
+    {{"name": "Dietary inclusion", "positive": 97}},
+    {{"name": "Packaging & presentation", "positive": 89}},
+    {{"name": "Gifting experience", "positive": 92}},
+    {{"name": "Value for money", "positive": 76}},
+    {{"name": "Delivery & fulfilment", "positive": 83}}
+  ]
+}}
+
+doing_well: what customers consistently praise (specific, not generic). gaps: what customers wish existed or mention wanting. aspects: realistic % based on the reviews — positive = % of aspect mentions that are positive."""
+
+            payload = json.dumps({
+                "model": "claude-haiku-4-5-20251001",
+                "max_tokens": 1200,
+                "messages": [{"role": "user", "content": prompt}]
+            }).encode()
+
+            req = urllib.request.Request(
+                "https://api.anthropic.com/v1/messages",
+                data=payload,
+                headers={
+                    "x-api-key": ANTHROPIC_KEY,
+                    "anthropic-version": "2023-06-01",
+                    "content-type": "application/json"
+                },
+                method="POST"
+            )
+            with urllib.request.urlopen(req, timeout=45) as r:
+                resp = json.loads(r.read())
+                raw_text = resp["content"][0]["text"].strip()
+                # Strip markdown fences if present
+                if raw_text.startswith("```"):
+                    raw_text = raw_text.split("```")[1]
+                    if raw_text.startswith("json"):
+                        raw_text = raw_text[4:]
+                ai_analysis = json.loads(raw_text.strip())
+                print(f"  AI analysis complete — {len(ai_analysis.get('doing_well',[]))} strengths, {len(ai_analysis.get('gaps',[]))} gaps")
+        except Exception as e:
+            import traceback
+            print(f"  AI analysis failed: {e}")
+            traceback.print_exc()
+    else:
+        if not ANTHROPIC_KEY:
+            print("  Skipping AI analysis (ANTHROPIC_API_KEY not set)")
+
     result["gbp_reviews"] = {
         "source":       "Google Business Profile via Make → Google Sheet (All Google Reviews tab)",
         "sheet_url":    "https://docs.google.com/spreadsheets/d/1DXKumasfRDY4tGiPAi07pV15eiyAb5R0HezoxpUkhc8/edit?gid=879421801",
@@ -363,6 +427,7 @@ try:
         "top_reviews":  top_reviews,
         "latest_reviews": recent_reviews,
         "months":       dict(sorted(months.items())),
+        "ai_analysis":  ai_analysis,
     }
     print(f"  {total} reviews | avg {avg} | {pct5}% five-star | {len(top_reviews)} top | {len(recent_reviews)} latest")
 
