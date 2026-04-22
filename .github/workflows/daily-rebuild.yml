@@ -59,13 +59,12 @@ jobs:
           ONEDRIVE_BOM_URL: ${{ secrets.ONEDRIVE_BOM_URL }}
 
       # ── External APIs ──────────────────────────────────────────────────────
-      - name: Build marketing cache (Typeform + Google Reviews + AI analysis)
+      - name: Build marketing cache (Typeform + Google Reviews)
         continue-on-error: true
         run: python3 scripts/build-marketing-cache.py
         working-directory: ./
         env:
           TYPEFORM_TOKEN: ${{ secrets.TYPEFORM_TOKEN }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
       - name: Build Klaviyo cache (flows, campaigns, 30d metrics)
         continue-on-error: true
