@@ -308,11 +308,14 @@ window.EDEN.components = window.EDEN.components || {};
       + '</div>'
       + '<div class="tp-detail-body">';
 
-    // Tasks completed — always open, no toggle
+    // Tasks completed — collapsible, default hidden
+    var compId = 'tp-ds-' + name + '-done';
     html += '<div class="tp-dsec tp-dsec-completed">'
-      + '<div class="tp-dsec-hd tp-dsec-always"><div class="tp-dsec-lbl">Tasks completed this week</div>'
-      + '<div class="tp-dsec-count">' + doneTasks.length + '</div></div>'
-      + '<div class="tp-dsec-body"><div class="tp-detail-tasks">';
+      + '<div class="tp-dsec-hd" onclick="var b=document.getElementById(\'' + compId + '\');b.classList.toggle(\'collapsed\');this.querySelector(\'.tp-dsec-toggle\').textContent=b.classList.contains(\'collapsed\')?\'show\':\'hide\'">'
+      + '<div class="tp-dsec-lbl">Tasks completed this week</div>'
+      + '<div style="display:flex;align-items:center;gap:12px"><div class="tp-dsec-count">' + doneTasks.length + '</div><span class="tp-dsec-toggle">show</span></div>'
+      + '</div>'
+      + '<div class="tp-dsec-body collapsed" id="' + compId + '"><div class="tp-detail-tasks">';
     if (doneTasks.length) {
       for (var di = 0; di < doneTasks.length; di++) html += renderTask(doneTasks[di], false, di);
     } else {
