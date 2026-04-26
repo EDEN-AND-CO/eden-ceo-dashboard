@@ -159,7 +159,7 @@ body {
 
 .sidebar-wordmark {
   font-family: var(--F);
-  font-size: 10px;
+  font-size: 18px;
   font-weight: 600;
   letter-spacing: 0.28em;
   text-transform: uppercase;
@@ -309,7 +309,7 @@ body {
 
 .pb-brand {
   font-family: var(--F);
-  font-size: 10px;
+  font-size: 18px;
   font-weight: 600;
   letter-spacing: 0.28em;
   text-transform: uppercase;
