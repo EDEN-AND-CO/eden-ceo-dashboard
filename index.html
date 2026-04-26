@@ -298,6 +298,10 @@
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
       Knowledge Base
     </div>
+    <div class="tab" onclick="showTab('critpath',this,'Critical Path 2026');cpInit()">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      2026 Plan
+    </div>
   </nav>
 
   <div class="sidebar-foot">
@@ -370,6 +374,7 @@
   <div class="tab" onclick="showTab('platforms',this,'Platforms')"><div class="tdot g"></div>Platforms</div>
   <div class="tab" onclick="showTab('operations',this,'Operations')"><div class="tdot r"></div>Operations</div>
   <div class="tab" onclick="showTab('knowledge',this,'Knowledge Base')">Knowledge Base</div>
+  <div class="tab" onclick="showTab('critpath',this,'2026 Plan');cpInit()">2026 Plan</div>
 </div>
 
 <!-- ═══════════════════════════════════
@@ -1072,7 +1077,65 @@
 
 </div></div>
 
-<div class="footer">EDEN &amp; CO. CEO FLIGHT DECK &nbsp;·&nbsp; v6.0 &nbsp;·&nbsp; 20 APRIL 2026</div>
+<!-- ═══════════════════════════════════
+     CRITICAL PATH 2026 TAB
+═══════════════════════════════════ -->
+<div class="panel" id="tab-critpath"><div class="page">
+
+  <div class="section-head-block" style="padding-bottom:0">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px">
+      <div>
+        <div class="seclbl">2026 Critical Path</div>
+        <h2 style="font-family:var(--FM);font-size:28px;font-weight:300;color:var(--G);margin:4px 0 0;letter-spacing:-0.01em">32 milestones. One year.</h2>
+      </div>
+      <div class="cp-summary" style="padding:0">
+        <div class="cp-stat"><span class="cp-stat-val" id="cp-stat-done">—</span><div class="cp-stat-lbl">Done</div></div>
+        <div class="cp-stat"><span class="cp-stat-val" id="cp-stat-ontrack">—</span><div class="cp-stat-lbl">On Track</div></div>
+        <div class="cp-stat"><span class="cp-stat-val" id="cp-stat-pending">—</span><div class="cp-stat-lbl">Not Started</div></div>
+        <div class="cp-stat danger"><span class="cp-stat-val" id="cp-stat-blocked">—</span><div class="cp-stat-lbl">Blocked</div></div>
+        <div class="cp-progress-wrap" style="min-width:120px">
+          <div class="cp-pct-label">Complete: <span id="cp-pct">0%</span></div>
+          <div class="cp-progress-track"><div class="cp-progress-fill" id="cp-progress-fill"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="cp-filters" style="margin-top:16px">
+      <button class="cp-filter-btn active" data-filter="all"         onclick="cpFilter('all',this)">All (32)</button>
+      <button class="cp-filter-btn"         data-filter="on-track"   onclick="cpFilter('on-track',this)">On Track</button>
+      <button class="cp-filter-btn"         data-filter="done"       onclick="cpFilter('done',this)">Done</button>
+      <button class="cp-filter-btn"         data-filter="not-started"onclick="cpFilter('not-started',this)">Not Started</button>
+      <button class="cp-filter-btn"         data-filter="blocked"    onclick="cpFilter('blocked',this)">Blocked</button>
+      <button class="cp-filter-btn"         data-filter="overdue"    onclick="cpFilter('overdue',this)">Overdue</button>
+    </div>
+  </div>
+
+  <div class="cp-table-wrap">
+    <table class="cp-table">
+      <colgroup>
+        <col><col><col><col><col><col>
+      </colgroup>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Owner</th>
+          <th>Deadline</th>
+          <th>Status</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody id="cp-table-body"></tbody>
+    </table>
+  </div>
+
+  <div class="cp-footer">
+    <span class="cp-footer-note">Click any row to cycle status (Not Started → On Track → Done → Blocked → Overdue). Status saved in your browser.</span>
+    <button class="cp-reset-all" onclick="cpResetAll()">Reset all local overrides</button>
+  </div>
+
+</div></div>
+
+<div class="footer">EDEN &amp; CO. CEO FLIGHT DECK &nbsp;·&nbsp; v6.1 &nbsp;·&nbsp; 26 APRIL 2026</div>
 
 </div><!-- /shell-main -->
 </div><!-- /app-shell -->
@@ -1101,6 +1164,8 @@
 <script src="data/bom-cache.js?v=20260420b"></script>
 <script src="components/goals.js?v=20260419b"></script>
 <script src="components/scenario.js"></script>
+<script src="data/critical-path-cache.js?v=20260426a"></script>
+<script src="components/critpath.js?v=20260426a"></script>
 <!-- App init (must be last) -->
 <script src="app.js?v=20260420a"></script>
 

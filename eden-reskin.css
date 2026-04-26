@@ -1611,3 +1611,51 @@ body { font-size: 14px; }
 .hbar-sub { color: var(--ec-grey-700); }
 .bom-supplier { color: var(--ec-grey-700); }
 .detcell { color: var(--ec-grey-700); }
+
+/* ── Critical Path 2026 ────────────────────────────────────────────────── */
+.cp-summary { display: flex; align-items: center; gap: 32px; padding: 20px 0 16px; }
+.cp-stat { text-align: center; min-width: 52px; }
+.cp-stat-val { display: block; font-size: 36px; font-weight: 300; font-family: var(--FM); color: var(--ec-dark-green); line-height: 1; }
+.cp-stat-lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ec-grey-500); margin-top: 3px; }
+.cp-stat.danger .cp-stat-val { color: var(--RED, #c0392b); }
+.cp-progress-wrap { flex: 1; }
+.cp-pct-label { font-size: 11px; color: var(--ec-grey-500); margin-bottom: 5px; }
+.cp-progress-track { height: 5px; background: var(--ec-stone, #e8e0d0); border-radius: 0; overflow: hidden; }
+.cp-progress-fill { height: 100%; background: var(--ec-dark-green); border-radius: 0; width: 0%; transition: width 0.5s; }
+.cp-filters { display: flex; gap: 6px; flex-wrap: wrap; padding-bottom: 16px; border-bottom: 1px solid var(--ec-stone, #e8e0d0); }
+.cp-filter-btn { background: none; border: 1px solid var(--ec-stone, #e8e0d0); color: var(--ec-grey-500); padding: 5px 12px; font-size: 11px; cursor: pointer; border-radius: 3px; font-family: var(--F); letter-spacing: 0.02em; transition: all 0.15s; }
+.cp-filter-btn:hover:not(.active) { background: var(--ec-cream, #f5efe4); border-color: var(--ec-grey-400); }
+.cp-filter-btn.active { background: var(--ec-dark-green); border-color: var(--ec-dark-green); color: #fff; }
+.cp-table-wrap { overflow-x: auto; margin-top: 0; }
+.cp-table { width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
+.cp-table colgroup col:nth-child(1) { width: 44px; }
+.cp-table colgroup col:nth-child(2) { width: 320px; }
+.cp-table colgroup col:nth-child(3) { width: 110px; }
+.cp-table colgroup col:nth-child(4) { width: 90px; }
+.cp-table colgroup col:nth-child(5) { width: 120px; }
+.cp-table colgroup col:nth-child(6) { width: auto; }
+.cp-table thead th { background: #1a1a1a; color: #fff; font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 600; padding: 10px 12px; text-align: left; white-space: nowrap; }
+.cp-phase-row td { background: #f0f0ee; padding: 7px 12px; }
+.cp-phase-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ec-dark-green); }
+.cp-phase-count { font-size: 11px; font-weight: 400; color: var(--ec-grey-500); margin-left: 10px; }
+.cp-row { cursor: pointer; border-bottom: 1px solid var(--ec-stone, #e8e0d0); transition: background 0.12s; }
+.cp-row:hover { background: var(--ec-cream, #f5efe4); }
+.cp-row td { padding: 10px 12px; vertical-align: top; line-height: 1.45; }
+.cp-num { color: var(--ec-grey-400, #b0b0b0); font-size: 11px; font-family: var(--FM); }
+.cp-title { font-weight: 500; color: var(--ec-dark-green); word-wrap: break-word; }
+.cp-owner { font-size: 12px; color: var(--ec-grey-600, #555); white-space: nowrap; }
+.cp-deadline { font-size: 12px; color: var(--ec-grey-500); white-space: nowrap; }
+.cp-status-cell { white-space: nowrap; }
+.cp-notes { font-size: 11px; color: var(--ec-grey-500); line-height: 1.55; word-wrap: break-word; }
+.cp-chip { display: inline-block; padding: 3px 8px; border-radius: 3px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.cp-chip-done        { background: #d4edda; color: #155724; }
+.cp-chip-on-track    { background: #d1ecf1; color: #0c5460; }
+.cp-chip-not-started { background: #f3f3f3; color: #6c757d; border: 1px solid #ddd; }
+.cp-chip-blocked     { background: #f8d7da; color: #721c24; }
+.cp-chip-overdue     { background: #fff3cd; color: #856404; }
+.cp-override-dot { display: inline-block; margin-left: 6px; font-size: 13px; color: var(--ec-grey-400); cursor: pointer; line-height: 1; vertical-align: middle; }
+.cp-override-dot:hover { color: #c0392b; }
+.cp-footer { margin-top: 14px; display: flex; justify-content: space-between; align-items: center; }
+.cp-footer-note { font-size: 11px; color: var(--ec-grey-400); }
+.cp-reset-all { background: none; border: none; color: var(--ec-grey-400); font-size: 11px; cursor: pointer; font-family: var(--F); text-decoration: underline; padding: 0; }
+.cp-reset-all:hover { color: #c0392b; }
