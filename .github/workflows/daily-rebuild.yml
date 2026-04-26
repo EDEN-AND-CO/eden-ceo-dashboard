@@ -66,6 +66,11 @@ jobs:
         env:
           TYPEFORM_TOKEN: ${{ secrets.TYPEFORM_TOKEN }}
 
+      - name: Build Critical Path cache (from Google Sheet)
+        continue-on-error: true
+        run: python3 scripts/build-critpath-cache.py
+        working-directory: ./
+
       - name: Build Klaviyo cache (flows, campaigns, 30d metrics)
         continue-on-error: true
         run: python3 scripts/build-klaviyo-cache.py
