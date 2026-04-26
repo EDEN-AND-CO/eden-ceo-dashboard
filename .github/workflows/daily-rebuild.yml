@@ -2,7 +2,7 @@ name: Daily Data Rebuild
 
 on:
   schedule:
-    - cron: '30 9 * * *'   # 9:30am UTC daily (Coupler syncs at 9am UTC)
+    - cron: '0 9 * * *'    # 9am UTC daily
   workflow_dispatch:         # Allow manual trigger from GitHub Actions UI
 
 jobs:
