@@ -8,7 +8,7 @@ import csv, io, json, os, sys, urllib.request
 from datetime import datetime, timezone
 
 SHEET_ID  = '1XXivn1DwnkVmlfCP8YGA4va6SywS8Ax51QldlIvyq70'
-GID       = '1368330420'
+GID       = '1060730891'
 SHEET_URL = f'https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&gid={GID}'
 OUT_FILE  = os.path.join(os.path.dirname(__file__), '../src/data/critical-path-cache.js')
 
