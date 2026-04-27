@@ -185,13 +185,10 @@ window.EDEN.components = window.EDEN.components || {};
         continue;
       }
 
-      // Skip rows from future weeks
-      if (row.week && row.week > currentWeek) continue;
-
       // Sanitize parent — unevaluated formula strings start with '='
       var parentVal = (row.parent && row.parent.charAt(0) === '=') ? '' : (row.parent || '');
 
-      // Tasks from a prior week that aren't done are overdue
+      // Overdue = week has passed and task not done
       var isPriorWeek = row.week && row.week < currentWeek;
       var status = row.status || '';
       if (isPriorWeek && status !== 'done') status = 'overdue';
@@ -208,7 +205,7 @@ window.EDEN.components = window.EDEN.components || {};
         goals:      [],
         urgent:     isUrgent,
         priorWeek:  isPriorWeek,
-        weekLabel:  isPriorWeek ? row.week : ''
+        weekLabel:  row.week || ''
       });
     }
     // Ensure This week section exists even if empty
@@ -329,32 +326,27 @@ window.EDEN.components = window.EDEN.components || {};
       + buildQuestionsBlock(name)
       + '<div class="tp-detail-divider"></div>';
 
-    // Tasks completed — collapsible, default hidden
-    var compId = 'tp-ds-' + name + '-done';
-    html += '<div class="tp-dsec tp-dsec-completed">'
-      + '<div class="tp-dsec-hd" onclick="var b=document.getElementById(\'' + compId + '\');b.classList.toggle(\'collapsed\');this.querySelector(\'.tp-dsec-toggle\').textContent=b.classList.contains(\'collapsed\')?\'show\':\'hide\'">'
-      + '<div class="tp-dsec-lbl">Tasks completed this week</div>'
-      + '<div style="display:flex;align-items:center;gap:12px"><div class="tp-dsec-count">' + doneTasks.length + '</div><span class="tp-dsec-toggle">show</span></div>'
-      + '</div>'
-      + '<div class="tp-dsec-body collapsed" id="' + compId + '"><div class="tp-detail-tasks">';
-    if (doneTasks.length) {
-      for (var di = 0; di < doneTasks.length; di++) html += renderTask(doneTasks[di], false, di);
-    } else {
-      html += '<div class="tp-dsec-empty">No tasks completed yet this week.</div>';
-    }
-    html += '</div></div></div>';
-
     // Core goals — collapsible, default open
     var cg = categories['Core goals'] || [];
     if (cg.length) html += buildDsec('Core goals', name + '-cg', cg, false, true);
 
-    // This week active — collapsible, default open
-    var wk = (categories['This week'] || []).filter(function(t) { return t.status !== 'done'; });
+    // This week — ALL tasks, done shown struck, overdue shown red
+    var wk = categories['This week'] || [];
     if (wk.length) html += buildDsec('This week', name + '-wk', wk, true, true);
 
-    // Monthly — collapsible, default open
-    var mo = (categories['Monthly'] || []).filter(function(t) { return t.status !== 'done'; });
-    if (mo.length) html += buildDsec('Monthly', name + '-mo', mo, false, true);
+    // Monthly — ALL tasks regardless of week
+    var mo = categories['Monthly'] || [];
+    if (mo.length) html += buildDsec('Monthly', name + '-mo', mo, true, true);
+
+    // Any other categories from the sheet
+    var knownCats = { 'Core goals': true, 'This week': true, 'Monthly': true, 'Other': true, 'Urgent': true };
+    var catKeys = Object.keys(categories);
+    for (var ci = 0; ci < catKeys.length; ci++) {
+      var ck = catKeys[ci];
+      if (knownCats[ck]) continue;
+      var extra = categories[ck] || [];
+      if (extra.length) html += buildDsec(ck, name + '-' + ck.replace(/\W/g,''), extra, true, true);
+    }
 
     // Noise — collapsible, default open
     var noiseItems = noise || [];
