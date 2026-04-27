@@ -269,15 +269,35 @@ window.EDEN.components = window.EDEN.components || {};
 
   // ── Detail section block ─────────────────────────────────────────
   function buildDsec(label, id, tasks, isWeekCat, startOpen) {
-    var bodyId = 'tp-ds-' + id;
+    var bodyId   = 'tp-ds-' + id;
     var collapsed = startOpen ? '' : ' collapsed';
     var toggleTxt = startOpen ? 'hide' : 'show';
-    var tasksHtml = '';
-    for (var i = 0; i < tasks.length; i++) tasksHtml += renderTask(tasks[i], isWeekCat, i);
+
+    var active = [], done = [];
+    for (var i = 0; i < tasks.length; i++) {
+      if (tasks[i].status === 'done') done.push(tasks[i]);
+      else active.push(tasks[i]);
+    }
+
+    var activeHtml = '';
+    for (var ai = 0; ai < active.length; ai++) activeHtml += renderTask(active[ai], isWeekCat, ai);
+
+    var doneHtml = '';
+    if (done.length) {
+      var doneId = bodyId + '-done';
+      var doneTasksHtml = '';
+      for (var di = 0; di < done.length; di++) doneTasksHtml += renderTask(done[di], isWeekCat, active.length + di);
+      doneHtml = '<div class="tp-done-toggle" onclick="var d=document.getElementById(\'' + doneId + '\');d.classList.toggle(\'open\');this.classList.toggle(\'open\')">'
+        + '<span class="tp-done-toggle-label">' + done.length + ' completed</span>'
+        + '<span class="tp-done-chevron">▾</span>'
+        + '</div>'
+        + '<div class="tp-done-body" id="' + doneId + '"><div class="tp-detail-tasks">' + doneTasksHtml + '</div></div>';
+    }
+
     return '<div class="tp-dsec">'
       + '<div class="tp-dsec-hd" onclick="var b=document.getElementById(\'' + bodyId + '\');b.classList.toggle(\'collapsed\');this.querySelector(\'.tp-dsec-toggle\').textContent=b.classList.contains(\'collapsed\')?\'show\':\'hide\'">'
       + '<div class="tp-dsec-lbl">' + esc(label) + '</div><span class="tp-dsec-toggle">' + toggleTxt + '</span></div>'
-      + '<div class="tp-dsec-body' + collapsed + '" id="' + bodyId + '"><div class="tp-detail-tasks">' + tasksHtml + '</div></div>'
+      + '<div class="tp-dsec-body' + collapsed + '" id="' + bodyId + '"><div class="tp-detail-tasks">' + activeHtml + '</div>' + doneHtml + '</div>'
       + '</div>';
   }
 
