@@ -1,5 +1,5 @@
 // EDEN & CO. CEO Flight Deck — Stock Cache
-// Generated: 2026-04-27T08:35:54Z
+// Generated: 2026-04-27T08:42:13Z
 // Source: Google Sheet Stock tab — net stock = baseline minus sold since stock date
 // Do not edit manually. Run: python3 scripts/build-stock-cache.py
 
@@ -7,11 +7,11 @@ window.EDEN = window.EDEN || {};
 window.EDEN._stockData = {
   "SIGNATURE": {
     "item": "Signatures",
-    "baseline": 127,
-    "baseline_date": "2026-03-30",
+    "baseline": 20,
+    "baseline_date": "2026-03-28",
     "available": 0,
     "minimum": 200,
-    "date": "3/30/26 0:00",
+    "date": "28/03/2026",
     "notes": ""
   },
   "COCOA": {
@@ -74,4 +74,4 @@ window.EDEN._packagingStock = [
     "notes": ""
   }
 ];
-window.EDEN._stockCacheDate = '2026-04-27T08:35:54Z';
+window.EDEN._stockCacheDate = '2026-04-27T08:42:13Z';
