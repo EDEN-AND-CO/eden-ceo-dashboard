@@ -1664,38 +1664,32 @@ body { font-size: 14px; }
 .tp-questions-block {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  padding: 20px 0 4px;
+  gap: 3px;
+  background: #004437;
 }
 .tp-q-item {
-  background: var(--ec-dark-green, #004437);
-  border-radius: 8px;
-  padding: 20px 22px 22px;
+  background: #b4a269;
+  padding: 28px 36px 32px;
 }
 .tp-q-label {
-  font-family: var(--FM, 'DM Mono', monospace);
+  font-family: 'Josefin Sans', sans-serif;
   font-size: 10px;
-  letter-spacing: 0.08em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.55);
-  margin-bottom: 12px;
-  line-height: 1.5;
+  color: rgba(0,68,55,0.6);
+  margin-bottom: 16px;
+  line-height: 1.6;
 }
 .tp-q-answer {
-  font-size: 18px;
+  font-size: 26px;
   font-weight: 600;
-  color: #fff;
-  line-height: 1.45;
+  color: #004437;
+  line-height: 1.35;
   word-wrap: break-word;
 }
-.tp-q-blank {
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(255,255,255,0.3);
-  font-style: italic;
-}
 .tp-detail-divider {
-  height: 1px;
-  background: var(--ec-stone, #e8e0d0);
-  margin: 20px 0 6px;
+  height: 3px;
+  background: #004437;
+  margin: 0 0 0 0;
 }

@@ -291,16 +291,14 @@ window.EDEN.components = window.EDEN.components || {};
     var problem = q.problem || '';
     var win     = q.win     || '';
 
-    var blank = '<span class="tp-q-blank">Not filled in yet</span>';
-
     return '<div class="tp-questions-block">'
       + '<div class="tp-q-item">'
       + '<div class="tp-q-label">What\'s the biggest problem I need to solve this week?</div>'
-      + '<div class="tp-q-answer">' + (problem ? esc(problem) : blank) + '</div>'
+      + (problem ? '<div class="tp-q-answer">' + esc(problem) + '</div>' : '')
       + '</div>'
       + '<div class="tp-q-item">'
       + '<div class="tp-q-label">What\'s one win or something I learnt since last Monday?</div>'
-      + '<div class="tp-q-answer">' + (win ? esc(win) : blank) + '</div>'
+      + (win ? '<div class="tp-q-answer">' + esc(win) + '</div>' : '')
       + '</div>'
       + '</div>';
   }
