@@ -284,6 +284,27 @@ window.EDEN.components = window.EDEN.components || {};
       + '</div>';
   }
 
+  // ── Weekly questions block ───────────────────────────────────────
+  function buildQuestionsBlock(name) {
+    var tp  = window.EDEN.teamPulse || {};
+    var q   = (tp.questions || {})[name] || {};
+    var problem = q.problem || '';
+    var win     = q.win     || '';
+
+    var blank = '<span class="tp-q-blank">Not filled in yet</span>';
+
+    return '<div class="tp-questions-block">'
+      + '<div class="tp-q-item">'
+      + '<div class="tp-q-label">What\'s the biggest problem I need to solve this week?</div>'
+      + '<div class="tp-q-answer">' + (problem ? esc(problem) : blank) + '</div>'
+      + '</div>'
+      + '<div class="tp-q-item">'
+      + '<div class="tp-q-label">What\'s one win or something I learnt since last Monday?</div>'
+      + '<div class="tp-q-answer">' + (win ? esc(win) : blank) + '</div>'
+      + '</div>'
+      + '</div>';
+  }
+
   // ── Build full detail panel for one person ───────────────────────
   function buildDetailPanel(name, categories, noise, ytd, streak) {
     var meta = TP_META[name] || { role: '', focus: '' };
@@ -306,7 +327,9 @@ window.EDEN.components = window.EDEN.components || {};
       + '<div class="tp-detail-focus">' + esc(meta.focus) + '</div>'
       + '<button class="tp-detail-close" onclick="tpClosePerson()">\u2715 Close</button>'
       + '</div>'
-      + '<div class="tp-detail-body">';
+      + '<div class="tp-detail-body">'
+      + buildQuestionsBlock(name)
+      + '<div class="tp-detail-divider"></div>';
 
     // Tasks completed — collapsible, default hidden
     var compId = 'tp-ds-' + name + '-done';

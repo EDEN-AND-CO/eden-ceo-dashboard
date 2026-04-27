@@ -1659,3 +1659,43 @@ body { font-size: 14px; }
 .cp-footer-note { font-size: 11px; color: var(--ec-grey-400); }
 .cp-reset-all { background: none; border: none; color: var(--ec-grey-400); font-size: 11px; cursor: pointer; font-family: var(--F); text-decoration: underline; padding: 0; }
 .cp-reset-all:hover { color: #c0392b; }
+
+/* ── Weekly Pulse — Questions Block ───────────────────────────────── */
+.tp-questions-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 20px 0 4px;
+}
+.tp-q-item {
+  background: var(--ec-dark-green, #004437);
+  border-radius: 8px;
+  padding: 20px 22px 22px;
+}
+.tp-q-label {
+  font-family: var(--FM, 'DM Mono', monospace);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.tp-q-answer {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.45;
+  word-wrap: break-word;
+}
+.tp-q-blank {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.3);
+  font-style: italic;
+}
+.tp-detail-divider {
+  height: 1px;
+  background: var(--ec-stone, #e8e0d0);
+  margin: 20px 0 6px;
+}

@@ -1,11 +1,11 @@
 // EDEN & CO. CEO Flight Deck — Team Pulse Cache
-// Generated: 2026-04-27T08:22:15Z
+// Generated: 2026-04-27T09:13:20Z
 // Source: Google Sheets (live pubhtml)
 // Do not edit manually. Run: python3 scripts/build-team-pulse.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN.teamPulse = {
-  "generated": "2026-04-27T08:22:15Z",
+  "generated": "2026-04-27T09:13:20Z",
   "current_week": "2026-W18",
   "source": "google_sheets",
   "core_goals": {
@@ -374,7 +374,7 @@ window.EDEN.teamPulse = {
         "week": "2026-W16",
         "category": "This week",
         "task": "Amazon Account Validation (VAT + Phone)",
-        "status": "done",
+        "status": "on-track",
         "parent": "B2B - 2 key accounts/month",
         "note": "Contact Accountants & Chase Amazon",
         "other": ""
@@ -437,7 +437,7 @@ window.EDEN.teamPulse = {
         "week": "2026-W17",
         "category": "This week",
         "task": "GlobalCheckout Setup",
-        "status": "on-track",
+        "status": "done",
         "parent": "International - shipping + Amz",
         "note": "UPS checkin",
         "other": ""
@@ -461,7 +461,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W17",
+        "week": "2026-W21",
         "category": "This Week",
         "task": "PPC Check-in & Update",
         "status": "on-track",
@@ -482,13 +482,13 @@ window.EDEN.teamPulse = {
         "week": "2026-W19",
         "category": "This Month",
         "task": "Setup Instantly",
-        "status": "on-track",
+        "status": "done",
         "parent": "B2B - 2 key accounts/month",
         "note": "Warm-up Email Accounts for 30 Days",
         "other": ""
       },
       {
-        "week": "2026-W19",
+        "week": "2026-W21",
         "category": "This Month",
         "task": "Build Lead Magnets Corp Outreach",
         "status": "on-track",
@@ -497,7 +497,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W19",
+        "week": "2026-W21",
         "category": "This Month",
         "task": "Create Apollo Lists for Corp Outbound",
         "status": "on-track",
@@ -506,7 +506,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W19",
+        "week": "2026-W21",
         "category": "This Month",
         "task": "Create Emails for B2B Outreach",
         "status": "on-track",
@@ -518,13 +518,13 @@ window.EDEN.teamPulse = {
         "week": "2026-W19",
         "category": "This Month",
         "task": "Create B2B Landing page",
-        "status": "on-track",
+        "status": "done",
         "parent": "B2B - 2 key accounts/month",
         "note": "Focused Messaging on Core pillars (see WellBox) and visual callouts",
         "other": ""
       },
       {
-        "week": "2026-W19",
+        "week": "2026-W21",
         "category": "This Month",
         "task": "Integrate AI in B2B Workflow",
         "status": "on-track",
@@ -598,7 +598,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W17",
+        "week": "2026-W18",
         "category": "This week",
         "task": "Decide on new Product lines",
         "status": "on-track",
@@ -616,7 +616,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W17",
+        "week": "2026-W18",
         "category": "This Month",
         "task": "Process new Alcohol Licence",
         "status": "on-track",
@@ -625,7 +625,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W17",
+        "week": "2026-W19",
         "category": "This Month",
         "task": "Reg. Food Biz",
         "status": "on-track",
@@ -634,7 +634,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W17",
+        "week": "2026-W19",
         "category": "Other",
         "task": "Close down operations/ suppliers to Estune",
         "status": "on-track",
@@ -646,7 +646,7 @@ window.EDEN.teamPulse = {
         "week": "2026-W17",
         "category": "This week",
         "task": "Stock of STD hampers - PALLET",
-        "status": "on-track",
+        "status": "done",
         "parent": "Stock + product QA",
         "note": "",
         "other": ""
@@ -866,7 +866,7 @@ window.EDEN.teamPulse = {
         "week": "",
         "category": "This week",
         "task": "Files and platforms",
-        "status": "on-track",
+        "status": "done",
         "parent": "Admin & Finance",
         "note": "Go through filing and platforms to undersatnd what is saved where",
         "other": ""
@@ -884,14 +884,14 @@ window.EDEN.teamPulse = {
         "week": "",
         "category": "This week",
         "task": "Google review chocolate",
-        "status": "on-track",
+        "status": "done",
         "parent": "Stock planning",
         "note": "Confirm chocolate order for google review gifts.",
         "other": ""
       },
       {
         "week": "",
-        "category": "This week",
+        "category": "This Month",
         "task": "Google review responses",
         "status": "on-track",
         "parent": "Customer service - 4hr SLA",
@@ -902,7 +902,7 @@ window.EDEN.teamPulse = {
         "week": "",
         "category": "This week",
         "task": "Product builder",
-        "status": "on-track",
+        "status": "overdue",
         "parent": "Stock planning",
         "note": "Update the project builder spreadsheet as discussed on Monday. Deadline is 20 April.",
         "other": ""
@@ -920,33 +920,62 @@ window.EDEN.teamPulse = {
         "week": "",
         "category": "This week",
         "task": "Prosecco stock",
-        "status": "on-track",
+        "status": "done",
         "parent": "Stock planning",
         "note": "Order more stock (5). Check if there is anything else we need to order from Chaple and Jenkins.",
+        "other": ""
+      },
+      {
+        "week": "",
+        "category": "This week",
+        "task": "Granola Product Recall",
+        "status": "on-track",
+        "parent": "Stock planning",
+        "note": "Learn process for recalling stock and action granola recall",
+        "other": ""
+      },
+      {
+        "week": "",
+        "category": "This week",
+        "task": "Royal Mail Invoices",
+        "status": "on-track",
+        "parent": "Admin & Finance",
+        "note": "Look into royal mail invoices and get a better understanding of how they are done. Do we need to process to check these as and when they come in",
         "other": ""
       }
     ]
   },
+  "questions": {
+    "Jon": {
+      "problem": "",
+      "win": ""
+    },
+    "Rosie": {
+      "problem": "",
+      "win": ""
+    },
+    "Edith": {
+      "problem": "",
+      "win": ""
+    },
+    "Phoebe": {
+      "problem": "",
+      "win": ""
+    }
+  },
   "ytd": {
-    "Jon": 6,
-    "Rosie": 3,
+    "Jon": 8,
+    "Rosie": 4,
     "Edith": 7,
     "Phoebe": 5
   },
   "streak": {
-    "Jon": 3,
-    "Rosie": 2,
+    "Jon": 4,
+    "Rosie": 3,
     "Edith": 3,
-    "Phoebe": 1
+    "Phoebe": 2
   },
   "concerns": [
-    {
-      "title": "Postal Outers - Low Stock",
-      "owner": "Rosie",
-      "level": "high",
-      "action": "Check-in with RH F this week.",
-      "due": "2026-04-04"
-    },
     {
       "title": "Change Return Process",
       "owner": "Jon + Phoebe",
@@ -955,46 +984,25 @@ window.EDEN.teamPulse = {
       "due": "2026-04-17"
     },
     {
-      "title": "Stanard Hamper Outers",
-      "owner": "Jon + Phoebe + Rosie",
+      "title": "Plan Next Pack Day",
+      "owner": "Jon, Rosie + Phoebe",
       "level": "high",
-      "action": "Order Hamper Postal Outers",
-      "due": "2026-04-19"
+      "action": "POA Next Pack Day in Yaton",
+      "due": "2026-04-30"
     },
     {
-      "title": "INTERNET",
+      "title": "Move Logistics",
       "owner": "Rosie",
       "level": "high",
-      "action": "Delay installation",
-      "due": "2026-04-20"
+      "action": "Inform Team of Move Logistics and Who needs to do what/when",
+      "due": "2026-04-30"
     },
     {
-      "title": "Aery Delivery",
-      "owner": "Phoebe",
-      "level": "high",
-      "action": "Chase outstanding Stock",
-      "due": "2026-04-24"
-    },
-    {
-      "title": "Prosecco Stock Levels",
-      "owner": "Phoebe & Rosie",
-      "level": "high",
-      "action": "Check & Decide on Order",
-      "due": "2026-04-24"
-    },
-    {
-      "title": "Postal Outers Stock Levels",
-      "owner": "Phoebe & Rosie",
-      "level": "high",
-      "action": "Check & Decide on Order - New Stock Due 27th - Chase RH F First",
-      "due": "2026-04-24"
-    },
-    {
-      "title": "Use Sonnet",
-      "owner": "All Team",
-      "level": "high",
-      "action": "Avoid AI Use Limit - Use Sonnet Model",
-      "due": "2026-04-24"
+      "title": "TGTG",
+      "owner": "Jon + Phoebe",
+      "level": "med",
+      "action": "Teach Phobe Dashboard",
+      "due": "2026-04-30"
     }
   ]
 };
