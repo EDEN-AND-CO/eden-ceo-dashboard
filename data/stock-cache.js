@@ -1,5 +1,5 @@
 // EDEN & CO. CEO Flight Deck — Stock Cache
-// Generated: 2026-04-27T08:42:13Z
+// Generated: 2026-04-27T08:44:08Z
 // Source: Google Sheet Stock tab — net stock = baseline minus sold since stock date
 // Do not edit manually. Run: python3 scripts/build-stock-cache.py
 
@@ -12,7 +12,8 @@ window.EDEN._stockData = {
     "available": 0,
     "minimum": 200,
     "date": "28/03/2026",
-    "notes": ""
+    "notes": "",
+    "net": -134
   },
   "COCOA": {
     "item": "Chocolate Hampers",
@@ -21,7 +22,8 @@ window.EDEN._stockData = {
     "available": 190,
     "minimum": 200,
     "date": "3/30/26 0:00",
-    "notes": ""
+    "notes": "",
+    "net": 190
   },
   "LETTERBOX": {
     "item": "Petite",
@@ -30,7 +32,8 @@ window.EDEN._stockData = {
     "available": 175,
     "minimum": 462,
     "date": "3/31/26 0:00",
-    "notes": ""
+    "notes": "",
+    "net": 175
   },
   "GRAND": {
     "item": "Large",
@@ -39,7 +42,8 @@ window.EDEN._stockData = {
     "available": 0,
     "minimum": 10,
     "date": "3/30/26 0:00",
-    "notes": ""
+    "notes": "",
+    "net": -1
   },
   "PRESTIGE": {
     "item": "Prestige",
@@ -48,7 +52,8 @@ window.EDEN._stockData = {
     "available": 0,
     "minimum": 5,
     "date": "3/30/26 0:00",
-    "notes": ""
+    "notes": "",
+    "net": -3
   }
 };
 window.EDEN._packagingStock = [
@@ -74,4 +79,4 @@ window.EDEN._packagingStock = [
     "notes": ""
   }
 ];
-window.EDEN._stockCacheDate = '2026-04-27T08:42:13Z';
+window.EDEN._stockCacheDate = '2026-04-27T08:44:08Z';
