@@ -1,10 +1,10 @@
 // EDEN & CO. Critical Path 2026
-// Built: 2026-04-27 — source: Google Sheet gid=1060730891
+// Built: 2026-04-28 — source: Google Sheet gid=1060730891
 // Status overrides stored in localStorage['cp_overrides']
 
 window.EDEN = window.EDEN || {};
 window.EDEN._criticalPath = {
-  "generated": "2026-04-27",
+  "generated": "2026-04-28",
   "sheet_url": "https://docs.google.com/spreadsheets/d/1XXivn1DwnkVmlfCP8YGA4va6SywS8Ax51QldlIvyq70/edit?gid=1060730891",
   "total": 32,
   "items": [
