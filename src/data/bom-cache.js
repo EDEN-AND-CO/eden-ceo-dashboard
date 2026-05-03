@@ -1,10 +1,10 @@
 // EDEN & CO. CEO Flight Deck — BoM Cache
-// Generated: 2026-05-02T09:50:45Z
+// Generated: 2026-05-03T09:57:26Z
 // Do not edit manually. Run: python3 scripts/build-bom-cache.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN.bomData = {
-  "generated": "2026-05-02T09:50:45Z",
+  "generated": "2026-05-03T09:57:26Z",
   "hampers": [
     "LETTERBOX",
     "COCOA",
