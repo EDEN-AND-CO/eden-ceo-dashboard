@@ -1,5 +1,5 @@
 // EDEN & CO. CEO Flight Deck — Stock Cache
-// Generated: 2026-04-27T09:08:30Z
+// Generated: 2026-05-05T08:26:57Z
 // Source: Google Sheet Stock tab — net stock = baseline minus sold since stock date
 // Do not edit manually. Run: python3 scripts/build-stock-cache.py
 
@@ -9,31 +9,31 @@ window.EDEN._stockData = {
     "item": "Signatures",
     "baseline": 20,
     "baseline_date": "2026-04-25",
-    "available": 14,
+    "available": 0,
     "minimum": 200,
     "date": "25/04/2026",
     "notes": "",
-    "net": 14
+    "net": -31
   },
   "COCOA": {
     "item": "Chocolate Hampers",
     "baseline": 313,
     "baseline_date": "2026-03-30",
-    "available": 184,
+    "available": 146,
     "minimum": 200,
     "date": "3/30/26 0:00",
     "notes": "",
-    "net": 184
+    "net": 146
   },
   "LETTERBOX": {
     "item": "Petite",
     "baseline": 555,
     "baseline_date": "2026-03-31",
-    "available": 150,
+    "available": 59,
     "minimum": 462,
     "date": "3/31/26 0:00",
     "notes": "",
-    "net": 150
+    "net": 59
   },
   "GRAND": {
     "item": "Large",
@@ -43,7 +43,7 @@ window.EDEN._stockData = {
     "minimum": 10,
     "date": "3/30/26 0:00",
     "notes": "",
-    "net": -1
+    "net": -2
   },
   "PRESTIGE": {
     "item": "Prestige",
@@ -79,4 +79,4 @@ window.EDEN._packagingStock = [
     "notes": ""
   }
 ];
-window.EDEN._stockCacheDate = '2026-04-27T09:08:30Z';
+window.EDEN._stockCacheDate = '2026-05-05T08:26:57Z';

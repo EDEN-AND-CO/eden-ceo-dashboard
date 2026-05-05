@@ -1,12 +1,12 @@
 // EDEN & CO. CEO Flight Deck — Team Pulse Cache
-// Generated: 2026-04-27T09:22:22Z
+// Generated: 2026-05-05T08:27:13Z
 // Source: Google Sheets (live pubhtml)
 // Do not edit manually. Run: python3 scripts/build-team-pulse.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN.teamPulse = {
-  "generated": "2026-04-27T09:22:22Z",
-  "current_week": "2026-W18",
+  "generated": "2026-05-05T08:27:13Z",
+  "current_week": "2026-W19",
   "source": "google_sheets",
   "core_goals": {
     "Jon": {
@@ -540,6 +540,15 @@ window.EDEN.teamPulse = {
         "parent": "Business Strategy & Performance",
         "note": "Focus on Hampers and their Storeis on Homepage",
         "other": ""
+      },
+      {
+        "week": "2026-W21",
+        "category": "This Month",
+        "task": "1 Pager on Branding to Needi",
+        "status": "on-track",
+        "parent": "B2B - 2 key accounts/month",
+        "note": "1 Pager on Branding to Needi",
+        "other": ""
       }
     ],
     "Rosie": [
@@ -592,7 +601,7 @@ window.EDEN.teamPulse = {
         "week": "2026-W16",
         "category": "This week",
         "task": "Continue Despatch Training Phoebe",
-        "status": "on-track",
+        "status": "done",
         "parent": "Team training needs - identify + act",
         "note": "",
         "other": ""
@@ -601,7 +610,7 @@ window.EDEN.teamPulse = {
         "week": "2026-W18",
         "category": "This week",
         "task": "Decide on new Product lines",
-        "status": "on-track",
+        "status": "done",
         "parent": "Stock + product QA",
         "note": "",
         "other": ""
@@ -634,7 +643,7 @@ window.EDEN.teamPulse = {
         "other": ""
       },
       {
-        "week": "2026-W19",
+        "week": "2026-W20",
         "category": "Other",
         "task": "Close down operations/ suppliers to Estune",
         "status": "on-track",
@@ -648,6 +657,24 @@ window.EDEN.teamPulse = {
         "task": "Stock of STD hampers - PALLET",
         "status": "done",
         "parent": "Stock + product QA",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W20",
+        "category": "This week",
+        "task": "Confirm new designs",
+        "status": "on-track",
+        "parent": "Stock + product QA",
+        "note": "",
+        "other": ""
+      },
+      {
+        "week": "2026-W20",
+        "category": "This week",
+        "task": "Contact Collaborators",
+        "status": "on-track",
+        "parent": "Customer satisfaction",
         "note": "",
         "other": ""
       }
@@ -929,7 +956,7 @@ window.EDEN.teamPulse = {
         "week": "",
         "category": "This week",
         "task": "Granola Product Recall",
-        "status": "on-track",
+        "status": "done",
         "parent": "Stock planning",
         "note": "Learn process for recalling stock and action granola recall",
         "other": ""
@@ -965,13 +992,13 @@ window.EDEN.teamPulse = {
   },
   "ytd": {
     "Jon": 8,
-    "Rosie": 4,
+    "Rosie": 6,
     "Edith": 7,
     "Phoebe": 5
   },
   "streak": {
     "Jon": 4,
-    "Rosie": 3,
+    "Rosie": 4,
     "Edith": 3,
     "Phoebe": 2
   },
@@ -984,7 +1011,7 @@ window.EDEN.teamPulse = {
       "due": "2026-04-17"
     },
     {
-      "title": "Plan Next Pack Day",
+      "title": "Plan Next Hamper Pack",
       "owner": "Jon, Rosie + Phoebe",
       "level": "high",
       "action": "POA Next Pack Day in Yaton",
@@ -998,11 +1025,25 @@ window.EDEN.teamPulse = {
       "due": "2026-04-30"
     },
     {
-      "title": "TGTG",
-      "owner": "Jon + Phoebe",
-      "level": "med",
-      "action": "Teach Phobe Dashboard",
+      "title": "Plan Tube Pack Day",
+      "owner": "Jon, Rosie + Phoebe",
+      "level": "high",
+      "action": "Use Tubes From EDEN & CO.",
       "due": "2026-04-30"
+    },
+    {
+      "title": "ISIO Cards",
+      "owner": "Rosie, Phoebe",
+      "level": "high",
+      "action": "Check Stock",
+      "due": "2026-05-05"
+    },
+    {
+      "title": "Unfulfilled Orders",
+      "owner": "Rosie, Phoebe",
+      "level": "high",
+      "action": "Create urgent management system for ensuring printed, unfulfilled labels are able to safely managed",
+      "due": "2026-05-05"
     }
   ]
 };
