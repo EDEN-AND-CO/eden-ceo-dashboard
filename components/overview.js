@@ -313,6 +313,8 @@ window.EDEN = window.EDEN || {};
     setStyle('ov-rev-bar', 'width', revPct + '%');
     setClass('ov-rev-bar', 'pf a pf r', revRag === 'g' ? 'pf' : revRag === 'a' ? 'pf a' : 'pf r');
     setClass('ov-rev-tile', 'tg ta tr', 't' + ragClass(revRag));
+    setHTML('ov-rev-prior-lbl', priorMTD.length ? fmtGBP(revPriorMTD) + ' last period' : '');
+    setHTML('ov-rev-pace-lbl', '');
 
     // ── Contribution margin % MTD ──
     var cmPct        = m.contributionMarginPct(mtd);
@@ -367,7 +369,7 @@ window.EDEN = window.EDEN || {};
     var revMTDExVat = m.totalRevenueExVat ? m.totalRevenueExVat(mtd) : (revMTD / 1.2);
 
     // Revenue vs ad spend card (always populate revenue; ROAS when adSpend known and in MTD mode)
-    setHTML('ov-roas-rev', fmtGBP(revMTDExVat));
+    setHTML('ov-roas-rev', fmtGBP(revMTD));
     if (adSpendValid) {
       var blendedRoas = revMTDExVat / adSpend;
       setHTML('ov-roas-spend', fmtGBP(adSpend));
@@ -453,9 +455,8 @@ window.EDEN = window.EDEN || {};
     var opd           = daysElapsed > 0 ? totalMTD / daysElapsed : 0;
     var opdPrior      = daysElapsed > 0 ? totalPriorMTD / daysElapsed : 0;
 
-    // vs prior period
-    var ordVsPrior    = totalPriorMTD > 0 ? ((totalMTD - totalPriorMTD) / totalPriorMTD) * 100 : 0;
-    var opdVsPrior    = opdPrior > 0 ? ((opd - opdPrior) / opdPrior) * 100 : 0;
+    var ordVsPrior = totalPriorMTD > 0 ? ((totalMTD - totalPriorMTD) / totalPriorMTD) * 100 : 0;
+    var opdVsPrior = opdPrior > 0 ? ((opd - opdPrior) / opdPrior) * 100 : 0;
 
     function vsArrow(pct) {
       var abs = Math.abs(Math.round(pct * 10) / 10);
@@ -464,32 +465,23 @@ window.EDEN = window.EDEN || {};
       return '<span style="color:var(--GMD)">&#8213; flat vs last period</span>';
     }
 
-    // £50K/month goal → implied order count at current AOV
-    var monthGoal50k  = aovVal > 0 ? Math.round(50000 / aovVal) : 1000;
-    var goalPaceMTD   = Math.round(monthGoal50k / daysInMonthN * daysElapsed);
-    var goalPct50k    = goalPaceMTD > 0 ? Math.round((totalMTD / goalPaceMTD) * 100) : 0;
+    var priorBarPct = totalPriorMTD > 0 ? Math.min(150, Math.round((totalMTD / totalPriorMTD) * 100)) : 0;
+    var opdBarPct   = opdPrior > 0 ? Math.min(150, Math.round((opd / opdPrior) * 100)) : 0;
 
-    // Primary bar: vs prior period (100% = matched prior, 120% = 20% ahead)
-    var priorBarPct   = totalPriorMTD > 0 ? Math.min(150, Math.round((totalMTD / totalPriorMTD) * 100)) : goalPct50k;
-    var opdBarPct     = opdPrior > 0 ? Math.min(150, Math.round((opd / opdPrior) * 100)) : 0;
-
-    // MTD orders chip — forced dark green, primary = vs prior period
+    // MTD orders — dark green, primary = vs prior period
     setHTML('ov-orders-val', totalMTD.toLocaleString('en-GB'));
     setHTML('ov-orders-meta',
       vsArrow(ordVsPrior) +
-      '<br><span style="color:var(--GMD);font-size:10px">' +
-        (isLastMonth ? 'Full month · ' : (daysElapsed + 'd in · ')) +
-        goalPct50k + '% of £50K pace (' + goalPaceMTD + ' needed)' +
-      '</span>');
+      '<br><span style="color:rgba(245,239,228,0.55);font-size:11px">' + totalPriorMTD.toLocaleString('en-GB') + ' same period last month</span>');
     setStyle('ov-orders-bar', 'width', Math.min(100, priorBarPct) + '%');
-    setClass('ov-orders-chip', 'tg ta tr', 'tg'); // always dark green
+    setClass('ov-orders-chip', 'tg ta tr', 'tg');
 
-    // Orders per day chip
+    // Orders per day — vs prior period
     var opdRag = m.ragStatus(opd, { green: opdPrior * 1.0, amber: opdPrior * 0.85, red: opdPrior * 0.7 });
     setHTML('ov-opd-val', (Math.round(opd * 10) / 10).toString());
     setHTML('ov-opd-meta',
       vsArrow(opdVsPrior) +
-      '<br><span style="color:var(--GMD);font-size:10px">Prior period: ' + (Math.round(opdPrior * 10) / 10) + '/day · goal 50/day</span>');
+      '<br><span style="color:var(--GMD);font-size:11px">' + (Math.round(opdPrior * 10) / 10) + '/day last period</span>');
     setStyle('ov-opd-bar', 'width', Math.min(100, opdBarPct) + '%');
     setClass('ov-opd-chip', 'tg ta tr', 't' + ragClass(opdRag));
 
@@ -604,6 +596,26 @@ window.EDEN = window.EDEN || {};
       ytdBarEl.style.background = ytdPct >= 80 ? 'var(--OK)' : ytdPct >= 50 ? 'var(--G)' : 'var(--AMB)';
     }
     if (ytdPctLbl) ytdPctLbl.textContent = Math.round(ytdPct * 10) / 10 + '% there';
+
+    // ── £1m pacing breakdown ──
+    var ytdOrderCount = ytdOrders.length;
+    var aovYTD = ytdOrderCount > 0 ? revYTD / ytdOrderCount : aovVal;
+    var daysRemainingInYear = Math.max(1, 365 - daysElapsedYTD);
+    var revPerDayNeeded = ytdGap / daysRemainingInYear;
+    var ordersPerDayNeeded = aovYTD > 0 ? revPerDayNeeded / aovYTD : 0;
+    var ordersPerMonthNeeded = ordersPerDayNeeded * 30.5;
+    var totalOrdersNeeded = aovYTD > 0 ? Math.ceil(ytdGap / aovYTD) : 0;
+    var currentDailyRateYTD = daysElapsedYTD > 0 ? ytdOrderCount / daysElapsedYTD : 0;
+
+    function setV2(id, val) { var e = document.getElementById(id); if (e) e.textContent = val; }
+    setV2('ov-pace-orders-ytd', ytdOrderCount.toLocaleString('en-GB'));
+    setV2('ov-pace-aov', fmtGBP(aovYTD));
+    setV2('ov-pace-daily', (Math.round(currentDailyRateYTD * 10) / 10) + '/day');
+    setV2('ov-pace-days', daysRemainingInYear + ' days');
+    setV2('ov-pace-gap', fmtGBP(ytdGap));
+    setV2('ov-pace-orders-needed', totalOrdersNeeded.toLocaleString('en-GB') + ' orders');
+    setV2('ov-pace-req-day', (Math.round(ordersPerDayNeeded * 10) / 10) + '/day');
+    setV2('ov-pace-req-month', Math.round(ordersPerMonthNeeded) + '/month');
 
     // ── CEO Hero Command Bar ──
     (function() {
