@@ -448,29 +448,49 @@ window.EDEN = window.EDEN || {};
     setClass('ov-aov-tile', 'tg ta tr', 't' + ragClass(aovRag));
 
     // ── Order velocity ──
-    var totalMTD   = m.totalOrders(mtd);
-    var opd        = daysElapsed > 0 ? totalMTD / daysElapsed : 0;
+    var totalMTD      = m.totalOrders(mtd);
+    var totalPriorMTD = m.totalOrders(priorMTD);
+    var opd           = daysElapsed > 0 ? totalMTD / daysElapsed : 0;
+    var opdPrior      = daysElapsed > 0 ? totalPriorMTD / daysElapsed : 0;
 
-    // Implied order goals derived from revenue target / actual AOV
-    // More meaningful than fixed daily count when AOV drifts
-    var impliedMonthGoal = aovVal > 0 ? Math.round(cfg.targets.monthly_revenue / aovVal) : cfg.targets.daily_orders * daysInMonthN;
-    var impliedDailyGoal = impliedMonthGoal / daysInMonthN;
-    var proratedOrderGoal = Math.round(impliedDailyGoal * daysElapsed);
+    // vs prior period
+    var ordVsPrior    = totalPriorMTD > 0 ? ((totalMTD - totalPriorMTD) / totalPriorMTD) * 100 : 0;
+    var opdVsPrior    = opdPrior > 0 ? ((opd - opdPrior) / opdPrior) * 100 : 0;
 
-    var goalPct  = proratedOrderGoal > 0 ? Math.round((totalMTD / proratedOrderGoal) * 100) : 0;
-    var pacePct  = impliedDailyGoal > 0  ? Math.round((opd / impliedDailyGoal) * 100) : 0;
-    var opdRag   = m.ragStatus(opd, { green: impliedDailyGoal, amber: impliedDailyGoal * 0.8, red: impliedDailyGoal * 0.6 });
+    function vsArrow(pct) {
+      var abs = Math.abs(Math.round(pct * 10) / 10);
+      if (pct > 1)  return '<span style="color:var(--OK);font-weight:700">&#8593; ' + abs + '% vs last period</span>';
+      if (pct < -1) return '<span style="color:var(--RED);font-weight:700">&#8595; ' + abs + '% vs last period</span>';
+      return '<span style="color:var(--GMD)">&#8213; flat vs last period</span>';
+    }
 
+    // £50K/month goal → implied order count at current AOV
+    var monthGoal50k  = aovVal > 0 ? Math.round(50000 / aovVal) : 1000;
+    var goalPaceMTD   = Math.round(monthGoal50k / daysInMonthN * daysElapsed);
+    var goalPct50k    = goalPaceMTD > 0 ? Math.round((totalMTD / goalPaceMTD) * 100) : 0;
+
+    // Primary bar: vs prior period (100% = matched prior, 120% = 20% ahead)
+    var priorBarPct   = totalPriorMTD > 0 ? Math.min(150, Math.round((totalMTD / totalPriorMTD) * 100)) : goalPct50k;
+    var opdBarPct     = opdPrior > 0 ? Math.min(150, Math.round((opd / opdPrior) * 100)) : 0;
+
+    // MTD orders chip — forced dark green, primary = vs prior period
     setHTML('ov-orders-val', totalMTD.toLocaleString('en-GB'));
-    setHTML('ov-orders-meta', isLastMonth
-      ? '<span class="d">' + totalMTD.toLocaleString('en-GB') + ' orders · ' + (Math.round(opd * 10) / 10) + '/day avg · full month</span>'
-      : '<span class="d">' + goalPct + '% of ' + proratedOrderGoal.toLocaleString('en-GB') + ' pace goal · ' + impliedMonthGoal + '/mo implied</span>');
-    setStyle('ov-orders-bar', 'width', Math.min(100, goalPct) + '%');
-    setClass('ov-orders-chip', 'tg ta tr', 't' + ragClass(m.ragStatus(goalPct, { green: 100, amber: 80, red: 60 })));
+    setHTML('ov-orders-meta',
+      vsArrow(ordVsPrior) +
+      '<br><span style="color:var(--GMD);font-size:10px">' +
+        (isLastMonth ? 'Full month · ' : (daysElapsed + 'd in · ')) +
+        goalPct50k + '% of £50K pace (' + goalPaceMTD + ' needed)' +
+      '</span>');
+    setStyle('ov-orders-bar', 'width', Math.min(100, priorBarPct) + '%');
+    setClass('ov-orders-chip', 'tg ta tr', 'tg'); // always dark green
 
+    // Orders per day chip
+    var opdRag = m.ragStatus(opd, { green: opdPrior * 1.0, amber: opdPrior * 0.85, red: opdPrior * 0.7 });
     setHTML('ov-opd-val', (Math.round(opd * 10) / 10).toString());
-    setHTML('ov-opd-meta', '<span class="d">' + pacePct + '% of ' + (Math.round(impliedDailyGoal * 10) / 10) + '/day implied goal</span>');
-    setStyle('ov-opd-bar', 'width', Math.min(100, pacePct) + '%');
+    setHTML('ov-opd-meta',
+      vsArrow(opdVsPrior) +
+      '<br><span style="color:var(--GMD);font-size:10px">Prior period: ' + (Math.round(opdPrior * 10) / 10) + '/day · goal 50/day</span>');
+    setStyle('ov-opd-bar', 'width', Math.min(100, opdBarPct) + '%');
     setClass('ov-opd-chip', 'tg ta tr', 't' + ragClass(opdRag));
 
     // ── Express orders MTD ──
