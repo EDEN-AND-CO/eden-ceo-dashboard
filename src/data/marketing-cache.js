@@ -1,11 +1,11 @@
 // EDEN & CO. Marketing Intelligence Cache
-// Built: 2026-05-04 10:52 UTC
+// Built: 2026-05-05 10:27 UTC
 // Run: python3 scripts/build-marketing-cache.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN._marketingData = {
   "gift_designer": {
-    "total": 1673,
+    "total": 1676,
     "fetched": 1000,
     "who": {
       "A family member or friend": 820,
@@ -22,28 +22,28 @@ window.EDEN._marketingData = {
     "concern": {
       "Worrying about allergies or dietary needs": 684,
       "Not wanting it to feel generic": 343,
-      "It won't look as good as it does in the picture": 232,
       "It will taste rubbish": 231,
+      "It won't look as good as it does in the picture": 231,
       "I care deeply, but worry the gift won\u2019t show it.": 186,
-      "Feeling overwhelmed with options": 76
+      "Feeling overwhelmed with options": 75
     },
     "matters": {
-      "All of the above": 570,
-      "Quality, ethical ingredients": 328,
+      "All of the above": 569,
+      "Quality, ethical ingredients": 329,
       "Beautiful packaging & presentation": 308,
       "Something they\u2019ve never seen before": 174
     },
     "product": {
       "The Signature Collection (Top Seller)": 381,
       "The Petite Collection (The perfect gesture)": 326,
-      "The Chocolate Collection (Pure Indulgence)": 136,
-      "The Grand (For Special occasions)": 92,
+      "The Chocolate Collection (Pure Indulgence)": 137,
+      "The Grand (For Special occasions)": 91,
       "The Prestige (For Milestone Moments)": 65
     },
     "occasion": {
-      "Merry Christmas": 182,
-      "Happy Birthday": 120,
-      "With Love": 64,
+      "Merry Christmas": 181,
+      "Happy Birthday": 121,
+      "With Love": 65,
       "For Mum": 41,
       "Thank You": 39,
       "Signature": 37,
@@ -53,20 +53,20 @@ window.EDEN._marketingData = {
     },
     "dietary": {
       "Gluten Free": 493,
-      "Dairy Free": 321,
-      "Vegan": 292,
-      "Vegetarian": 93,
+      "Dairy Free": 320,
+      "Vegan": 291,
+      "Vegetarian": 94,
       "None": 78,
       "Plant Based": 47,
-      "Halal": 35
+      "Halal": 36
     },
     "months": {
-      "2025-12": 443,
+      "2025-12": 440,
       "2026-01": 97,
       "2026-02": 127,
       "2026-03": 176,
       "2026-04": 137,
-      "2026-05": 20
+      "2026-05": 23
     }
   },
   "virgin": {
@@ -188,12 +188,12 @@ window.EDEN._marketingData = {
     }
   },
   "google_reviews": {
-    "total": 1138,
+    "total": 1139,
     "fetched": 1000,
     "quality": {
       "avg": 4.83,
-      "total": 905,
-      "five": 778,
+      "total": 906,
+      "five": 779,
       "four": 109,
       "three": 13,
       "two": 3,
@@ -202,8 +202,8 @@ window.EDEN._marketingData = {
     },
     "impression": {
       "avg": 4.73,
-      "total": 883,
-      "five": 695,
+      "total": 884,
+      "five": 696,
       "four": 152,
       "three": 27,
       "two": 6,
@@ -213,7 +213,7 @@ window.EDEN._marketingData = {
     "dietary": {},
     "missed_foods": [],
     "months": {
-      "2024-09": 15,
+      "2024-09": 14,
       "2024-10": 8,
       "2024-11": 11,
       "2024-12": 37,
@@ -230,13 +230,13 @@ window.EDEN._marketingData = {
       "2026-02": 126,
       "2026-03": 138,
       "2026-04": 120,
-      "2026-05": 10
+      "2026-05": 11
     }
   },
   "gbp_reviews": {
     "source": "Google Business Profile via Make \u2192 Google Sheet (All Google Reviews tab)",
     "sheet_url": "https://docs.google.com/spreadsheets/d/1DXKumasfRDY4tGiPAi07pV15eiyAb5R0HezoxpUkhc8/edit?gid=879421801",
-    "last_updated": "2026-05-04",
+    "last_updated": "2026-05-05",
     "total": 673,
     "avg_rating": 4.82,
     "five_star": 585,
@@ -481,7 +481,7 @@ window.EDEN._marketingData = {
       "2026-03": 79
     },
     "ai_analysis": {
-      "generated": "2026-05-04",
+      "generated": "2026-05-05",
       "summary": "Across 673 Google reviews, EDEN & CO. scores 4.82/5 with 97% positive sentiment. The dominant theme is relief: buyers with vegan and other dietary requirements describe EDEN & CO. as the only brand that solves inclusive gifting without compromise. Recipients use language that goes well beyond product satisfaction \u2014 'felt seen', 'included for once', 'knew exactly what I needed'. Quality exceeds expectations at the price point and presentation arrives gift-ready, converting first-time buyers into loyal repeat customers.",
       "doing_well": [
         "Dietary trust \u2014 134 vegan, 77 gluten-free and 22 dairy-free customers mention specific relief",
@@ -523,6 +523,6 @@ window.EDEN._marketingData = {
       ]
     }
   },
-  "_built": "2026-05-04 10:52 UTC",
+  "_built": "2026-05-05 10:27 UTC",
   "_version": "1.0"
 };
