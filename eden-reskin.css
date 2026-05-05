@@ -1113,6 +1113,14 @@ body {
 .d.dn { color: var(--ec-error); }
 .d.fl { color: var(--ec-grey-500); }
 
+/* Ink tile — override .d and .rag for readability on dark green */
+.tile.ink .d.dn { color: #ff8a8a !important; }
+.tile.ink .d.up { color: #7ee8a2 !important; }
+.tile.ink .d.fl { color: rgba(245,239,228,0.5) !important; }
+.tile.ink .rag.g { background: rgba(126,232,162,0.15) !important; color: #7ee8a2 !important; }
+.tile.ink .rag.a { background: rgba(255,200,80,0.15) !important; color: #ffd966 !important; }
+.tile.ink .rag.r { background: rgba(255,138,138,0.15) !important; color: #ff8a8a !important; }
+
 /* --------------------------------------------------------------------------
    Horizontal bar metrics (platform split)
    -------------------------------------------------------------------------- */

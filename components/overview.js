@@ -307,14 +307,22 @@ window.EDEN = window.EDEN || {};
     var revPct       = Math.min(100, Math.round((revMTD / proratedTarget) * 100));
     var revChg       = fmtChange(revChange);
 
-    var vsLbl = isLastMonth ? ('vs ' + priorLabel) : 'vs last period';
+    var vsLbl  = isLastMonth ? ('vs ' + priorLabel) : 'vs last period';
+    var revDiff = revMTD - revPriorMTD;
+    var diffArrow = revDiff >= 0 ? '&#8593;' : '&#8595;';
+    var diffCls   = revDiff >= 0 ? 'up' : 'dn';
+    var revBarPct = revPriorMTD > 0 ? Math.min(100, Math.round((revMTD / revPriorMTD) * 100)) : revPct;
+
     setHTML('ov-rev-val', fmtGBP(revMTD));
-    setHTML('ov-rev-change', '<span class="d ' + revChg.cls + '">' + (revChg.cls === 'up' ? '&#8593;' : revChg.cls === 'dn' ? '&#8595;' : '&#8213;') + ' ' + Math.abs(Math.round(revChange * 10) / 10) + '% ' + vsLbl + '</span><span class="rag ' + ragClass(revRag) + '">' + ragLabel(revRag) + '</span>');
-    setStyle('ov-rev-bar', 'width', revPct + '%');
-    setClass('ov-rev-bar', 'pf a pf r', revRag === 'g' ? 'pf' : revRag === 'a' ? 'pf a' : 'pf r');
+    setHTML('ov-rev-change',
+      '<span class="d ' + diffCls + '" style="font-size:15px;font-weight:700">' + diffArrow + ' ' + fmtGBP(Math.abs(revDiff)) + '</span>'
+      + '<span class="d ' + diffCls + '" style="font-size:11px;opacity:0.8"> · ' + Math.abs(Math.round(revChange * 10) / 10) + '% ' + vsLbl + '</span>'
+    );
+    setStyle('ov-rev-bar', 'width', revBarPct + '%');
+    setClass('ov-rev-bar', 'pf a pf r', revDiff >= 0 ? 'pf' : 'pf r');
     setClass('ov-rev-tile', 'tg ta tr', 't' + ragClass(revRag));
-    setHTML('ov-rev-prior-lbl', priorMTD.length ? fmtGBP(revPriorMTD) + ' last period' : '');
-    setHTML('ov-rev-pace-lbl', '');
+    setHTML('ov-rev-prior-lbl', revPriorMTD > 0 ? fmtGBP(revPriorMTD) + ' last period' : '');
+    setHTML('ov-rev-pace-lbl', revPriorMTD > 0 ? (revBarPct + '% of prior') : '');
 
     // ── Contribution margin % MTD ──
     var cmPct        = m.contributionMarginPct(mtd);
@@ -342,12 +350,17 @@ window.EDEN = window.EDEN || {};
     var opexCovered = cmAbs >= opex;
     var opexPct     = Math.min(100, Math.round((cmAbs / opex) * 100));
 
+    var opexShortfall = opex - cmAbs;
+    var opexSurplus   = cmAbs - opex;
+
     setHTML('ov-profit-val', fmtGBP(cmAbs));
     setHTML('ov-profit-meta',
-      '<span class="d fl">OpEx covered: ' + opexPct + '%</span>' +
-      '<span class="rag ' + (opexCovered ? 'g' : 'r') + '">' + (opexCovered ? 'COVERED' : 'SHORTFALL') + '</span>'
+      opexCovered
+        ? '<span class="d up">&#8593; ' + fmtGBP(opexSurplus) + ' above OpEx</span><span class="rag g">COVERED</span>'
+        : '<span class="d dn">' + fmtGBP(opexShortfall) + ' short of OpEx</span><span class="rag r">SHORTFALL</span>'
     );
     setStyle('ov-profit-bar', 'width', opexPct + '%');
+    setHTML('ov-profit-status', opexCovered ? 'OpEx: £10,230' : fmtGBP(opexShortfall) + ' to cover');
     setClass('ov-profit-tile', 'tg ta tr', opexCovered ? 'tg' : 'tr');
 
     // ── TACOS + Blended ROAS card ──
