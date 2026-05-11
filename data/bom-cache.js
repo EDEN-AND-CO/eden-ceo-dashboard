@@ -1,10 +1,10 @@
 // EDEN & CO. CEO Flight Deck — BoM Cache
-// Generated: 2026-05-05T08:27:18Z
+// Generated: 2026-05-11T08:16:39Z
 // Do not edit manually. Run: python3 scripts/build-bom-cache.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN.bomData = {
-  "generated": "2026-05-05T08:27:18Z",
+  "generated": "2026-05-11T08:16:39Z",
   "source": "google_sheets",
   "hampers": [
     "LETTERBOX",
@@ -36,19 +36,19 @@ window.EDEN.bomData = {
   "hamperCogs": {
     "LETTERBOX": 12.93,
     "COCOA": 64.69,
-    "SIGNATURE": 69.7,
+    "SIGNATURE": 69.9,
     "PAMPER": 82.16,
-    "GRAND": 80.29,
-    "PRESTIGE": 91.45,
-    "ADDON": 43.75
+    "GRAND": 80.49,
+    "PRESTIGE": 91.74,
+    "ADDON": 43.84
   },
   "hamperMargin": {
     "LETTERBOX": 48.3,
     "COCOA": -55.3,
-    "SIGNATURE": -28.7,
+    "SIGNATURE": -29.0,
     "PAMPER": -9.5,
-    "GRAND": 22.9,
-    "PRESTIGE": 37.3,
+    "GRAND": 22.7,
+    "PRESTIGE": 37.1,
     "ADDON": 0
   },
   "products": [
@@ -76,10 +76,10 @@ window.EDEN.bomData = {
       "name": "Nut Butter Fruit & Nut",
       "section": "Products",
       "supplier": "Fredas",
-      "caseQty": null,
+      "caseQty": 50,
       "weightG": 180.0,
       "privateLabel": true,
-      "cost": 2.1,
+      "cost": 2.3,
       "rrp": 5.99,
       "vatable": false,
       "hampers": {
@@ -133,8 +133,28 @@ window.EDEN.bomData = {
       }
     },
     {
+      "name": "Coconut Peanut Butter",
+      "section": "Products",
+      "supplier": "Fredas",
+      "caseQty": 50,
+      "weightG": null,
+      "privateLabel": true,
+      "cost": 2.2,
+      "rrp": 4.75,
+      "vatable": false,
+      "hampers": {
+        "LETTERBOX": false,
+        "COCOA": false,
+        "SIGNATURE": false,
+        "PAMPER": false,
+        "GRAND": false,
+        "PRESTIGE": false,
+        "ADDON": false
+      }
+    },
+    {
       "name": "Choc Chip Shortbread Biscuits",
-      "section": "Coconut Peanut Butter",
+      "section": "Products",
       "supplier": "Lazy Days",
       "caseQty": 8,
       "weightG": 150.0,
@@ -154,7 +174,7 @@ window.EDEN.bomData = {
     },
     {
       "name": "House Chai Box",
-      "section": "Coconut Peanut Butter",
+      "section": "Products",
       "supplier": "Blendsmiths",
       "caseQty": 42,
       "weightG": 250.0,
@@ -174,7 +194,7 @@ window.EDEN.bomData = {
     },
     {
       "name": "House Chocolate",
-      "section": "Coconut Peanut Butter",
+      "section": "Products",
       "supplier": "Blendsmiths",
       "caseQty": 42,
       "weightG": 250.0,
@@ -194,7 +214,7 @@ window.EDEN.bomData = {
     },
     {
       "name": "House Chocolate Sachet",
-      "section": "Coconut Peanut Butter",
+      "section": "Products",
       "supplier": "Blendsmiths",
       "caseQty": 300,
       "weightG": 35.0,
@@ -214,7 +234,7 @@ window.EDEN.bomData = {
     },
     {
       "name": "White Chocolate Sachet",
-      "section": "Coconut Peanut Butter",
+      "section": "Products",
       "supplier": "Blendsmiths",
       "caseQty": 300,
       "weightG": 35.0,
@@ -234,13 +254,13 @@ window.EDEN.bomData = {
     },
     {
       "name": "Chocolate Granola",
-      "section": "Coconut Peanut Butter",
+      "section": "Products",
       "supplier": "Green Fingers Family",
       "caseQty": 8,
       "weightG": null,
       "privateLabel": true,
       "cost": 2.6,
-      "rrp": null,
+      "rrp": 5.0,
       "vatable": false,
       "hampers": {
         "LETTERBOX": false,
@@ -254,9 +274,9 @@ window.EDEN.bomData = {
     },
     {
       "name": "Apple Crumble Granola",
-      "section": "Coconut Peanut Butter",
+      "section": "Products",
       "supplier": "Green Fingers Family",
-      "caseQty": null,
+      "caseQty": 8,
       "weightG": 300.0,
       "privateLabel": true,
       "cost": 2.6,
@@ -274,9 +294,9 @@ window.EDEN.bomData = {
     },
     {
       "name": "Black Forest - Bliss Balls",
-      "section": "Coconut Peanut Butter",
+      "section": "Products",
       "supplier": "Green Fingers Family",
-      "caseQty": null,
+      "caseQty": 12,
       "weightG": 300.0,
       "privateLabel": true,
       "cost": 1.9,
@@ -294,9 +314,9 @@ window.EDEN.bomData = {
     },
     {
       "name": "Salted Caramel & Peanut  - Bliss Balls",
-      "section": "Coconut Peanut Butter",
+      "section": "Products",
       "supplier": "Green Fingers Family",
-      "caseQty": null,
+      "caseQty": 12,
       "weightG": 300.0,
       "privateLabel": true,
       "cost": 1.9,
@@ -314,7 +334,7 @@ window.EDEN.bomData = {
     },
     {
       "name": "Chinese Salt & Pepper Nuts",
-      "section": "Coconut Peanut Butter",
+      "section": "Products",
       "supplier": "Nalo",
       "caseQty": 12,
       "weightG": 40.0,
@@ -334,7 +354,7 @@ window.EDEN.bomData = {
     },
     {
       "name": "Maple Truffle Cashews",
-      "section": "Coconut Peanut Butter",
+      "section": "Products",
       "supplier": "Nalo",
       "caseQty": 12,
       "weightG": 40.0,
@@ -354,9 +374,9 @@ window.EDEN.bomData = {
     },
     {
       "name": "Salted Caramel Chocolate Bar",
-      "section": "Coconut Peanut Butter",
+      "section": "Products",
       "supplier": "Made Uncommon",
-      "caseQty": null,
+      "caseQty": 12,
       "weightG": 80.0,
       "privateLabel": true,
       "cost": 1.56,
@@ -374,9 +394,9 @@ window.EDEN.bomData = {
     },
     {
       "name": "Chocolate Orange Bar",
-      "section": "Coconut Peanut Butter",
+      "section": "Products",
       "supplier": "Made Uncommon",
-      "caseQty": null,
+      "caseQty": 12,
       "weightG": 80.0,
       "privateLabel": true,
       "cost": 1.56,
@@ -394,7 +414,7 @@ window.EDEN.bomData = {
     },
     {
       "name": "Chocolate Wonders - Raspberry Scrunch",
-      "section": "Coconut Peanut Butter",
+      "section": "Products",
       "supplier": "Booja Booja",
       "caseQty": 8,
       "weightG": 65.0,
@@ -414,7 +434,7 @@ window.EDEN.bomData = {
     },
     {
       "name": "Chocolate Salted Caramel Truffle Box (8 Pack)",
-      "section": "Coconut Peanut Butter",
+      "section": "Products",
       "supplier": "Booja Booja",
       "caseQty": 8,
       "weightG": 92.0,
@@ -434,7 +454,7 @@ window.EDEN.bomData = {
     },
     {
       "name": "Almond Biscotti Biscuits",
-      "section": "Coconut Peanut Butter",
+      "section": "Products",
       "supplier": "Rhythm 108",
       "caseQty": 8,
       "weightG": 135.0,
@@ -454,7 +474,7 @@ window.EDEN.bomData = {
     },
     {
       "name": "Double Chocolate Hazelnut",
-      "section": "Coconut Peanut Butter",
+      "section": "Products",
       "supplier": "Rhythm 108",
       "caseQty": 8,
       "weightG": 135.0,
@@ -474,7 +494,7 @@ window.EDEN.bomData = {
     },
     {
       "name": "Crunchie Bar (Honeycomb)",
-      "section": "Coconut Peanut Butter",
+      "section": "Products",
       "supplier": "Buttermilk",
       "caseQty": 18,
       "weightG": 50.0,
@@ -494,7 +514,7 @@ window.EDEN.bomData = {
     },
     {
       "name": "Snickers (Peanut Nougat Caramel Snack Bar)",
-      "section": "Coconut Peanut Butter",
+      "section": "Products",
       "supplier": "Buttermilk",
       "caseQty": 24,
       "weightG": 50.0,
@@ -539,7 +559,7 @@ window.EDEN.bomData = {
       "caseQty": 24,
       "weightG": 200.0,
       "privateLabel": false,
-      "cost": 3.74,
+      "cost": 3.83,
       "rrp": 9.99,
       "vatable": true,
       "hampers": {
@@ -735,8 +755,8 @@ window.EDEN.bomData = {
     {
       "name": "Gift Tube",
       "section": "Packaging",
-      "supplier": "RH Fibreboard",
-      "caseQty": 5000,
+      "supplier": "Artés",
+      "caseQty": 10000,
       "weightG": 150.0,
       "privateLabel": true,
       "cost": 1.0,
@@ -755,10 +775,10 @@ window.EDEN.bomData = {
     {
       "name": "Wicker Hamper",
       "section": "Packaging",
-      "supplier": "Gadsby",
+      "supplier": "Gadsby / Home Products Basketware",
       "caseQty": 10,
       "weightG": 500.0,
-      "privateLabel": false,
+      "privateLabel": true,
       "cost": 11.0,
       "rrp": null,
       "vatable": false,

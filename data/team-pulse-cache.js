@@ -1,12 +1,12 @@
 // EDEN & CO. CEO Flight Deck — Team Pulse Cache
-// Generated: 2026-05-05T08:27:13Z
+// Generated: 2026-05-11T08:16:39Z
 // Source: Google Sheets (live pubhtml)
 // Do not edit manually. Run: python3 scripts/build-team-pulse.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN.teamPulse = {
-  "generated": "2026-05-05T08:27:13Z",
-  "current_week": "2026-W19",
+  "generated": "2026-05-11T08:16:39Z",
+  "current_week": "2026-W20",
   "source": "google_sheets",
   "core_goals": {
     "Jon": {
@@ -875,7 +875,7 @@ window.EDEN.teamPulse = {
         "week": "2026-W16",
         "category": "This week",
         "task": "New suppliers",
-        "status": "on-track",
+        "status": "done",
         "parent": "Stock planning",
         "note": "Look into x2 new supplier emails",
         "other": ""
@@ -965,9 +965,36 @@ window.EDEN.teamPulse = {
         "week": "",
         "category": "This week",
         "task": "Royal Mail Invoices",
-        "status": "on-track",
+        "status": "done",
         "parent": "Admin & Finance",
         "note": "Look into royal mail invoices and get a better understanding of how they are done. Do we need to process to check these as and when they come in",
+        "other": ""
+      },
+      {
+        "week": "",
+        "category": "This week",
+        "task": "New supplier emails",
+        "status": "on-track",
+        "parent": "Stock planning",
+        "note": "Get back to Spice Kitchen and Choc Amor",
+        "other": ""
+      },
+      {
+        "week": "",
+        "category": "This week",
+        "task": "Aery delivery",
+        "status": "on-track",
+        "parent": "Stock planning",
+        "note": "Update our delivery address for handcream order",
+        "other": ""
+      },
+      {
+        "week": "",
+        "category": "This week",
+        "task": "Google review outers",
+        "status": "on-track",
+        "parent": "Order satisfaction + despatch",
+        "note": "Order some more outers for our google review chocolate gifts",
         "other": ""
       }
     ]
@@ -994,7 +1021,7 @@ window.EDEN.teamPulse = {
     "Jon": 8,
     "Rosie": 6,
     "Edith": 7,
-    "Phoebe": 5
+    "Phoebe": 6
   },
   "streak": {
     "Jon": 4,
