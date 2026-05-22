@@ -137,7 +137,7 @@ window.EDEN.components = window.EDEN.components || {};
     });
   }
 
-  // ── Chart 2: Growth + Cost Ratio ─────────────────────────────────────────────
+  // ── Chart 2: Two bars per month — income + costs, % change ───────────────────
   function buildCostChart() {
     destroyChart('cost');
     var canvas = document.getElementById('fin-cost-canvas');
@@ -145,31 +145,35 @@ window.EDEN.components = window.EDEN.components || {};
 
     var data = ac();
 
-    // Revenue bars — 2025 all months, 2026 actuals only (null for May-Dec)
-    var rev2025 = MONTHS.map(function (m) { return REV_2025[m] || 0; });
-    var rev2026 = MONTHS.map(function (m, i) {
+    // Income per month
+    var inc2025 = MONTHS.map(function (m) { return REV_2025[m] || 0; });
+    var inc2026 = MONTHS.map(function (m, i) {
       if (i >= CURRENT_IDX) return null;
       var v = data.income_actual && data.income_actual[m];
       return v != null ? Math.round(v) : null;
     });
 
-    // Cost ratio lines — costs / revenue * 100
-    var ratio2025 = MONTHS.map(function (m) {
-      var r = REV_2025[m];
-      return r > 0 ? Math.round((COSTS_2025[m] / r) * 100) : null;
-    });
-    var ratio2026 = MONTHS.map(function (m, i) {
+    // Costs per month
+    var costs2025 = MONTHS.map(function (m) { return COSTS_2025[m] || 0; });
+    var costs2026 = MONTHS.map(function (m, i) {
       if (i >= CURRENT_IDX) return null;
-      var r = data.income_actual && data.income_actual[m];
-      var c = data.total_expenses && data.total_expenses[m];
-      return (r && r > 0 && c != null) ? Math.round((c / r) * 100) : null;
+      var v = data.total_expenses && data.total_expenses[m];
+      return v != null ? Math.round(v) : null;
     });
 
-    // Point colours for 2026 ratio — green if better than 2025, red if worse
-    var ratio2026PointColors = MONTHS.map(function (m, i) {
-      var r26 = ratio2026[i], r25 = ratio2025[i];
-      if (r26 === null || r25 === null) return 'transparent';
-      return r26 <= r25 ? '#639922' : '#E24B4A';
+    // % income change 2026 vs 2025 (for tooltip)
+    var incPctChange = MONTHS.map(function (m, i) {
+      if (i >= CURRENT_IDX) return null;
+      var r25 = REV_2025[m], r26 = inc2026[i];
+      if (!r25 || r26 == null) return null;
+      return Math.round(((r26 - r25) / r25) * 100);
+    });
+
+    // Profit/loss signal per month for 2026
+    var profitable2026 = MONTHS.map(function (m, i) {
+      var r = inc2026[i], c = costs2026[i];
+      if (r == null || c == null) return null;
+      return r >= c;
     });
 
     _charts['cost'] = new Chart(canvas, {
@@ -178,56 +182,48 @@ window.EDEN.components = window.EDEN.components || {};
         labels: MONTHS,
         datasets: [
           {
-            type: 'bar',
-            label: '2025 revenue',
-            data: rev2025,
-            backgroundColor: 'rgba(180,180,180,0.45)',
-            borderColor: 'rgba(150,150,150,0.6)',
+            label: '2025 Income',
+            data: inc2025,
+            backgroundColor: 'rgba(180,180,180,0.5)',
+            borderColor: 'rgba(130,130,130,0.7)',
             borderWidth: 1,
             borderRadius: 2,
-            order: 3,
-            yAxisID: 'y',
+            stack: 'y2025',
           },
           {
-            type: 'bar',
-            label: '2026 revenue (actual)',
-            data: rev2026,
-            backgroundColor: 'rgba(99,153,34,0.75)',
-            borderColor: '#639922',
+            label: '2025 Costs',
+            data: costs2025,
+            backgroundColor: 'rgba(180,180,180,0.2)',
+            borderColor: 'rgba(130,130,130,0.4)',
+            borderWidth: 1,
+            borderDash: [3,2],
+            borderRadius: 2,
+            stack: 'c2025',
+          },
+          {
+            label: '2026 Income',
+            data: inc2026,
+            backgroundColor: inc2026.map(function (v, i) {
+              return profitable2026[i] === true ? 'rgba(99,153,34,0.8)' :
+                     profitable2026[i] === false ? 'rgba(192,57,43,0.7)' :
+                     'rgba(99,153,34,0.4)';
+            }),
+            borderColor: inc2026.map(function (v, i) {
+              return profitable2026[i] === true ? '#639922' :
+                     profitable2026[i] === false ? '#c0392b' : '#639922';
+            }),
             borderWidth: 1.5,
             borderRadius: 3,
-            order: 2,
-            yAxisID: 'y',
+            stack: 'y2026',
           },
           {
-            type: 'line',
-            label: '2025 cost ratio %',
-            data: ratio2025,
-            borderColor: 'rgba(150,150,150,0.6)',
-            borderWidth: 1.5,
-            borderDash: [5,4],
-            pointRadius: 3,
-            pointBackgroundColor: 'rgba(150,150,150,0.6)',
-            tension: 0.3,
-            fill: false,
-            order: 1,
-            yAxisID: 'y2',
-          },
-          {
-            type: 'line',
-            label: '2026 cost ratio % (actual)',
-            data: ratio2026,
+            label: '2026 Costs',
+            data: costs2026,
+            backgroundColor: 'rgba(186,117,23,0.35)',
             borderColor: '#BA7517',
-            borderWidth: 2.5,
-            pointRadius: 6,
-            pointBackgroundColor: ratio2026PointColors,
-            pointBorderColor: '#BA7517',
-            pointBorderWidth: 2,
-            tension: 0.3,
-            fill: false,
-            order: 1,
-            yAxisID: 'y2',
-            spanGaps: false,
+            borderWidth: 1.5,
+            borderRadius: 2,
+            stack: 'c2026',
           },
         ],
       },
@@ -239,38 +235,34 @@ window.EDEN.components = window.EDEN.components || {};
           legend: { position: 'top', labels: { font: { size: 12 }, boxWidth: 14, padding: 16 } },
           tooltip: {
             callbacks: {
+              title: function (ctx) {
+                var idx = ctx[0].dataIndex;
+                var pct = incPctChange[idx];
+                var suffix = pct != null ? '  ' + (pct >= 0 ? '▲' : '▼') + ' ' + Math.abs(pct) + '% vs 2025' : '  (2025 only)';
+                return MONTHS[idx] + suffix;
+              },
               label: function (ctx) {
-                if (ctx.dataset.yAxisID === 'y2') {
-                  var v = ctx.parsed.y;
-                  if (v === null) return null;
-                  var flag = v > 100 ? ' — loss month' : v > 80 ? ' — tight' : ' — profitable';
-                  return ' ' + ctx.dataset.label + ': ' + v + '%' + flag;
-                }
-                return ctx.parsed.y != null ? ' ' + ctx.dataset.label + ': ' + fmtGBP(ctx.parsed.y) : null;
+                if (ctx.parsed.y == null) return null;
+                return ' ' + ctx.dataset.label + ': ' + fmtGBP(ctx.parsed.y);
               },
               afterBody: function (ctx) {
-                var idx = ctx[0] && ctx[0].dataIndex;
-                if (idx == null || idx >= CURRENT_IDX) return;
-                var r25 = ratio2025[idx], r26 = ratio2026[idx];
-                if (r25 == null || r26 == null) return;
-                var diff = r26 - r25;
-                var arrow = diff <= 0 ? '↓' : '↑';
-                var msg   = diff <= 0 ? ' — improved vs 2025' : ' — worse than 2025';
-                return ['─────────────', arrow + ' ' + Math.abs(diff) + 'pp' + msg];
+                var idx = ctx[0].dataIndex;
+                if (idx >= CURRENT_IDX) return;
+                var r = inc2026[idx], c = costs2026[idx];
+                if (r == null || c == null) return;
+                var net = r - c;
+                var ratio = Math.round((c / r) * 100);
+                var result = net >= 0 ? '✓ Profitable — net ' + fmtGBP(net) : '✗ Loss — net ' + fmtGBP(net);
+                return ['─────────────', result, 'Cost ratio: ' + ratio + '%'];
               }
             }
           },
           annotation: {
             annotations: {
-              breakeven: {
-                type: 'line', scaleID: 'y2', value: 100,
-                borderColor: 'rgba(192,57,43,0.5)', borderWidth: 1.5, borderDash: [6,3],
-                label: { content: '100% breakeven', display: true, position: 'start', font: { size: 11, weight: '600' }, color: '#c0392b', backgroundColor: 'rgba(255,255,255,0.85)', padding: 4 }
-              },
               divider: {
                 type: 'line', scaleID: 'x', value: CURRENT_IDX - 0.5,
-                borderColor: 'rgba(0,68,55,0.3)', borderWidth: 1.5, borderDash: [3,3],
-                label: { content: 'Actuals ← | Benchmark →', display: true, position: 'center', font: { size: 10 }, color: '#004437', backgroundColor: 'rgba(255,255,255,0.9)', padding: 4 }
+                borderColor: 'rgba(0,68,55,0.25)', borderWidth: 1.5, borderDash: [3,3],
+                label: { content: '← Actual  Benchmark →', display: true, position: 'center', font: { size: 10 }, color: '#004437', backgroundColor: 'rgba(255,255,255,0.9)', padding: 4 }
               }
             }
           }
@@ -278,16 +270,8 @@ window.EDEN.components = window.EDEN.components || {};
         scales: {
           x: { grid: { color: 'rgba(0,68,55,0.06)' }, ticks: { font: { size: 13 } } },
           y: {
-            position: 'left',
             grid: { color: 'rgba(0,68,55,0.06)' },
-            ticks: { font: { size: 13 }, callback: function (v) { return '£' + (v/1000).toFixed(0) + 'k'; } },
-            title: { display: true, text: 'Revenue (£)', font: { size: 11 }, color: 'var(--GMD)' }
-          },
-          y2: {
-            position: 'right',
-            grid: { drawOnChartArea: false },
-            ticks: { font: { size: 13 }, callback: function (v) { return v + '%'; } },
-            title: { display: true, text: 'Cost ratio', font: { size: 11 }, color: '#BA7517' }
+            ticks: { font: { size: 13 }, callback: function (v) { return '£' + (v/1000).toFixed(0) + 'k'; } }
           }
         }
       }
@@ -352,11 +336,11 @@ window.EDEN.components = window.EDEN.components || {};
       '<div class="fin-card">',
         '<div class="fin-chart-title">Growth &amp; profitability — 2026 vs 2025',
           '<span class="fin-chart-legend">',
-            '<span class="fin-swatch" style="background:rgba(99,153,34,0.75)"></span>2026 revenue (actual)',
-            ' <span class="fin-swatch" style="background:rgba(180,180,180,0.45)"></span>2025 revenue',
-            ' <span style="color:#BA7517;font-weight:600">— 2026 cost ratio</span>',
-            ' <span style="color:rgba(150,150,150,0.8)">— 2025 cost ratio</span>',
-            ' <span style="opacity:0.55;font-size:11px;margin-left:8px">Dot: green = ratio improving vs 2025 · red = worse · hover for detail</span>',
+            '<span class="fin-swatch" style="background:rgba(99,153,34,0.8)"></span>2026 income',
+            ' <span class="fin-swatch" style="background:rgba(186,117,23,0.35);border:1px solid #BA7517"></span>2026 costs',
+            ' <span class="fin-swatch" style="background:rgba(180,180,180,0.5)"></span>2025 income',
+            ' <span class="fin-swatch" style="background:rgba(180,180,180,0.2);border:1px solid rgba(130,130,130,0.4)"></span>2025 costs',
+            ' <span style="opacity:0.55;font-size:11px;margin-left:8px">Green bar = profitable · Red bar = loss · Hover for % change vs 2025</span>',
           '</span>',
         '</div>',
         '<div style="height:360px;position:relative"><canvas id="fin-cost-canvas"></canvas></div>',
