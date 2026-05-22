@@ -1,10 +1,10 @@
 // EDEN Accounting Cache — DASHBOARD tab, Cash Forecast Google Sheet
-// Generated: 2026-05-22T16:11:47Z
+// Generated: 2026-05-22T17:51:17Z
 // Source: https://docs.google.com/spreadsheets/d/14mTkKDJ9wmOq3tyOsmH5RoAzda_gHFQQx2K2QuF4PRM/edit?gid=137937925
 // Do not edit manually. Run: python3 scripts/build-accounting-cache.py
 window.EDEN = window.EDEN || {};
 window.EDEN._accounting = {
-  "generated": "2026-05-22T16:11:47Z",
+  "generated": "2026-05-22T17:51:17Z",
   "months": [
     "Jan",
     "Feb",
@@ -48,46 +48,46 @@ window.EDEN._accounting = {
     "Dec": 176486.5
   },
   "opening_balance": {
-    "Jan": 173849.2,
-    "Feb": 142492.67,
-    "Mar": 136320.75,
-    "Apr": 141668.93,
-    "May": 135979.17,
-    "Jun": 131751.01,
-    "Jul": 115801.71,
-    "Aug": 115111.88,
-    "Sep": 109154.02,
-    "Oct": 28746.29,
-    "Nov": 28567.47,
-    "Dec": -3386.07
+    "Jan": 242814.77,
+    "Feb": 206817.31,
+    "Mar": 183125.25,
+    "Apr": 174135.34,
+    "May": 172995.79,
+    "Jun": 168767.63,
+    "Jul": 152818.33,
+    "Aug": 152128.5,
+    "Sep": 146170.64,
+    "Oct": 65762.91,
+    "Nov": 65584.09,
+    "Dec": 33630.55
   },
   "closing_balance": {
-    "Jan": 142492.67,
-    "Feb": 136320.75,
-    "Mar": 141668.93,
-    "Apr": 135979.17,
-    "May": 131751.01,
-    "Jun": 115801.71,
-    "Jul": 115111.88,
-    "Aug": 109154.02,
-    "Sep": 28746.29,
-    "Oct": 28567.47,
-    "Nov": -3386.07,
-    "Dec": 173100.43
+    "Jan": 211458.24,
+    "Feb": 200645.39,
+    "Mar": 188473.43,
+    "Apr": 168445.58,
+    "May": 168767.63,
+    "Jun": 152818.33,
+    "Jul": 152128.5,
+    "Aug": 146170.64,
+    "Sep": 65762.91,
+    "Oct": 65584.09,
+    "Nov": 33630.55,
+    "Dec": 210117.05
   },
   "pl_actual": {
-    "Jan": -31356.53,
-    "Feb": -6171.92,
-    "Mar": 5348.18,
-    "Apr": -5689.76,
-    "May": -4228.16,
-    "Jun": -15949.3,
-    "Jul": -689.83,
-    "Aug": -5957.86,
-    "Sep": -80407.73,
-    "Oct": -178.82,
-    "Nov": -31953.54,
-    "Dec": 176486.5
+    "Jan": 26059.7,
+    "Feb": -674.57,
+    "Mar": 18929.84,
+    "Apr": 8124.7,
+    "May": -49503.41,
+    "Jun": -7285.45,
+    "Jul": -177.99,
+    "Aug": -13982.51,
+    "Sep": 21382.68,
+    "Oct": -6397.0,
+    "Nov": -24767.83,
+    "Dec": 130007.9
   },
   "cogs_actual": {
     "Jan": 44694.18,
@@ -176,5 +176,5 @@ window.EDEN._accounting = {
   "starling_balance": 173849.2,
   "starling_date": "22 May 2026",
   "lowest_month": "Nov",
-  "lowest_amount": -3386.07
+  "lowest_amount": 33630.55
 };
