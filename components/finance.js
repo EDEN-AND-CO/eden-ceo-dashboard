@@ -208,7 +208,13 @@ window.EDEN.components = window.EDEN.components || {};
                 var m   = MONTHS[idx];
                 if (idx >= CURRENT_IDX) return m + ' — 2025 benchmark only';
                 var r26 = inc2026[idx], c26 = costs2026[idx];
-                var ret = (r26 && c26) ? '£' + (r26 / c26).toFixed(2) + ' back per £1 spent' : '';
+                var ret = '';
+                if (r26 && c26) {
+                  var mul = r26 / c26;
+                  ret = mul >= 1
+                    ? '£' + mul.toFixed(2) + ' back per £1'
+                    : '£' + (1 - mul).toFixed(2) + ' lost per £1';
+                }
                 var growth = pct != null ? '  ·  income ' + (pct >= 0 ? '+' : '') + pct + '% vs 2025' : '';
                 return m + '  ' + ret + growth;
               },
@@ -219,7 +225,14 @@ window.EDEN.components = window.EDEN.components || {};
 
                 function ret(inc, cost) {
                   if (!inc || !cost) return '—';
-                  return '£' + (inc / cost).toFixed(2) + ' per £1 spent';
+                  var multiple = inc / cost;
+                  var bracket = '(' + multiple.toFixed(2) + 'x)';
+                  if (multiple >= 1) {
+                    return '£' + multiple.toFixed(2) + ' back per £1 ' + bracket;
+                  } else {
+                    var lost = (1 - multiple).toFixed(2);
+                    return '£' + lost + ' lost per £1 ' + bracket;
+                  }
                 }
 
                 var r25 = inc2025[idx];
