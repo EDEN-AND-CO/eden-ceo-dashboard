@@ -319,8 +319,8 @@ window.EDEN.components = window.EDEN.components || {};
 
         var tdStyle = [
           'text-align:right',
-          'padding:' + (isLarge ? '12px 14px' : '9px 14px'),
-          'font-size:' + (isLarge ? '16px' : '14px'),
+          'padding:' + (isLarge ? '16px 16px' : '12px 16px'),
+          'font-size:' + (isLarge ? '20px' : '15px'),
           'font-weight:' + (isLarge ? '700' : '400'),
           'font-family:var(--FM)',
           'font-style:' + fontStyle,
@@ -328,6 +328,7 @@ window.EDEN.components = window.EDEN.components || {};
           color ? 'color:' + color : '',
           bg,
           'border-bottom:1px solid var(--GL)',
+          isLarge ? 'letter-spacing:-0.01em' : '',
         ].filter(Boolean).join(';');
 
         return '<td style="'+tdStyle+'"' +
@@ -335,7 +336,7 @@ window.EDEN.components = window.EDEN.components || {};
           '>'+displayVal+editMark+'</td>';
       }).join('');
 
-      var thStyle = 'padding:'+(isLarge?'12px 16px':'9px 16px')+';font-size:'+(isLarge?'15px':'13px')+';font-weight:'+(isLarge?'700':'400')+';white-space:nowrap;border-bottom:1px solid var(--GL);color:var(--G)';
+      var thStyle = 'padding:'+(isLarge?'16px 16px':'12px 16px')+';font-size:'+(isLarge?'18px':'15px')+';font-weight:'+(isLarge?'700':'400')+';white-space:nowrap;border-bottom:1px solid var(--GL);color:var(--G)';
       return '<tr><td style="'+thStyle+'">'+row.label+'</td>'+cells+'</tr>';
     });
 
@@ -394,10 +395,10 @@ window.EDEN.components = window.EDEN.components || {};
         '<div style="overflow-x:auto">',
           '<table style="width:100%;border-collapse:collapse">',
             '<thead><tr>',
-              '<th style="text-align:left;padding:10px 16px;border-bottom:2px solid var(--G);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--GMD);white-space:nowrap">Label</th>',
+              '<th style="text-align:left;padding:12px 16px;border-bottom:2px solid var(--G);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--GMD);white-space:nowrap">Label</th>',
               MONTHS.map(function(m,i){
                 var hl = i===4?'background:rgba(55,138,221,0.1)':'';
-                return '<th style="text-align:right;padding:10px 14px;border-bottom:2px solid var(--G);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--GMD);'+hl+'">'+m+'</th>';
+                return '<th style="text-align:right;padding:12px 16px;border-bottom:2px solid var(--G);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--GMD);'+hl+'">'+m+'</th>';
               }).join(''),
             '</tr></thead>',
             '<tbody id="fin-table-body"></tbody>',
