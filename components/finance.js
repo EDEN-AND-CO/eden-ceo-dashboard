@@ -51,15 +51,7 @@ window.EDEN.components = window.EDEN.components || {};
 
   function ac() { return (window.EDEN && window.EDEN._accounting) || {}; }
 
-  // Fix: validate stored balance — reject anything implausible (< 1000 or > 10M)
   function getStarlingBalance() {
-    var stored = localStorage.getItem('ec_starling_balance');
-    if (stored !== null) {
-      var v = parseFloat(stored);
-      if (!isNaN(v) && v >= 1000 && v <= 10000000) return v;
-      // Bad value in storage — clear it
-      localStorage.removeItem('ec_starling_balance');
-    }
     return ac().starling_balance || DEFAULT_BALANCE;
   }
 
@@ -116,8 +108,7 @@ window.EDEN.components = window.EDEN.components || {};
     var exhaustDate = new Date();
     exhaustDate.setDate(exhaustDate.getDate() + days);
     var exhaustStr = exhaustDate.toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'});
-
-    var starlingDate = ac().starling_date || '';
+    var sheetDate  = ac().starling_date || '—';
 
     return [
       '<div class="fin-gauge-wrap">',
@@ -129,17 +120,13 @@ window.EDEN.components = window.EDEN.components || {};
           '<text x="100" y="153" text-anchor="middle" font-size="11" font-family="var(--F)" fill="'+color+'">'+label+'</text>',
         '</svg>',
         '<div class="fin-gauge-stats">',
-          '<div>Cash today: <strong>'+fmtGBP(balance)+'</strong> <span class="fin-badge fin-badge-live">LIVE</span></div>',
-          '<div>Fuel runs out: <strong>'+exhaustStr+'</strong></div>',
-          '<div>Q4 revenue lands: <strong>Dec 2026</strong></div>',
+          '<div>Cash: <strong>'+fmtGBP(balance)+'</strong></div>',
+          '<div>Runs out: <strong>'+exhaustStr+'</strong></div>',
+          '<div>Q4 lands: <strong>Dec 2026</strong></div>',
         '</div>',
-        '<div class="fin-gauge-input">',
-          '<label>Update Starling balance</label>',
-          '<div style="display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap">',
-            '<input type="number" id="fin-starling-input" value="'+Math.round(balance)+'" step="100"',
-            ' style="width:140px;padding:7px 10px;font-size:14px;border:1px solid var(--GL);border-radius:3px;font-family:var(--FM)">',
-            starlingDate ? '<span style="font-size:11px;color:var(--GMD)">as of '+starlingDate+'</span>' : '',
-          '</div>',
+        '<div style="margin-top:14px;text-align:center;font-size:11px;color:var(--GMD);line-height:1.6">',
+          'Balance as of '+sheetDate+'<br>',
+          '<span style="opacity:0.7">Update in the Cash Forecast sheet</span>',
         '</div>',
       '</div>',
     ].join('');
@@ -148,22 +135,6 @@ window.EDEN.components = window.EDEN.components || {};
   function updateGauge() {
     var el = document.getElementById('fin-gauge-container');
     if (el) el.innerHTML = buildGauge();
-    attachGaugeListener();
-  }
-
-  function attachGaugeListener() {
-    var inp = document.getElementById('fin-starling-input');
-    if (!inp || inp._wired) return;
-    inp._wired = true;
-    inp.addEventListener('input', function () {
-      var v = parseFloat(this.value);
-      if (!isNaN(v) && v >= 1000) {
-        localStorage.setItem('ec_starling_balance', String(v));
-        updateGauge();
-        updateChart();
-        renderTable();
-      }
-    });
   }
 
   // ── Scenario Chart (grouped bars + 2025 line) ────────────────────────────────
@@ -525,7 +496,6 @@ window.EDEN.components = window.EDEN.components || {};
       '</div>',
     ].join('');
 
-    attachGaugeListener();
     renderTable();
     setTimeout(updateChart, 50);
     setTimeout(updateIncExpChart, 80);
@@ -586,6 +556,7 @@ window.EDEN.components = window.EDEN.components || {};
       this._t = setTimeout(function () { updateChart(); }, 100);
     },
 
+    _saveBalance: function () {}, // no-op — balance updated in sheet
     _editCell: function (month) {
       var current = ac().closing_balance && ac().closing_balance[month];
       var stored = localStorage.getItem('ec_balance_' + month);
