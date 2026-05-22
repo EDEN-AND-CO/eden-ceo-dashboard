@@ -27,8 +27,58 @@ window.EDEN.components = window.EDEN.components || {};
   };
 
   var _charts = {};
+  var _cashMode = 'current'; // 'current' | 'ytdpace'
+
+  // 2025 stock purchases (for YTD pace scaling)
+  var STOCK_2025 = {
+    Jan:23620, Feb:542,   Mar:21338, Apr:6688,  May:7080,  Jun:7375,
+    Jul:2149,  Aug:2157,  Sep:65087, Oct:13352, Nov:71331, Dec:22688
+  };
 
   function ac() { return (window.EDEN && window.EDEN._accounting) || {}; }
+
+  // Compute YTD growth rate from Jan-Apr 2026 vs 2025
+  function ytdGrowthRate() {
+    var data = ac();
+    var rev26 = 0, rev25 = 0;
+    ACTUAL_MONTHS.forEach(function (m) {
+      var v = data.income_actual && data.income_actual[m];
+      if (v != null) rev26 += v;
+      rev25 += REV_2025[m] || 0;
+    });
+    return rev25 > 0 ? (rev26 - rev25) / rev25 : 0;
+  }
+
+  // Compute closing balances for YTD pace scenario
+  function computeYTDBalances() {
+    var data  = ac();
+    var g     = ytdGrowthRate();
+    var balances = [];
+
+    // Jan-Apr: use actuals from sheet
+    var aprClose = null;
+    MONTHS.forEach(function (m, i) {
+      if (i < CURRENT_IDX) {
+        var v = data.closing_balance && data.closing_balance[m];
+        balances.push(v != null ? Math.round(v) : null);
+        if (i === CURRENT_IDX - 1) aprClose = v;
+      }
+    });
+
+    // May-Dec: project from Apr closing using scaled 2025 figures
+    var prev = aprClose || 168446;
+    MONTHS.forEach(function (m, i) {
+      if (i < CURRENT_IDX) return;
+      var rev   = (REV_2025[m]   || 0) * (1 + g);
+      var stock = (STOCK_2025[m] || 0) * (1 + g);
+      var opex  = (COSTS_2025[m] || 0) - (STOCK_2025[m] || 0); // flat — doesn't scale
+      var net   = rev - stock - opex;
+      prev = Math.round(prev + net);
+      balances.push(prev);
+    });
+
+    return balances;
+  }
 
   function fmtGBP(n) {
     if (n == null || isNaN(n)) return '—';
@@ -46,39 +96,54 @@ window.EDEN.components = window.EDEN.components || {};
     var canvas = document.getElementById('fin-cash-canvas');
     if (!canvas || typeof Chart === 'undefined') return;
 
-    var data = ac();
-    var balances = MONTHS.map(function (m) {
+    var data      = ac();
+    var isYTD     = _cashMode === 'ytdpace';
+    var g         = ytdGrowthRate();
+    var gLabel    = (g >= 0 ? '+' : '') + Math.round(g * 100) + '%';
+
+    var currentBalances = MONTHS.map(function (m) {
       var v = data.closing_balance && data.closing_balance[m];
       return v != null ? Math.round(v) : null;
     });
+    var ytdBalances = computeYTDBalances();
 
-    // Bar colours: red below safety, amber below 100k, green above
-    var bgColors = balances.map(function (v, i) {
+    var activeBalances = isYTD ? ytdBalances : currentBalances;
+
+    function barColor(v, i, alpha) {
       if (v === null) return 'rgba(0,0,0,0)';
-      var isActual = i < CURRENT_IDX;
-      var alpha = isActual ? 'cc' : '66';
-      if (v < SAFETY_LOW)   return '#E24B4A' + alpha;
-      if (v < SAFETY_AMBER) return '#BA7517' + alpha;
-      return '#639922' + alpha;
-    });
+      var a = alpha || (i < CURRENT_IDX ? 'cc' : '66');
+      if (v < SAFETY_LOW)   return '#E24B4A' + a;
+      if (v < SAFETY_AMBER) return '#BA7517' + a;
+      return '#639922' + a;
+    }
 
-    var borderColors = bgColors.map(function (c) {
-      return c.substring(0, 7);
-    });
+    var datasets = [{
+      label: isYTD ? 'YTD pace (' + gLabel + ')' : 'Forecast (2025 base)',
+      data: activeBalances,
+      backgroundColor: activeBalances.map(function (v, i) { return barColor(v, i); }),
+      borderColor: activeBalances.map(function (v, i) { return barColor(v, i, 'ff'); }),
+      borderWidth: 1.5,
+      borderRadius: 3,
+    }];
+
+    // In YTD mode overlay the current forecast as a faint line for comparison
+    if (isYTD) {
+      datasets.push({
+        type: 'line',
+        label: 'Current forecast',
+        data: currentBalances,
+        borderColor: 'rgba(130,130,130,0.5)',
+        borderWidth: 1.5,
+        borderDash: [5,4],
+        pointRadius: 2,
+        fill: false,
+        tension: 0.2,
+      });
+    }
 
     _charts['cash'] = new Chart(canvas, {
       type: 'bar',
-      data: {
-        labels: MONTHS,
-        datasets: [{
-          label: 'Closing balance',
-          data: balances,
-          backgroundColor: bgColors,
-          borderColor: borderColors,
-          borderWidth: 1.5,
-          borderRadius: 3,
-        }],
-      },
+      data: { labels: MONTHS, datasets: datasets },
       options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -92,7 +157,9 @@ window.EDEN.components = window.EDEN.components || {};
                 return fmtGBP(v) + status;
               },
               title: function (ctx) {
-                return ctx[0].label + (MONTHS.indexOf(ctx[0].label) >= CURRENT_IDX ? ' (forecast)' : ' (actual)');
+                var idx = MONTHS.indexOf(ctx[0].label);
+                if (idx < CURRENT_IDX) return ctx[0].label + ' (actual)';
+                return ctx[0].label + (isYTD ? ' (YTD pace ' + gLabel + ')' : ' (2025 base forecast)');
               }
             }
           },
@@ -326,6 +393,10 @@ window.EDEN.components = window.EDEN.components || {};
       // Chart 1
       '<div class="fin-card">',
         '<div class="fin-chart-title">Cash balance — month by month',
+          '<div class="fin-toggle-wrap">',
+            '<button id="fin-toggle-current" class="fin-toggle active" onclick="window.EDEN.components.finance._setMode(\'current\')">Current forecast</button>',
+            '<button id="fin-toggle-ytd" class="fin-toggle" onclick="window.EDEN.components.finance._setMode(\'ytdpace\')">If YTD growth continues</button>',
+          '</div>',
           '<span class="fin-chart-legend"><span class="fin-dot" style="background:#639922"></span>Safe',
           ' <span class="fin-dot" style="background:#BA7517"></span>Watch',
           ' <span class="fin-dot" style="background:#E24B4A"></span>Danger',
@@ -373,6 +444,10 @@ window.EDEN.components = window.EDEN.components || {};
       '.fin-chart-legend{font-size:12px;color:var(--GMD);font-weight:400;display:flex;align-items:center;gap:8px;flex-wrap:wrap}',
       '.fin-dot{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle;margin-right:3px}',
       '.fin-swatch{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:middle;margin-right:3px}',
+      '.fin-toggle-wrap{display:flex;gap:6px;margin-left:auto}',
+      '.fin-toggle{padding:5px 14px;font-size:11px;font-family:var(--F);font-weight:600;letter-spacing:.04em;border:1px solid var(--GL);border-radius:3px;background:transparent;color:var(--GMD);cursor:pointer;transition:all .15s}',
+      '.fin-toggle.active{background:var(--G);color:#fff;border-color:var(--G)}',
+      '.fin-toggle:hover:not(.active){background:var(--LG)}',
     ].join('\n');
     document.head.appendChild(s);
   }
@@ -384,6 +459,19 @@ window.EDEN.components = window.EDEN.components || {};
       injectStyles();
       if (!document.getElementById('fin-cash-canvas')) render();
       else { buildCashChart(); buildCostChart(); }
+    },
+    _setMode: function (mode) {
+      _cashMode = mode;
+      var btnC = document.getElementById('fin-toggle-current');
+      var btnY = document.getElementById('fin-toggle-ytd');
+      if (btnC) btnC.classList.toggle('active', mode === 'current');
+      if (btnY) btnY.classList.toggle('active', mode === 'ytdpace');
+      // Update YTD growth label on YTD button
+      if (mode === 'ytdpace' && btnY) {
+        var g = ytdGrowthRate();
+        btnY.textContent = 'If YTD growth continues (' + (g >= 0 ? '+' : '') + Math.round(g * 100) + '%)';
+      }
+      buildCashChart();
     },
   };
 
