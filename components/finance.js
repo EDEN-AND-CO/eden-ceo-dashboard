@@ -1,6 +1,7 @@
 /**
- * EDEN & CO. CEO Flight Deck — Finance Tab
- * Fuel Gauge · Scenario Bar Chart · Rolling Balance Table · Key Dates
+ * EDEN & CO. Finance Tab
+ * Chart 1: Cash balance month by month — where does it dip below safety?
+ * Chart 2: Revenue vs costs (operating + stock split) — is growth profitable?
  */
 window.EDEN = window.EDEN || {};
 window.EDEN.components = window.EDEN.components || {};
@@ -8,302 +9,204 @@ window.EDEN.components = window.EDEN.components || {};
 (function () {
   'use strict';
 
-  // ── Constants ────────────────────────────────────────────────────────────────
-  var FIXED_MONTHLY_BURN = 11665;
-  var DAILY_BURN         = FIXED_MONTHLY_BURN / 30;
-  var DANGER_THRESHOLD   = 40000;
-  var HIGH_THRESHOLD     = 100000;
-  var DEFAULT_BALANCE    = 173849.20;
-  var EXCEPTIONAL = { May:-41754, Jun:-7560, Sep:30000, Dec:-132101 };
+  var SAFETY_LOW    = 40000;   // danger — act now
+  var SAFETY_AMBER  = 100000;  // watch
+  var MONTHS        = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var ACTUAL_MONTHS = ['Jan','Feb','Mar','Apr'];
+  var CURRENT_IDX   = 4; // May = index 4
+
+  // 2025 full-year revenue for comparison line
   var REV_2025 = {
     Jan:16783, Feb:22089, Mar:21376, Apr:25058, May:19666, Jun:19726,
     Jul:22647, Aug:16930, Sep:18114, Oct:32914, Nov:75962, Dec:390941
   };
-  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var ACTUALS_MONTHS = ['Jan','Feb','Mar','Apr'];
 
-  // Three scenarios only — no Blue
-  var SCENARIOS = [
-    { key:'red',    label:'Red',    pct:-10, color:'#E24B4A', bgAlpha:'33' },
-    { key:'orange', label:'Orange', pct:0,   color:'#BA7517', bgAlpha:'33' },
-    { key:'green',  label:'Green',  pct:25,  color:'#639922', bgAlpha:'44' },
-  ];
+  // 2025 stock purchases for comparison
+  var STOCK_2025 = {
+    Jan:23620, Feb:542,   Mar:21338, Apr:6688,  May:7080,  Jun:7375,
+    Jul:2149,  Aug:2157,  Sep:65087, Oct:13352, Nov:71331, Dec:22688
+  };
 
-  var KEY_DATES = [
-    { date:'May 2026',  desc:'Move costs land',           amount:'-£41,754',  sign:-1 },
-    { date:'Jun 2026',  desc:'Remaining move costs',       amount:'-£7,560',   sign:-1 },
-    { date:'Sep 2026',  desc:'Personal loan in',           amount:'+£30,000',  sign:1  },
-    { date:'Oct 2026',  desc:'Production begins',          amount:'Stock committed', sign:0 },
-    { date:'Dec 2026',  desc:'Supplier payments due',      amount:'-£132,101', sign:-1 },
-    { date:'Dec 2026',  desc:'Q4 revenue clears',          amount:'+',         sign:1  },
-    { date:'Jan 2027',  desc:'Nov production invoices',    amount:'-£198,151', sign:-1 },
-  ];
+  var _charts = {};
 
-  var _chart = null;
-  var _incExpChart = null;
+  function ac() { return (window.EDEN && window.EDEN._accounting) || {}; }
 
-  // ── Helpers ──────────────────────────────────────────────────────────────────
   function fmtGBP(n) {
     if (n == null || isNaN(n)) return '—';
     var abs = Math.abs(Math.round(n));
     return (n < 0 ? '-' : '') + '£' + abs.toLocaleString('en-GB');
   }
 
-  function ac() { return (window.EDEN && window.EDEN._accounting) || {}; }
-
-  function getStarlingBalance() {
-    return ac().starling_balance || DEFAULT_BALANCE;
+  function destroyChart(key) {
+    if (_charts[key]) { _charts[key].destroy(); delete _charts[key]; }
   }
 
-  function getSliderPct(i) {
-    var el = document.getElementById('fin-slider-' + i);
-    return el ? parseFloat(el.value) : SCENARIOS[i].pct;
-  }
-
-  // ── Scenario engine ──────────────────────────────────────────────────────────
-  function computeScenario(growthPct) {
-    var data = ac();
-    var balance = getStarlingBalance();
-    var results = [];
-    MONTHS.forEach(function (m) {
-      var isActual = ACTUALS_MONTHS.indexOf(m) !== -1;
-      var net;
-      if (isActual) {
-        var pl = data.pl_actual && data.pl_actual[m];
-        var mv = data.net_movement && data.net_movement[m];
-        net = pl != null ? pl : (mv != null ? mv : 0);
-      } else {
-        var rev = REV_2025[m] * (1 + growthPct / 100);
-        var exc = EXCEPTIONAL[m] || 0;
-        net = rev - FIXED_MONTHLY_BURN + exc;
-      }
-      balance += net;
-      results.push(Math.round(balance));
-    });
-    return results;
-  }
-
-  // ── Fuel Gauge ───────────────────────────────────────────────────────────────
-  function buildGauge() {
-    var balance = getStarlingBalance();
-    var days = Math.round(balance / DAILY_BURN);
-    var color = days >= 90 ? '#639922' : days >= 60 ? '#BA7517' : '#E24B4A';
-    var label = days >= 90 ? 'Safe — race hard' : days >= 60 ? 'Watch spend' : 'Act now';
-
-    var pct = Math.min(1, days / 180);
-    var sweepDeg = pct * 270 - 135;
-    var sweepRad = sweepDeg * Math.PI / 180;
-    var cx = 100, cy = 110, r = 76;
-
-    function pt(deg) {
-      var a = deg * Math.PI / 180;
-      return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
-    }
-
-    var s = pt(-135), e = pt(sweepDeg);
-    var large = pct > 0.5 ? 1 : 0;
-    var track = 'M '+pt(-135).join(' ')+' A '+r+' '+r+' 0 1 1 '+pt(135).join(' ');
-    var fill  = 'M '+s.join(' ')+' A '+r+' '+r+' 0 '+large+' 1 '+e.join(' ');
-
-    var exhaustDate = new Date();
-    exhaustDate.setDate(exhaustDate.getDate() + days);
-    var exhaustStr = exhaustDate.toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'});
-    var sheetDate  = ac().starling_date || '—';
-
-    return [
-      '<div class="fin-gauge-wrap">',
-        '<svg width="200" height="175" viewBox="0 0 200 175">',
-          '<path d="'+track+'" fill="none" stroke="rgba(0,68,55,0.1)" stroke-width="14" stroke-linecap="round"/>',
-          '<path d="'+fill+'" fill="none" stroke="'+color+'" stroke-width="14" stroke-linecap="round"/>',
-          '<text x="100" y="108" text-anchor="middle" font-size="42" font-weight="700" font-family="var(--FM)" fill="'+color+'">'+days+'</text>',
-          '<text x="100" y="132" text-anchor="middle" font-size="12" font-family="var(--F)" fill="var(--GMD)" letter-spacing="0.08em">of runway</text>',
-          '<text x="100" y="153" text-anchor="middle" font-size="11" font-family="var(--F)" fill="'+color+'">'+label+'</text>',
-        '</svg>',
-        '<div class="fin-gauge-stats">',
-          '<div>Cash: <strong>'+fmtGBP(balance)+'</strong></div>',
-          '<div>Runs out: <strong>'+exhaustStr+'</strong></div>',
-          '<div>Q4 lands: <strong>Dec 2026</strong></div>',
-        '</div>',
-        '<div style="margin-top:14px;text-align:center;font-size:11px;color:var(--GMD);line-height:1.6">',
-          'Balance as of '+sheetDate+'<br>',
-          '<span style="opacity:0.7">Update in the Cash Forecast sheet</span>',
-        '</div>',
-      '</div>',
-    ].join('');
-  }
-
-  function updateGauge() {
-    var el = document.getElementById('fin-gauge-container');
-    if (el) el.innerHTML = buildGauge();
-  }
-
-  // ── Scenario Chart (grouped bars + 2025 line) ────────────────────────────────
-  function updateChart() {
-    if (_chart) { _chart.destroy(); _chart = null; }
-    var canvas = document.getElementById('fin-scenario-canvas');
+  // ── Chart 1: Cash Balance ─────────────────────────────────────────────────────
+  function buildCashChart() {
+    destroyChart('cash');
+    var canvas = document.getElementById('fin-cash-canvas');
     if (!canvas || typeof Chart === 'undefined') return;
 
-    var barDatasets = SCENARIOS.map(function (s, i) {
-      var pct = getSliderPct(i);
-      return {
-        type: 'bar',
-        label: s.label + ' (' + (pct >= 0 ? '+' : '') + pct + '%)',
-        data: computeScenario(pct),
-        backgroundColor: s.color + s.bgAlpha,
-        borderColor: s.color,
-        borderWidth: 1.5,
-        borderRadius: 2,
-        order: 2,
-      };
+    var data = ac();
+    var balances = MONTHS.map(function (m) {
+      var v = data.closing_balance && data.closing_balance[m];
+      return v != null ? Math.round(v) : null;
     });
 
-    // 2025 actual closing balances as overlay line
-    var history2025 = [206194,208888,208316,179609,182603,165817,131559,137965,116541,46208,39470,27450];
-    var lineDataset = {
-      type: 'line',
-      label: '2025 actual',
-      data: history2025,
-      borderColor: '#999999',
-      borderWidth: 2,
-      borderDash: [6,4],
-      pointRadius: 3,
-      pointBackgroundColor: '#999',
-      tension: 0.3,
-      fill: false,
-      order: 1,
-    };
+    // Bar colours: red below safety, amber below 100k, green above
+    var bgColors = balances.map(function (v, i) {
+      if (v === null) return 'rgba(0,0,0,0)';
+      var isActual = i < CURRENT_IDX;
+      var alpha = isActual ? 'cc' : '66';
+      if (v < SAFETY_LOW)   return '#E24B4A' + alpha;
+      if (v < SAFETY_AMBER) return '#BA7517' + alpha;
+      return '#639922' + alpha;
+    });
 
-    _chart = new Chart(canvas, {
+    var borderColors = bgColors.map(function (c) {
+      return c.substring(0, 7);
+    });
+
+    _charts['cash'] = new Chart(canvas, {
       type: 'bar',
-      data: { labels: MONTHS, datasets: barDatasets.concat([lineDataset]) },
+      data: {
+        labels: MONTHS,
+        datasets: [{
+          label: 'Closing balance',
+          data: balances,
+          backgroundColor: bgColors,
+          borderColor: borderColors,
+          borderWidth: 1.5,
+          borderRadius: 3,
+        }],
+      },
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        interaction: { mode: 'index', intersect: false },
         plugins: {
-          legend: { position: 'top', labels: { font: { size: 12 }, boxWidth: 14, padding: 16 } },
+          legend: { display: false },
           tooltip: {
             callbacks: {
               label: function (ctx) {
-                return ' ' + ctx.dataset.label + ': ' + fmtGBP(ctx.parsed.y);
+                var v = ctx.parsed.y;
+                var status = v < SAFETY_LOW ? ' ⚠ BELOW SAFETY' : v < SAFETY_AMBER ? ' · watch' : ' · safe';
+                return fmtGBP(v) + status;
+              },
+              title: function (ctx) {
+                return ctx[0].label + (MONTHS.indexOf(ctx[0].label) >= CURRENT_IDX ? ' (forecast)' : ' (actual)');
               }
             }
           },
           annotation: {
             annotations: {
-              currentMonth: {
-                type: 'line', scaleID: 'x', value: 4,
-                borderColor: 'rgba(0,68,55,0.5)', borderWidth: 2,
-                borderDash: [5,4],
-                label: { content: 'Today', display: true, position: 'start', font: { size: 10 }, color: '#004437' }
+              safetyLow: {
+                type: 'line', scaleID: 'y', value: SAFETY_LOW,
+                borderColor: '#E24B4A', borderWidth: 2, borderDash: [6,3],
+                label: { content: '£40k danger', display: true, position: 'start', font: { size: 11, weight: '600' }, color: '#E24B4A', backgroundColor: 'rgba(255,255,255,0.85)', padding: 4 }
+              },
+              safetyAmber: {
+                type: 'line', scaleID: 'y', value: SAFETY_AMBER,
+                borderColor: '#BA7517', borderWidth: 1.5, borderDash: [4,3],
+                label: { content: '£100k watch', display: true, position: 'start', font: { size: 11 }, color: '#BA7517', backgroundColor: 'rgba(255,255,255,0.85)', padding: 4 }
+              },
+              today: {
+                type: 'line', scaleID: 'x', value: CURRENT_IDX,
+                borderColor: 'rgba(0,68,55,0.35)', borderWidth: 2, borderDash: [4,3],
+                label: { content: 'Today', display: true, position: 'start', font: { size: 10 }, color: '#004437', backgroundColor: 'rgba(255,255,255,0.85)', padding: 3 }
               },
               zero: {
                 type: 'line', scaleID: 'y', value: 0,
-                borderColor: '#E24B4A', borderWidth: 1.5, borderDash: [6,3],
-              },
-              danger: {
-                type: 'line', scaleID: 'y', value: DANGER_THRESHOLD,
-                borderColor: '#BA7517', borderWidth: 1, borderDash: [4,3],
-                label: { content: '£40k', display: true, position: 'end', font: { size: 10 }, color: '#BA7517' }
+                borderColor: '#E24B4A', borderWidth: 1, borderDash: [2,2],
               }
             }
           }
         },
         scales: {
-          x: { grid: { color: 'rgba(0,68,55,0.06)' }, ticks: { font: { size: 12 } } },
+          x: {
+            grid: { color: 'rgba(0,68,55,0.06)' },
+            ticks: { font: { size: 13 } }
+          },
           y: {
             grid: { color: 'rgba(0,68,55,0.06)' },
-            ticks: { font: { size: 12 }, callback: function (v) { return '£' + (v/1000).toFixed(0) + 'k'; } }
+            ticks: {
+              font: { size: 13 },
+              callback: function (v) { return '£' + (v / 1000).toFixed(0) + 'k'; }
+            }
           }
         }
       }
     });
   }
 
-  function buildSliders() {
-    return [
-      '<div class="fin-sliders">',
-      SCENARIOS.map(function (s, i) {
-        return [
-          '<div class="fin-slider-row">',
-            '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">',
-              '<div class="fin-slider-dot" style="background:'+s.color+'"></div>',
-              '<span class="fin-slider-lbl" id="fin-slider-lbl-'+i+'">'+s.label+' '+(s.pct>=0?'+':'')+s.pct+'%</span>',
-            '</div>',
-            '<input type="range" id="fin-slider-'+i+'" min="-30" max="50" step="1" value="'+s.pct+'"',
-            ' oninput="window.EDEN.components.finance._onSlider()">',
-          '</div>',
-        ].join('');
-      }).join(''),
-      '</div>',
-    ].join('');
-  }
-
-  function updateSliderLabels() {
-    SCENARIOS.forEach(function (s, i) {
-      var lbl = document.getElementById('fin-slider-lbl-' + i);
-      var val = getSliderPct(i);
-      if (lbl) lbl.textContent = s.label + ' ' + (val >= 0 ? '+' : '') + val + '%';
-    });
-  }
-
-  // ── Income vs Expenses Chart ─────────────────────────────────────────────────
-  function updateIncExpChart() {
-    if (_incExpChart) { _incExpChart.destroy(); _incExpChart = null; }
-    var canvas = document.getElementById('fin-incexp-canvas');
+  // ── Chart 2: Revenue vs Costs (stacked: opex + stock) ────────────────────────
+  function buildCostChart() {
+    destroyChart('cost');
+    var canvas = document.getElementById('fin-cost-canvas');
     if (!canvas || typeof Chart === 'undefined') return;
 
     var data = ac();
-    var income   = MONTHS.map(function (m) { return data.income_actual   && data.income_actual[m]   != null ? Math.round(data.income_actual[m])   : null; });
-    var expenses = MONTHS.map(function (m) { return data.total_expenses  && data.total_expenses[m]  != null ? Math.round(data.total_expenses[m])  : null; });
-    var ratio    = MONTHS.map(function (m, i) {
-      var inc = income[i], exp = expenses[i];
-      return (inc && inc > 0) ? Math.round((exp / inc) * 100) : null;
+
+    var revenue  = MONTHS.map(function (m) { return Math.round(data.income_actual && data.income_actual[m] || REV_2025[m] || 0); });
+    var opex     = MONTHS.map(function (m) { return Math.round(Math.max(0, data.opex_only && data.opex_only[m] != null ? data.opex_only[m] : 0)); });
+    var stock    = MONTHS.map(function (m) { return Math.round(Math.max(0, (data.stock_purchases_2026 && data.stock_purchases_2026[m]) || 0)); });
+    var rev2025  = MONTHS.map(function (m) { return REV_2025[m] || 0; });
+
+    // Actual months solid, forecast lighter
+    var revColors = MONTHS.map(function (m, i) {
+      return i < CURRENT_IDX ? 'rgba(99,153,34,0.85)' : 'rgba(99,153,34,0.4)';
+    });
+    var opexColors = MONTHS.map(function (m, i) {
+      return i < CURRENT_IDX ? 'rgba(0,68,55,0.7)' : 'rgba(0,68,55,0.35)';
+    });
+    var stockColors = MONTHS.map(function (m, i) {
+      return i < CURRENT_IDX ? 'rgba(186,117,23,0.85)' : 'rgba(186,117,23,0.4)';
     });
 
-    _incExpChart = new Chart(canvas, {
+    _charts['cost'] = new Chart(canvas, {
       type: 'bar',
       data: {
         labels: MONTHS,
         datasets: [
           {
             type: 'bar',
-            label: 'Income',
-            data: income,
-            backgroundColor: 'rgba(99,153,34,0.55)',
-            borderColor: '#639922',
-            borderWidth: 1.5,
+            label: 'Revenue',
+            data: revenue,
+            backgroundColor: revColors,
+            borderColor: revColors.map(function(c){return c.replace(/0\.\d+\)/, '1)');}),
+            borderWidth: 1,
             borderRadius: 3,
             order: 2,
-            yAxisID: 'y',
           },
           {
             type: 'bar',
-            label: 'Expenses',
-            data: expenses,
-            backgroundColor: 'rgba(192,57,43,0.45)',
-            borderColor: '#c0392b',
-            borderWidth: 1.5,
-            borderRadius: 3,
-            order: 2,
-            yAxisID: 'y',
+            label: 'Operating costs',
+            data: opex,
+            backgroundColor: opexColors,
+            borderWidth: 0,
+            stack: 'costs',
+            order: 3,
+          },
+          {
+            type: 'bar',
+            label: 'Stock purchases',
+            data: stock,
+            backgroundColor: stockColors,
+            borderWidth: 0,
+            stack: 'costs',
+            order: 3,
           },
           {
             type: 'line',
-            label: 'Expense ratio %',
-            data: ratio,
-            borderColor: '#BA7517',
-            backgroundColor: 'rgba(186,117,23,0.08)',
-            borderWidth: 2.5,
-            pointRadius: 4,
-            pointBackgroundColor: function (ctx) {
-              var v = ctx.parsed && ctx.parsed.y;
-              return v > 100 ? '#c0392b' : '#639922';
-            },
-            tension: 0.35,
+            label: '2025 revenue',
+            data: rev2025,
+            borderColor: 'rgba(150,150,150,0.7)',
+            borderWidth: 2,
+            borderDash: [5,4],
+            pointRadius: 3,
+            pointBackgroundColor: '#aaa',
+            tension: 0.3,
             fill: false,
             order: 1,
-            yAxisID: 'y2',
           },
         ],
       },
@@ -312,262 +215,160 @@ window.EDEN.components = window.EDEN.components || {};
         maintainAspectRatio: false,
         interaction: { mode: 'index', intersect: false },
         plugins: {
-          legend: { position: 'top', labels: { font: { size: 12 }, boxWidth: 14, padding: 16 } },
+          legend: {
+            position: 'top',
+            labels: { font: { size: 12 }, boxWidth: 14, padding: 16 }
+          },
           tooltip: {
             callbacks: {
               label: function (ctx) {
-                if (ctx.dataset.yAxisID === 'y2') return ' Expense ratio: ' + ctx.parsed.y + '%';
                 return ' ' + ctx.dataset.label + ': ' + fmtGBP(ctx.parsed.y);
+              },
+              afterBody: function (ctx) {
+                var idx = ctx[0] && ctx[0].dataIndex;
+                if (idx == null) return;
+                var rev  = revenue[idx]  || 0;
+                var cost = (opex[idx] || 0) + (stock[idx] || 0);
+                if (rev <= 0) return;
+                var ratio = Math.round((cost / rev) * 100);
+                var flag  = ratio > 100 ? ' ⚠ loss month' : ratio > 80 ? ' · tight' : ' · profitable';
+                return ['─────────────', 'Cost ratio: ' + ratio + '%' + flag];
               }
             }
           },
           annotation: {
             annotations: {
-              breakeven: {
-                type: 'line', scaleID: 'y2', value: 100,
-                borderColor: 'rgba(192,57,43,0.5)', borderWidth: 1.5, borderDash: [5,4],
-                label: { content: '100% breakeven', display: true, position: 'start', font: { size: 10 }, color: '#c0392b' }
-              },
-              currentMonth: {
-                type: 'line', scaleID: 'x', value: 4,
-                borderColor: 'rgba(0,68,55,0.4)', borderWidth: 1.5, borderDash: [4,3],
-              },
+              today: {
+                type: 'line', scaleID: 'x', value: CURRENT_IDX,
+                borderColor: 'rgba(0,68,55,0.35)', borderWidth: 2, borderDash: [4,3],
+                label: { content: 'Today', display: true, position: 'start', font: { size: 10 }, color: '#004437', backgroundColor: 'rgba(255,255,255,0.85)', padding: 3 }
+              }
             }
           }
         },
         scales: {
-          x: { grid: { color: 'rgba(0,68,55,0.06)' }, ticks: { font: { size: 12 } } },
-          y: {
-            position: 'left',
+          x: {
             grid: { color: 'rgba(0,68,55,0.06)' },
-            ticks: { font: { size: 12 }, callback: function (v) { return '£' + (v/1000).toFixed(0) + 'k'; } },
-            title: { display: true, text: 'Amount (£)', font: { size: 11 }, color: 'var(--GMD)' },
+            ticks: { font: { size: 13 } }
           },
-          y2: {
-            position: 'right',
-            grid: { drawOnChartArea: false },
+          y: {
+            stacked: false,
+            grid: { color: 'rgba(0,68,55,0.06)' },
             ticks: {
-              font: { size: 12 },
-              callback: function (v) { return v + '%'; },
-              color: function (ctx) { return ctx.tick && ctx.tick.value > 100 ? '#c0392b' : '#639922'; },
-            },
-            title: { display: true, text: 'Expense ratio', font: { size: 11 }, color: '#BA7517' },
-          },
-        },
-      },
+              font: { size: 13 },
+              callback: function (v) { return '£' + (v / 1000).toFixed(0) + 'k'; }
+            }
+          }
+        }
+      }
     });
   }
 
-  // ── Rolling Balance Table ────────────────────────────────────────────────────
-  function renderTable() {
-    var tbody = document.getElementById('fin-table-body');
-    if (!tbody) return;
-    var data = ac();
-    var currentIdx = 4; // May
-
-    var rowDefs = [
-      { key:'net',   label:'Net cash movement',  src:data.net_movement,    size:'normal' },
-      { key:'open',  label:'Opening balance',     src:data.opening_balance, size:'normal' },
-      { key:'close', label:'Closing balance',     src:data.closing_balance, size:'large'  },
-    ];
-
-    // Separator row between actuals and forecast
-    var separatorHtml = '<tr><td colspan="13" style="padding:0;height:2px;background:linear-gradient(90deg,var(--G) 33%,var(--GL) 100%)"></td></tr>';
-
-    var rowsHtml = rowDefs.map(function (row) {
-      var isLarge = row.size === 'large';
-      var cells = MONTHS.map(function (m, idx) {
-        var v = row.src && row.src[m];
-        var isActual = idx < currentIdx;
-        var isCurrent = idx === currentIdx;
-        var fmt = v != null ? fmtGBP(v) : '—';
-
-        // Colour logic
-        var color = '';
-        if (row.key === 'net') {
-          color = v != null ? (v < 0 ? '#c0392b' : '#2e7d32') : '';
-        }
-        if (row.key === 'close') {
-          if (v != null) color = v >= HIGH_THRESHOLD ? '#2e7d32' : v >= DANGER_THRESHOLD ? '#BA7517' : '#c0392b';
-        }
-
-        var opacity = (!isActual && !isCurrent) ? '0.62' : '1';
-        var fontStyle = (!isActual && !isCurrent) ? 'italic' : 'normal';
-        var bg = isCurrent ? 'background:rgba(55,138,221,0.1)' : '';
-
-        // Override check
-        var override = localStorage.getItem('ec_balance_' + m);
-        var displayVal = (override && row.key === 'close') ? fmtGBP(parseFloat(override)) : fmt;
-        var editMark = (override && row.key === 'close') ? '<span style="font-size:9px;color:var(--GOLD);margin-left:3px">✏</span>' : '';
-
-        var tdStyle = [
-          'text-align:right',
-          'padding:' + (isLarge ? '16px 16px' : '12px 16px'),
-          'font-size:' + (isLarge ? '20px' : '15px'),
-          'font-weight:' + (isLarge ? '700' : '400'),
-          'font-family:var(--FM)',
-          'font-style:' + fontStyle,
-          'opacity:' + opacity,
-          color ? 'color:' + color : '',
-          bg,
-          'border-bottom:1px solid var(--GL)',
-          isLarge ? 'letter-spacing:-0.01em' : '',
-        ].filter(Boolean).join(';');
-
-        return '<td style="'+tdStyle+'"' +
-          (row.key==='close' ? ' ondblclick="window.EDEN.components.finance._editCell(\''+m+'\',this)" title="Double-click to override"' : '') +
-          '>'+displayVal+editMark+'</td>';
-      }).join('');
-
-      var thStyle = 'padding:'+(isLarge?'16px 16px':'12px 16px')+';font-size:'+(isLarge?'18px':'15px')+';font-weight:'+(isLarge?'700':'400')+';white-space:nowrap;border-bottom:1px solid var(--GL);color:var(--G)';
-      return '<tr><td style="'+thStyle+'">'+row.label+'</td>'+cells+'</tr>';
-    });
-
-    // Insert separator after row index 1 (between opening and closing)
-    rowsHtml.splice(2, 0, '');
-    tbody.innerHTML = rowsHtml.join(separatorHtml);
-  }
-
-  // ── Key Dates ────────────────────────────────────────────────────────────────
-  function buildKeyDates() {
-    return KEY_DATES.map(function (d) {
-      var color = d.sign > 0 ? '#2e7d32' : d.sign < 0 ? '#c0392b' : 'var(--GMD)';
-      return [
-        '<div class="fin-keydate-row">',
-          '<span class="fin-keydate-date">'+d.date+'</span>',
-          '<span class="fin-keydate-desc">'+d.desc+'</span>',
-          '<span class="fin-keydate-amount" style="color:'+color+'">'+d.amount+'</span>',
-        '</div>',
-      ].join('');
-    }).join('');
-  }
-
-  // ── Full render ──────────────────────────────────────────────────────────────
+  // ── Render ────────────────────────────────────────────────────────────────────
   function render() {
     var root = document.getElementById('finance-root');
     if (!root) return;
 
+    var data = ac();
+    var starlingBalance = data.starling_balance || 173849;
+    var starlingDate    = data.starling_date    || '—';
+    var lowestMonth     = data.lowest_month     || '—';
+    var lowestAmt       = data.lowest_amount;
+
+    // Summary strip
+    var lowestColor = lowestAmt != null && lowestAmt < SAFETY_LOW ? '#E24B4A' : lowestAmt < SAFETY_AMBER ? '#BA7517' : '#639922';
+
     root.innerHTML = [
-      // Top row
-      '<div class="fin-top-row">',
-        '<div class="fin-card fin-gauge-card">',
-          '<div class="fin-section-label">Runway</div>',
-          '<div id="fin-gauge-container">'+buildGauge()+'</div>',
+
+      // Summary strip
+      '<div class="fin-summary-strip">',
+        '<div class="fin-summary-item">',
+          '<div class="fin-summary-label">Starling balance</div>',
+          '<div class="fin-summary-val">'+fmtGBP(starlingBalance)+'</div>',
+          '<div class="fin-summary-sub">as of '+starlingDate+'</div>',
         '</div>',
-        '<div class="fin-card">',
-          '<div class="fin-section-label">Key dates</div>',
-          buildKeyDates(),
+        '<div class="fin-summary-sep"></div>',
+        '<div class="fin-summary-item">',
+          '<div class="fin-summary-label">Lowest projected</div>',
+          '<div class="fin-summary-val" style="color:'+lowestColor+'">'+fmtGBP(lowestAmt)+'</div>',
+          '<div class="fin-summary-sub">'+lowestMonth+'</div>',
+        '</div>',
+        '<div class="fin-summary-sep"></div>',
+        '<div class="fin-summary-item">',
+          '<div class="fin-summary-label">Safety threshold</div>',
+          '<div class="fin-summary-val">£40k</div>',
+          '<div class="fin-summary-sub">danger line</div>',
+        '</div>',
+        '<div class="fin-summary-sep"></div>',
+        '<div class="fin-summary-item">',
+          '<div class="fin-summary-label">Q4 revenue lands</div>',
+          '<div class="fin-summary-val">Dec 2026</div>',
+          '<div class="fin-summary-sub">plan for Sep stock buy</div>',
         '</div>',
       '</div>',
 
-      // Scenario chart
+      // Chart 1
       '<div class="fin-card">',
-        '<div class="fin-section-label">Cash balance forecast</div>',
-        '<div style="height:340px;position:relative"><canvas id="fin-scenario-canvas"></canvas></div>',
-        buildSliders(),
+        '<div class="fin-chart-title">Cash balance — month by month',
+          '<span class="fin-chart-legend"><span class="fin-dot" style="background:#639922"></span>Safe',
+          ' <span class="fin-dot" style="background:#BA7517"></span>Watch',
+          ' <span class="fin-dot" style="background:#E24B4A"></span>Danger',
+          ' <span style="opacity:0.5;font-size:11px;margin-left:8px">Solid = actual · Faded = forecast</span></span>',
+        '</div>',
+        '<div style="height:360px;position:relative"><canvas id="fin-cash-canvas"></canvas></div>',
       '</div>',
 
-      // Income vs Expenses chart
+      // Chart 2
       '<div class="fin-card">',
-        '<div class="fin-section-label">Income vs expenses — monthly</div>',
-        '<div style="height:320px;position:relative"><canvas id="fin-incexp-canvas"></canvas></div>',
-      '</div>',
-
-      // Rolling table
-      '<div class="fin-card">',
-        '<div class="fin-section-label">',
-          'Rolling bank balance',
-          '<span style="font-size:10px;font-weight:400;color:var(--GMD);margin-left:10px;letter-spacing:0">',
-            'Solid = actual · Italic = forecast · Double-click closing to override',
+        '<div class="fin-chart-title">Revenue vs costs — month by month',
+          '<span class="fin-chart-legend">',
+            '<span class="fin-swatch" style="background:rgba(99,153,34,0.85)"></span>Revenue 2026',
+            ' <span class="fin-swatch" style="background:rgba(0,68,55,0.7)"></span>Operating costs',
+            ' <span class="fin-swatch" style="background:rgba(186,117,23,0.85)"></span>Stock purchases',
+            ' <span style="opacity:0.5;font-size:11px;margin-left:8px">Grey line = 2025 revenue · Faded = forecast · Hover for cost ratio</span>',
           '</span>',
         '</div>',
-        '<div style="overflow-x:auto">',
-          '<table style="width:100%;border-collapse:collapse">',
-            '<thead><tr>',
-              '<th style="text-align:left;padding:12px 16px;border-bottom:2px solid var(--G);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--GMD);white-space:nowrap">Label</th>',
-              MONTHS.map(function(m,i){
-                var hl = i===4?'background:rgba(55,138,221,0.1)':'';
-                return '<th style="text-align:right;padding:12px 16px;border-bottom:2px solid var(--G);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--GMD);'+hl+'">'+m+'</th>';
-              }).join(''),
-            '</tr></thead>',
-            '<tbody id="fin-table-body"></tbody>',
-          '</table>',
-        '</div>',
+        '<div style="height:360px;position:relative"><canvas id="fin-cost-canvas"></canvas></div>',
       '</div>',
+
     ].join('');
 
-    renderTable();
-    setTimeout(updateChart, 50);
-    setTimeout(updateIncExpChart, 80);
+    setTimeout(function () {
+      buildCashChart();
+      buildCostChart();
+    }, 50);
   }
 
-  // ── Styles ───────────────────────────────────────────────────────────────────
+  // ── Styles ────────────────────────────────────────────────────────────────────
   function injectStyles() {
     if (document.getElementById('fin-styles')) return;
     var s = document.createElement('style');
     s.id = 'fin-styles';
     s.textContent = [
-      '#finance-root{display:flex;flex-direction:column;gap:28px;padding:8px 0 40px}',
-      '.fin-top-row{display:grid;grid-template-columns:260px 1fr;gap:28px}',
+      '#finance-root{display:flex;flex-direction:column;gap:28px;padding:8px 0 48px}',
+      '.fin-summary-strip{display:flex;align-items:center;background:var(--W);border:1px solid var(--GL);border-radius:6px;padding:20px 28px;gap:0}',
+      '.fin-summary-item{flex:1;text-align:center}',
+      '.fin-summary-sep{width:1px;height:48px;background:var(--GL);flex-shrink:0;margin:0 4px}',
+      '.fin-summary-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--GMD);margin-bottom:6px;font-family:var(--F)}',
+      '.fin-summary-val{font-size:22px;font-weight:700;font-family:var(--FM);color:var(--G);line-height:1}',
+      '.fin-summary-sub{font-size:11px;color:var(--GMD);margin-top:5px}',
       '.fin-card{background:var(--W);border:1px solid var(--GL);border-radius:6px;padding:24px 28px}',
-      '.fin-section-label{font-family:var(--F);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--GMD);margin-bottom:20px}',
-      '.fin-gauge-wrap{display:flex;flex-direction:column;align-items:center}',
-      '.fin-gauge-stats{font-size:13px;color:var(--GMD);text-align:center;line-height:2.2;margin-top:6px}',
-      '.fin-gauge-stats strong{color:var(--G);font-family:var(--FM)}',
-      '.fin-gauge-input{margin-top:18px;text-align:center;width:100%}',
-      '.fin-gauge-input label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--GMD)}',
-      '.fin-badge{font-size:9px;font-weight:700;letter-spacing:.06em;padding:2px 7px;border-radius:3px;vertical-align:middle}',
-      '.fin-badge-live{background:rgba(99,153,34,0.15);color:#639922}',
-      '.fin-badge-manual{background:rgba(186,117,23,0.15);color:#BA7517}',
-      '.fin-keydate-row{display:grid;grid-template-columns:90px 1fr auto;gap:10px;padding:11px 0;border-bottom:1px solid var(--GL);align-items:center;font-size:13px}',
-      '.fin-keydate-date{font-family:var(--FM);font-size:11px;color:var(--GMD);white-space:nowrap}',
-      '.fin-keydate-desc{color:var(--G)}',
-      '.fin-keydate-amount{font-family:var(--FM);font-size:13px;font-weight:600;text-align:right;white-space:nowrap}',
-      '.fin-sliders{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:20px;padding-top:20px;border-top:1px solid var(--GL)}',
-      '.fin-slider-row{display:flex;flex-direction:column}',
-      '.fin-slider-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}',
-      '.fin-slider-lbl{font-family:var(--F);font-size:12px;font-weight:600;color:var(--G)}',
-      'input[type=range]{width:100%;accent-color:var(--G);margin-top:4px}',
+      '.fin-chart-title{font-size:14px;font-weight:600;color:var(--G);margin-bottom:20px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-family:var(--F)}',
+      '.fin-chart-legend{font-size:12px;color:var(--GMD);font-weight:400;display:flex;align-items:center;gap:8px;flex-wrap:wrap}',
+      '.fin-dot{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle;margin-right:3px}',
+      '.fin-swatch{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:middle;margin-right:3px}',
     ].join('\n');
     document.head.appendChild(s);
   }
 
-  // ── Public ───────────────────────────────────────────────────────────────────
-  var component = {
+  // ── Public ────────────────────────────────────────────────────────────────────
+  window.EDEN.components.finance = {
     render: render,
-
     init: function () {
       injectStyles();
-      var root = document.getElementById('finance-root');
-      if (!root) return;
-      if (!document.getElementById('fin-gauge-container')) {
-        render();
-      } else {
-        updateGauge();
-        updateChart();
-        updateIncExpChart();
-        renderTable();
-      }
-    },
-
-    _onSlider: function () {
-      updateSliderLabels();
-      if (this._t) clearTimeout(this._t);
-      this._t = setTimeout(function () { updateChart(); }, 100);
-    },
-
-    _saveBalance: function () {}, // no-op — balance updated in sheet
-    _editCell: function (month) {
-      var current = ac().closing_balance && ac().closing_balance[month];
-      var stored = localStorage.getItem('ec_balance_' + month);
-      var val = prompt('Override closing balance for ' + month + ':', stored || Math.round(current || 0));
-      if (val === null) return;
-      if (val === '') localStorage.removeItem('ec_balance_' + month);
-      else localStorage.setItem('ec_balance_' + month, val);
-      renderTable();
+      if (!document.getElementById('fin-cash-canvas')) render();
+      else { buildCashChart(); buildCostChart(); }
     },
   };
-
-  window.EDEN.components.finance = component;
 
 })();

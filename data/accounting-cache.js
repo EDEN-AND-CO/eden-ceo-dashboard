@@ -1,10 +1,10 @@
 // EDEN Accounting Cache — DASHBOARD tab, Cash Forecast Google Sheet
-// Generated: 2026-05-22T14:10:59Z
+// Generated: 2026-05-22T16:11:47Z
 // Source: https://docs.google.com/spreadsheets/d/14mTkKDJ9wmOq3tyOsmH5RoAzda_gHFQQx2K2QuF4PRM/edit?gid=137937925
 // Do not edit manually. Run: python3 scripts/build-accounting-cache.py
 window.EDEN = window.EDEN || {};
 window.EDEN._accounting = {
-  "generated": "2026-05-22T14:10:59Z",
+  "generated": "2026-05-22T16:11:47Z",
   "months": [
     "Jan",
     "Feb",
@@ -130,6 +130,48 @@ window.EDEN._accounting = {
     "Oct": 33092.380000000005,
     "Nov": 107915.22,
     "Dec": 214454.75
+  },
+  "opex_only": {
+    "Jan": 47097.93000000001,
+    "Feb": 23332.07,
+    "Mar": 29508.21,
+    "Apr": 28365.850000000002,
+    "May": 23894.46,
+    "Jun": 35675.1,
+    "Jul": 23337.129999999997,
+    "Aug": 22888.16,
+    "Sep": 98521.45000000001,
+    "Oct": 33092.380000000005,
+    "Nov": 107915.22,
+    "Dec": 214454.75
+  },
+  "stock_purchases_2026": {
+    "Jan": 29207.92,
+    "Feb": 11693.44,
+    "Mar": 3882.82,
+    "Apr": 2837.41,
+    "May": null,
+    "Jun": null,
+    "Jul": null,
+    "Aug": null,
+    "Sep": null,
+    "Oct": null,
+    "Nov": null,
+    "Dec": null
+  },
+  "stock_purchases_2025": {
+    "Jan": 23620.09,
+    "Feb": 542.14,
+    "Mar": 21337.57,
+    "Apr": 6688.4,
+    "May": 7079.6,
+    "Jun": 7375.14,
+    "Jul": 2149.4,
+    "Aug": 2157.09,
+    "Sep": 65086.93,
+    "Oct": 13352.39,
+    "Nov": 71330.84,
+    "Dec": 22687.84
   },
   "starling_balance": 173849.2,
   "starling_date": "22 May 2026",
