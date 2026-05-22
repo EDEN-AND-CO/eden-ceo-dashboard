@@ -1,7 +1,6 @@
 /**
  * EDEN & CO. CEO Flight Deck — Finance Tab
- * Four components: Fuel Gauge · Scenario Chart · Rolling Balance Table · Key Dates
- * Data: window.EDEN._accounting (from accounting-cache.js, source: Cash Forecast Google Sheet)
+ * Fuel Gauge · Scenario Bar Chart · Rolling Balance Table · Key Dates
  */
 window.EDEN = window.EDEN || {};
 window.EDEN.components = window.EDEN.components || {};
@@ -10,21 +9,24 @@ window.EDEN.components = window.EDEN.components || {};
   'use strict';
 
   // ── Constants ────────────────────────────────────────────────────────────────
-  var FIXED_MONTHLY_BURN   = 11665;
-  var DANGER_THRESHOLD     = 40000;
+  var FIXED_MONTHLY_BURN = 11665;
+  var DAILY_BURN         = FIXED_MONTHLY_BURN / 30;
+  var DANGER_THRESHOLD   = 40000;
+  var HIGH_THRESHOLD     = 100000;
+  var DEFAULT_BALANCE    = 173849.20;
   var EXCEPTIONAL = { May:-41754, Jun:-7560, Sep:30000, Dec:-132101 };
   var REV_2025 = {
     Jan:16783, Feb:22089, Mar:21376, Apr:25058, May:19666, Jun:19726,
     Jul:22647, Aug:16930, Sep:18114, Oct:32914, Nov:75962, Dec:390941
   };
   var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var ACTUALS_MONTHS = ['Jan','Feb','Mar','Apr']; // months with 2026 confirmed actuals
+  var ACTUALS_MONTHS = ['Jan','Feb','Mar','Apr'];
 
+  // Three scenarios only — no Blue
   var SCENARIOS = [
-    { key:'red',    label:'Red',    pct:-10, color:'#E24B4A' },
-    { key:'orange', label:'Orange', pct:0,   color:'#BA7517' },
-    { key:'blue',   label:'Blue',   pct:20,  color:'#378ADD' },
-    { key:'green',  label:'Green',  pct:25,  color:'#639922' },
+    { key:'red',    label:'Red',    pct:-10, color:'#E24B4A', bgAlpha:'33' },
+    { key:'orange', label:'Orange', pct:0,   color:'#BA7517', bgAlpha:'33' },
+    { key:'green',  label:'Green',  pct:25,  color:'#639922', bgAlpha:'44' },
   ];
 
   var KEY_DATES = [
@@ -37,7 +39,7 @@ window.EDEN.components = window.EDEN.components || {};
     { date:'Jan 2027',  desc:'Nov production invoices',    amount:'-£198,151', sign:-1 },
   ];
 
-  var _scenarioChart = null;
+  var _chart = null;
 
   // ── Helpers ──────────────────────────────────────────────────────────────────
   function fmtGBP(n) {
@@ -48,9 +50,16 @@ window.EDEN.components = window.EDEN.components || {};
 
   function ac() { return (window.EDEN && window.EDEN._accounting) || {}; }
 
+  // Fix: validate stored balance — reject anything implausible (< 1000 or > 10M)
   function getStarlingBalance() {
     var stored = localStorage.getItem('ec_starling_balance');
-    return stored !== null ? parseFloat(stored) : (ac().starling_balance || 173849);
+    if (stored !== null) {
+      var v = parseFloat(stored);
+      if (!isNaN(v) && v >= 1000 && v <= 10000000) return v;
+      // Bad value in storage — clear it
+      localStorage.removeItem('ec_starling_balance');
+    }
+    return ac().starling_balance || DEFAULT_BALANCE;
   }
 
   function getSliderPct(i) {
@@ -59,87 +68,76 @@ window.EDEN.components = window.EDEN.components || {};
   }
 
   // ── Scenario engine ──────────────────────────────────────────────────────────
-  // Returns array of 12 closing balances for a given growth %
   function computeScenario(growthPct) {
     var data = ac();
     var balance = getStarlingBalance();
     var results = [];
-
-    MONTHS.forEach(function (m, i) {
+    MONTHS.forEach(function (m) {
       var isActual = ACTUALS_MONTHS.indexOf(m) !== -1;
       var net;
-
       if (isActual) {
-        // Use sheet actual net movement
-        var actual = data.net_movement && data.net_movement[m];
-        // Jan-Apr actuals: use pl_actual which reflects real P&L
         var pl = data.pl_actual && data.pl_actual[m];
-        net = (pl != null) ? pl : (actual != null ? actual : 0);
+        var mv = data.net_movement && data.net_movement[m];
+        net = pl != null ? pl : (mv != null ? mv : 0);
       } else {
-        // Forecast: revenue based on 2025 * (1 + growth%) + fixed costs
         var rev = REV_2025[m] * (1 + growthPct / 100);
         var exc = EXCEPTIONAL[m] || 0;
         net = rev - FIXED_MONTHLY_BURN + exc;
       }
-
       balance += net;
       results.push(Math.round(balance));
     });
-
     return results;
   }
 
   // ── Fuel Gauge ───────────────────────────────────────────────────────────────
   function buildGauge() {
     var balance = getStarlingBalance();
-    var dailyBurn = FIXED_MONTHLY_BURN / 30;
-    var days = Math.round(balance / dailyBurn);
-
+    var days = Math.round(balance / DAILY_BURN);
     var color = days >= 90 ? '#639922' : days >= 60 ? '#BA7517' : '#E24B4A';
     var label = days >= 90 ? 'Safe — race hard' : days >= 60 ? 'Watch spend' : 'Act now';
 
-    var pct = Math.min(1, days / 180); // 180d = full gauge
-    var angle = pct * 270 - 135; // -135deg to +135deg sweep
-    var rad = angle * Math.PI / 180;
-    var cx = 100, cy = 110, r = 80;
-    var startAngle = -135 * Math.PI / 180;
-    var endAngle   = (angle) * Math.PI / 180;
+    var pct = Math.min(1, days / 180);
+    var sweepDeg = pct * 270 - 135;
+    var sweepRad = sweepDeg * Math.PI / 180;
+    var cx = 100, cy = 110, r = 76;
 
-    function arcPoint(a) {
+    function pt(deg) {
+      var a = deg * Math.PI / 180;
       return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
     }
 
-    var s = arcPoint(startAngle), e = arcPoint(endAngle);
+    var s = pt(-135), e = pt(sweepDeg);
     var large = pct > 0.5 ? 1 : 0;
-    var trackPath  = 'M ' + arcPoint(-135*Math.PI/180).join(' ') + ' A ' + r + ' ' + r + ' 0 1 1 ' + arcPoint(135*Math.PI/180).join(' ');
-    var fillPath   = 'M ' + s.join(' ') + ' A ' + r + ' ' + r + ' 0 ' + large + ' 1 ' + e.join(' ');
+    var track = 'M '+pt(-135).join(' ')+' A '+r+' '+r+' 0 1 1 '+pt(135).join(' ');
+    var fill  = 'M '+s.join(' ')+' A '+r+' '+r+' 0 '+large+' 1 '+e.join(' ');
 
     var exhaustDate = new Date();
     exhaustDate.setDate(exhaustDate.getDate() + days);
-    var exhaustStr = exhaustDate.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+    var exhaustStr = exhaustDate.toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'});
 
     var starlingDate = ac().starling_date || '';
-    var badge = '<span class="fin-badge fin-badge-live">LIVE</span>';
 
     return [
       '<div class="fin-gauge-wrap">',
-        '<svg width="200" height="170" viewBox="0 0 200 170">',
-          '<path d="' + trackPath + '" fill="none" stroke="rgba(0,68,55,0.1)" stroke-width="14" stroke-linecap="round"/>',
-          '<path d="' + fillPath + '" fill="none" stroke="' + color + '" stroke-width="14" stroke-linecap="round"/>',
-          '<text x="100" y="108" text-anchor="middle" font-size="38" font-weight="700" font-family="var(--FM)" fill="' + color + '">' + days + '</text>',
-          '<text x="100" y="130" text-anchor="middle" font-size="11" font-family="var(--F)" fill="var(--GMD)" letter-spacing="0.1em">of runway</text>',
-          '<text x="100" y="150" text-anchor="middle" font-size="10" font-family="var(--F)" fill="' + color + '">' + label + '</text>',
+        '<svg width="200" height="175" viewBox="0 0 200 175">',
+          '<path d="'+track+'" fill="none" stroke="rgba(0,68,55,0.1)" stroke-width="14" stroke-linecap="round"/>',
+          '<path d="'+fill+'" fill="none" stroke="'+color+'" stroke-width="14" stroke-linecap="round"/>',
+          '<text x="100" y="108" text-anchor="middle" font-size="42" font-weight="700" font-family="var(--FM)" fill="'+color+'">'+days+'</text>',
+          '<text x="100" y="132" text-anchor="middle" font-size="12" font-family="var(--F)" fill="var(--GMD)" letter-spacing="0.08em">of runway</text>',
+          '<text x="100" y="153" text-anchor="middle" font-size="11" font-family="var(--F)" fill="'+color+'">'+label+'</text>',
         '</svg>',
         '<div class="fin-gauge-stats">',
-          '<div>Cash today: <strong>' + fmtGBP(balance) + '</strong> ' + badge + '</div>',
-          '<div>Fuel runs out: <strong>' + exhaustStr + '</strong></div>',
+          '<div>Cash today: <strong>'+fmtGBP(balance)+'</strong> <span class="fin-badge fin-badge-live">LIVE</span></div>',
+          '<div>Fuel runs out: <strong>'+exhaustStr+'</strong></div>',
           '<div>Q4 revenue lands: <strong>Dec 2026</strong></div>',
         '</div>',
         '<div class="fin-gauge-input">',
           '<label>Update Starling balance</label>',
-          '<div style="display:flex;gap:8px;align-items:center;margin-top:6px">',
-            '<input type="number" id="fin-starling-input" value="' + Math.round(balance) + '" step="100" style="width:130px;padding:5px 8px;font-size:13px;border:1px solid var(--GL);border-radius:3px;font-family:var(--FM)">',
-            '<span style="font-size:11px;color:var(--GMD)">As of ' + (starlingDate || 'today') + '</span>',
+          '<div style="display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap">',
+            '<input type="number" id="fin-starling-input" value="'+Math.round(balance)+'" step="100"',
+            ' style="width:140px;padding:7px 10px;font-size:14px;border:1px solid var(--GL);border-radius:3px;font-family:var(--FM)">',
+            starlingDate ? '<span style="font-size:11px;color:var(--GMD)">as of '+starlingDate+'</span>' : '',
           '</div>',
         '</div>',
       '</div>',
@@ -154,77 +152,78 @@ window.EDEN.components = window.EDEN.components || {};
 
   function attachGaugeListener() {
     var inp = document.getElementById('fin-starling-input');
-    if (!inp) return;
+    if (!inp || inp._wired) return;
+    inp._wired = true;
     inp.addEventListener('input', function () {
       var v = parseFloat(this.value);
-      if (!isNaN(v) && v > 0) {
+      if (!isNaN(v) && v >= 1000) {
         localStorage.setItem('ec_starling_balance', String(v));
         updateGauge();
-        updateScenarioChart();
+        updateChart();
         renderTable();
       }
     });
   }
 
-  // ── Scenario Chart ───────────────────────────────────────────────────────────
-  function updateScenarioChart() {
-    if (_scenarioChart) { _scenarioChart.destroy(); _scenarioChart = null; }
+  // ── Scenario Chart (grouped bars + 2025 line) ────────────────────────────────
+  function updateChart() {
+    if (_chart) { _chart.destroy(); _chart = null; }
     var canvas = document.getElementById('fin-scenario-canvas');
     if (!canvas || typeof Chart === 'undefined') return;
 
-    var datasets = SCENARIOS.map(function (s, i) {
+    var barDatasets = SCENARIOS.map(function (s, i) {
       var pct = getSliderPct(i);
-      var vals = computeScenario(pct);
       return {
+        type: 'bar',
         label: s.label + ' (' + (pct >= 0 ? '+' : '') + pct + '%)',
-        data: vals,
+        data: computeScenario(pct),
+        backgroundColor: s.color + s.bgAlpha,
         borderColor: s.color,
-        backgroundColor: s.color + '15',
-        borderWidth: 2.5,
-        pointRadius: 3,
-        pointHoverRadius: 5,
-        tension: 0.3,
-        fill: false,
+        borderWidth: 1.5,
+        borderRadius: 2,
+        order: 2,
       };
     });
 
-    // 2025 comparison line (actual Starling closing balances baked in)
+    // 2025 actual closing balances as overlay line
     var history2025 = [206194,208888,208316,179609,182603,165817,131559,137965,116541,46208,39470,27450];
-    datasets.push({
+    var lineDataset = {
+      type: 'line',
       label: '2025 actual',
       data: history2025,
-      borderColor: '#aaaaaa',
-      borderWidth: 1.5,
+      borderColor: '#999999',
+      borderWidth: 2,
       borderDash: [6,4],
-      pointRadius: 2,
+      pointRadius: 3,
+      pointBackgroundColor: '#999',
       tension: 0.3,
       fill: false,
-    });
+      order: 1,
+    };
 
-    var currentMonthIdx = 4; // May (0-indexed)
-
-    _scenarioChart = new Chart(canvas, {
-      type: 'line',
-      data: { labels: MONTHS, datasets: datasets },
+    _chart = new Chart(canvas, {
+      type: 'bar',
+      data: { labels: MONTHS, datasets: barDatasets.concat([lineDataset]) },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         interaction: { mode: 'index', intersect: false },
         plugins: {
-          legend: { position: 'top', labels: { font: { size: 11 }, boxWidth: 18 } },
+          legend: { position: 'top', labels: { font: { size: 12 }, boxWidth: 14, padding: 16 } },
           tooltip: {
             callbacks: {
               label: function (ctx) {
-                return ctx.dataset.label + ': ' + fmtGBP(ctx.parsed.y);
+                return ' ' + ctx.dataset.label + ': ' + fmtGBP(ctx.parsed.y);
               }
             }
           },
           annotation: {
             annotations: {
               currentMonth: {
-                type: 'line', scaleID: 'x', value: currentMonthIdx,
-                borderColor: 'rgba(0,68,55,0.4)', borderWidth: 1.5,
-                borderDash: [4,3], label: { content: 'Today', display: true, position: 'start', font: { size: 10 } }
+                type: 'line', scaleID: 'x', value: 4,
+                borderColor: 'rgba(0,68,55,0.5)', borderWidth: 2,
+                borderDash: [5,4],
+                label: { content: 'Today', display: true, position: 'start', font: { size: 10 }, color: '#004437' }
               },
               zero: {
                 type: 'line', scaleID: 'y', value: 0,
@@ -233,18 +232,16 @@ window.EDEN.components = window.EDEN.components || {};
               danger: {
                 type: 'line', scaleID: 'y', value: DANGER_THRESHOLD,
                 borderColor: '#BA7517', borderWidth: 1, borderDash: [4,3],
+                label: { content: '£40k', display: true, position: 'end', font: { size: 10 }, color: '#BA7517' }
               }
             }
           }
         },
         scales: {
-          x: { grid: { color: 'rgba(0,68,55,0.07)' }, ticks: { font: { size: 11 } } },
+          x: { grid: { color: 'rgba(0,68,55,0.06)' }, ticks: { font: { size: 12 } } },
           y: {
-            grid: { color: 'rgba(0,68,55,0.07)' },
-            ticks: {
-              font: { size: 11 },
-              callback: function (v) { return '£' + (v/1000).toFixed(0) + 'k'; }
-            }
+            grid: { color: 'rgba(0,68,55,0.06)' },
+            ticks: { font: { size: 12 }, callback: function (v) { return '£' + (v/1000).toFixed(0) + 'k'; } }
           }
         }
       }
@@ -252,16 +249,22 @@ window.EDEN.components = window.EDEN.components || {};
   }
 
   function buildSliders() {
-    return SCENARIOS.map(function (s, i) {
-      return [
-        '<div class="fin-slider-row">',
-          '<div class="fin-slider-dot" style="background:' + s.color + '"></div>',
-          '<span class="fin-slider-lbl" id="fin-slider-lbl-' + i + '">' + s.label + ' ' + (s.pct >= 0 ? '+' : '') + s.pct + '%</span>',
-          '<input type="range" id="fin-slider-' + i + '" min="-30" max="50" step="1" value="' + s.pct + '"',
-          ' oninput="window.EDEN.components.finance._onSlider()">',
-        '</div>',
-      ].join('');
-    }).join('');
+    return [
+      '<div class="fin-sliders">',
+      SCENARIOS.map(function (s, i) {
+        return [
+          '<div class="fin-slider-row">',
+            '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">',
+              '<div class="fin-slider-dot" style="background:'+s.color+'"></div>',
+              '<span class="fin-slider-lbl" id="fin-slider-lbl-'+i+'">'+s.label+' '+(s.pct>=0?'+':'')+s.pct+'%</span>',
+            '</div>',
+            '<input type="range" id="fin-slider-'+i+'" min="-30" max="50" step="1" value="'+s.pct+'"',
+            ' oninput="window.EDEN.components.finance._onSlider()">',
+          '</div>',
+        ].join('');
+      }).join(''),
+      '</div>',
+    ].join('');
   }
 
   function updateSliderLabels() {
@@ -277,52 +280,79 @@ window.EDEN.components = window.EDEN.components || {};
     var tbody = document.getElementById('fin-table-body');
     if (!tbody) return;
     var data = ac();
-    var currentMonthIdx = 4; // May
+    var currentIdx = 4; // May
 
-    var rows = [
-      { key: 'net',     label: 'Net cash movement', src: data.net_movement },
-      { key: 'open',    label: 'Opening balance',   src: data.opening_balance },
-      { key: 'close',   label: 'Closing balance',   src: data.closing_balance, bold: true },
+    var rowDefs = [
+      { key:'net',   label:'Net cash movement',  src:data.net_movement,    size:'normal' },
+      { key:'open',  label:'Opening balance',     src:data.opening_balance, size:'normal' },
+      { key:'close', label:'Closing balance',     src:data.closing_balance, size:'large'  },
     ];
 
-    tbody.innerHTML = rows.map(function (row) {
+    // Separator row between actuals and forecast
+    var separatorHtml = '<tr><td colspan="13" style="padding:0;height:2px;background:linear-gradient(90deg,var(--G) 33%,var(--GL) 100%)"></td></tr>';
+
+    var rowsHtml = rowDefs.map(function (row) {
+      var isLarge = row.size === 'large';
       var cells = MONTHS.map(function (m, idx) {
         var v = row.src && row.src[m];
-        var isActual = idx < currentMonthIdx;
-        var isCurrent = idx === currentMonthIdx;
+        var isActual = idx < currentIdx;
+        var isCurrent = idx === currentIdx;
         var fmt = v != null ? fmtGBP(v) : '—';
 
-        var style = '';
-        if (row.key === 'net' && v != null) style = v < 0 ? 'color:var(--RED)' : 'color:var(--OK)';
-        if (row.key === 'close' && v != null && v < DANGER_THRESHOLD) style = 'color:var(--RED);font-weight:700';
-        if (!isActual && !isCurrent) style += (style ? ';' : '') + 'opacity:0.6;font-style:italic';
-        if (row.bold) style += (style ? ';' : '') + 'font-weight:600';
+        // Colour logic
+        var color = '';
+        if (row.key === 'net') {
+          color = v != null ? (v < 0 ? '#c0392b' : '#2e7d32') : '';
+        }
+        if (row.key === 'close') {
+          if (v != null) color = v >= HIGH_THRESHOLD ? '#2e7d32' : v >= DANGER_THRESHOLD ? '#BA7517' : '#c0392b';
+        }
 
-        var bg = isCurrent ? 'background:rgba(55,138,221,0.08)' : '';
+        var opacity = (!isActual && !isCurrent) ? '0.62' : '1';
+        var fontStyle = (!isActual && !isCurrent) ? 'italic' : 'normal';
+        var bg = isCurrent ? 'background:rgba(55,138,221,0.1)' : '';
 
-        // Check localStorage override
+        // Override check
         var override = localStorage.getItem('ec_balance_' + m);
-        var displayVal = override ? fmtGBP(parseFloat(override)) : fmt;
-        var editIcon = override ? ' <span style="font-size:9px;color:var(--GOLD)">✏</span>' : '';
+        var displayVal = (override && row.key === 'close') ? fmtGBP(parseFloat(override)) : fmt;
+        var editMark = (override && row.key === 'close') ? '<span style="font-size:9px;color:var(--GOLD);margin-left:3px">✏</span>' : '';
 
-        return '<td style="text-align:right;padding:7px 10px;' + style + ';' + bg + '" ' +
-          (row.key === 'close' ? 'ondblclick="window.EDEN.components.finance._editCell(\'' + m + '\', this)" title="Double-click to override"' : '') +
-          '>' + displayVal + editIcon + '</td>';
+        var tdStyle = [
+          'text-align:right',
+          'padding:' + (isLarge ? '12px 14px' : '9px 14px'),
+          'font-size:' + (isLarge ? '16px' : '14px'),
+          'font-weight:' + (isLarge ? '700' : '400'),
+          'font-family:var(--FM)',
+          'font-style:' + fontStyle,
+          'opacity:' + opacity,
+          color ? 'color:' + color : '',
+          bg,
+          'border-bottom:1px solid var(--GL)',
+        ].filter(Boolean).join(';');
+
+        return '<td style="'+tdStyle+'"' +
+          (row.key==='close' ? ' ondblclick="window.EDEN.components.finance._editCell(\''+m+'\',this)" title="Double-click to override"' : '') +
+          '>'+displayVal+editMark+'</td>';
       }).join('');
 
-      return '<tr><td style="padding:7px 12px;font-weight:' + (row.bold ? '600' : '400') + ';white-space:nowrap">' + row.label + '</td>' + cells + '</tr>';
-    }).join('');
+      var thStyle = 'padding:'+(isLarge?'12px 16px':'9px 16px')+';font-size:'+(isLarge?'15px':'13px')+';font-weight:'+(isLarge?'700':'400')+';white-space:nowrap;border-bottom:1px solid var(--GL);color:var(--G)';
+      return '<tr><td style="'+thStyle+'">'+row.label+'</td>'+cells+'</tr>';
+    });
+
+    // Insert separator after row index 1 (between opening and closing)
+    rowsHtml.splice(2, 0, '');
+    tbody.innerHTML = rowsHtml.join(separatorHtml);
   }
 
-  // ── Key Dates Panel ──────────────────────────────────────────────────────────
+  // ── Key Dates ────────────────────────────────────────────────────────────────
   function buildKeyDates() {
     return KEY_DATES.map(function (d) {
-      var color = d.sign > 0 ? 'var(--OK)' : d.sign < 0 ? 'var(--RED)' : 'var(--GMD)';
+      var color = d.sign > 0 ? '#2e7d32' : d.sign < 0 ? '#c0392b' : 'var(--GMD)';
       return [
         '<div class="fin-keydate-row">',
-          '<span class="fin-keydate-date">' + d.date + '</span>',
-          '<span class="fin-keydate-desc">' + d.desc + '</span>',
-          '<span class="fin-keydate-amount" style="color:' + color + '">' + d.amount + '</span>',
+          '<span class="fin-keydate-date">'+d.date+'</span>',
+          '<span class="fin-keydate-desc">'+d.desc+'</span>',
+          '<span class="fin-keydate-amount" style="color:'+color+'">'+d.amount+'</span>',
         '</div>',
       ].join('');
     }).join('');
@@ -334,37 +364,40 @@ window.EDEN.components = window.EDEN.components || {};
     if (!root) return;
 
     root.innerHTML = [
-      // Top row: gauge + key dates
+      // Top row
       '<div class="fin-top-row">',
         '<div class="fin-card fin-gauge-card">',
           '<div class="fin-section-label">Runway</div>',
-          '<div id="fin-gauge-container">', buildGauge(), '</div>',
+          '<div id="fin-gauge-container">'+buildGauge()+'</div>',
         '</div>',
-        '<div class="fin-card fin-dates-card">',
+        '<div class="fin-card">',
           '<div class="fin-section-label">Key dates</div>',
           buildKeyDates(),
         '</div>',
       '</div>',
 
       // Scenario chart
-      '<div class="fin-card" style="margin-bottom:20px">',
-        '<div class="fin-section-label">Cash balance — scenario forecast</div>',
-        '<div style="height:320px;position:relative"><canvas id="fin-scenario-canvas"></canvas></div>',
-        '<div class="fin-sliders">', buildSliders(), '</div>',
+      '<div class="fin-card">',
+        '<div class="fin-section-label">Cash balance forecast</div>',
+        '<div style="height:340px;position:relative"><canvas id="fin-scenario-canvas"></canvas></div>',
+        buildSliders(),
       '</div>',
 
-      // Rolling balance table
-      '<div class="fin-card" style="margin-bottom:20px">',
-        '<div class="fin-section-label">Rolling bank balance',
-          ' <span style="font-size:10px;color:var(--GMD);font-weight:400;margin-left:8px">Italic = forecast · Bold = closing · Double-click closing to override</span>',
+      // Rolling table
+      '<div class="fin-card">',
+        '<div class="fin-section-label">',
+          'Rolling bank balance',
+          '<span style="font-size:10px;font-weight:400;color:var(--GMD);margin-left:10px;letter-spacing:0">',
+            'Solid = actual · Italic = forecast · Double-click closing to override',
+          '</span>',
         '</div>',
         '<div style="overflow-x:auto">',
-          '<table style="width:100%;border-collapse:collapse;font-size:12px;font-family:var(--FM)">',
+          '<table style="width:100%;border-collapse:collapse">',
             '<thead><tr>',
-              '<th style="text-align:left;padding:7px 12px;border-bottom:2px solid var(--GL);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--GMD)">Label</th>',
-              'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ').map(function(m,i){
-                var hl = i===4 ? 'background:rgba(55,138,221,0.08)' : '';
-                return '<th style="text-align:right;padding:7px 10px;border-bottom:2px solid var(--GL);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--GMD);'+hl+'">'+m+'</th>';
+              '<th style="text-align:left;padding:10px 16px;border-bottom:2px solid var(--G);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--GMD);white-space:nowrap">Label</th>',
+              MONTHS.map(function(m,i){
+                var hl = i===4?'background:rgba(55,138,221,0.1)':'';
+                return '<th style="text-align:right;padding:10px 14px;border-bottom:2px solid var(--G);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--GMD);'+hl+'">'+m+'</th>';
               }).join(''),
             '</tr></thead>',
             '<tbody id="fin-table-body"></tbody>',
@@ -375,40 +408,41 @@ window.EDEN.components = window.EDEN.components || {};
 
     attachGaugeListener();
     renderTable();
-    setTimeout(updateScenarioChart, 50);
+    setTimeout(updateChart, 50);
   }
 
-  // ── CSS injection ────────────────────────────────────────────────────────────
+  // ── Styles ───────────────────────────────────────────────────────────────────
   function injectStyles() {
     if (document.getElementById('fin-styles')) return;
     var s = document.createElement('style');
     s.id = 'fin-styles';
     s.textContent = [
-      '.fin-top-row{display:grid;grid-template-columns:1fr 1.5fr;gap:20px;margin-bottom:20px}',
-      '.fin-card{background:var(--W);border:1px solid var(--GL);border-radius:6px;padding:20px 24px}',
-      '.fin-section-label{font-family:var(--F);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--GMD);margin-bottom:16px}',
+      '#finance-root{display:flex;flex-direction:column;gap:28px;padding:8px 0 40px}',
+      '.fin-top-row{display:grid;grid-template-columns:260px 1fr;gap:28px}',
+      '.fin-card{background:var(--W);border:1px solid var(--GL);border-radius:6px;padding:24px 28px}',
+      '.fin-section-label{font-family:var(--F);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--GMD);margin-bottom:20px}',
       '.fin-gauge-wrap{display:flex;flex-direction:column;align-items:center}',
-      '.fin-gauge-stats{font-size:12px;color:var(--GMD);text-align:center;line-height:2;margin-top:4px}',
-      '.fin-gauge-stats strong{color:var(--G)}',
-      '.fin-gauge-input{margin-top:14px;text-align:center}',
+      '.fin-gauge-stats{font-size:13px;color:var(--GMD);text-align:center;line-height:2.2;margin-top:6px}',
+      '.fin-gauge-stats strong{color:var(--G);font-family:var(--FM)}',
+      '.fin-gauge-input{margin-top:18px;text-align:center;width:100%}',
       '.fin-gauge-input label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--GMD)}',
-      '.fin-badge{font-size:9px;font-weight:700;letter-spacing:.08em;padding:2px 6px;border-radius:3px}',
+      '.fin-badge{font-size:9px;font-weight:700;letter-spacing:.06em;padding:2px 7px;border-radius:3px;vertical-align:middle}',
       '.fin-badge-live{background:rgba(99,153,34,0.15);color:#639922}',
       '.fin-badge-manual{background:rgba(186,117,23,0.15);color:#BA7517}',
-      '.fin-keydate-row{display:grid;grid-template-columns:90px 1fr auto;gap:8px;padding:8px 0;border-bottom:1px solid var(--GL);align-items:center;font-size:12px}',
-      '.fin-keydate-date{font-family:var(--FM);font-size:11px;color:var(--GMD)}',
+      '.fin-keydate-row{display:grid;grid-template-columns:90px 1fr auto;gap:10px;padding:11px 0;border-bottom:1px solid var(--GL);align-items:center;font-size:13px}',
+      '.fin-keydate-date{font-family:var(--FM);font-size:11px;color:var(--GMD);white-space:nowrap}',
       '.fin-keydate-desc{color:var(--G)}',
-      '.fin-keydate-amount{font-family:var(--FM);font-size:12px;font-weight:600;text-align:right;white-space:nowrap}',
-      '.fin-sliders{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;margin-top:16px;padding-top:16px;border-top:1px solid var(--GL)}',
-      '.fin-slider-row{display:flex;flex-direction:column;gap:4px}',
-      '.fin-slider-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:middle}',
-      '.fin-slider-lbl{font-family:var(--F);font-size:11px;font-weight:600;color:var(--G)}',
-      'input[type=range]{width:100%;accent-color:var(--G)}',
+      '.fin-keydate-amount{font-family:var(--FM);font-size:13px;font-weight:600;text-align:right;white-space:nowrap}',
+      '.fin-sliders{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:20px;padding-top:20px;border-top:1px solid var(--GL)}',
+      '.fin-slider-row{display:flex;flex-direction:column}',
+      '.fin-slider-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}',
+      '.fin-slider-lbl{font-family:var(--F);font-size:12px;font-weight:600;color:var(--G)}',
+      'input[type=range]{width:100%;accent-color:var(--G);margin-top:4px}',
     ].join('\n');
     document.head.appendChild(s);
   }
 
-  // ── Public API ───────────────────────────────────────────────────────────────
+  // ── Public ───────────────────────────────────────────────────────────────────
   var component = {
     render: render,
 
@@ -416,11 +450,11 @@ window.EDEN.components = window.EDEN.components || {};
       injectStyles();
       var root = document.getElementById('finance-root');
       if (!root) return;
-      var needsRender = !document.getElementById('fin-gauge-container');
-      if (needsRender) render();
-      else {
+      if (!document.getElementById('fin-gauge-container')) {
+        render();
+      } else {
         updateGauge();
-        updateScenarioChart();
+        updateChart();
         renderTable();
       }
     },
@@ -428,21 +462,16 @@ window.EDEN.components = window.EDEN.components || {};
     _onSlider: function () {
       updateSliderLabels();
       if (this._t) clearTimeout(this._t);
-      this._t = setTimeout(function () {
-        updateScenarioChart();
-      }, 120);
+      this._t = setTimeout(function () { updateChart(); }, 100);
     },
 
-    _editCell: function (month, td) {
-      var current = (ac().closing_balance && ac().closing_balance[month]) || '';
+    _editCell: function (month) {
+      var current = ac().closing_balance && ac().closing_balance[month];
       var stored = localStorage.getItem('ec_balance_' + month);
-      var val = prompt('Override closing balance for ' + month + ':', stored || Math.round(current));
+      var val = prompt('Override closing balance for ' + month + ':', stored || Math.round(current || 0));
       if (val === null) return;
-      if (val === '') {
-        localStorage.removeItem('ec_balance_' + month);
-      } else {
-        localStorage.setItem('ec_balance_' + month, val);
-      }
+      if (val === '') localStorage.removeItem('ec_balance_' + month);
+      else localStorage.setItem('ec_balance_' + month, val);
       renderTable();
     },
   };
