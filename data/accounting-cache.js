@@ -1,10 +1,10 @@
 // EDEN Accounting Cache — DASHBOARD tab, Cash Forecast Google Sheet
-// Generated: 2026-05-22T14:09:52Z
+// Generated: 2026-05-22T14:10:59Z
 // Source: https://docs.google.com/spreadsheets/d/14mTkKDJ9wmOq3tyOsmH5RoAzda_gHFQQx2K2QuF4PRM/edit?gid=137937925
 // Do not edit manually. Run: python3 scripts/build-accounting-cache.py
 window.EDEN = window.EDEN || {};
 window.EDEN._accounting = {
-  "generated": "2026-05-22T14:09:52Z",
+  "generated": "2026-05-22T14:10:59Z",
   "months": [
     "Jan",
     "Feb",
@@ -88,6 +88,48 @@ window.EDEN._accounting = {
     "Oct": -178.82,
     "Nov": -31953.54,
     "Dec": 176486.5
+  },
+  "cogs_actual": {
+    "Jan": 44694.18,
+    "Feb": 24271.08,
+    "Mar": 18393.66,
+    "Apr": 23439.79,
+    "May": 13474.74,
+    "Jun": 17066.66,
+    "Jul": 12959.98,
+    "Aug": 13486.24,
+    "Sep": 85180.49,
+    "Oct": 27691.04,
+    "Nov": 93196.04,
+    "Dec": 131659.4
+  },
+  "admin_actual": {
+    "Jan": 31611.67,
+    "Feb": 10754.43,
+    "Mar": 14997.37,
+    "Apr": 7763.47,
+    "May": 10419.72,
+    "Jun": 18608.44,
+    "Jul": 10377.15,
+    "Aug": 9401.92,
+    "Sep": 13340.96,
+    "Oct": 5401.34,
+    "Nov": 14719.18,
+    "Dec": 82795.35
+  },
+  "total_expenses": {
+    "Jan": 76305.85,
+    "Feb": 35025.51,
+    "Mar": 33391.03,
+    "Apr": 31203.260000000002,
+    "May": 23894.46,
+    "Jun": 35675.1,
+    "Jul": 23337.129999999997,
+    "Aug": 22888.16,
+    "Sep": 98521.45000000001,
+    "Oct": 33092.380000000005,
+    "Nov": 107915.22,
+    "Dec": 214454.75
   },
   "starling_balance": 173849.2,
   "starling_date": "22 May 2026",

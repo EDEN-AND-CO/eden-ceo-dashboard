@@ -40,6 +40,7 @@ window.EDEN.components = window.EDEN.components || {};
   ];
 
   var _chart = null;
+  var _incExpChart = null;
 
   // ── Helpers ──────────────────────────────────────────────────────────────────
   function fmtGBP(n) {
@@ -275,6 +276,117 @@ window.EDEN.components = window.EDEN.components || {};
     });
   }
 
+  // ── Income vs Expenses Chart ─────────────────────────────────────────────────
+  function updateIncExpChart() {
+    if (_incExpChart) { _incExpChart.destroy(); _incExpChart = null; }
+    var canvas = document.getElementById('fin-incexp-canvas');
+    if (!canvas || typeof Chart === 'undefined') return;
+
+    var data = ac();
+    var income   = MONTHS.map(function (m) { return data.income_actual   && data.income_actual[m]   != null ? Math.round(data.income_actual[m])   : null; });
+    var expenses = MONTHS.map(function (m) { return data.total_expenses  && data.total_expenses[m]  != null ? Math.round(data.total_expenses[m])  : null; });
+    var ratio    = MONTHS.map(function (m, i) {
+      var inc = income[i], exp = expenses[i];
+      return (inc && inc > 0) ? Math.round((exp / inc) * 100) : null;
+    });
+
+    _incExpChart = new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels: MONTHS,
+        datasets: [
+          {
+            type: 'bar',
+            label: 'Income',
+            data: income,
+            backgroundColor: 'rgba(99,153,34,0.55)',
+            borderColor: '#639922',
+            borderWidth: 1.5,
+            borderRadius: 3,
+            order: 2,
+            yAxisID: 'y',
+          },
+          {
+            type: 'bar',
+            label: 'Expenses',
+            data: expenses,
+            backgroundColor: 'rgba(192,57,43,0.45)',
+            borderColor: '#c0392b',
+            borderWidth: 1.5,
+            borderRadius: 3,
+            order: 2,
+            yAxisID: 'y',
+          },
+          {
+            type: 'line',
+            label: 'Expense ratio %',
+            data: ratio,
+            borderColor: '#BA7517',
+            backgroundColor: 'rgba(186,117,23,0.08)',
+            borderWidth: 2.5,
+            pointRadius: 4,
+            pointBackgroundColor: function (ctx) {
+              var v = ctx.parsed && ctx.parsed.y;
+              return v > 100 ? '#c0392b' : '#639922';
+            },
+            tension: 0.35,
+            fill: false,
+            order: 1,
+            yAxisID: 'y2',
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { position: 'top', labels: { font: { size: 12 }, boxWidth: 14, padding: 16 } },
+          tooltip: {
+            callbacks: {
+              label: function (ctx) {
+                if (ctx.dataset.yAxisID === 'y2') return ' Expense ratio: ' + ctx.parsed.y + '%';
+                return ' ' + ctx.dataset.label + ': ' + fmtGBP(ctx.parsed.y);
+              }
+            }
+          },
+          annotation: {
+            annotations: {
+              breakeven: {
+                type: 'line', scaleID: 'y2', value: 100,
+                borderColor: 'rgba(192,57,43,0.5)', borderWidth: 1.5, borderDash: [5,4],
+                label: { content: '100% breakeven', display: true, position: 'start', font: { size: 10 }, color: '#c0392b' }
+              },
+              currentMonth: {
+                type: 'line', scaleID: 'x', value: 4,
+                borderColor: 'rgba(0,68,55,0.4)', borderWidth: 1.5, borderDash: [4,3],
+              },
+            }
+          }
+        },
+        scales: {
+          x: { grid: { color: 'rgba(0,68,55,0.06)' }, ticks: { font: { size: 12 } } },
+          y: {
+            position: 'left',
+            grid: { color: 'rgba(0,68,55,0.06)' },
+            ticks: { font: { size: 12 }, callback: function (v) { return '£' + (v/1000).toFixed(0) + 'k'; } },
+            title: { display: true, text: 'Amount (£)', font: { size: 11 }, color: 'var(--GMD)' },
+          },
+          y2: {
+            position: 'right',
+            grid: { drawOnChartArea: false },
+            ticks: {
+              font: { size: 12 },
+              callback: function (v) { return v + '%'; },
+              color: function (ctx) { return ctx.tick && ctx.tick.value > 100 ? '#c0392b' : '#639922'; },
+            },
+            title: { display: true, text: 'Expense ratio', font: { size: 11 }, color: '#BA7517' },
+          },
+        },
+      },
+    });
+  }
+
   // ── Rolling Balance Table ────────────────────────────────────────────────────
   function renderTable() {
     var tbody = document.getElementById('fin-table-body');
@@ -384,6 +496,12 @@ window.EDEN.components = window.EDEN.components || {};
         buildSliders(),
       '</div>',
 
+      // Income vs Expenses chart
+      '<div class="fin-card">',
+        '<div class="fin-section-label">Income vs expenses — monthly</div>',
+        '<div style="height:320px;position:relative"><canvas id="fin-incexp-canvas"></canvas></div>',
+      '</div>',
+
       // Rolling table
       '<div class="fin-card">',
         '<div class="fin-section-label">',
@@ -410,6 +528,7 @@ window.EDEN.components = window.EDEN.components || {};
     attachGaugeListener();
     renderTable();
     setTimeout(updateChart, 50);
+    setTimeout(updateIncExpChart, 80);
   }
 
   // ── Styles ───────────────────────────────────────────────────────────────────
@@ -456,6 +575,7 @@ window.EDEN.components = window.EDEN.components || {};
       } else {
         updateGauge();
         updateChart();
+        updateIncExpChart();
         renderTable();
       }
     },
