@@ -211,28 +211,32 @@ window.EDEN.components = window.EDEN.components || {};
               label: function () { return null; },
               afterBody: function (ctx) {
                 var idx = ctx[0].dataIndex;
+                var m   = MONTHS[idx];
+
+                function ratio(inc, cost) {
+                  if (!inc || cost == null) return '—';
+                  var r = Math.round((cost / inc) * 100);
+                  return cost > inc ? String(-r) : String(r);
+                }
+
                 var r25 = inc2025[idx];
-                var c25 = COSTS_2025[idx] != null ? COSTS_2025[MONTHS[idx]] : null;
-                var ratio25 = (r25 && c25) ? Math.round((c25 / r25) * 100) : null;
-                var net25   = (r25 && c25) ? r25 - c25 : null;
+                var c25 = COSTS_2025[m];
 
                 var lines = [
-                  '── 2025 ──────────────────',
+                  '── 2025 ──────────────',
                   '  Income:  ' + fmtGBP(r25),
                   '  Costs:   ' + fmtGBP(c25),
-                  '  Ratio:   ' + (ratio25 != null ? ratio25 + '%' : '—') + '  Net: ' + fmtGBP(net25),
+                  '  Ratio:   ' + ratio(r25, c25),
                 ];
 
                 if (idx < CURRENT_IDX) {
                   var r26 = inc2026[idx];
                   var c26 = costs2026[idx];
-                  var ratio26 = (r26 && c26) ? Math.round((c26 / r26) * 100) : null;
-                  var net26   = (r26 != null && c26 != null) ? r26 - c26 : null;
-                  lines.push('── 2026 ──────────────────');
+                  lines.push('── 2026 ──────────────');
                   lines.push('  Income:  ' + fmtGBP(r26));
                   lines.push('  Costs:   ' + fmtGBP(c26));
-                  lines.push('  Ratio:   ' + (ratio26 != null ? ratio26 + '%' : '—') + '  Net: ' + fmtGBP(net26));
-                  lines.push(net26 >= 0 ? '  ✓ Profitable' : '  ✗ Loss month');
+                  lines.push('  Ratio:   ' + ratio(r26, c26));
+                  lines.push((c26 == null || r26 >= c26) ? '  ✓ Profitable' : '  ✗ Loss');
                 }
 
                 return lines;
