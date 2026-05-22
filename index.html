@@ -302,6 +302,12 @@
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
       2026 Plan
     </div>
+
+    <div class="sidebar-nav-label" style="margin-top:16px">Financial</div>
+    <div class="tab" onclick="showTab('finance',this,'Finance');if(window.EDEN&&window.EDEN.components&&window.EDEN.components.finance)window.EDEN.components.finance.init()">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      Finance
+    </div>
   </nav>
 
   <div class="sidebar-foot">
@@ -1215,12 +1221,21 @@
 
 </div></div>
 
+<!-- FINANCE TAB -->
+<div class="panel" id="tab-finance">
+  <div class="page" id="finance-root">
+    <div style="padding:40px;color:var(--GMD)">Loading financial data...</div>
+  </div>
+</div>
+
 <div class="footer">EDEN &amp; CO. CEO FLIGHT DECK &nbsp;·&nbsp; v6.1 &nbsp;·&nbsp; 26 APRIL 2026</div>
 
 </div><!-- /shell-main -->
 </div><!-- /app-shell -->
 
 
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
 <!-- Data layer (load order matters) -->
 <script src="data/config.js"></script>
 <script src="data/orders-cache.js?v=20260505a"></script>
@@ -1246,6 +1261,8 @@
 <script src="components/scenario.js"></script>
 <script src="data/critical-path-cache.js?v=20260426a"></script>
 <script src="components/critpath.js?v=20260426a"></script>
+<script src="data/accounting-cache.js?v=20260521a"></script>
+<script src="components/finance.js?v=20260521a"></script>
 <!-- App init (must be last) -->
 <script src="app.js?v=20260420a"></script>
 
