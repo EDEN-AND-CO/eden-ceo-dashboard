@@ -205,18 +205,21 @@ window.EDEN.components = window.EDEN.components || {};
               title: function (ctx) {
                 var idx = ctx[0].dataIndex;
                 var pct = pctChange[idx];
-                if (pct == null) return MONTHS[idx] + ' — 2025 benchmark';
-                return MONTHS[idx] + '  ' + (pct >= 0 ? '▲ +' : '▼ ') + pct + '% income vs 2025';
+                var m   = MONTHS[idx];
+                if (idx >= CURRENT_IDX) return m + ' — 2025 benchmark only';
+                var r26 = inc2026[idx], c26 = costs2026[idx];
+                var ret = (r26 && c26) ? '£' + (r26 / c26).toFixed(2) + ' back per £1 spent' : '';
+                var growth = pct != null ? '  ·  income ' + (pct >= 0 ? '+' : '') + pct + '% vs 2025' : '';
+                return m + '  ' + ret + growth;
               },
               label: function () { return null; },
               afterBody: function (ctx) {
                 var idx = ctx[0].dataIndex;
                 var m   = MONTHS[idx];
 
-                function ratio(inc, cost) {
-                  if (!inc || cost == null) return '—';
-                  var r = Math.round((cost / inc) * 100);
-                  return cost > inc ? String(-r) : String(r);
+                function ret(inc, cost) {
+                  if (!inc || !cost) return '—';
+                  return '£' + (inc / cost).toFixed(2) + ' per £1 spent';
                 }
 
                 var r25 = inc2025[idx];
@@ -226,7 +229,7 @@ window.EDEN.components = window.EDEN.components || {};
                   '── 2025 ──────────────',
                   '  Income:  ' + fmtGBP(r25),
                   '  Costs:   ' + fmtGBP(c25),
-                  '  Ratio:   ' + ratio(r25, c25),
+                  '  Return:  ' + ret(r25, c25),
                 ];
 
                 if (idx < CURRENT_IDX) {
@@ -235,7 +238,7 @@ window.EDEN.components = window.EDEN.components || {};
                   lines.push('── 2026 ──────────────');
                   lines.push('  Income:  ' + fmtGBP(r26));
                   lines.push('  Costs:   ' + fmtGBP(c26));
-                  lines.push('  Ratio:   ' + ratio(r26, c26));
+                  lines.push('  Return:  ' + ret(r26, c26));
                   lines.push((c26 == null || r26 >= c26) ? '  ✓ Profitable' : '  ✗ Loss');
                 }
 
