@@ -205,26 +205,37 @@ window.EDEN.components = window.EDEN.components || {};
               title: function (ctx) {
                 var idx = ctx[0].dataIndex;
                 var pct = pctChange[idx];
-                if (pct == null) return MONTHS[idx] + ' — 2025 only';
-                return MONTHS[idx] + '  ' + (pct >= 0 ? '▲ +' : '▼ ') + pct + '% vs 2025';
+                if (pct == null) return MONTHS[idx] + ' — 2025 benchmark';
+                return MONTHS[idx] + '  ' + (pct >= 0 ? '▲ +' : '▼ ') + pct + '% income vs 2025';
               },
-              label: function (ctx) {
-                if (ctx.parsed.y == null) return null;
-                return ' ' + ctx.dataset.label + ' income: ' + fmtGBP(ctx.parsed.y);
-              },
+              label: function () { return null; },
               afterBody: function (ctx) {
                 var idx = ctx[0].dataIndex;
-                if (idx >= CURRENT_IDX) return;
-                var r = inc2026[idx], c = costs2026[idx];
-                if (r == null || c == null) return;
-                var net = r - c;
-                var ratio = Math.round((c / r) * 100);
-                return [
-                  '─────────────────',
-                  ' 2026 costs: ' + fmtGBP(c),
-                  ' Net: ' + fmtGBP(net) + ' (' + ratio + '% cost ratio)',
-                  net >= 0 ? ' ✓ Profitable' : ' ✗ Loss month',
+                var r25 = inc2025[idx];
+                var c25 = COSTS_2025[idx] != null ? COSTS_2025[MONTHS[idx]] : null;
+                var ratio25 = (r25 && c25) ? Math.round((c25 / r25) * 100) : null;
+                var net25   = (r25 && c25) ? r25 - c25 : null;
+
+                var lines = [
+                  '── 2025 ──────────────────',
+                  '  Income:  ' + fmtGBP(r25),
+                  '  Costs:   ' + fmtGBP(c25),
+                  '  Ratio:   ' + (ratio25 != null ? ratio25 + '%' : '—') + '  Net: ' + fmtGBP(net25),
                 ];
+
+                if (idx < CURRENT_IDX) {
+                  var r26 = inc2026[idx];
+                  var c26 = costs2026[idx];
+                  var ratio26 = (r26 && c26) ? Math.round((c26 / r26) * 100) : null;
+                  var net26   = (r26 != null && c26 != null) ? r26 - c26 : null;
+                  lines.push('── 2026 ──────────────────');
+                  lines.push('  Income:  ' + fmtGBP(r26));
+                  lines.push('  Costs:   ' + fmtGBP(c26));
+                  lines.push('  Ratio:   ' + (ratio26 != null ? ratio26 + '%' : '—') + '  Net: ' + fmtGBP(net26));
+                  lines.push(net26 >= 0 ? '  ✓ Profitable' : '  ✗ Loss month');
+                }
+
+                return lines;
               }
             }
           },
