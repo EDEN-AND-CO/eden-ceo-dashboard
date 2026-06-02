@@ -1,50 +1,50 @@
 // EDEN & CO. Marketing Intelligence Cache
-// Built: 2026-06-01 14:43 UTC
+// Built: 2026-06-02 12:31 UTC
 // Run: python3 scripts/build-marketing-cache.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN._marketingData = {
   "gift_designer": {
-    "total": 1823,
+    "total": 1832,
     "fetched": 1000,
     "who": {
-      "A family member or friend": 817,
-      "A client or colleague": 140,
+      "A family member or friend": 816,
+      "A client or colleague": 141,
       "Myself (we love this!)": 31,
       "A team or group": 12
     },
     "feel": {
-      "Loved and appreciated": 592,
-      "Surprised and delighted": 324,
+      "Loved and appreciated": 591,
+      "Surprised and delighted": 325,
       "Calm and relaxed": 61,
       "Inspired or empowered": 18
     },
     "concern": {
-      "Worrying about allergies or dietary needs": 669,
-      "Not wanting it to feel generic": 346,
-      "It won't look as good as it does in the picture": 231,
-      "It will taste rubbish": 226,
+      "Worrying about allergies or dietary needs": 670,
+      "Not wanting it to feel generic": 341,
+      "It won't look as good as it does in the picture": 233,
+      "It will taste rubbish": 228,
       "I care deeply, but worry the gift won\u2019t show it.": 177,
-      "Feeling overwhelmed with options": 78
+      "Feeling overwhelmed with options": 77
     },
     "matters": {
-      "All of the above": 569,
-      "Quality, ethical ingredients": 329,
-      "Beautiful packaging & presentation": 314,
-      "Something they\u2019ve never seen before": 173
+      "All of the above": 570,
+      "Quality, ethical ingredients": 327,
+      "Beautiful packaging & presentation": 313,
+      "Something they\u2019ve never seen before": 171
     },
     "product": {
-      "The Signature Collection (Top Seller)": 375,
-      "The Petite Collection (The perfect gesture)": 340,
-      "The Chocolate Collection (Pure Indulgence)": 141,
-      "The Grand (For Special occasions)": 76,
+      "The Signature Collection (Top Seller)": 374,
+      "The Petite Collection (The perfect gesture)": 338,
+      "The Chocolate Collection (Pure Indulgence)": 143,
+      "The Grand (For Special occasions)": 77,
       "The Prestige (For Milestone Moments)": 68
     },
     "occasion": {
-      "Happy Birthday": 151,
-      "Merry Christmas": 128,
+      "Happy Birthday": 154,
+      "Merry Christmas": 125,
       "With Love": 71,
-      "Thank You": 44,
+      "Thank You": 45,
       "For Mum": 42,
       "Signature": 40,
       "Just For You": 22,
@@ -52,22 +52,22 @@ window.EDEN._marketingData = {
       "For Dad": 2
     },
     "dietary": {
-      "Gluten Free": 493,
-      "Dairy Free": 318,
-      "Vegan": 304,
-      "Vegetarian": 94,
-      "None": 75,
+      "Gluten Free": 495,
+      "Dairy Free": 319,
+      "Vegan": 301,
+      "Vegetarian": 93,
+      "None": 72,
       "Plant Based": 51,
-      "Halal": 34
+      "Halal": 35
     },
     "months": {
-      "2025-12": 293,
+      "2025-12": 284,
       "2026-01": 97,
       "2026-02": 127,
       "2026-03": 176,
       "2026-04": 137,
       "2026-05": 166,
-      "2026-06": 4
+      "2026-06": 13
     }
   },
   "virgin": {
@@ -169,12 +169,12 @@ window.EDEN._marketingData = {
     }
   },
   "google_reviews": {
-    "total": 1177,
+    "total": 1178,
     "fetched": 1000,
     "quality": {
       "avg": 4.83,
-      "total": 944,
-      "five": 811,
+      "total": 945,
+      "five": 812,
       "four": 115,
       "three": 13,
       "two": 3,
@@ -183,8 +183,8 @@ window.EDEN._marketingData = {
     },
     "impression": {
       "avg": 4.74,
-      "total": 922,
-      "five": 729,
+      "total": 923,
+      "five": 730,
       "four": 157,
       "three": 27,
       "two": 6,
@@ -194,7 +194,7 @@ window.EDEN._marketingData = {
     "dietary": {},
     "missed_foods": [],
     "months": {
-      "2024-12": 32,
+      "2024-12": 31,
       "2025-01": 12,
       "2025-02": 12,
       "2025-03": 11,
@@ -208,13 +208,14 @@ window.EDEN._marketingData = {
       "2026-02": 126,
       "2026-03": 138,
       "2026-04": 120,
-      "2026-05": 49
+      "2026-05": 49,
+      "2026-06": 1
     }
   },
   "gbp_reviews": {
     "source": "Google Business Profile via Make \u2192 Google Sheet (All Google Reviews tab)",
     "sheet_url": "https://docs.google.com/spreadsheets/d/1DXKumasfRDY4tGiPAi07pV15eiyAb5R0HezoxpUkhc8/edit?gid=879421801",
-    "last_updated": "2026-06-01",
+    "last_updated": "2026-06-02",
     "total": 673,
     "avg_rating": 4.82,
     "five_star": 585,
@@ -459,7 +460,7 @@ window.EDEN._marketingData = {
       "2026-03": 79
     },
     "ai_analysis": {
-      "generated": "2026-06-01",
+      "generated": "2026-06-02",
       "summary": "Across 673 Google reviews, EDEN & CO. scores 4.82/5 with 97% positive sentiment. The dominant theme is relief: buyers with vegan and other dietary requirements describe EDEN & CO. as the only brand that solves inclusive gifting without compromise. Recipients use language that goes well beyond product satisfaction \u2014 'felt seen', 'included for once', 'knew exactly what I needed'. Quality exceeds expectations at the price point and presentation arrives gift-ready, converting first-time buyers into loyal repeat customers.",
       "doing_well": [
         "Dietary trust \u2014 134 vegan, 77 gluten-free and 22 dairy-free customers mention specific relief",
@@ -501,6 +502,6 @@ window.EDEN._marketingData = {
       ]
     }
   },
-  "_built": "2026-06-01 14:43 UTC",
+  "_built": "2026-06-02 12:31 UTC",
   "_version": "1.0"
 };
