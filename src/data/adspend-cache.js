@@ -1,5 +1,5 @@
 // EDEN & CO. CEO Flight Deck — Ad Spend Cache
-// Generated: 2026-06-04T11:42:09Z
+// Generated: 2026-06-05T11:54:12Z
 // Source: Stock Tracker Google Sheet — Coupler (Google Ads, Amazon Ads, Meta Ads tabs)
 window.EDEN = window.EDEN || {};
 window.EDEN._adSpend = {
@@ -28,5 +28,5 @@ window.EDEN._adSpend = {
     "spend_col": "Cost: Amount spend"
   },
   "meta_updated": "2026-05-27 09:03:37",
-  "_built": "2026-06-04T11:42:09Z"
+  "_built": "2026-06-05T11:54:12Z"
 };
