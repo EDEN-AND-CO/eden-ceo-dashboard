@@ -1,14 +1,9 @@
 // EDEN & CO. CEO Flight Deck — Klaviyo Cache
-// Generated: 2026-06-12T12:09:32Z
+// Generated: 2026-06-13T11:05:59Z
 // Source: Klaviyo REST API v2024-10-15
 window.EDEN = window.EDEN || {};
 window.EDEN._klaviyoData = {
   "flows": [
-    {
-      "id": "XzdWS9",
-      "name": "Loyalty Program Welcome - Standard",
-      "status": "draft"
-    },
     {
       "id": "Wmpyhn",
       "name": "Remove Amazon Profiles",
@@ -86,11 +81,11 @@ window.EDEN._klaviyoData = {
     }
   ],
   "campaigns": [],
-  "_built": "2026-06-12T12:09:32Z",
+  "_built": "2026-06-13T11:05:59Z",
   "metrics_30d": {
     "opens": 0,
     "clicks": 0,
     "revenue": 0.0,
-    "period": "2026-05-13 to 2026-06-12"
+    "period": "2026-05-14 to 2026-06-13"
   }
 };
