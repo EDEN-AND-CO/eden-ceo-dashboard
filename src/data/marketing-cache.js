@@ -1,31 +1,31 @@
 // EDEN & CO. Marketing Intelligence Cache
-// Built: 2026-06-25 11:29 UTC
+// Built: 2026-06-26 11:35 UTC
 // Run: python3 scripts/build-marketing-cache.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN._marketingData = {
   "gift_designer": {
-    "total": 1950,
+    "total": 1952,
     "fetched": 1000,
     "who": {
-      "A family member or friend": 820,
+      "A family member or friend": 819,
       "A client or colleague": 142,
       "Myself (we love this!)": 27,
-      "A team or group": 11
+      "A team or group": 12
     },
     "feel": {
-      "Loved and appreciated": 591,
-      "Surprised and delighted": 326,
+      "Loved and appreciated": 590,
+      "Surprised and delighted": 327,
       "Calm and relaxed": 60,
       "Inspired or empowered": 18
     },
     "concern": {
       "Worrying about allergies or dietary needs": 658,
-      "Not wanting it to feel generic": 347,
-      "It will taste rubbish": 235,
-      "It won't look as good as it does in the picture": 231,
-      "I care deeply, but worry the gift won\u2019t show it.": 177,
-      "Feeling overwhelmed with options": 79
+      "Not wanting it to feel generic": 346,
+      "It will taste rubbish": 233,
+      "It won't look as good as it does in the picture": 230,
+      "I care deeply, but worry the gift won\u2019t show it.": 176,
+      "Feeling overwhelmed with options": 80
     },
     "matters": {
       "All of the above": 572,
@@ -34,15 +34,15 @@ window.EDEN._marketingData = {
       "Something they\u2019ve never seen before": 169
     },
     "product": {
-      "The Signature Collection (Top Seller)": 362,
-      "The Petite Collection (The perfect gesture)": 339,
-      "The Chocolate Collection (Pure Indulgence)": 150,
+      "The Signature Collection (Top Seller)": 361,
+      "The Petite Collection (The perfect gesture)": 341,
+      "The Chocolate Collection (Pure Indulgence)": 149,
       "The Grand (For Special occasions)": 78,
       "The Prestige (For Milestone Moments)": 71
     },
     "occasion": {
       "Happy Birthday": 175,
-      "Merry Christmas": 77,
+      "Merry Christmas": 75,
       "With Love": 74,
       "Thank You": 50,
       "Signature": 42,
@@ -52,26 +52,26 @@ window.EDEN._marketingData = {
       "For Dad": 11
     },
     "dietary": {
-      "Gluten Free": 497,
-      "Dairy Free": 316,
+      "Gluten Free": 498,
+      "Dairy Free": 315,
       "Vegan": 293,
-      "Vegetarian": 95,
+      "Vegetarian": 96,
       "None": 76,
       "Plant Based": 53,
-      "Halal": 37
+      "Halal": 38
     },
     "months": {
-      "2025-12": 166,
+      "2025-12": 164,
       "2026-01": 97,
       "2026-02": 127,
       "2026-03": 176,
       "2026-04": 137,
       "2026-05": 166,
-      "2026-06": 131
+      "2026-06": 133
     }
   },
   "virgin": {
-    "total": 2134,
+    "total": 2135,
     "fetched": 1000,
     "product": {
       "P07274": 172,
@@ -79,9 +79,9 @@ window.EDEN._marketingData = {
       "P04313": 110,
       "P04314": 96,
       "P04315": 74,
-      "P04316": 69,
+      "P04316": 70,
       "P04649": 56,
-      "P10530": 46,
+      "P10530": 45,
       "P04652": 39,
       "P10527": 37,
       "P10519": 34,
@@ -110,14 +110,14 @@ window.EDEN._marketingData = {
       "Yes": 3
     },
     "dietary": {
-      "None": 768,
+      "None": 767,
       "Vegetarian": 51,
       "Vegan": 44,
-      "Gluten Free": 19,
+      "Gluten Free": 20,
       "Dairy Free": 16
     },
     "months": {
-      "2024-11": 77,
+      "2024-11": 76,
       "2024-12": 115,
       "2025-01": 69,
       "2025-02": 32,
@@ -136,7 +136,7 @@ window.EDEN._marketingData = {
       "2026-03": 64,
       "2026-04": 45,
       "2026-05": 36,
-      "2026-06": 20
+      "2026-06": 21
     }
   },
   "corporate": {
@@ -170,13 +170,13 @@ window.EDEN._marketingData = {
     }
   },
   "google_reviews": {
-    "total": 1245,
+    "total": 1252,
     "fetched": 1000,
     "quality": {
       "avg": 4.84,
       "total": 1000,
-      "five": 863,
-      "four": 119,
+      "five": 865,
+      "four": 117,
       "three": 12,
       "two": 3,
       "one": 3,
@@ -184,8 +184,8 @@ window.EDEN._marketingData = {
     },
     "impression": {
       "avg": 4.74,
-      "total": 990,
-      "five": 785,
+      "total": 997,
+      "five": 792,
       "four": 167,
       "three": 28,
       "two": 6,
@@ -195,7 +195,7 @@ window.EDEN._marketingData = {
     "dietary": {},
     "missed_foods": [],
     "months": {
-      "2025-04": 8,
+      "2025-04": 1,
       "2025-05": 1,
       "2025-09": 1,
       "2025-10": 9,
@@ -206,13 +206,13 @@ window.EDEN._marketingData = {
       "2026-03": 138,
       "2026-04": 120,
       "2026-05": 49,
-      "2026-06": 68
+      "2026-06": 75
     }
   },
   "gbp_reviews": {
     "source": "Google Business Profile via Make \u2192 Google Sheet (All Google Reviews tab)",
     "sheet_url": "https://docs.google.com/spreadsheets/d/1DXKumasfRDY4tGiPAi07pV15eiyAb5R0HezoxpUkhc8/edit?gid=879421801",
-    "last_updated": "2026-06-25",
+    "last_updated": "2026-06-26",
     "total": 673,
     "avg_rating": 4.82,
     "five_star": 585,
@@ -457,7 +457,7 @@ window.EDEN._marketingData = {
       "2026-03": 79
     },
     "ai_analysis": {
-      "generated": "2026-06-25",
+      "generated": "2026-06-26",
       "summary": "Across 673 Google reviews, EDEN & CO. scores 4.82/5 with 97% positive sentiment. The dominant theme is relief: buyers with vegan and other dietary requirements describe EDEN & CO. as the only brand that solves inclusive gifting without compromise. Recipients use language that goes well beyond product satisfaction \u2014 'felt seen', 'included for once', 'knew exactly what I needed'. Quality exceeds expectations at the price point and presentation arrives gift-ready, converting first-time buyers into loyal repeat customers.",
       "doing_well": [
         "Dietary trust \u2014 134 vegan, 77 gluten-free and 22 dairy-free customers mention specific relief",
@@ -499,6 +499,6 @@ window.EDEN._marketingData = {
       ]
     }
   },
-  "_built": "2026-06-25 11:29 UTC",
+  "_built": "2026-06-26 11:35 UTC",
   "_version": "1.0"
 };
