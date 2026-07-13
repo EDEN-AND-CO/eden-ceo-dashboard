@@ -1,11 +1,11 @@
 // EDEN & CO. Marketing Intelligence Cache
-// Built: 2026-07-12 10:16 UTC
+// Built: 2026-07-13 11:46 UTC
 // Run: python3 scripts/build-marketing-cache.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN._marketingData = {
   "gift_designer": {
-    "total": 2033,
+    "total": 2038,
     "fetched": 1000,
     "who": {
       "A family member or friend": 815,
@@ -14,75 +14,75 @@ window.EDEN._marketingData = {
       "A team or group": 12
     },
     "feel": {
-      "Loved and appreciated": 597,
-      "Surprised and delighted": 325,
-      "Calm and relaxed": 55,
-      "Inspired or empowered": 18
+      "Loved and appreciated": 599,
+      "Surprised and delighted": 323,
+      "Calm and relaxed": 56,
+      "Inspired or empowered": 17
     },
     "concern": {
-      "Worrying about allergies or dietary needs": 642,
-      "Not wanting it to feel generic": 344,
-      "It will taste rubbish": 235,
-      "It won't look as good as it does in the picture": 234,
+      "Worrying about allergies or dietary needs": 643,
+      "Not wanting it to feel generic": 345,
+      "It will taste rubbish": 238,
+      "It won't look as good as it does in the picture": 233,
       "I care deeply, but worry the gift won\u2019t show it.": 170,
       "Feeling overwhelmed with options": 74
     },
     "matters": {
-      "All of the above": 567,
+      "All of the above": 569,
       "Quality, ethical ingredients": 328,
-      "Beautiful packaging & presentation": 318,
-      "Something they\u2019ve never seen before": 172
+      "Beautiful packaging & presentation": 316,
+      "Something they\u2019ve never seen before": 174
     },
     "product": {
       "The Petite Collection (The perfect gesture)": 346,
-      "The Signature Collection (Top Seller)": 346,
-      "The Chocolate Collection (Pure Indulgence)": 150,
+      "The Signature Collection (Top Seller)": 343,
+      "The Chocolate Collection (Pure Indulgence)": 152,
       "The Prestige (For Milestone Moments)": 81,
-      "The Grand (For Special occasions)": 77
+      "The Grand (For Special occasions)": 78
     },
     "occasion": {
-      "Happy Birthday": 192,
+      "Happy Birthday": 193,
       "With Love": 75,
-      "Thank You": 54,
+      "Thank You": 53,
       "Signature": 42,
       "For Mum": 41,
-      "Merry Christmas": 36,
+      "Merry Christmas": 34,
       "Just For You": 25,
-      "Celebration": 20,
+      "Celebration": 21,
       "For Dad": 11
     },
     "dietary": {
       "Gluten Free": 483,
-      "Vegan": 319,
-      "Dairy Free": 303,
-      "Vegetarian": 92,
-      "None": 75,
+      "Vegan": 320,
+      "Dairy Free": 304,
+      "Vegetarian": 91,
+      "None": 74,
       "Plant Based": 61,
       "Halal": 40
     },
     "months": {
-      "2025-12": 83,
+      "2025-12": 78,
       "2026-01": 97,
       "2026-02": 127,
       "2026-03": 176,
       "2026-04": 137,
       "2026-05": 166,
       "2026-06": 160,
-      "2026-07": 54
+      "2026-07": 59
     }
   },
   "virgin": {
-    "total": 2142,
+    "total": 2143,
     "fetched": 1000,
     "product": {
       "P07274": 173,
       "P06059": 134,
-      "P04313": 112,
+      "P04313": 113,
       "P04314": 96,
       "P04315": 73,
       "P04316": 70,
       "P04649": 54,
-      "P10530": 46,
+      "P10530": 45,
       "P04652": 39,
       "P10527": 37,
       "P10519": 34,
@@ -118,7 +118,7 @@ window.EDEN._marketingData = {
       "Dairy Free": 16
     },
     "months": {
-      "2024-11": 69,
+      "2024-11": 68,
       "2024-12": 115,
       "2025-01": 69,
       "2025-02": 32,
@@ -138,7 +138,7 @@ window.EDEN._marketingData = {
       "2026-04": 45,
       "2026-05": 36,
       "2026-06": 23,
-      "2026-07": 5
+      "2026-07": 6
     }
   },
   "corporate": {
@@ -172,13 +172,13 @@ window.EDEN._marketingData = {
     }
   },
   "google_reviews": {
-    "total": 1295,
+    "total": 1296,
     "fetched": 1000,
     "quality": {
       "avg": 4.84,
       "total": 1000,
-      "five": 870,
-      "four": 112,
+      "five": 871,
+      "four": 111,
       "three": 12,
       "two": 3,
       "one": 3,
@@ -187,30 +187,30 @@ window.EDEN._marketingData = {
     "impression": {
       "avg": 4.75,
       "total": 1000,
-      "five": 798,
+      "five": 799,
       "four": 164,
-      "three": 28,
+      "three": 27,
       "two": 6,
       "one": 4,
-      "pct_positive": 96.2
+      "pct_positive": 96.3
     },
     "dietary": {},
     "missed_foods": [],
     "months": {
-      "2025-12": 364,
+      "2025-12": 363,
       "2026-01": 85,
       "2026-02": 126,
       "2026-03": 138,
       "2026-04": 120,
       "2026-05": 49,
       "2026-06": 92,
-      "2026-07": 26
+      "2026-07": 27
     }
   },
   "gbp_reviews": {
     "source": "Google Business Profile via Make \u2192 Google Sheet (All Google Reviews tab)",
     "sheet_url": "https://docs.google.com/spreadsheets/d/1DXKumasfRDY4tGiPAi07pV15eiyAb5R0HezoxpUkhc8/edit?gid=879421801",
-    "last_updated": "2026-07-12",
+    "last_updated": "2026-07-13",
     "total": 673,
     "avg_rating": 4.82,
     "five_star": 585,
@@ -455,7 +455,7 @@ window.EDEN._marketingData = {
       "2026-03": 79
     },
     "ai_analysis": {
-      "generated": "2026-07-12",
+      "generated": "2026-07-13",
       "summary": "Across 673 Google reviews, EDEN & CO. scores 4.82/5 with 97% positive sentiment. The dominant theme is relief: buyers with vegan and other dietary requirements describe EDEN & CO. as the only brand that solves inclusive gifting without compromise. Recipients use language that goes well beyond product satisfaction \u2014 'felt seen', 'included for once', 'knew exactly what I needed'. Quality exceeds expectations at the price point and presentation arrives gift-ready, converting first-time buyers into loyal repeat customers.",
       "doing_well": [
         "Dietary trust \u2014 134 vegan, 77 gluten-free and 22 dairy-free customers mention specific relief",
@@ -497,6 +497,6 @@ window.EDEN._marketingData = {
       ]
     }
   },
-  "_built": "2026-07-12 10:16 UTC",
+  "_built": "2026-07-13 11:46 UTC",
   "_version": "1.0"
 };
