@@ -1,5 +1,5 @@
 // EDEN & CO. CEO Flight Deck — Klaviyo Cache
-// Generated: 2026-07-28T11:06:43Z
+// Generated: 2026-07-29T11:11:45Z
 // Source: Klaviyo REST API v2024-10-15
 window.EDEN = window.EDEN || {};
 window.EDEN._klaviyoData = {
@@ -81,11 +81,11 @@ window.EDEN._klaviyoData = {
     }
   ],
   "campaigns": [],
-  "_built": "2026-07-28T11:06:43Z",
+  "_built": "2026-07-29T11:11:45Z",
   "metrics_30d": {
     "opens": 0,
     "clicks": 0,
     "revenue": 0.0,
-    "period": "2026-06-28 to 2026-07-28"
+    "period": "2026-06-29 to 2026-07-29"
   }
 };
