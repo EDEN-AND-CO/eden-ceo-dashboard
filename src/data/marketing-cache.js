@@ -1,5 +1,5 @@
 // EDEN & CO. Marketing Intelligence Cache
-// Built: 2026-08-21 09:22 UTC
+// Built: 2026-08-22 09:14 UTC
 // Run: python3 scripts/build-marketing-cache.py
 
 window.EDEN = window.EDEN || {};
@@ -72,15 +72,15 @@ window.EDEN._marketingData = {
     }
   },
   "virgin": {
-    "total": 2175,
+    "total": 2176,
     "fetched": 1000,
     "product": {
-      "P07274": 175,
+      "P07274": 176,
       "P06059": 141,
       "P04313": 118,
       "P04314": 96,
       "P04315": 74,
-      "P04316": 65,
+      "P04316": 64,
       "P04649": 52,
       "P10530": 47,
       "P04652": 40,
@@ -96,7 +96,7 @@ window.EDEN._marketingData = {
       "P10523": 4
     },
     "card": {
-      "No Personalisation": 134,
+      "No Personalisation": 135,
       "Merry Christmas": 85,
       "Just For You": 57,
       "With Love": 49,
@@ -111,14 +111,14 @@ window.EDEN._marketingData = {
       "Yes": 4
     },
     "dietary": {
-      "None": 772,
+      "None": 771,
       "Vegetarian": 52,
       "Vegan": 44,
-      "Gluten Free": 21,
+      "Gluten Free": 22,
       "Dairy Free": 16
     },
     "months": {
-      "2024-11": 36,
+      "2024-11": 35,
       "2024-12": 115,
       "2025-01": 69,
       "2025-02": 32,
@@ -139,7 +139,7 @@ window.EDEN._marketingData = {
       "2026-05": 36,
       "2026-06": 23,
       "2026-07": 24,
-      "2026-08": 14
+      "2026-08": 15
     }
   },
   "corporate": {
@@ -173,7 +173,7 @@ window.EDEN._marketingData = {
     }
   },
   "google_reviews": {
-    "total": 1377,
+    "total": 1379,
     "fetched": 1000,
     "quality": {
       "avg": 4.86,
@@ -188,8 +188,8 @@ window.EDEN._marketingData = {
     "impression": {
       "avg": 4.75,
       "total": 1000,
-      "five": 805,
-      "four": 160,
+      "five": 804,
+      "four": 161,
       "three": 23,
       "two": 7,
       "one": 5,
@@ -198,7 +198,7 @@ window.EDEN._marketingData = {
     "dietary": {},
     "missed_foods": [],
     "months": {
-      "2025-12": 282,
+      "2025-12": 280,
       "2026-01": 85,
       "2026-02": 126,
       "2026-03": 138,
@@ -206,13 +206,13 @@ window.EDEN._marketingData = {
       "2026-05": 49,
       "2026-06": 92,
       "2026-07": 68,
-      "2026-08": 40
+      "2026-08": 42
     }
   },
   "gbp_reviews": {
     "source": "Google Business Profile via Make \u2192 Google Sheet (All Google Reviews tab)",
     "sheet_url": "https://docs.google.com/spreadsheets/d/1DXKumasfRDY4tGiPAi07pV15eiyAb5R0HezoxpUkhc8/edit?gid=879421801",
-    "last_updated": "2026-08-21",
+    "last_updated": "2026-08-22",
     "total": 673,
     "avg_rating": 4.82,
     "five_star": 585,
@@ -457,7 +457,7 @@ window.EDEN._marketingData = {
       "2026-03": 79
     },
     "ai_analysis": {
-      "generated": "2026-08-21",
+      "generated": "2026-08-22",
       "summary": "Across 673 Google reviews, EDEN & CO. scores 4.82/5 with 97% positive sentiment. The dominant theme is relief: buyers with vegan and other dietary requirements describe EDEN & CO. as the only brand that solves inclusive gifting without compromise. Recipients use language that goes well beyond product satisfaction \u2014 'felt seen', 'included for once', 'knew exactly what I needed'. Quality exceeds expectations at the price point and presentation arrives gift-ready, converting first-time buyers into loyal repeat customers.",
       "doing_well": [
         "Dietary trust \u2014 134 vegan, 77 gluten-free and 22 dairy-free customers mention specific relief",
@@ -499,6 +499,6 @@ window.EDEN._marketingData = {
       ]
     }
   },
-  "_built": "2026-08-21 09:22 UTC",
+  "_built": "2026-08-22 09:14 UTC",
   "_version": "1.0"
 };
