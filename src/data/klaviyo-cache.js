@@ -1,18 +1,23 @@
 // EDEN & CO. CEO Flight Deck — Klaviyo Cache
-// Generated: 2026-08-26T09:27:40Z
+// Generated: 2026-08-27T19:17:22Z
 // Source: Klaviyo REST API v2024-10-15
 window.EDEN = window.EDEN || {};
 window.EDEN._klaviyoData = {
   "flows": [
     {
       "id": "Wmpyhn",
-      "name": "Remove Amazon Profiles",
+      "name": "Delete Amazon, ReachDesk, Sendoso, GiftSenda Profiles",
       "status": "live"
     },
     {
-      "id": "SjrkRb",
-      "name": "Re-Engage (Last Chance) (Updated)",
-      "status": "draft"
+      "id": "U5LR23",
+      "name": "Suppress Cannot Receive Profiles",
+      "status": "live"
+    },
+    {
+      "id": "QUxRLV",
+      "name": "Suppress Unengaged Profiles",
+      "status": "live"
     },
     {
       "id": "WqsbM4",
@@ -58,19 +63,14 @@ window.EDEN._klaviyoData = {
       "id": "WFbjeC",
       "name": "Email Welcome Series",
       "status": "live"
-    },
-    {
-      "id": "UdJsnv",
-      "name": "Re-Engage (Last Chance)",
-      "status": "draft"
     }
   ],
   "campaigns": [],
-  "_built": "2026-08-26T09:27:40Z",
+  "_built": "2026-08-27T19:17:22Z",
   "metrics_30d": {
     "opens": 0,
     "clicks": 0,
     "revenue": 0.0,
-    "period": "2026-07-27 to 2026-08-26"
+    "period": "2026-07-28 to 2026-08-27"
   }
 };
