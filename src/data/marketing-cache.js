@@ -1,11 +1,11 @@
 // EDEN & CO. Marketing Intelligence Cache
-// Built: 2026-10-08 15:54 UTC
+// Built: 2026-10-09 15:36 UTC
 // Run: python3 scripts/build-marketing-cache.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN._marketingData = {
   "gift_designer": {
-    "total": 2469,
+    "total": 2474,
     "fetched": 1000,
     "who": {
       "A family member or friend": 806,
@@ -14,67 +14,67 @@ window.EDEN._marketingData = {
       "A team or group": 9
     },
     "feel": {
-      "Loved and appreciated": 559,
-      "Surprised and delighted": 352,
+      "Loved and appreciated": 555,
+      "Surprised and delighted": 355,
       "Calm and relaxed": 59,
-      "Inspired or empowered": 20
+      "Inspired or empowered": 21
     },
     "concern": {
       "Worrying about allergies or dietary needs": 627,
-      "Not wanting it to feel generic": 353,
-      "It won't look as good as it does in the picture": 234,
-      "It will taste rubbish": 220,
-      "I care deeply, but worry the gift won\u2019t show it.": 192,
+      "Not wanting it to feel generic": 352,
+      "It won't look as good as it does in the picture": 232,
+      "It will taste rubbish": 218,
+      "I care deeply, but worry the gift won\u2019t show it.": 190,
       "Feeling overwhelmed with options": 72
     },
     "matters": {},
     "product": {
-      "Food & Drink Collection (Top Seller)": 347,
-      "Letterbox Collection (The perfect gesture)": 328,
-      "Chocolate Collection (Pure Indulgence)": 135,
+      "Food & Drink Collection (Top Seller)": 348,
+      "Letterbox Collection (The perfect gesture)": 327,
+      "Chocolate Collection (Pure Indulgence)": 133,
       "Wicker Hampers (For Milestone Moments)": 106,
-      "Sharing Hampers (For Special Occasions)": 78,
+      "Sharing Hampers (For Special Occasions)": 80,
       "Pamper Hampers (For \"Me Time\")": 3,
       "Experiences (For Memory Makers)": 2,
       "Alcohol Gift Sets (For Raising a Toast)": 1
     },
     "occasion": {
-      "Happy Birthday": 237,
-      "With Love": 66,
+      "Happy Birthday": 240,
       "Thank You": 65,
-      "Generic Card": 50,
+      "With Love": 65,
+      "Generic Card": 49,
       "Just For You": 30,
-      "Celebration": 28,
+      "Celebration": 29,
       "For Dad": 13,
-      "For Mum": 10,
       "Merry Christmas": 9,
+      "For Mum": 9,
       "New Baby / Parents": 1
     },
     "dietary": {
       "Gluten Free": 479,
-      "Vegan": 341,
-      "Dairy Free": 299,
-      "Vegetarian": 113,
+      "Vegan": 340,
+      "Dairy Free": 298,
+      "Vegetarian": 111,
       "None": 74,
-      "Plant Based": 66,
+      "Plant Based": 65,
       "Halal": 35
     },
     "months": {
-      "2026-03": 47,
+      "2026-03": 42,
       "2026-04": 137,
       "2026-05": 166,
       "2026-06": 160,
       "2026-07": 149,
       "2026-08": 120,
       "2026-09": 187,
-      "2026-10": 34
+      "2026-10": 39
     }
   },
   "virgin": {
-    "total": 2212,
+    "total": 2214,
     "fetched": 1000,
     "product": {
-      "P07274": 182,
+      "P07274": 183,
       "P06059": 144,
       "P04313": 120,
       "P04314": 98,
@@ -83,19 +83,19 @@ window.EDEN._marketingData = {
       "P04649": 54,
       "P10530": 47,
       "P04652": 41,
-      "P04317": 35,
-      "P07273": 30,
+      "P04317": 34,
+      "P07273": 31,
       "P10527": 28,
       "P04653": 21,
       "P10519": 18,
       "P06058": 15,
       "P10528": 11,
       "P10521": 11,
-      "P10525": 7,
+      "P10525": 6,
       "P10523": 2
     },
     "card": {
-      "No Personalisation": 145,
+      "No Personalisation": 146,
       "Merry Christmas": 82,
       "Just For You": 58,
       "With Love": 50,
@@ -110,14 +110,14 @@ window.EDEN._marketingData = {
       "Yes": 5
     },
     "dietary": {
-      "None": 778,
-      "Vegetarian": 53,
+      "None": 779,
+      "Vegetarian": 52,
       "Vegan": 43,
       "Gluten Free": 23,
       "Dairy Free": 15
     },
     "months": {
-      "2024-12": 114,
+      "2024-12": 112,
       "2025-01": 69,
       "2025-02": 32,
       "2025-03": 36,
@@ -139,7 +139,7 @@ window.EDEN._marketingData = {
       "2026-07": 24,
       "2026-08": 23,
       "2026-09": 24,
-      "2026-10": 4
+      "2026-10": 6
     }
   },
   "corporate": {
@@ -173,7 +173,7 @@ window.EDEN._marketingData = {
     }
   },
   "google_reviews": {
-    "total": 1502,
+    "total": 1504,
     "fetched": 1000,
     "quality": {
       "avg": 4.85,
@@ -198,7 +198,7 @@ window.EDEN._marketingData = {
     "dietary": {},
     "missed_foods": [],
     "months": {
-      "2025-12": 157,
+      "2025-12": 155,
       "2026-01": 85,
       "2026-02": 126,
       "2026-03": 138,
@@ -208,13 +208,13 @@ window.EDEN._marketingData = {
       "2026-07": 68,
       "2026-08": 65,
       "2026-09": 71,
-      "2026-10": 29
+      "2026-10": 31
     }
   },
   "gbp_reviews": {
     "source": "Google Business Profile via Make \u2192 Google Sheet (All Google Reviews tab)",
     "sheet_url": "https://docs.google.com/spreadsheets/d/1DXKumasfRDY4tGiPAi07pV15eiyAb5R0HezoxpUkhc8/edit?gid=879421801",
-    "last_updated": "2026-10-08",
+    "last_updated": "2026-10-09",
     "total": 673,
     "avg_rating": 4.82,
     "five_star": 585,
@@ -459,7 +459,7 @@ window.EDEN._marketingData = {
       "2026-03": 79
     },
     "ai_analysis": {
-      "generated": "2026-10-08",
+      "generated": "2026-10-09",
       "summary": "Across 673 Google reviews, EDEN & CO. scores 4.82/5 with 97% positive sentiment. The dominant theme is relief: buyers with vegan and other dietary requirements describe EDEN & CO. as the only brand that solves inclusive gifting without compromise. Recipients use language that goes well beyond product satisfaction \u2014 'felt seen', 'included for once', 'knew exactly what I needed'. Quality exceeds expectations at the price point and presentation arrives gift-ready, converting first-time buyers into loyal repeat customers.",
       "doing_well": [
         "Dietary trust \u2014 134 vegan, 77 gluten-free and 22 dairy-free customers mention specific relief",
@@ -501,6 +501,6 @@ window.EDEN._marketingData = {
       ]
     }
   },
-  "_built": "2026-10-08 15:54 UTC",
+  "_built": "2026-10-09 15:36 UTC",
   "_version": "1.0"
 };
