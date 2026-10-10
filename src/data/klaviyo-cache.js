@@ -1,12 +1,17 @@
 // EDEN & CO. CEO Flight Deck — Klaviyo Cache
-// Generated: 2026-10-09T15:36:46Z
+// Generated: 2026-10-10T14:50:28Z
 // Source: Klaviyo REST API v2024-10-15
 window.EDEN = window.EDEN || {};
 window.EDEN._klaviyoData = {
   "flows": [
     {
+      "id": "WFbjeC",
+      "name": "Email Welcome Series",
+      "status": "live"
+    },
+    {
       "id": "WSnHL8",
-      "name": "Full Shipping Confirmation - Standard (Email & SMS)",
+      "name": "Order Despatched - Email & SMS (Oct 2026)",
       "status": "live"
     },
     {
@@ -55,11 +60,6 @@ window.EDEN._klaviyoData = {
       "status": "live"
     },
     {
-      "id": "UHeCP4",
-      "name": "Shipping Status: Order Shipped",
-      "status": "live"
-    },
-    {
       "id": "XLd2tH",
       "name": "Gift Finder - Large Order",
       "status": "live"
@@ -88,19 +88,14 @@ window.EDEN._klaviyoData = {
       "id": "RjU5hB",
       "name": "Corporate Intro Flow 2",
       "status": "draft"
-    },
-    {
-      "id": "WFbjeC",
-      "name": "Email Welcome Series",
-      "status": "live"
     }
   ],
   "campaigns": [],
-  "_built": "2026-10-09T15:36:46Z",
+  "_built": "2026-10-10T14:50:28Z",
   "metrics_30d": {
     "opens": 0,
     "clicks": 0,
     "revenue": 0.0,
-    "period": "2026-09-09 to 2026-10-09"
+    "period": "2026-09-10 to 2026-10-10"
   }
 };
