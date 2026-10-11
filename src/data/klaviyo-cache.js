@@ -1,9 +1,19 @@
 // EDEN & CO. CEO Flight Deck — Klaviyo Cache
-// Generated: 2026-10-10T14:50:28Z
+// Generated: 2026-10-11T15:09:08Z
 // Source: Klaviyo REST API v2024-10-15
 window.EDEN = window.EDEN || {};
 window.EDEN._klaviyoData = {
   "flows": [
+    {
+      "id": "UnP7ih",
+      "name": "Smile Points Redemption Reminder",
+      "status": "live"
+    },
+    {
+      "id": "TRUZit",
+      "name": "Smile Points Earned on Order - Alert",
+      "status": "live"
+    },
     {
       "id": "WFbjeC",
       "name": "Email Welcome Series",
@@ -15,11 +25,6 @@ window.EDEN._klaviyoData = {
       "status": "live"
     },
     {
-      "id": "TRUZit",
-      "name": "Points Earned on Order - Standard",
-      "status": "draft"
-    },
-    {
       "id": "SPpEVX",
       "name": "Abandoned Checkout Reminder - Standard (Email & SMS)",
       "status": "draft"
@@ -27,11 +32,6 @@ window.EDEN._klaviyoData = {
     {
       "id": "SXzVCx",
       "name": "First Purchase Anniversary - Standard",
-      "status": "draft"
-    },
-    {
-      "id": "UBt4wz",
-      "name": "Loyalty Program Welcome - Standard",
       "status": "draft"
     },
     {
@@ -83,19 +83,14 @@ window.EDEN._klaviyoData = {
       "id": "QPF8Dq",
       "name": "Abandoned Cart Reminder - Started Checkout (Email & SMS)",
       "status": "live"
-    },
-    {
-      "id": "RjU5hB",
-      "name": "Corporate Intro Flow 2",
-      "status": "draft"
     }
   ],
   "campaigns": [],
-  "_built": "2026-10-10T14:50:28Z",
+  "_built": "2026-10-11T15:09:08Z",
   "metrics_30d": {
     "opens": 0,
     "clicks": 0,
     "revenue": 0.0,
-    "period": "2026-09-10 to 2026-10-10"
+    "period": "2026-09-11 to 2026-10-11"
   }
 };
