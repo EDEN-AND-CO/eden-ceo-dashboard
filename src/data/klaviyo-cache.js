@@ -1,9 +1,49 @@
 // EDEN & CO. CEO Flight Deck — Klaviyo Cache
-// Generated: 2026-10-11T15:09:08Z
+// Generated: 2026-10-12T18:16:17Z
 // Source: Klaviyo REST API v2024-10-15
 window.EDEN = window.EDEN || {};
 window.EDEN._klaviyoData = {
   "flows": [
+    {
+      "id": "UnyJee",
+      "name": "Abandoned Cart - Added to Cart",
+      "status": "live"
+    },
+    {
+      "id": "UmcDrF",
+      "name": "Abandoned Browse - Viewed a Product",
+      "status": "live"
+    },
+    {
+      "id": "XLd2tH",
+      "name": "Gift Finder - Large Order",
+      "status": "draft"
+    },
+    {
+      "id": "VdV4sN",
+      "name": "Winback Fow - 60 Day Cycle",
+      "status": "draft"
+    },
+    {
+      "id": "SPpEVX",
+      "name": "Abandoned Checkout Reminder - Standard (Email & SMS)",
+      "status": "live"
+    },
+    {
+      "id": "WFbjeC",
+      "name": "Welcome Email Series",
+      "status": "live"
+    },
+    {
+      "id": "WSnHL8",
+      "name": "Shipping Order Despatched - Email & SMS (Oct 2026)",
+      "status": "live"
+    },
+    {
+      "id": "WqsbM4",
+      "name": "Shipping Status: Order Received",
+      "status": "live"
+    },
     {
       "id": "UnP7ih",
       "name": "Smile Points Redemption Reminder",
@@ -13,21 +53,6 @@ window.EDEN._klaviyoData = {
       "id": "TRUZit",
       "name": "Smile Points Earned on Order - Alert",
       "status": "live"
-    },
-    {
-      "id": "WFbjeC",
-      "name": "Email Welcome Series",
-      "status": "live"
-    },
-    {
-      "id": "WSnHL8",
-      "name": "Order Despatched - Email & SMS (Oct 2026)",
-      "status": "live"
-    },
-    {
-      "id": "SPpEVX",
-      "name": "Abandoned Checkout Reminder - Standard (Email & SMS)",
-      "status": "draft"
     },
     {
       "id": "SXzVCx",
@@ -53,44 +78,14 @@ window.EDEN._klaviyoData = {
       "id": "QUxRLV",
       "name": "Suppress Unengaged Profiles",
       "status": "live"
-    },
-    {
-      "id": "WqsbM4",
-      "name": "Shipping Status: Order Received",
-      "status": "live"
-    },
-    {
-      "id": "XLd2tH",
-      "name": "Gift Finder - Large Order",
-      "status": "live"
-    },
-    {
-      "id": "UmcDrF",
-      "name": "Browse Abandonment - Viewed a Product",
-      "status": "live"
-    },
-    {
-      "id": "YxR42H",
-      "name": "Abandoned Collection Flow",
-      "status": "live"
-    },
-    {
-      "id": "VdV4sN",
-      "name": "Winback Fow - 60 Day Cycle",
-      "status": "live"
-    },
-    {
-      "id": "QPF8Dq",
-      "name": "Abandoned Cart Reminder - Started Checkout (Email & SMS)",
-      "status": "live"
     }
   ],
   "campaigns": [],
-  "_built": "2026-10-11T15:09:08Z",
+  "_built": "2026-10-12T18:16:17Z",
   "metrics_30d": {
     "opens": 0,
     "clicks": 0,
     "revenue": 0.0,
-    "period": "2026-09-11 to 2026-10-11"
+    "period": "2026-09-12 to 2026-10-12"
   }
 };
