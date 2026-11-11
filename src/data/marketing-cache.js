@@ -1,86 +1,85 @@
 // EDEN & CO. Marketing Intelligence Cache
-// Built: 2026-11-10 16:38 UTC
+// Built: 2026-11-11 16:40 UTC
 // Run: python3 scripts/build-marketing-cache.py
 
 window.EDEN = window.EDEN || {};
 window.EDEN._marketingData = {
   "gift_designer": {
-    "total": 2651,
+    "total": 2657,
     "fetched": 1000,
     "who": {
-      "A family member or friend *(One Gift)*": 803,
-      "A client or colleague *(Corporate Gift)*": 144,
+      "A family member or friend *(One Gift)*": 801,
+      "A client or colleague *(Corporate Gift)*": 145,
       "Several family members or friends *(Many Gifts)*": 19,
       "A team or group *(One or Many)*": 13,
       "Myself (we love this!)": 13,
-      "Someone else": 8
+      "Someone else": 9
     },
     "feel": {
       "Loved and appreciated": 536,
-      "Surprised and delighted": 370,
-      "Calm and relaxed": 60,
+      "Surprised and delighted": 369,
+      "Calm and relaxed": 61,
       "Inspired or empowered": 24
     },
     "concern": {
-      "Worrying about allergies or dietary needs": 642,
-      "Not wanting it to feel generic": 334,
-      "It won't look as good as it does in the picture": 232,
-      "It will taste rubbish": 222,
+      "Worrying about allergies or dietary needs": 643,
+      "Not wanting it to feel generic": 337,
+      "It won't look as good as it does in the picture": 233,
+      "It will taste rubbish": 224,
       "I care deeply, but worry the gift won\u2019t show it.": 192,
       "Feeling overwhelmed with options": 66
     },
     "matters": {},
     "product": {
-      "Food & Drink Collection (Top Seller)": 332,
-      "Letterbox Collection (The perfect gesture)": 300,
+      "Food & Drink Collection (Top Seller)": 331,
+      "Letterbox Collection (The perfect gesture)": 299,
       "Chocolate Collection (Pure Indulgence)": 124,
-      "Wicker Hampers (For Milestone Moments)": 112,
-      "Sharing Hampers (For Special Occasions)": 83,
-      "Pamper Hampers (For \"Me Time\")": 31,
+      "Wicker Hampers (For Milestone Moments)": 111,
+      "Sharing Hampers (For Special Occasions)": 85,
+      "Pamper Hampers (For \"Me Time\")": 32,
       "Experiences (For Memory Makers)": 12,
       "Alcohol Gift Sets (For Raising a Toast)": 6
     },
     "occasion": {
-      "Happy Birthday": 247,
+      "Happy Birthday": 245,
       "Thank You": 77,
-      "Merry Christmas": 70,
+      "Merry Christmas": 72,
       "With Love": 68,
-      "Generic Card": 43,
+      "Generic Card": 44,
       "Just For You": 38,
-      "Celebration": 30,
+      "Celebration": 31,
+      "For Mum": 12,
       "For Dad": 12,
-      "For Mum": 11,
       "New Baby / Parents": 7
     },
     "dietary": {
-      "Gluten Free": 469,
-      "Vegan": 345,
+      "Gluten Free": 466,
+      "Vegan": 346,
       "Dairy Free": 297,
-      "Vegetarian": 111,
-      "None": 85,
+      "Vegetarian": 112,
+      "None": 86,
       "Plant Based": 63,
-      "Halal": 33
+      "Halal": 32
     },
     "months": {
-      "2026-04": 2,
-      "2026-05": 166,
+      "2026-05": 162,
       "2026-06": 160,
       "2026-07": 149,
       "2026-08": 120,
       "2026-09": 187,
       "2026-10": 150,
-      "2026-11": 66
+      "2026-11": 72
     }
   },
   "virgin": {
-    "total": 2272,
+    "total": 2275,
     "fetched": 1000,
     "product": {
       "P07274": 192,
-      "P04313": 127,
-      "P04314": 103,
+      "P04313": 128,
+      "P04314": 101,
       "P04315": 68,
-      "P04316": 62,
+      "P04316": 63,
       "P04649": 55,
       "P10530": 46,
       "P04652": 44,
@@ -105,12 +104,12 @@ window.EDEN._marketingData = {
     "dietary": {
       "None": 648,
       "Vegetarian": 39,
-      "Gluten Free": 23,
-      "Vegan": 18,
+      "Gluten Free": 24,
+      "Vegan": 19,
       "Dairy Free": 7
     },
     "months": {
-      "2024-12": 54,
+      "2024-12": 51,
       "2025-01": 69,
       "2025-02": 32,
       "2025-03": 36,
@@ -133,7 +132,7 @@ window.EDEN._marketingData = {
       "2026-08": 23,
       "2026-09": 24,
       "2026-10": 35,
-      "2026-11": 29
+      "2026-11": 32
     }
   },
   "corporate": {
@@ -167,7 +166,7 @@ window.EDEN._marketingData = {
     }
   },
   "google_reviews": {
-    "total": 1575,
+    "total": 1577,
     "fetched": 1000,
     "quality": {
       "avg": 4.84,
@@ -192,7 +191,7 @@ window.EDEN._marketingData = {
     "dietary": {},
     "missed_foods": [],
     "months": {
-      "2025-12": 84,
+      "2025-12": 82,
       "2026-01": 85,
       "2026-02": 126,
       "2026-03": 138,
@@ -203,13 +202,13 @@ window.EDEN._marketingData = {
       "2026-08": 65,
       "2026-09": 71,
       "2026-10": 83,
-      "2026-11": 19
+      "2026-11": 21
     }
   },
   "gbp_reviews": {
     "source": "Google Business Profile via Make \u2192 Google Sheet (All Google Reviews tab)",
     "sheet_url": "https://docs.google.com/spreadsheets/d/1DXKumasfRDY4tGiPAi07pV15eiyAb5R0HezoxpUkhc8/edit?gid=879421801",
-    "last_updated": "2026-11-10",
+    "last_updated": "2026-11-11",
     "total": 673,
     "avg_rating": 4.82,
     "five_star": 585,
@@ -454,7 +453,7 @@ window.EDEN._marketingData = {
       "2026-03": 79
     },
     "ai_analysis": {
-      "generated": "2026-11-10",
+      "generated": "2026-11-11",
       "summary": "Across 673 Google reviews, EDEN & CO. scores 4.82/5 with 97% positive sentiment. The dominant theme is relief: buyers with vegan and other dietary requirements describe EDEN & CO. as the only brand that solves inclusive gifting without compromise. Recipients use language that goes well beyond product satisfaction \u2014 'felt seen', 'included for once', 'knew exactly what I needed'. Quality exceeds expectations at the price point and presentation arrives gift-ready, converting first-time buyers into loyal repeat customers.",
       "doing_well": [
         "Dietary trust \u2014 134 vegan, 77 gluten-free and 22 dairy-free customers mention specific relief",
@@ -496,6 +495,6 @@ window.EDEN._marketingData = {
       ]
     }
   },
-  "_built": "2026-11-10 16:38 UTC",
+  "_built": "2026-11-11 16:40 UTC",
   "_version": "1.0"
 };
